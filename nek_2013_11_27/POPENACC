@@ -1,0 +1,8 @@
+      common /spltacc/  ml_acc(lx2*ly2*lz2*lelv)
+     $              ,   mu_acc(lx2*ly2*lz2*lelv)
+
+      real ml_acc,mu_acc
+
+      parameter (lta=lx1*ly1*lz1*lelt)
+      common /mgdssum/ mg_lgl1(-1:lta,6)
+     $              ,  mg_lgl2(-1:lta,6),mg_ptr(lta,6)

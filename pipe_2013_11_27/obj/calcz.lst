@@ -1,0 +1,732 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S u m m a r y   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Compilation
+-----------
+File     : /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/calcz.f
+Compiled : 10/28/14  13:46:55
+Compiler : Version 8.3.0
+Ftnlx    : Version 8316 (libcif 83015)
+Target   : x86-64
+Command  : ftn_driver.exe -hcpu=interlagos -haccel=nvidia_35 -hdynamic
+           -D__CRAYXE -D__CRAYXT_COMPUTE_LINUX_TARGET -hnetwork=gemini
+           -I/opt/cray/perftools/6.2.0/include -DCRAYPAT -homp_trace
+           -hpat_trace -L/opt/cray/perftools/6.2.0/lib64 -c -O2 -hacc -ra
+           -sreal64 -eZ -em -Rc -rm -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE
+           -DGLOBAL_LONG_LONG
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./
+           -oobj/calcz.o -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/libsci_acc/3.0.3.1/CRAY/83/x86_64/include
+           -I/opt/cray/libsci/13.0.0/CRAY/83/interlagos/include
+           -I/opt/cray/mpt/7.0.0/gni/mpich2-cray/83/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/extras/CUPTI/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/nvvm/include
+           -I/opt/cray/rca/1.0.0-2.0502.53711.3.125.gem/include
+           -I/opt/cray/pmi/5.0.4-1.0000.10161.132.18.gem/include
+           -I/opt/cray/xpmem/0.1-2.0502.55507.3.2.gem/include
+           -I/opt/cray/dmapp/7.0.1-1.0502.9501.5.211.gem/include
+           -I/opt/cray/gni-headers/3.0-1.0502.9684.5.2.gem/include
+           -I/opt/cray/ugni/5.0-1.0502.9685.4.24.gem/include
+           -I/opt/cray/udreg/2.3.2-1.0502.9275.1.25.gem/include
+           -I/opt/cray/alps/5.2.1-2.0502.9041.11.6.gem/include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/pkgconfig/../include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/wlm_detect/1.0-1.0502.53341.1.1.gem/include
+           -I/opt/cray/krca/1.0.0-2.0502.53880.4.103.gem/include
+           -I/opt/cray-hss-devel/7.2.0/include /lustre/atlas/scratch/csep22/trn0
+           01/nek5_acc/nek_2013_11_27/calcz.f
+
+ftnlx report
+------------
+Source   : /lustre/atlas1/trn001/scratch/csep22/nek5_acc/pipe_2013_11_27//lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/calcz.f
+Date     : 10/28/2014  13:46:56
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          O p t i o n s   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Options :  -O cache2,fp2,scalar2,thread2,vector2,mpi0,modinline,ipa3,noaggress
+           -O autoprefetch,noautothread,fusion2,nomsgs,negmsgs,nooverindex
+           -O pattern,shortcircuit2,unroll2,nozeroinc
+           -h noadd_paren,align_arrays,caf,noconcurrent,nocontiguous,nofp_trap
+           -h nofunc_trace,nomessage,noomp_analyze,omp_trace,pat_trace
+           -h omp,acc
+           -h acc_model=auto_async_kernel:fast_addr:no_deep_copy
+           -h cpu=x86-64,interlagos,gemini,accel=NVIDIA_GPU
+           -s real64
+           -eh
+           -d acdgjnopvBDEIPQRS0
+           -e mqswACFTZ
+           -J bj
+           -R c 
+           -f fixed
+           -m3
+           -N72
+           -S /tmp/scratch/pe_10387/calcz_1.s
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+     %%%    L o o p m a r k   L e g e n d    %%%
+
+     Primary Loop Type        Modifiers
+     ------- ---- ----        ---------
+     A - Pattern matched      a - atomic memory operation
+                              b - blocked
+     C - Collapsed            c - conditional and/or computed
+     D - Deleted               
+     E - Cloned                
+     F - Flat - No calls      f - fused
+     G - Accelerated          g - partitioned
+     I - Inlined              i - interchanged
+     M - Multithreaded        m - partitioned
+                              n - non-blocking remote transfer
+                              p - partial
+                              r - unrolled
+                              s - shortloop
+     V - Vectorized           w - unwound
+
+     + - More messages listed at end of listing
+     ------------------------------------------
+
+
+    1.               c-----------------------------------------------------------------------
+    2.                     subroutine calcz(d,e,n,dmax,dmin,z,ierr)
+    3.               c
+    4.               c     Num. Rec. 2nd Ed., p.473
+    5.               c
+    6.               c     Note:  d(1:n) is the diagonal of the sym. tridiagonal matrix
+    7.               c            e(1:n) is the upper diagonal of the tridiagonal matrix,
+    8.               c                   WITH e(n) ARBITRARY (a slight shift from Num.Rec.)
+    9.               c
+   10.               c            z(n:n) is the packed array of eigenvectors
+   11.               c
+   12.                     real  d(n),e(n),z(n,n)
+   13.                     real  smalln,small
+   14.               c
+   15.  +                  call ident(z,n)
+   16.                     one = 1.
+   17.               c
+   18.               c     Find smallest number  (pff mod to Num. Rec. 2nd Ed., p.473)
+   19.               c
+   20.                     small = 0.5
+   21.  + 1--------<       do i = 1,100
+   22.    1                   smalln = small * small
+   23.    1                   if (smalln .eq.0) then
+   24.  + 1 2------<             do j=1,1000
+   25.  + 1 2                       smalln = 0.5*small
+   26.    1 2                       if (smalln .eq.0) goto 10
+   27.    1 2                       small = smalln
+   28.    1 2------>             enddo
+   29.    1                   endif
+   30.    1                   small = smalln
+   31.    1-------->       enddo
+   32.                  10 continue
+   33.                     small = 10.*small
+   34.                     small = max(small,1e-99)
+   35.                     
+   36.               c     write(6,*) 'this is small:',small
+   37.               c
+   38.  + 1--------<       do 15 l=1,n
+   39.    1                   iter = 0
+   40.    1          c
+   41.  + 1 2------<     1    do 12 m=l,n-1
+   42.    1 2                    dd = abs( d(m) ) + abs( d(m+1) )
+   43.    1 2                    de = e(m) + dd
+   44.    1 2                    df = abs(dd - de)
+   45.    1 2        c           write(6,112) iter,m,'de:',dd,de,df,small
+   46.    1 2                    if ( df .le. small ) goto 2
+   47.    1 2------>    12    continue
+   48.    1            112    format(i3,i9,1x,a3,1p4e16.8)
+   49.    1                   m = n
+   50.    1          c
+   51.    1              2    if ( m .ne. l ) then
+   52.    1                      if ( iter .eq. 600 ) then
+   53.    1                         write (6,*) 'too many iterations in calc'
+   54.    1          c              n10 = min(n,10)
+   55.    1          c              do i=1,n
+   56.    1          c                 write(6,9) d(i),(z(i,j),j=1,n10)
+   57.    1          c              enddo
+   58.    1          c   9          format(1pe12.4,' e:',1p10e12.4)
+   59.    1          c              call exitt
+   60.    1                         ierr=1
+   61.    1                         return
+   62.    1                      endif
+   63.    1          c
+   64.    1                      iter = iter + 1
+   65.    1                      g = ( d(l+1) - d(l) ) / ( 2.0 * e(l) )
+   66.  + 1  I----->             r = pythag(g,one)
+   67.    1                      g = d(m) - d(l) + e(l)/(g+sign(r,g))
+   68.    1                      s = 1.0
+   69.    1                      c = 1.0
+   70.    1                      p = 0.0
+   71.    1          c
+   72.  + 1 F------<             do 14 i = m-1,l,-1
+   73.    1 F                       f = s * e(i)
+   74.    1 F                       b = c * e(i)
+   75.    1 F  I                    r = pythag(f,g)
+   76.    1 F                       e(i+1) = r
+   77.    1 F                       if ( abs(r) .le. small ) then
+   78.    1 F                          d(i+1) = d(i+1) - p
+   79.    1 F                          e(m)   = 0.
+   80.    1 F                          goto 1
+   81.    1 F                       endif
+   82.  + 1 F                       s = f/r
+   83.    1 F                       c = g/r
+   84.    1 F                       g = d(i+1) - p
+   85.    1 F                       r = ( d(i)-g )*s + 2.*c*b
+   86.    1 F                       p = s*r
+   87.    1 F                       d(i+1) = g + p
+   88.    1 F                       g = c*r - b
+   89.    1 F        c      ...     find eigenvectors ... (new, 11/19/94, pff, p.363. Num.Rec.I.)
+   90.    1 F Vr4--<                do 13 k=1,n
+   91.    1 F Vr4                      f = z(k,i+1)
+   92.    1 F Vr4                      z(k,i+1) = s*z(k,i)+c*f
+   93.    1 F Vr4                      z(k,i  ) = c*z(k,i)-s*f
+   94.    1 F Vr4-->    13          continue
+   95.    1 F        c      ...     end of eigenvector section ... 
+   96.    1 F------>    14       continue
+   97.    1          c
+   98.    1                      d(l) = d(l) - p
+   99.    1                      e(l) = g
+  100.    1                      e(m) = 0.0
+  101.    1                      goto 1
+  102.    1                   endif
+  103.    1          c
+  104.    1-------->    15 continue
+  105.               c
+  106.               c     write (8,8) (d(j),j=1,n)
+  107.               c   8 format('eig:',8f10.4)
+  108.               c
+  109.                     dmin = d(1)
+  110.                     dmax = d(1)
+  111.    Vr4------<       do 40 i = 1 , n
+  112.    Vr4                dmin = min( d(i) , dmin )
+  113.    Vr4                dmax = max( d(i) , dmax )
+  114.    Vr4------>    40 continue
+  115.               c
+  116.               c     Output eigenvectors
+  117.               c
+  118.               c     n10 = min(n,10)
+  119.               c     do i=1,n
+  120.               c        write(6,9) d(i),(z(i,j),j=1,n10)
+  121.               c     enddo
+  122.               c   9 format(1pe12.4,' e:',1p10e12.4)
+  123.               c
+  124.                     ierr=0
+  125.                     return
+  126.                     end
+ftn-5011 ftn: NOTE File = calcz.f, Line = 126 
+  Label "112" is unused.
+
+
+ftn-3118 ftn: IPA File = calcz.f, Line = 15 
+  "ident" (called from "calcz") was not inlined because the call site will not flatten.  "rzero" is missing.
+
+ftn-6254 ftn: VECTOR File = calcz.f, Line = 21 
+  A loop starting at line 21 was not vectorized because a recurrence was found on "small" at line 30.
+
+ftn-6254 ftn: VECTOR File = calcz.f, Line = 24 
+  A loop starting at line 24 was not vectorized because a recurrence was found on "smalln" at line 25.
+
+ftn-6009 ftn: SCALAR File = calcz.f, Line = 25 
+  A floating point expression involving an induction variable was strength reduced by optimization.  This may cause numerical
+  differences.
+
+ftn-6254 ftn: VECTOR File = calcz.f, Line = 38 
+  A loop starting at line 38 was not vectorized because a recurrence was found on "z" at line 92.
+
+ftn-6289 ftn: VECTOR File = calcz.f, Line = 41 
+  A loop starting at line 41 was not vectorized because a recurrence was found on "d" between lines 65 and 78.
+
+ftn-6010 ftn: SCALAR File = calcz.f, Line = 66 
+  A divide was turned into a multiply by a reciprocal
+
+ftn-3001 ftn: IPA File = calcz.f, Line = 66 
+  The call to tiny leaf routine "pythag" was textually inlined.
+
+ftn-6254 ftn: VECTOR File = calcz.f, Line = 72 
+  A loop starting at line 72 was not vectorized because a recurrence was found on "s" at line 82.
+
+ftn-3182 ftn: IPA File = calcz.f, Line = 72 
+  Loop has been flattened.
+
+ftn-3001 ftn: IPA File = calcz.f, Line = 75 
+  The call to tiny leaf routine "pythag" was textually inlined.
+
+ftn-6010 ftn: SCALAR File = calcz.f, Line = 82 
+  A divide was turned into a multiply by a reciprocal
+
+ftn-6005 ftn: SCALAR File = calcz.f, Line = 90 
+  A loop starting at line 90 was unrolled 4 times.
+
+ftn-6204 ftn: VECTOR File = calcz.f, Line = 90 
+  A loop starting at line 90 was vectorized.
+
+ftn-6005 ftn: SCALAR File = calcz.f, Line = 111 
+  A loop starting at line 111 was unrolled 4 times.
+
+ftn-6204 ftn: VECTOR File = calcz.f, Line = 111 
+  A loop starting at line 111 was vectorized.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  127.               c-----------------------------------------------------------------------
+  128.                     function pythag(a,b)
+  129.               c
+  130.               c     Compute sqrt(a*a + b*b) w/o under- or over-flow.
+  131.               c
+  132.                     absa=abs(a) 
+  133.                     absb=abs(b) 
+  134.                     if (absa.gt.absb) then
+  135.                        pythag = absa*sqrt(1. + (absb/absa)**2 )
+  136.                     else
+  137.                        if (absb.eq.0.) then
+  138.                           pythag = 0.
+  139.                        else
+  140.                           pythag = absb*sqrt(1. + (absa/absb)**2 )
+  141.                        endif
+  142.                     endif
+  143.                     return
+  144.                     end
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  145.               c-----------------------------------------------------------------------
+  146.                     subroutine ident(a,n)
+  147.                     real  a(n,n)
+  148.  +                  call rzero(a,n*n)
+  149.  + r8-------<       do i=1,n
+  150.    r8                  a(i,i) = 1.0
+  151.    r8------->       enddo
+  152.                     return
+  153.                     end
+
+ftn-3021 ftn: IPA File = calcz.f, Line = 148 
+  "rzero" (called from "ident") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6332 ftn: VECTOR File = calcz.f, Line = 149 
+  A loop starting at line 149 was not vectorized because it does not map well onto the target architecture.
+
+ftn-6005 ftn: SCALAR File = calcz.f, Line = 149 
+  A loop starting at line 149 was unrolled 8 times.
+
+  154.               c-----------------------------------------------------------------------
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                  C r o s s   R e f e r e n c e   for   CALCZ
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+1                                                                 Statement label
+  Decl      41
+  Set 
+  Used      80     101
+
+10                                                                Statement label
+  Decl      32
+  Set 
+  Used      26
+
+112                                                               FORMAT label
+  Decl      48
+  Set 
+  Used
+
+12                                                                Statement label
+  Decl      47
+  Set 
+  Used      41
+
+13                                                                Statement label
+  Decl      94
+  Set 
+  Used      90
+
+14                                                                Statement label
+  Decl      96
+  Set 
+  Used      72
+
+15                                                                Statement label
+  Decl     104
+  Set 
+  Used      38
+
+2                                                                 Statement label
+  Decl      51
+  Set 
+  Used      46
+
+40                                                                Statement label
+  Decl     114
+  Set 
+  Used     111
+
+ABS                                                               Function, REAL, INTRINSIC
+  Decl
+  Set 
+  Used       0      44      77
+
+B                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       74
+  Used      85      88
+
+C                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       69      83
+  Used      74      85      88      92      93
+
+CALCZ                                                             Subroutine, EXTERNAL
+  Decl       2
+  Set 
+  Used
+
+D                               Dummy Arg                         DOUBLE PRECISION, DIMENSION(<exp>)
+  Decl       2      12
+  Set       78      87      98
+  Used      42      65      67      84      85     109     110     112     113
+
+DD                              Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       42
+  Used      43      44
+
+DE                              Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       43
+  Used      44
+
+DF                              Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       44
+  Used      46
+
+DMAX                            Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl       2
+  Set      110     113
+  Used
+
+DMIN                            Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl       2
+  Set      109     112
+  Used
+
+E                               Dummy Arg                         DOUBLE PRECISION, DIMENSION(<exp>)
+  Decl       2      12
+  Set       76      79      99     100
+  Used      43      65      67      73      74
+
+F                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       73      91
+  Used      82      92      93
+
+G                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       65      67      84      88
+  Used      83      85      87      99
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      73      74      76      78      84      85      87      91      92      93     112     113
+
+IDENT                                                             Subroutine, EXTERNAL
+  Decl
+  Set 
+  Used      15
+
+IERR                            Dummy Arg                         INTEGER, Implicit type
+  Decl       2
+  Set       60     124
+  Used
+
+ITER                            Stack                             INTEGER, Implicit type
+  Decl
+  Set       39      64
+  Used      52
+
+K                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      91      92      93
+
+L                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      51      65      67      72      98      99
+
+M                               Stack                             INTEGER, Implicit type
+  Decl
+  Set       49
+  Used      42      43      51      67      79     100
+
+MAX                                                               Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used       0     113
+
+MIN                                                               Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used     112
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl       2
+  Set 
+  Used      12      15      38      41      49      90     111
+
+ONE                             Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       16
+  Used
+
+P                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       70      86
+  Used      78      84      87      98
+
+R                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       66      75      85
+  Used      67      76      77      82      83      86      88
+
+S                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       68      82
+  Used      73      85      86      92      93
+
+SIGN                                                              Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used      67
+
+SMALL                           Stack                             DOUBLE PRECISION
+  Decl      13
+  Set       20      27      30      33      34
+  Used      22      25      46      77
+
+SMALLN                          Stack                             DOUBLE PRECISION
+  Decl      13
+  Set       22      25
+  Used      23      26      27      30
+
+Z                               Dummy Arg                         DOUBLE PRECISION, DIMENSION(<exp>, <exp>)
+  Decl       2      12
+  Set       92      93
+  Used      15      91
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                  C r o s s   R e f e r e n c e   for   PYTHAG
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+A                               Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl     128
+  Set 
+  Used     132
+
+ABS                                                               Function, REAL, INTRINSIC
+  Decl
+  Set 
+  Used       0     133
+
+ABSA                            Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set      132
+  Used     134     135     140
+
+ABSB                            Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set      133
+  Used     134     135     137     140
+
+B                               Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl     128
+  Set 
+  Used     133
+
+PYTHAG                                                            Function, DOUBLE PRECISION, Implicit type, RESULT(PYTHAG), EXTERNAL
+  Decl     128
+  Set 
+  Used
+
+PYTHAG                          Register                          DOUBLE PRECISION, Implicit type, Function result
+  Decl
+  Set      135     138     140
+  Used
+
+SQRT                                                              Function, REAL, INTRINSIC
+  Decl
+  Set 
+  Used       0     140
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                  C r o s s   R e f e r e n c e   for   IDENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+A                               Dummy Arg                         DOUBLE PRECISION, DIMENSION(<exp>, <exp>)
+  Decl     146     147
+  Set      150
+  Used     148
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     150
+
+IDENT                                                             Subroutine, EXTERNAL
+  Decl     146
+  Set 
+  Used
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl     146
+  Set 
+  Used     147     149
+
+RZERO                                                             Subroutine
+  Decl
+  Set 
+  Used     148
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                         E x t e r n a l   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name  Messages
+----  --------
+ABS(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   CALCZ (Line 42, file calcz.f)
+                   CALCZ (Line 42, file calcz.f)
+                   CALCZ (Line 44, file calcz.f)
+                   CALCZ (Line 77, file calcz.f)
+                   PYTHAG (Line 132, file calcz.f)
+                   PYTHAG (Line 133, file calcz.f)
+
+Name  Messages
+----  --------
+CALCZ
+      Defined as:  Subroutine (line 2, file calcz.f)
+
+      Interface:   None
+
+      Calls:       IDENT (Line 15, file calcz.f)
+                   MAX(Intrinsic) (Line 34, file calcz.f)
+                   MAX(Intrinsic) (Line 113, file calcz.f)
+                   ABS(Intrinsic) (Line 42, file calcz.f)
+                   ABS(Intrinsic) (Line 42, file calcz.f)
+                   ABS(Intrinsic) (Line 44, file calcz.f)
+                   ABS(Intrinsic) (Line 77, file calcz.f)
+                   PYTHAG (Line 66, file calcz.f)
+                   PYTHAG (Line 75, file calcz.f)
+                   SIGN(Intrinsic) (Line 67, file calcz.f)
+                   MIN(Intrinsic) (Line 112, file calcz.f)
+
+Name  Messages
+----  --------
+IDENT
+      Defined as:  Subroutine (line 146, file calcz.f)
+
+      Interface:   None
+
+      Called By:   CALCZ (Line 15, file calcz.f)
+
+      Calls:       RZERO (Line 148, file calcz.f)
+
+Name  Messages
+----  --------
+MAX(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   CALCZ (Line 34, file calcz.f)
+                   CALCZ (Line 113, file calcz.f)
+
+Name  Messages
+----  --------
+MIN(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   CALCZ (Line 112, file calcz.f)
+
+Name  Messages
+----  --------
+PYTHAG
+      Defined as:  Function (line 128, file calcz.f)
+
+      Interface:   None
+
+      Called By:   CALCZ (Line 66, file calcz.f)
+                   CALCZ (Line 75, file calcz.f)
+
+      Calls:       ABS(Intrinsic) (Line 132, file calcz.f)
+                   ABS(Intrinsic) (Line 133, file calcz.f)
+                   SQRT(Intrinsic) (Line 135, file calcz.f)
+                   SQRT(Intrinsic) (Line 140, file calcz.f)
+
+Name  Messages
+----  --------
+RZERO
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   IDENT (Line 148, file calcz.f)
+
+Name  Messages
+----  --------
+SIGN(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   CALCZ (Line 67, file calcz.f)
+
+Name  Messages
+----  --------
+SQRT(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   PYTHAG (Line 135, file calcz.f)
+                   PYTHAG (Line 140, file calcz.f)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,5938 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S u m m a r y   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Compilation
+-----------
+File     : /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier7.f
+Compiled : 10/28/14  13:46:37
+Compiler : Version 8.3.0
+Ftnlx    : Version 8316 (libcif 83015)
+Target   : x86-64
+Command  : ftn_driver.exe -hcpu=interlagos -haccel=nvidia_35 -hdynamic
+           -D__CRAYXE -D__CRAYXT_COMPUTE_LINUX_TARGET -hnetwork=gemini
+           -I/opt/cray/perftools/6.2.0/include -DCRAYPAT -homp_trace
+           -hpat_trace -L/opt/cray/perftools/6.2.0/lib64 -c -O2 -hacc -ra
+           -sreal64 -eZ -em -Rc -rm -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE
+           -DGLOBAL_LONG_LONG
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./
+           -oobj/navier7.o -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/libsci_acc/3.0.3.1/CRAY/83/x86_64/include
+           -I/opt/cray/libsci/13.0.0/CRAY/83/interlagos/include
+           -I/opt/cray/mpt/7.0.0/gni/mpich2-cray/83/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/extras/CUPTI/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/nvvm/include
+           -I/opt/cray/rca/1.0.0-2.0502.53711.3.125.gem/include
+           -I/opt/cray/pmi/5.0.4-1.0000.10161.132.18.gem/include
+           -I/opt/cray/xpmem/0.1-2.0502.55507.3.2.gem/include
+           -I/opt/cray/dmapp/7.0.1-1.0502.9501.5.211.gem/include
+           -I/opt/cray/gni-headers/3.0-1.0502.9684.5.2.gem/include
+           -I/opt/cray/ugni/5.0-1.0502.9685.4.24.gem/include
+           -I/opt/cray/udreg/2.3.2-1.0502.9275.1.25.gem/include
+           -I/opt/cray/alps/5.2.1-2.0502.9041.11.6.gem/include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/pkgconfig/../include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/wlm_detect/1.0-1.0502.53341.1.1.gem/include
+           -I/opt/cray/krca/1.0.0-2.0502.53880.4.103.gem/include
+           -I/opt/cray-hss-devel/7.2.0/include /lustre/atlas/scratch/csep22/trn0
+           01/nek5_acc/nek_2013_11_27/navier7.f
+
+ftnlx report
+------------
+Source   : /lustre/atlas1/trn001/scratch/csep22/nek5_acc/pipe_2013_11_27//lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier7.f
+Date     : 10/28/2014  13:46:39
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          O p t i o n s   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Options :  -O cache2,fp2,scalar2,thread2,vector2,mpi0,modinline,ipa3,noaggress
+           -O autoprefetch,noautothread,fusion2,nomsgs,negmsgs,nooverindex
+           -O pattern,shortcircuit2,unroll2,nozeroinc
+           -h noadd_paren,align_arrays,caf,noconcurrent,nocontiguous,nofp_trap
+           -h nofunc_trace,nomessage,noomp_analyze,omp_trace,pat_trace
+           -h omp,acc
+           -h acc_model=auto_async_kernel:fast_addr:no_deep_copy
+           -h cpu=x86-64,interlagos,gemini,accel=NVIDIA_GPU
+           -s real64
+           -eh
+           -d acdgjnopvBDEIPQRS0
+           -e mqswACFTZ
+           -J bj
+           -R c 
+           -f fixed
+           -m3
+           -N72
+           -S /tmp/scratch/pe_9986/navier7_1.s
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+     %%%    L o o p m a r k   L e g e n d    %%%
+
+     Primary Loop Type        Modifiers
+     ------- ---- ----        ---------
+     A - Pattern matched      a - atomic memory operation
+                              b - blocked
+     C - Collapsed            c - conditional and/or computed
+     D - Deleted               
+     E - Cloned                
+     F - Flat - No calls      f - fused
+     G - Accelerated          g - partitioned
+     I - Inlined              i - interchanged
+     M - Multithreaded        m - partitioned
+                              n - non-blocking remote transfer
+                              p - partial
+                              r - unrolled
+                              s - shortloop
+     V - Vectorized           w - unwound
+
+     + - More messages listed at end of listing
+     ------------------------------------------
+
+
+    1.             c-----------------------------------------------------------------------
+    2.                   subroutine out_acsr(acsr,ia,ja,n)
+    3.                   real acsr(1)
+    4.                   integer ia(2),ja(1)
+    5.                   character*1 adum
+    6.             c
+    7.  +                open (unit=40,file='q0')
+    8.  +                open (unit=41,file='q1')
+    9.  +                open (unit=42,file='q2')
+   10.             c
+   11.                   write(6,*) 'this is ia:',ia(1),ia(2),n
+   12.  + 1------<       do i=1,n
+   13.    1                 nc = ia(i+1)-ia(i)
+   14.    1                 j0 = ia(i)-1
+   15.  + 1 2----<          do jc=1,nc
+   16.    1 2                  j = ja  (jc+j0)
+   17.    1 2                  a = acsr(jc+j0)
+   18.    1 2                  write(40,40) a
+   19.    1 2                  write(41,41) i
+   20.    1 2                  write(42,41) j
+   21.    1 2                  write(6,*) i,j,a
+   22.    1 2---->          enddo
+   23.    1------>       enddo
+   24.                40 format(1pe20.12)
+   25.                41 format(i9)
+   26.             c
+   27.  +                close (unit=40)
+   28.  +                close (unit=41)
+   29.  +                close (unit=42)
+   30.             c
+   31.             c     write(6,*) 'Output in q0,q1,q2. Continue? <cr> '
+   32.             c     read (5,*,end=1,err=1) adum
+   33.                 1 continue
+   34.             c
+   35.                   return
+   36.                   end
+ftn-5002 ftn: NOTE File = navier7.f, Line = 36 
+  Local variable "ADUM" is declared but neither defined nor used.
+
+ftn-5011 ftn: NOTE File = navier7.f, Line = 36 
+  Label "1" is unused.
+
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 7 
+  "_OPEN" (called from "out_acsr") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 8 
+  "_OPEN" (called from "out_acsr") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 9 
+  "_OPEN" (called from "out_acsr") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 12 
+  A loop starting at line 12 was not vectorized because it contains input/output operations at line 18.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 15 
+  A loop starting at line 15 was not vectorized because it contains input/output operations at line 18.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 27 
+  "_CLOSE" (called from "out_acsr") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 28 
+  "_CLOSE" (called from "out_acsr") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 29 
+  "_CLOSE" (called from "out_acsr") was not inlined because the compiler was unable to locate the routine.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   37.             c-----------------------------------------------------------------------
+   38.                   subroutine compress_acsr(acsr,ia,ja,n)
+   39.             c
+   40.             c     Compress csr formatted a matrix based on drop tolerance, eps.
+   41.             c
+   42.                   real acsr(1)
+   43.                   integer ia(1),ja(1)
+   44.             c
+   45.                   eps = 1.e-10
+   46.             c
+   47.                   k0 = ia(1)-1
+   48.  + 1------<       do i=1,n
+   49.    1                 nc = ia(i+1)-ia(i)
+   50.    1                 j0 = ia(i)-1
+   51.    1        
+   52.    1        C        row sum as metric
+   53.    1                 aa = 0.0
+   54.    1 Vr6--<          do jc=1,nc
+   55.    1 Vr6                aa = aa+abs(acsr(jc+j0))
+   56.    1 Vr6-->          enddo
+   57.    1                 if (aa.lt.eps) then
+   58.    1                    write(6,*) 'inf-norm of row is small',aa
+   59.    1                    aa=1.0
+   60.    1                 endif
+   61.    1        C
+   62.    1                 kc = 0
+   63.  + 1 2----<          do jc=1,nc
+   64.  + 1 2                  ae = abs(acsr(jc+j0)/aa)
+   65.    1 2                  if (ae.gt.eps) then
+   66.    1 2      c              bump column pointer
+   67.    1 2                     kc = kc+1
+   68.    1 2                     acsr(kc+k0) = acsr(jc+j0)
+   69.    1 2                     ja  (kc+k0) = ja  (jc+j0)
+   70.    1 2                  endif
+   71.    1 2---->          enddo
+   72.    1                 ia (i) = k0+1
+   73.    1                 k0     = k0+kc
+   74.    1------>       enddo
+   75.                   ia(i) = k0+1
+   76.             c
+   77.                   return
+   78.                   end
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 48 
+  A loop starting at line 48 was not vectorized because it contains input/output operations at line 58.
+
+ftn-6005 ftn: SCALAR File = navier7.f, Line = 54 
+  A loop starting at line 54 was unrolled 6 times.
+
+ftn-6204 ftn: VECTOR File = navier7.f, Line = 54 
+  A loop starting at line 54 was vectorized.
+
+ftn-6336 ftn: VECTOR File = navier7.f, Line = 63 
+  A loop starting at line 63 was not vectorized because it requires additional hardware capabilities for pack or unpack operations
+  on line 68.
+
+ftn-6010 ftn: SCALAR File = navier7.f, Line = 64 
+  A divide was turned into a multiply by a reciprocal
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   79.             c-----------------------------------------------------------------------
+   80.                   subroutine outbox(xmax,xmin,ymax,ymin,io)
+   81.             c
+   82.                   dx = xmax-xmin
+   83.                   dy = ymax-ymin
+   84.  +                dd = max(dx,dy)/2.
+   85.             c
+   86.  +                xh = (xmax+xmin)/2.
+   87.  +                yh = (ymax+ymin)/2.
+   88.                   xmn = xh - dd
+   89.                   xmx = xh + dd
+   90.                   ymn = yh - dd
+   91.                   ymx = yh + dd
+   92.             c
+   93.                   write(io,*) 
+   94.                   write(io,*) ymn,xmn
+   95.                   write(io,*) ymx,xmn
+   96.                   write(io,*) ymx,xmx
+   97.                   write(io,*) ymn,xmx
+   98.                   write(io,*) ymn,xmn
+   99.                   write(io,*) 
+  100.             c
+  101.                   return
+  102.                   end
+
+ftn-6010 ftn: SCALAR File = navier7.f, Line = 84 
+  A divide was turned into a multiply by a reciprocal
+
+ftn-6010 ftn: SCALAR File = navier7.f, Line = 86 
+  A divide was turned into a multiply by a reciprocal
+
+ftn-6010 ftn: SCALAR File = navier7.f, Line = 87 
+  A divide was turned into a multiply by a reciprocal
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  103.             c-----------------------------------------------------------------------
+  104.                   subroutine imout(x,m,n,name)
+  105.                   integer x(m,1)
+  106.                   character*9 name
+  107.             c
+  108.                   n15 = min(n,30)
+  109.  + 1------<       do i=1,m
+  110.    1                 write(6,6) n,name,(x(i,k),k=1,n15)
+  111.    1------>       enddo
+  112.                 6 format(i4,1x,a9,':',2x,30i3)
+  113.                   return
+  114.                   end
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 109 
+  A loop starting at line 109 was not vectorized because it contains input/output operations at line 110.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  115.             c-----------------------------------------------------------------------
+  116.                   subroutine out_abd(abd,lda,n,m)
+  117.                   real    abd(lda,1)
+  118.             c
+  119.                   write(6,*) 'abd:',lda,m,n
+  120.  + 1------<       do j=1,n
+  121.    1                  write(6,6) (abd(i,j),i=lda,1,-1)
+  122.    1------>       enddo
+  123.                6  format(12f8.3)
+  124.             c.
+  125.             c.
+  126.  +                open(unit=40,file='b0')
+  127.  +                open(unit=41,file='b1')
+  128.  +                open(unit=42,file='b2')
+  129.                   mm = lda-1
+  130.  + 1------<       do 20 j = 1, n
+  131.    1                 i1 = max0(1, j-mm)
+  132.  + 1 2----<          do 10 i = i1, j
+  133.    1 2                  k = i-j+mm+1
+  134.    1 2                  a = abd(k,j)
+  135.    1 2                  write(40,*) a
+  136.    1 2                  write(41,*) i
+  137.    1 2                  write(42,*) j
+  138.    1 2---->    10    continue
+  139.    1------>    20 continue
+  140.             c
+  141.  +                close(unit=40)
+  142.  +                close(unit=41)
+  143.  +                close(unit=42)
+  144.             c
+  145.                   return
+  146.                   end
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 120 
+  A loop starting at line 120 was not vectorized because it contains input/output operations at line 121.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 126 
+  "_OPEN" (called from "out_abd") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 127 
+  "_OPEN" (called from "out_abd") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 128 
+  "_OPEN" (called from "out_abd") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 130 
+  A loop starting at line 130 was not vectorized because it contains input/output operations at line 135.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 132 
+  A loop starting at line 132 was not vectorized because it contains input/output operations at line 135.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 141 
+  "_CLOSE" (called from "out_abd") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 142 
+  "_CLOSE" (called from "out_abd") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 143 
+  "_CLOSE" (called from "out_abd") was not inlined because the compiler was unable to locate the routine.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  147.             c-----------------------------------------------------------------------
+  148.                   subroutine rarr_out(x,name13)
+  149.                   include 'SIZE'
+  150.                   include 'INPUT'
+  151.             c
+  152.                   real x(lx1,ly1,lz1,lelt)
+  153.                   character*13 name13
+  154.             c
+  155.                   if (nelv.gt.20) return
+  156.                   write(6,*) 
+  157.                   write(6,1) name13
+  158.                 1 format('rarr ',3x,a13)
+  159.             c
+  160.             c     3 D
+  161.             c
+  162.                   if (if3d) then
+  163.  + 1------<          do iz=1,nz1
+  164.    1                    write(6,*) 
+  165.  + 1 2----<             do j=ny1,1,-1
+  166.    1 2                     write(6,3) (x(k,j,iz,1),k=1,nx1),(x(k,j,iz,2),k=1,nx1)
+  167.    1 2---->             enddo
+  168.    1------>          enddo
+  169.                      write(6,*)
+  170.                      write(6,*)
+  171.                      return
+  172.                   endif
+  173.             c
+  174.             c     2 D
+  175.             c
+  176.                   if (nelv.gt.2) then
+  177.                      write(6,*) 
+  178.  + 1------<          do j=ny1,1,-1
+  179.    1                    write(6,6) (x(k,j,1,3),k=1,nx1),(x(k,j,1,4),k=1,nx1)
+  180.    1------>          enddo
+  181.                      write(6,*)
+  182.                      write(6,*)
+  183.                   endif
+  184.             c
+  185.  + 1------<       do j=ny1,1,-1
+  186.    1                 write(6,6) (x(k,j,1,1),k=1,nx1),(x(k,j,1,2),k=1,nx1)
+  187.    1------>       enddo
+  188.                   write(6,*)
+  189.                 3 format(4f6.2,5x,4f6.2)
+  190.                 6 format(6f8.4,5x,6f8.4)
+  191.                   return
+  192.                   end
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LELG" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 192 
+  Named Constant "MXPREV" is not used.
+
+ftn-5012 ftn: NOTE File = navier7.f, Line = 192 
+  Local variable "IFNAV" is equivalenced but not referenced.
+
+ftn-5012 ftn: NOTE File = navier7.f, Line = 192 
+  Local variable "TURBMOD" is equivalenced but not referenced.
+
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 163 
+  A loop starting at line 163 was not vectorized because it contains input/output operations at line 164.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 165 
+  A loop starting at line 165 was not vectorized because it contains input/output operations at line 166.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 178 
+  A loop starting at line 178 was not vectorized because it contains input/output operations at line 179.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 185 
+  A loop starting at line 185 was not vectorized because it contains input/output operations at line 186.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  193.             c-----------------------------------------------------------------------
+  194.                   subroutine iarr_out(x,name)
+  195.                   include 'SIZE'
+  196.                   include 'INPUT'
+  197.             c
+  198.                   integer x(lx1,ly1,lz1,lelt)
+  199.                   character*13 name
+  200.             c
+  201.                   if (nelv.gt.20) return
+  202.                   write(6,*) 
+  203.                   write(6,1) name
+  204.                 1 format(a13)
+  205.             c
+  206.             c     3 D
+  207.             c
+  208.                   if (if3d) then
+  209.  + 1------<          do iz=1,nz1
+  210.    1                    write(6,*) 
+  211.  + 1 2----<             do j=ny1,1,-1
+  212.    1 2                     write(6,3) (x(k,j,iz,1),k=1,nx1),(x(k,j,iz,2),k=1,nx1)
+  213.    1 2---->             enddo
+  214.    1------>          enddo
+  215.                      write(6,*)
+  216.                      write(6,*)
+  217.                      return
+  218.                   endif
+  219.             c
+  220.             c     2 D
+  221.             c
+  222.                   if (nelv.gt.2) then
+  223.                      write(6,*) 
+  224.  + 1------<          do j=ny1,1,-1
+  225.    1                    write(6,6) (x(k,j,1,3),k=1,nx1),(x(k,j,1,4),k=1,nx1)
+  226.    1------>          enddo
+  227.                      write(6,*)
+  228.                      write(6,*)
+  229.                   endif
+  230.             c
+  231.  + 1------<       do j=ny1,1,-1
+  232.    1                 write(6,6) (x(k,j,1,1),k=1,nx1),(x(k,j,1,2),k=1,nx1)
+  233.    1------>       enddo
+  234.                   write(6,*)
+  235.                 3 format(4i5,5x,4i5)
+  236.                 6 format(5i5,5x,5i5)
+  237.                   return
+  238.                   end
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LELG" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 238 
+  Named Constant "MXPREV" is not used.
+
+ftn-5012 ftn: NOTE File = navier7.f, Line = 238 
+  Local variable "IFNAV" is equivalenced but not referenced.
+
+ftn-5012 ftn: NOTE File = navier7.f, Line = 238 
+  Local variable "TURBMOD" is equivalenced but not referenced.
+
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 209 
+  A loop starting at line 209 was not vectorized because it contains input/output operations at line 210.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 211 
+  A loop starting at line 211 was not vectorized because it contains input/output operations at line 212.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 224 
+  A loop starting at line 224 was not vectorized because it contains input/output operations at line 225.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 231 
+  A loop starting at line 231 was not vectorized because it contains input/output operations at line 232.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  239.             c-----------------------------------------------------------------------
+  240.                   subroutine iar2_out(x,name)
+  241.                   include 'SIZE'
+  242.             c
+  243.                   integer x(lx2,ly2,lz2,lelt)
+  244.                   character*13 name
+  245.             c
+  246.                   if (nelv.gt.20) return
+  247.                   write(6,*) 
+  248.                   write(6,1) name
+  249.                 1 format(a13)
+  250.                   if (nelv.gt.2) then
+  251.                      write(6,*) 
+  252.  + 1------<          do j=ny2,1,-1
+  253.    1                    write(6,6) (x(k,j,1,3),k=1,nx2),(x(k,j,1,4),k=1,nx2)
+  254.    1------>          enddo
+  255.                      write(6,*)
+  256.                      write(6,*)
+  257.                   endif
+  258.             c
+  259.  + 1------<       do j=ny2,1,-1
+  260.    1                 write(6,6) (x(k,j,1,1),k=1,nx2),(x(k,j,1,2),k=1,nx2)
+  261.    1------>       enddo
+  262.                   write(6,*)
+  263.                 6 format(3i5,5x,3i5)
+  264.                   return
+  265.                   end
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LDIMT1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LDIMT3" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LELG" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = navier7.f, Line = 265 
+  Named Constant "MAXOBJ" is not used.
+
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 252 
+  A loop starting at line 252 was not vectorized because it contains input/output operations at line 253.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 259 
+  A loop starting at line 259 was not vectorized because it contains input/output operations at line 260.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  266.             c-----------------------------------------------------------------------
+  267.                   subroutine scsr_permute(bcsr,ib,jb,acsr,ia,ja,n
+  268.                  $                                  ,icperm,inverse,nonzero,nzero)
+  269.             c
+  270.             c     Permutes a Symmetric Compressed Sparse Row formatted matrix
+  271.             c     to minimize bandwidth
+  272.             c
+  273.             c     Reqired space:  NONZERO is an array of size 2*nnz+2,  where nnz
+  274.             c                     is the number of nonzeros.  NONZERO and jb may
+  275.             c                     occupy the same space.
+  276.             c
+  277.             c     NOTE!!:   "inverse" is used as a scratch array for reals
+  278.             c               in the swap call below... Therefore, inverse must
+  279.             c               be aligned on even byte boundaries when running
+  280.             c               in 64 bit precision.
+  281.             c
+  282.             c
+  283.                   real bcsr(1)
+  284.                   integer ib(1),jb(1)
+  285.             c
+  286.                   real acsr(1)
+  287.                   integer ia(1),ja(1)
+  288.             c
+  289.                   integer icperm(n),nonzero(2,0:1)
+  290.                   integer inverse(n),nzero(n)
+  291.             C     HMT HACK ... if we're actualy using smbwr.c then we need to 
+  292.             C     uncomment the following line!!!
+  293.             C      integer sm_bandwidth_reduction
+  294.             c
+  295.                   integer icalld,max_n 
+  296.                   save    icalld,max_n 
+  297.                   data    icalld,max_n /0,0/
+  298.             C
+  299.             C     HMT HACK ... if we're actualy using smbwr.c then we need to 
+  300.             C     delete the following line!!!
+  301.                   write(6,*) 'HMT HACK in subroutine scsr_permute() ... pls fix!'
+  302.  +                call exitt
+  303.             C
+  304.                   icalld=icalld+1
+  305.             c
+  306.                   write(6,*) 'scsr_permute',n,acsr(1)
+  307.                   mnz    = 0
+  308.                   mbw_in = 0
+  309.  + 1------<       do i=1,n
+  310.    1                 n1 = ia(i)  +1
+  311.    1                 n2 = ia(i+1)-1
+  312.  + 1 r2---<          do jj=n1,n2
+  313.    1 r2                 mnz = mnz+1
+  314.    1 r2                 j   = ja(jj)
+  315.    1 r2                 nonzero(1,mnz) = i
+  316.    1 r2                 nonzero(2,mnz) = j
+  317.    1 r2     C            write (6,*) i,j
+  318.    1 r2                 mbw_in = max(mbw_in,abs(i-j))
+  319.    1 r2--->          enddo
+  320.    1------>       enddo
+  321.                   nonzero(1,0) = n
+  322.                   nonzero(2,0) = mnz
+  323.             C
+  324.                   itype = -1
+  325.             C      itype = -2
+  326.                   if (n.le.200) itype = -2
+  327.                   write(6,*) 'this is mnz:',mnz
+  328.             C      write(6,*)  nonzero(1,0), nonzero(2,0)
+  329.             c
+  330.             C     HMT HACK ... if we're actualy using smbwr.c then we need to 
+  331.             C     uncomment the following line!!!
+  332.             C      ierr  = sm_bandwidth_reduction(nonzero(1,0),icperm(1),itype)
+  333.                   ierr = 1
+  334.                   if (ierr.eq.0) then
+  335.                      write(6,*) 'scsr_permute :: sm_bandwidth_reduction failed',ierr
+  336.  +                   call exitt
+  337.                   elseif (ierr.lt.0) then
+  338.                      write(6,*) 'scsr_permute :: graph disconnected?',ierr
+  339.  +                   call exitt
+  340.                   endif
+  341.             c
+  342.             c     Setup inverse map
+  343.             c
+  344.  + r8-----<       do i=1,n
+  345.    r8                inverse(icperm(i))=i
+  346.    r8----->       enddo
+  347.             c
+  348.             C      n20 = min(50,n)
+  349.             C      write(6,20) (icperm (k),k=1,n20)
+  350.             C      write(6,21) (inverse(k),k=1,n20)
+  351.             C 20   format('icp:',20i4)
+  352.             C 21   format('inv:',20i4)
+  353.             c
+  354.             c
+  355.             c     Count *number* of nonzeros on each row in the new row pointer
+  356.             c
+  357.  +                call izero(nzero,2*mnz)
+  358.  + 1------<       do i=1,n
+  359.    1                 n1 = ia(i)
+  360.    1                 n2 = ia(i+1)-1
+  361.    1                 ii = inverse(i)
+  362.  + 1 2----<          do jc=n1,n2
+  363.    1 2                  j=ja(jc)
+  364.    1 2                  jj = inverse(j)
+  365.    1 2                  if (jj.ge.ii) then
+  366.    1 2                     nzero(ii) = nzero(ii)+1
+  367.    1 2                  else
+  368.    1 2                     nzero(jj) = nzero(jj)+1
+  369.    1 2                  endif
+  370.    1 2---->          enddo
+  371.    1------>       enddo
+  372.             c
+  373.             c     Convert to pointers
+  374.             c
+  375.                   ib(1) = 1
+  376.  + r4-----<       do i=1,n
+  377.    r4                ib(i+1) = ib(i)+nzero(i)
+  378.    r4----->       enddo
+  379.             c
+  380.             c     Fill permuted array
+  381.             c
+  382.  +                call icopy(nzero,ib,n)
+  383.  + 1------<       do i=1,n
+  384.    1                 n1 = ia(i)
+  385.    1                 n2 = ia(i+1)-1
+  386.    1                 ii = inverse(i)
+  387.  + 1 r4---<          do jc=n1,n2
+  388.    1 r4                 j=ja(jc)
+  389.    1 r4                 jj = inverse(j)
+  390.    1 r4                 if (jj.ge.ii) then
+  391.    1 r4                    jb  (nzero(ii)) = jj
+  392.    1 r4                    bcsr(nzero(ii)) = acsr(jc)
+  393.    1 r4                    nzero(ii) = nzero(ii)+1
+  394.    1 r4                 else
+  395.    1 r4                    jb  (nzero(jj)) = ii
+  396.    1 r4                    bcsr(nzero(jj)) = acsr(jc)
+  397.    1 r4                    nzero(jj) = nzero(jj)+1
+  398.    1 r4                 endif
+  399.    1 r4--->          enddo
+  400.    1------>       enddo
+  401.             c
+  402.             c     Sort each row of b in ascending column order -- 
+  403.             c                             just for subsequent access efficiency
+  404.             c
+  405.                   m2 = mod(n2,2)+2
+  406.  + 1------<       do i=1,n
+  407.    1                 n1 = ib(i)
+  408.    1                 n2 = ib(i+1)-ib(i)
+  409.  + 1                 call isort(jb  (n1),nzero,n2)
+  410.    1        c        write(6,*) 'call swap:',n,i,m2,n1,n2
+  411.  + 1                 call swap (bcsr(n1),nzero,n2,inverse)
+  412.    1------>       enddo
+  413.             c
+  414.                   if (icalld.le.10.or.mod(icalld,50).eq.0.or.n.gt.max_n) then
+  415.  +                   mbw = mbw_csr(ib,jb,n)
+  416.                      write(6,*) ierr,mbw,mbw_in,n,mnz,'   New bandwidth'
+  417.                      if (n.gt.max_n) max_n = n
+  418.                   endif
+  419.             c
+  420.                   return
+  421.                   end
+ftn-5001 ftn: NOTE File = navier7.f, Line = 421 
+  Local variable "M2" is assigned a value but never used.
+
+ftn-5001 ftn: NOTE File = navier7.f, Line = 421 
+  Local variable "ITYPE" is assigned a value but never used.
+
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 302 
+  "exitt" (called from "scsr_permute") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6254 ftn: VECTOR File = navier7.f, Line = 309 
+  A loop starting at line 309 was not vectorized because a recurrence was found on "mnz" at line 313.
+
+ftn-6271 ftn: VECTOR File = navier7.f, Line = 312 
+  A loop starting at line 312 was not vectorized because its trip count is too small.
+
+ftn-6005 ftn: SCALAR File = navier7.f, Line = 312 
+  A loop starting at line 312 was unrolled 2 times.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 336 
+  "exitt" (called from "scsr_permute") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 339 
+  "exitt" (called from "scsr_permute") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6332 ftn: VECTOR File = navier7.f, Line = 344 
+  A loop starting at line 344 was not vectorized because it does not map well onto the target architecture.
+
+ftn-6005 ftn: SCALAR File = navier7.f, Line = 344 
+  A loop starting at line 344 was unrolled 8 times.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 357 
+  "izero" (called from "scsr_permute") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6289 ftn: VECTOR File = navier7.f, Line = 358 
+  A loop starting at line 358 was not vectorized because a recurrence was found on "nzero" between lines 366 and 368.
+
+ftn-6254 ftn: VECTOR File = navier7.f, Line = 362 
+  A loop starting at line 362 was not vectorized because a recurrence was found on "nzero" at line 366.
+
+ftn-6005 ftn: SCALAR File = navier7.f, Line = 376 
+  A loop starting at line 376 was unrolled 4 times.
+
+ftn-6254 ftn: VECTOR File = navier7.f, Line = 376 
+  A loop starting at line 376 was not vectorized because a recurrence was found on "ib" at line 377.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 382 
+  "icopy" (called from "scsr_permute") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6289 ftn: VECTOR File = navier7.f, Line = 383 
+  A loop starting at line 383 was not vectorized because a recurrence was found on "bcsr" between lines 392 and 396.
+
+ftn-6005 ftn: SCALAR File = navier7.f, Line = 387 
+  A loop starting at line 387 was unrolled 4 times.
+
+ftn-6289 ftn: VECTOR File = navier7.f, Line = 387 
+  A loop starting at line 387 was not vectorized because a recurrence was found on "bcsr" between lines 392 and 396.
+
+ftn-6288 ftn: VECTOR File = navier7.f, Line = 406 
+  A loop starting at line 406 was not vectorized because it contains a call to subroutine "isort" on line 409.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 409 
+  "isort" (called from "scsr_permute") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3005 ftn: IPA File = navier7.f, Line = 411 
+  "swap" (called from "scsr_permute") was not inlined because the type of argument 4 does not match the corresponding type from the
+  routine definition.
+
+ftn-3171 ftn: IPA File = navier7.f, Line = 415 
+  "mbw_csr" (called from "scsr_permute") was not inlined because it is not in the body of a loop.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  422.             c=======================================================================
+  423.                   subroutine scsr_to_spb(abd,lda,acsr,ia,ja,n)
+  424.             c
+  425.             c     This, and the companion routines map a *symmetrically*
+  426.             c     stored (upper 1/2 only) Compressed Sparse Row formatted
+  427.             c     matrix to the linpack banded format.
+  428.             c
+  429.             c
+  430.                   real abd(1),acsr(1)
+  431.                   integer m,n,ia(1),ja(1)
+  432.             c
+  433.  +                lda = mbw_csr(ia,ja,n) + 1
+  434.  +                call scsr_to_spbm(abd,lda,acsr,ia,ja,n)
+  435.             c
+  436.                   return
+  437.                   end
+ftn-5002 ftn: NOTE File = navier7.f, Line = 437 
+  Local variable "M" is declared but neither defined nor used.
+
+
+ftn-3171 ftn: IPA File = navier7.f, Line = 433 
+  "mbw_csr" (called from "scsr_to_spb") was not inlined because it is not in the body of a loop.
+
+ftn-3118 ftn: IPA File = navier7.f, Line = 434 
+  "scsr_to_spbm" (called from "scsr_to_spb") was not inlined because the call site will not flatten.  "rzero" is missing.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  438.             c=======================================================================
+  439.                   subroutine scsr_to_spbm(abd,lda,acsr,ia,ja,n)
+  440.             c
+  441.                   real abd(lda,1),acsr(1)
+  442.                   integer n,ia(1),ja(1)
+  443.             c
+  444.  +                call rzero(abd,lda*n)
+  445.  + 1------<       do i=1,n
+  446.    1                 n1 = ia(i)
+  447.    1                 n2 = ia(i+1)-1
+  448.  + 1 r8---<          do jc=n1,n2
+  449.    1 r8                 j=ja(jc)
+  450.    1 r8                 klin = lda + (i-j)
+  451.    1 r8                 jlin = j
+  452.    1 r8                 abd(klin,jlin) = acsr(jc)
+  453.    1 r8--->          enddo
+  454.    1------>       enddo
+  455.                   return
+  456.                   end
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 444 
+  "rzero" (called from "scsr_to_spbm") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6254 ftn: VECTOR File = navier7.f, Line = 445 
+  A loop starting at line 445 was not vectorized because a recurrence was found on "abd" at line 452.
+
+ftn-6332 ftn: VECTOR File = navier7.f, Line = 448 
+  A loop starting at line 448 was not vectorized because it does not map well onto the target architecture.
+
+ftn-6005 ftn: SCALAR File = navier7.f, Line = 448 
+  A loop starting at line 448 was unrolled 8 times.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  457.                   function mbw_csr(ia,ja,n) 
+  458.             c
+  459.             c     Determine the maximum bandwidth for a csr formatted matrix
+  460.             c
+  461.                   integer ia(1),ja(1)
+  462.             c
+  463.                   m = 0
+  464.  + 1------<       do i=1,n
+  465.    1                 n1 = ia(i)
+  466.    1                 n2 = ia(i+1)-1
+  467.  + 1 r8---<          do jc=n1,n2
+  468.    1 r8                 j=ja(jc)
+  469.    1 r8                 m = max(m,abs(i-j))
+  470.    1 r8--->          enddo
+  471.    1------>       enddo
+  472.                   mbw_csr = m
+  473.                   return
+  474.                   end
+
+ftn-6306 ftn: VECTOR File = navier7.f, Line = 464 
+  A loop starting at line 464 was not vectorized because the iteration space is too irregular.
+
+ftn-6332 ftn: VECTOR File = navier7.f, Line = 467 
+  A loop starting at line 467 was not vectorized because it does not map well onto the target architecture.
+
+ftn-6005 ftn: SCALAR File = navier7.f, Line = 467 
+  A loop starting at line 467 was unrolled 8 times.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  475.             c=======================================================================
+  476.                   subroutine out_spbmat(abd,n,lda,name)
+  477.                   real    abd(lda,1)
+  478.             c
+  479.                   character*9 name
+  480.                   character*6 s(22)
+  481.             c
+  482.                   m = lda-1
+  483.                   write(6,1) name,n,m
+  484.                 1 format(/,'SPB Mat:',a9,3x,'n =',i3,' m =',i3,/)
+  485.             c
+  486.                   n22 = min(n,22)
+  487.  + 1------<       do i=1,n
+  488.  + 1                 call blank(s,132)
+  489.    1                 ii = lda*i
+  490.  + 1 2----<          do k=0,m
+  491.    1 2                  j = i+k
+  492.    1 2                  a = abd(ii+k*m,1)
+  493.    1 2                  if (a.ne.0..and.j.le.n22) write(s(j),6) a
+  494.    1 2---->          enddo
+  495.    1                 write(6,22) (s(k),k=1,n22)
+  496.    1------>       enddo
+  497.                 6 format(f6.3)
+  498.                22 format(22a6)
+  499.             c
+  500.                   return
+  501.                   end
+
+ftn-6288 ftn: VECTOR File = navier7.f, Line = 487 
+  A loop starting at line 487 was not vectorized because it contains a call to subroutine "blank" on line 488.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 488 
+  "blank" (called from "out_spbmat") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 490 
+  A loop starting at line 490 was not vectorized because it contains input/output operations at line 493.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  502.             c=======================================================================
+  503.                   subroutine swap(b,ind,n,temp)
+  504.                   real B(1),TEMP(1)
+  505.                   integer IND(1)
+  506.             C***
+  507.             C***  SORT ASSOCIATED ELEMENTS BY PUTTING ITEM(JJ)
+  508.             C***  INTO ITEM(I), WHERE JJ=IND(I).
+  509.             C***
+  510.  + r8-----<       DO 20 I=1,N
+  511.    r8                JJ=IND(I)
+  512.    r8                TEMP(I)=B(JJ)
+  513.    r8----->    20 CONTINUE
+  514.    A------<       DO 30 I=1,N
+  515.    A------>    30 B(I)=TEMP(I)
+  516.                   RETURN
+  517.                   END
+
+ftn-6332 ftn: VECTOR File = navier7.f, Line = 510 
+  A loop starting at line 510 was not vectorized because it does not map well onto the target architecture.
+
+ftn-6005 ftn: SCALAR File = navier7.f, Line = 510 
+  A loop starting at line 510 was unrolled 8 times.
+
+ftn-6202 ftn: VECTOR File = navier7.f, Line = 514 
+  A loop starting at line 514 was replaced by a library call.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  518.             c=======================================================================
+  519.                   subroutine ipermute(a,icperm,n,b)
+  520.                   integer a(1),b(1)
+  521.                   integer icperm(1)
+  522.             c
+  523.  +                call icopy(b,a,n)
+  524.  + r8-----<       do i=1,n
+  525.    r8                a(i) = b(icperm(i))
+  526.    r8----->       enddo
+  527.                   return
+  528.                   end
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 523 
+  "icopy" (called from "ipermute") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6332 ftn: VECTOR File = navier7.f, Line = 524 
+  A loop starting at line 524 was not vectorized because it does not map well onto the target architecture.
+
+ftn-6005 ftn: SCALAR File = navier7.f, Line = 524 
+  A loop starting at line 524 was unrolled 8 times.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  529.             c=======================================================================
+  530.                   subroutine out_csrmat(acsr,ia,ja,n,name9)
+  531.                   real    acsr(1)
+  532.                   integer ia(1),ja(1)
+  533.             c
+  534.                   character*9 name9
+  535.                   character*6 s(22)
+  536.             c
+  537.                   nnz = ia(n+1)-ia(1)
+  538.             c
+  539.                   write(6,1) name9,n,nnz
+  540.                 1 format(/,'CSR Mat:',a9,3x,'n =',i3,3x,'nnz =',i5,/)
+  541.             c
+  542.                   n22 = min(n,22)
+  543.                   n29 = min(n,29)
+  544.  + 1------<       do i=1,n29
+  545.  + 1                 call blank(s,132)
+  546.    1                 n1 = ia(i)
+  547.    1                 n2 = ia(i+1)-1
+  548.  + 1 2----<          do jj=n1,n2
+  549.    1 2                  j = ja  (jj)
+  550.    1 2                  a = acsr(jj)
+  551.    1 2                  if (a.ne.0..and.j.le.n22) write(s(j),6) a
+  552.    1 2---->          enddo
+  553.    1                 write(6,22) (s(k),k=1,n22)
+  554.    1------>       enddo
+  555.                 6 format(f6.2)
+  556.                22 format(22a6)
+  557.             c
+  558.                   return
+  559.                   end
+
+ftn-6288 ftn: VECTOR File = navier7.f, Line = 544 
+  A loop starting at line 544 was not vectorized because it contains a call to subroutine "blank" on line 545.
+
+ftn-3021 ftn: IPA File = navier7.f, Line = 545 
+  "blank" (called from "out_csrmat") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6286 ftn: VECTOR File = navier7.f, Line = 548 
+  A loop starting at line 548 was not vectorized because it contains input/output operations at line 551.
+
+  560.             c=======================================================================
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                 C r o s s   R e f e r e n c e   for   OUT_ACSR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+1                                                                 Statement label
+  Decl      33
+  Set 
+  Used
+
+40                                                                FORMAT label
+  Decl      24
+  Set 
+  Used
+
+41                                                                FORMAT label
+  Decl      25
+  Set 
+  Used
+
+A                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       17
+  Used      18      21
+
+ACSR                            Dummy Arg                         DOUBLE PRECISION, DIMENSION(1)
+  Decl       2       3
+  Set 
+  Used      17
+
+ADUM                            Stack                             CHARACTER(1)
+  Decl       5
+  Set 
+  Used
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      13      14      19      21
+
+IA                              Dummy Arg                         INTEGER, DIMENSION(2)
+  Decl       2       4
+  Set 
+  Used      11      13      14
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set       16
+  Used      20      21
+
+J0                              Stack                             INTEGER, Implicit type
+  Decl
+  Set       14
+  Used      16      17
+
+JA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl       2       4
+  Set 
+  Used      16
+
+JC                              Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      16      17
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl       2
+  Set 
+  Used      11      12
+
+NC                              Stack                             INTEGER, Implicit type
+  Decl
+  Set       13
+  Used      15
+
+OUT_ACSR                                                          Subroutine, EXTERNAL
+  Decl       2
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+              C r o s s   R e f e r e n c e   for   COMPRESS_ACSR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AA                              Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       53      55      59
+  Used      57      58      64
+
+ABS                                                               Function, REAL, INTRINSIC
+  Decl
+  Set 
+  Used       0      64
+
+ACSR                            Dummy Arg                         DOUBLE PRECISION, DIMENSION(1)
+  Decl      38      42
+  Set       68
+  Used      55      64
+
+AE                              Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       64
+  Used      65
+
+COMPRESS_ACSR                                                     Subroutine, EXTERNAL
+  Decl      38
+  Set 
+  Used
+
+EPS                             Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       45
+  Used      57      65
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      49      50      72      75
+
+IA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl      38      43
+  Set       72      75
+  Used      47      49      50
+
+J0                              Stack                             INTEGER, Implicit type
+  Decl
+  Set       50
+  Used      55      64      68      69
+
+JA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl      38      43
+  Set       69
+  Used
+
+JC                              Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      55      64      68      69
+
+K0                              Stack                             INTEGER, Implicit type
+  Decl
+  Set       47      73
+  Used      68      69      72      75
+
+KC                              Stack                             INTEGER, Implicit type
+  Decl
+  Set       62      67
+  Used      68      69      73
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl      38
+  Set 
+  Used      48
+
+NC                              Stack                             INTEGER, Implicit type
+  Decl
+  Set       49
+  Used      54      63
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                  C r o s s   R e f e r e n c e   for   OUTBOX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+DD                              Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       84
+  Used      88      89      90      91
+
+DX                              Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       82
+  Used      84
+
+DY                              Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       83
+  Used      84
+
+IO                              Dummy Arg                         INTEGER, Implicit type
+  Decl      80
+  Set 
+  Used      93      94      95      96      97      98      99
+
+MAX                                                               Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used      84
+
+OUTBOX                                                            Subroutine, EXTERNAL
+  Decl      80
+  Set 
+  Used
+
+XH                              Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       86
+  Used      88      89
+
+XMAX                            Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl      80
+  Set 
+  Used      82      86
+
+XMIN                            Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl      80
+  Set 
+  Used      82      86
+
+XMN                             Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       88
+  Used      94      95      98
+
+XMX                             Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       89
+  Used      96      97
+
+YH                              Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       87
+  Used      90      91
+
+YMAX                            Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl      80
+  Set 
+  Used      83      87
+
+YMIN                            Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl      80
+  Set 
+  Used      83      87
+
+YMN                             Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       90
+  Used      94      97      98
+
+YMX                             Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       91
+  Used      95      96
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                  C r o s s   R e f e r e n c e   for   IMOUT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+6                                                                 FORMAT label
+  Decl     112
+  Set 
+  Used
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     110
+
+IMOUT                                                             Subroutine, EXTERNAL
+  Decl     104
+  Set 
+  Used
+
+K                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      110
+  Used     110
+
+M                               Dummy Arg                         INTEGER, Implicit type
+  Decl     104
+  Set 
+  Used     105     109
+
+MIN                                                               Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used     108
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl     104
+  Set 
+  Used     108     110
+
+N15                             Stack                             INTEGER, Implicit type
+  Decl
+  Set      108
+  Used     110
+
+NAME                            Dummy Arg                         CHARACTER(9)
+  Decl     104     106
+  Set 
+  Used     110
+
+X                               Dummy Arg                         INTEGER, DIMENSION(<exp>, 1)
+  Decl     104     105
+  Set 
+  Used     110
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                 C r o s s   R e f e r e n c e   for   OUT_ABD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+10                                                                Statement label
+  Decl     138
+  Set 
+  Used     132
+
+20                                                                Statement label
+  Decl     139
+  Set 
+  Used     130
+
+6                                                                 FORMAT label
+  Decl     123
+  Set 
+  Used
+
+A                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set      134
+  Used     135
+
+ABD                             Dummy Arg                         DOUBLE PRECISION, DIMENSION(<exp>, 1)
+  Decl     116     117
+  Set 
+  Used     121     134
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      121
+  Used     121     133     136
+
+I1                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      131
+  Used
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     121     131     132     133     134     137
+
+K                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      133
+  Used     134
+
+LDA                             Dummy Arg                         INTEGER, Implicit type
+  Decl     116
+  Set 
+  Used     117     119     121     129
+
+M                               Dummy Arg                         INTEGER, Implicit type
+  Decl     116
+  Set 
+  Used     119
+
+MAX0                                                              Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used     131
+
+MM                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      129
+  Used     131     133
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl     116
+  Set 
+  Used     119     120     130
+
+OUT_ABD                                                           Subroutine, EXTERNAL
+  Decl     116
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                 C r o s s   R e f e r e n c e   for   RARR_OUT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+1                                                                 FORMAT label
+  Decl     158
+  Set 
+  Used
+
+3                                                                 FORMAT label
+  Decl     189
+  Set 
+  Used
+
+6                                                                 FORMAT label
+  Decl     190
+  Set 
+  Used
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+BC                              /INPUT5/ offset=629760            DOUBLE PRECISION, Implicit type, DIMENSION(5, 6, 410, 0:3)
+  Decl      74
+  Set 
+  Used
+
+BCF                             /INPUTMR/ offset=0                INTEGER, DIMENSION(50)
+  Decl      92      95
+  Set 
+  Used
+
+BCTYPS                          /INPUTMC/ offset=0                CHARACTER(3), DIMENSION(50)
+  Decl      93      94
+  Set 
+  Used
+
+CBC                             /INPUT8/ offset=0                 CHARACTER(3), DIMENSION(6, 410, 0:3)
+  Decl      81      84
+  Set 
+  Used
+
+CCURVE                          /INPUT8/ offset=236160            CHARACTER(1), DIMENSION(12, 410)
+  Decl      81      83
+  Set 
+  Used
+
+CDOF                            /INPUT8/ offset=275520            CHARACTER(1), DIMENSION(6, 410)
+  Decl      82      83
+  Set 
+  Used
+
+CERROR                          /INPUT5/ offset=5667840           DOUBLE PRECISION, Implicit type, DIMENSION(410)
+  Decl      76
+  Set 
+  Used
+
+CFILE2                                                            Common block 
+  Decl      68
+  Set 
+  Used
+
+CFILES                                                            Common block 
+  Decl      66
+  Set 
+  Used
+
+CPFLD                           /INPUT1/ offset=12928             DOUBLE PRECISION, Implicit type, DIMENSION(3, 3)
+  Decl      16
+  Set 
+  Used
+
+CPGRP                           /INPUT1/ offset=13504             DOUBLE PRECISION, Implicit type, DIMENSION(-5:10, 3, 3)
+  Decl      17
+  Set 
+  Used
+
+CURVE                           /INPUT5/ offset=3778560           DOUBLE PRECISION, Implicit type, DIMENSION(6, 12, 410)
+  Decl      75
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+DMPFLE                          /CFILES/ offset=2112              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+DRIVC                           /INPUT4/ offset=9152              CHARACTER(10), DIMENSION(5)
+  Decl      56      60
+  Set 
+  Used
+
+FLDFLE                          /CFILES/ offset=1056              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+H5MFLE                          /CFILE2/ offset=3168              CHARACTER(132)
+  Decl      68      69
+  Set 
+  Used
+
+HCODE                           /INPUT4/ offset=0                 CHARACTER(1), DIMENSION(11, 100)
+  Decl      56      58
+  Set 
+  Used
+
+HISFLE                          /CFILES/ offset=3168              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+IBCSTS                          /INPUTMI/ offset=16416            INTEGER, Implicit type, DIMENSION(50)
+  Decl      91
+  Set 
+  Used
+
+IEACT                           /INPUT9/ offset=0                 INTEGER, Implicit type, DIMENSION(410)
+  Decl      85
+  Set 
+  Used
+
+IF3D                            /INPUT3/ offset=0                 LOGICAL
+  Decl      26      39
+  Set 
+  Used     162
+
+IFADVC                          /INPUT3/ offset=256               LOGICAL, DIMENSION(3), EQUIVALENCE
+  Decl      28      41      54
+  Set 
+  Used
+
+IFANL2                          /INPUT3/ offset=1376              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFANLS                          /INPUT3/ offset=1344              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFAXIS                          /INPUT3/ offset=128               LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFAZIV                          /INPUT3/ offset=1920              LOGICAL
+  Decl      38      52
+  Set 
+  Used
+
+IFBASE                          /INPUT3/ offset=1504              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFBO                            /INPUT3/ offset=1312              LOGICAL
+  Decl      34      47
+  Set 
+  Used
+
+IFCHAR                          /INPUT3/ offset=544               LOGICAL
+  Decl      29      42
+  Set 
+  Used
+
+IFCONS                          /INPUT3/ offset=992               LOGICAL
+  Decl      32      45
+  Set 
+  Used
+
+IFCOUP                          /INPUT3/ offset=1760              LOGICAL
+  Decl      37      51
+  Set 
+  Used
+
+IFCVODE                         /INPUT3/ offset=1536              LOGICAL
+  Decl      36      49
+  Set 
+  Used
+
+IFCYCLIC                        /INPUT3/ offset=1696              LOGICAL
+  Decl      37      49
+  Set 
+  Used
+
+IFESSR                          /INPUT3/ offset=1440              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFEXPLVIS                       /INPUT3/ offset=1600              LOGICAL
+  Decl      36      49
+  Set 
+  Used
+
+IFFLOW                          /INPUT3/ offset=32                LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFFMTIN                         /INPUT3/ offset=1280              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFHEAT                          /INPUT3/ offset=64                LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFINTQ                          /INPUT3/ offset=960               LOGICAL
+  Decl      32      45
+  Set 
+  Used
+
+IFKEPS                          /INPUT3/ offset=928               LOGICAL
+  Decl      31      44
+  Set 
+  Used
+
+IFLDMHD                         /INPUT2/ offset=14496             INTEGER, Implicit type
+  Decl      22
+  Set 
+  Used
+
+IFLOMACH                        /INPUT3/ offset=1568              LOGICAL
+  Decl      36      49
+  Set 
+  Used
+
+IFMGRID                         /INPUT3/ offset=224               LOGICAL
+  Decl      28      41
+  Set 
+  Used
+
+IFMHD                           /INPUT3/ offset=1408              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFMOAB                          /INPUT3/ offset=1728              LOGICAL
+  Decl      37      51
+  Set 
+  Used
+
+IFMODEL                         /INPUT3/ offset=896               LOGICAL
+  Decl      31      44
+  Set 
+  Used
+
+IFMVBD                          /INPUT3/ offset=480               LOGICAL
+  Decl      29      42
+  Set 
+  Used
+
+IFNATC                          /INPUT3/ offset=512               LOGICAL
+  Decl      29      42
+  Set 
+  Used
+
+IFNAV                           /INPUT3/ offset=256               LOGICAL, EQUIVALENCE
+  Decl      53      54
+  Set 
+  Used
+
+IFNEKNEK                        /INPUT3/ offset=1952              LOGICAL
+  Decl      38      52
+  Set 
+  Used
+
+IFNONL                          /INPUT3/ offset=576               LOGICAL, DIMENSION(3)
+  Decl      29      42
+  Set 
+  Used
+
+IFPERT                          /INPUT3/ offset=1472              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFPO                            /INPUT3/ offset=1056              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFPSCO                          /INPUT3/ offset=768               LOGICAL, DIMENSION(3)
+  Decl      30      43
+  Set 
+  Used
+
+IFPSO                           /INPUT3/ offset=1184              LOGICAL, DIMENSION(3)
+  Decl      33      46
+  Set 
+  Used
+
+IFREGUO                         /INPUT3/ offset=1856              LOGICAL
+  Decl      37      51
+  Set 
+  Used
+
+IFSCHCLOB                       /INPUT3/ offset=1632              LOGICAL
+  Decl      36      50
+  Set 
+  Used
+
+IFSPLIT                         /INPUT3/ offset=192               LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFSTRS                          /INPUT3/ offset=160               LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFTGO                           /INPUT3/ offset=1152              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFTMSH                          /INPUT3/ offset=352               LOGICAL, DIMENSION(0:3)
+  Decl      28      41
+  Set 
+  Used
+
+IFTO                            /INPUT3/ offset=1120              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFTRAN                          /INPUT3/ offset=96                LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFUSERMV                        /INPUT3/ offset=1824              LOGICAL
+  Decl      37      51
+  Set 
+  Used
+
+IFUSERVP                        /INPUT3/ offset=1664              LOGICAL
+  Decl      36      49
+  Set 
+  Used
+
+IFVARP                          /INPUT3/ offset=672               LOGICAL, DIMENSION(3)
+  Decl      30      43
+  Set 
+  Used
+
+IFVCOUP                         /INPUT3/ offset=1792              LOGICAL
+  Decl      37      51
+  Set 
+  Used
+
+IFVO                            /INPUT3/ offset=1088              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFVPS                           /INPUT3/ offset=864               LOGICAL
+  Decl      30      43
+  Set 
+  Used
+
+IFXYO                           /INPUT3/ offset=1024              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFXYO_                          /INPUT3/ offset=1888              LOGICAL
+  Decl      38      51
+  Set 
+  Used
+
+IGROUP                          /INPUT6/ offset=0                 INTEGER, Implicit type, DIMENSION(410)
+  Decl      78
+  Set 
+  Used
+
+IMATIE                          /INPUTMI/ offset=3296             INTEGER, Implicit type, DIMENSION(410)
+  Decl      90
+  Set 
+  Used
+
+INITC                           /INPUT4/ offset=9552              CHARACTER(132), DIMENSION(15)
+  Decl      57      63
+  Set 
+  Used
+
+INPUT1                                                            Common block 
+  Decl      14
+  Set 
+  Used
+
+INPUT2                                                            Common block 
+  Decl      20
+  Set 
+  Used
+
+INPUT3                                                            Common block 
+  Decl      26
+  Set 
+  Used
+
+INPUT4                                                            Common block 
+  Decl      56
+  Set 
+  Used
+
+INPUT5                                                            Common block 
+  Decl      73
+  Set 
+  Used
+
+INPUT6                                                            Common block 
+  Decl      78
+  Set 
+  Used
+
+INPUT8                                                            Common block 
+  Decl      81
+  Set 
+  Used
+
+INPUT9                                                            Common block 
+  Decl      85
+  Set 
+  Used
+
+INPUTMC                                                           Common block 
+  Decl      93
+  Set 
+  Used
+
+INPUTMI                                                           Common block 
+  Decl      89
+  Set 
+  Used
+
+INPUTMR                                                           Common block 
+  Decl      92
+  Set 
+  Used
+
+IPSCAL                          /INPUT2/ offset=14400             INTEGER, Implicit type
+  Decl      22
+  Set 
+  Used
+
+IPSCO                           /INPUT2/ offset=14464             INTEGER, Implicit type
+  Decl      22
+  Set 
+  Used
+
+IRSTIM                          /INPUT2/ offset=14592             INTEGER, Implicit type
+  Decl      23
+  Set 
+  Used
+
+IRSTT                           /INPUT2/ offset=14560             INTEGER, Implicit type
+  Decl      23
+  Set 
+  Used
+
+IRSTV                           /INPUT2/ offset=14528             INTEGER, Implicit type
+  Decl      23
+  Set 
+  Used
+
+IZ                              Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     166
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     166     179     186
+
+K                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      166     166     179     179     186     186
+  Used     166     179     186
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used      16      17      20      28      29      30      33      74      81
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used      18
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used     152       6      55      59      65      66      87      73      74      75      76      78      81      82      85
+            90
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used      21      56
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LOCHIS                          /INPUT2/ offset=1600              INTEGER, Implicit type, DIMENSION(4, 100)
+  Decl      21
+  Set 
+  Used
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used     152       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used     152      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used     152      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MATIDS                          /INPUTMI/ offset=1696             INTEGER, Implicit type, DIMENSION(50)
+  Decl      90
+  Set 
+  Used
+
+MATINDX                         /INPUTMI/ offset=96               INTEGER, Implicit type, DIMENSION(50)
+  Decl      90
+  Set 
+  Used
+
+MATYPE                          /INPUT2/ offset=0                 INTEGER, Implicit type, DIMENSION(-5:10, 3)
+  Decl      20
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used      78
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used      18      23      78
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NAME13                          Dummy Arg                         CHARACTER(13)
+  Decl     148     153
+  Set 
+  Used     157
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NEACT                           /INPUT9/ offset=13120             INTEGER, Implicit type
+  Decl      85
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used     155     176
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NGEOM                           /INPUT2/ offset=14784             INTEGER, Implicit type
+  Decl      24
+  Set 
+  Used
+
+NHIS                            /INPUT2/ offset=1568              INTEGER, Implicit type
+  Decl      21
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NKTONV                          /INPUT2/ offset=1536              INTEGER, Implicit type
+  Decl      21
+  Set 
+  Used
+
+NMEMBER                         /INPUT2/ offset=14624             INTEGER, Implicit type, DIMENSION(4)
+  Decl      23
+  Set 
+  Used
+
+NOBJ                            /INPUT2/ offset=14752             INTEGER, Implicit type
+  Decl      23
+  Set 
+  Used
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPSCAL                          /INPUT2/ offset=14432             INTEGER, Implicit type
+  Decl      22
+  Set 
+  Used
+
+NREFLE                          /CFILES/ offset=6336              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+NUMBCS                          /INPUTMI/ offset=64               INTEGER, Implicit type
+  Decl      89
+  Set 
+  Used
+
+NUMFLU                          /INPUTMI/ offset=0                INTEGER, Implicit type
+  Decl      89
+  Set 
+  Used
+
+NUMOTH                          /INPUTMI/ offset=32               INTEGER, Implicit type
+  Decl      89
+  Set 
+  Used
+
+NUMSTS                                                            INTEGER, Implicit type, PARAMETER
+  Decl      88
+  Set 
+  Used      90      91      92      93
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used     166     179     186
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used     163
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+OBJECT                          /INPUT6/ offset=13120             INTEGER, DIMENSION(4, 2460, 2)
+  Decl      78      79
+  Set 
+  Used
+
+OCODE                           /INPUT4/ offset=8800              CHARACTER(2), DIMENSION(8)
+  Decl      56      59
+  Set 
+  Used
+
+OREFLE                          /CFILES/ offset=5280              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+PARAM                           /INPUT1/ offset=0                 DOUBLE PRECISION, Implicit type, DIMENSION(200)
+  Decl      14
+  Set 
+  Used
+
+PATH                            /CFILE2/ offset=1056              CHARACTER(132)
+  Decl      68      69
+  Set 
+  Used
+
+QINTEG                          /INPUT1/ offset=22720             DOUBLE PRECISION, Implicit type, DIMENSION(5, 4)
+  Decl      18
+  Set 
+  Used
+
+RARR_OUT                                                          Subroutine, EXTERNAL
+  Decl     148
+  Set 
+  Used
+
+RE2FLE                          /CFILE2/ offset=2112              CHARACTER(132)
+  Decl      68      69
+  Set 
+  Used
+
+REAFLE                          /CFILES/ offset=0                 CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+RSTIM                           /INPUT1/ offset=12800             DOUBLE PRECISION, Implicit type
+  Decl      15
+  Set 
+  Used
+
+RSTT                            /INPUT4/ offset=9040              CHARACTER(14)
+  Decl      56      61
+  Set 
+  Used
+
+RSTV                            /INPUT4/ offset=8928              CHARACTER(14)
+  Decl      56      61
+  Set 
+  Used
+
+SCHFLE                          /CFILES/ offset=4224              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+SESSION                         /CFILE2/ offset=0                 CHARACTER(132)
+  Decl      68      69
+  Set 
+  Used
+
+SOLVER_TYPE                     /INPUT8/ offset=295200            CHARACTER(3)
+  Decl      82      84
+  Set 
+  Used
+
+TEXTSW                          /INPUT4/ offset=25392             CHARACTER(40), DIMENSION(100, 2), EQUIVALENCE
+  Decl      57      62      64
+  Set 
+  Used
+
+TURBMOD                         /INPUT4/ offset=25392             CHARACTER(40), EQUIVALENCE
+  Decl      62      64
+  Set 
+  Used
+
+VNEKTON                         /INPUT1/ offset=12864             DOUBLE PRECISION, Implicit type
+  Decl      15
+  Set 
+  Used
+
+X                               Dummy Arg                         DOUBLE PRECISION, DIMENSION(10, 10, 10, 410)
+  Decl     148     152
+  Set 
+  Used     166     179     186
+
+XC                              /INPUT5/ offset=0                 DOUBLE PRECISION, Implicit type, DIMENSION(8, 410)
+  Decl      73
+  Set 
+  Used
+
+YC                              /INPUT5/ offset=209920            DOUBLE PRECISION, Implicit type, DIMENSION(8, 410)
+  Decl      73
+  Set 
+  Used
+
+ZC                              /INPUT5/ offset=419840            DOUBLE PRECISION, Implicit type, DIMENSION(8, 410)
+  Decl      73
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                 C r o s s   R e f e r e n c e   for   IARR_OUT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+1                                                                 FORMAT label
+  Decl     204
+  Set 
+  Used
+
+3                                                                 FORMAT label
+  Decl     235
+  Set 
+  Used
+
+6                                                                 FORMAT label
+  Decl     236
+  Set 
+  Used
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+BC                              /INPUT5/ offset=629760            DOUBLE PRECISION, Implicit type, DIMENSION(5, 6, 410, 0:3)
+  Decl      74
+  Set 
+  Used
+
+BCF                             /INPUTMR/ offset=0                INTEGER, DIMENSION(50)
+  Decl      92      95
+  Set 
+  Used
+
+BCTYPS                          /INPUTMC/ offset=0                CHARACTER(3), DIMENSION(50)
+  Decl      93      94
+  Set 
+  Used
+
+CBC                             /INPUT8/ offset=0                 CHARACTER(3), DIMENSION(6, 410, 0:3)
+  Decl      81      84
+  Set 
+  Used
+
+CCURVE                          /INPUT8/ offset=236160            CHARACTER(1), DIMENSION(12, 410)
+  Decl      81      83
+  Set 
+  Used
+
+CDOF                            /INPUT8/ offset=275520            CHARACTER(1), DIMENSION(6, 410)
+  Decl      82      83
+  Set 
+  Used
+
+CERROR                          /INPUT5/ offset=5667840           DOUBLE PRECISION, Implicit type, DIMENSION(410)
+  Decl      76
+  Set 
+  Used
+
+CFILE2                                                            Common block 
+  Decl      68
+  Set 
+  Used
+
+CFILES                                                            Common block 
+  Decl      66
+  Set 
+  Used
+
+CPFLD                           /INPUT1/ offset=12928             DOUBLE PRECISION, Implicit type, DIMENSION(3, 3)
+  Decl      16
+  Set 
+  Used
+
+CPGRP                           /INPUT1/ offset=13504             DOUBLE PRECISION, Implicit type, DIMENSION(-5:10, 3, 3)
+  Decl      17
+  Set 
+  Used
+
+CURVE                           /INPUT5/ offset=3778560           DOUBLE PRECISION, Implicit type, DIMENSION(6, 12, 410)
+  Decl      75
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+DMPFLE                          /CFILES/ offset=2112              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+DRIVC                           /INPUT4/ offset=9152              CHARACTER(10), DIMENSION(5)
+  Decl      56      60
+  Set 
+  Used
+
+FLDFLE                          /CFILES/ offset=1056              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+H5MFLE                          /CFILE2/ offset=3168              CHARACTER(132)
+  Decl      68      69
+  Set 
+  Used
+
+HCODE                           /INPUT4/ offset=0                 CHARACTER(1), DIMENSION(11, 100)
+  Decl      56      58
+  Set 
+  Used
+
+HISFLE                          /CFILES/ offset=3168              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+IARR_OUT                                                          Subroutine, EXTERNAL
+  Decl     194
+  Set 
+  Used
+
+IBCSTS                          /INPUTMI/ offset=16416            INTEGER, Implicit type, DIMENSION(50)
+  Decl      91
+  Set 
+  Used
+
+IEACT                           /INPUT9/ offset=0                 INTEGER, Implicit type, DIMENSION(410)
+  Decl      85
+  Set 
+  Used
+
+IF3D                            /INPUT3/ offset=0                 LOGICAL
+  Decl      26      39
+  Set 
+  Used     208
+
+IFADVC                          /INPUT3/ offset=256               LOGICAL, DIMENSION(3), EQUIVALENCE
+  Decl      28      41      54
+  Set 
+  Used
+
+IFANL2                          /INPUT3/ offset=1376              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFANLS                          /INPUT3/ offset=1344              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFAXIS                          /INPUT3/ offset=128               LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFAZIV                          /INPUT3/ offset=1920              LOGICAL
+  Decl      38      52
+  Set 
+  Used
+
+IFBASE                          /INPUT3/ offset=1504              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFBO                            /INPUT3/ offset=1312              LOGICAL
+  Decl      34      47
+  Set 
+  Used
+
+IFCHAR                          /INPUT3/ offset=544               LOGICAL
+  Decl      29      42
+  Set 
+  Used
+
+IFCONS                          /INPUT3/ offset=992               LOGICAL
+  Decl      32      45
+  Set 
+  Used
+
+IFCOUP                          /INPUT3/ offset=1760              LOGICAL
+  Decl      37      51
+  Set 
+  Used
+
+IFCVODE                         /INPUT3/ offset=1536              LOGICAL
+  Decl      36      49
+  Set 
+  Used
+
+IFCYCLIC                        /INPUT3/ offset=1696              LOGICAL
+  Decl      37      49
+  Set 
+  Used
+
+IFESSR                          /INPUT3/ offset=1440              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFEXPLVIS                       /INPUT3/ offset=1600              LOGICAL
+  Decl      36      49
+  Set 
+  Used
+
+IFFLOW                          /INPUT3/ offset=32                LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFFMTIN                         /INPUT3/ offset=1280              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFHEAT                          /INPUT3/ offset=64                LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFINTQ                          /INPUT3/ offset=960               LOGICAL
+  Decl      32      45
+  Set 
+  Used
+
+IFKEPS                          /INPUT3/ offset=928               LOGICAL
+  Decl      31      44
+  Set 
+  Used
+
+IFLDMHD                         /INPUT2/ offset=14496             INTEGER, Implicit type
+  Decl      22
+  Set 
+  Used
+
+IFLOMACH                        /INPUT3/ offset=1568              LOGICAL
+  Decl      36      49
+  Set 
+  Used
+
+IFMGRID                         /INPUT3/ offset=224               LOGICAL
+  Decl      28      41
+  Set 
+  Used
+
+IFMHD                           /INPUT3/ offset=1408              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFMOAB                          /INPUT3/ offset=1728              LOGICAL
+  Decl      37      51
+  Set 
+  Used
+
+IFMODEL                         /INPUT3/ offset=896               LOGICAL
+  Decl      31      44
+  Set 
+  Used
+
+IFMVBD                          /INPUT3/ offset=480               LOGICAL
+  Decl      29      42
+  Set 
+  Used
+
+IFNATC                          /INPUT3/ offset=512               LOGICAL
+  Decl      29      42
+  Set 
+  Used
+
+IFNAV                           /INPUT3/ offset=256               LOGICAL, EQUIVALENCE
+  Decl      53      54
+  Set 
+  Used
+
+IFNEKNEK                        /INPUT3/ offset=1952              LOGICAL
+  Decl      38      52
+  Set 
+  Used
+
+IFNONL                          /INPUT3/ offset=576               LOGICAL, DIMENSION(3)
+  Decl      29      42
+  Set 
+  Used
+
+IFPERT                          /INPUT3/ offset=1472              LOGICAL
+  Decl      35      48
+  Set 
+  Used
+
+IFPO                            /INPUT3/ offset=1056              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFPSCO                          /INPUT3/ offset=768               LOGICAL, DIMENSION(3)
+  Decl      30      43
+  Set 
+  Used
+
+IFPSO                           /INPUT3/ offset=1184              LOGICAL, DIMENSION(3)
+  Decl      33      46
+  Set 
+  Used
+
+IFREGUO                         /INPUT3/ offset=1856              LOGICAL
+  Decl      37      51
+  Set 
+  Used
+
+IFSCHCLOB                       /INPUT3/ offset=1632              LOGICAL
+  Decl      36      50
+  Set 
+  Used
+
+IFSPLIT                         /INPUT3/ offset=192               LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFSTRS                          /INPUT3/ offset=160               LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFTGO                           /INPUT3/ offset=1152              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFTMSH                          /INPUT3/ offset=352               LOGICAL, DIMENSION(0:3)
+  Decl      28      41
+  Set 
+  Used
+
+IFTO                            /INPUT3/ offset=1120              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFTRAN                          /INPUT3/ offset=96                LOGICAL
+  Decl      27      40
+  Set 
+  Used
+
+IFUSERMV                        /INPUT3/ offset=1824              LOGICAL
+  Decl      37      51
+  Set 
+  Used
+
+IFUSERVP                        /INPUT3/ offset=1664              LOGICAL
+  Decl      36      49
+  Set 
+  Used
+
+IFVARP                          /INPUT3/ offset=672               LOGICAL, DIMENSION(3)
+  Decl      30      43
+  Set 
+  Used
+
+IFVCOUP                         /INPUT3/ offset=1792              LOGICAL
+  Decl      37      51
+  Set 
+  Used
+
+IFVO                            /INPUT3/ offset=1088              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFVPS                           /INPUT3/ offset=864               LOGICAL
+  Decl      30      43
+  Set 
+  Used
+
+IFXYO                           /INPUT3/ offset=1024              LOGICAL
+  Decl      33      46
+  Set 
+  Used
+
+IFXYO_                          /INPUT3/ offset=1888              LOGICAL
+  Decl      38      51
+  Set 
+  Used
+
+IGROUP                          /INPUT6/ offset=0                 INTEGER, Implicit type, DIMENSION(410)
+  Decl      78
+  Set 
+  Used
+
+IMATIE                          /INPUTMI/ offset=3296             INTEGER, Implicit type, DIMENSION(410)
+  Decl      90
+  Set 
+  Used
+
+INITC                           /INPUT4/ offset=9552              CHARACTER(132), DIMENSION(15)
+  Decl      57      63
+  Set 
+  Used
+
+INPUT1                                                            Common block 
+  Decl      14
+  Set 
+  Used
+
+INPUT2                                                            Common block 
+  Decl      20
+  Set 
+  Used
+
+INPUT3                                                            Common block 
+  Decl      26
+  Set 
+  Used
+
+INPUT4                                                            Common block 
+  Decl      56
+  Set 
+  Used
+
+INPUT5                                                            Common block 
+  Decl      73
+  Set 
+  Used
+
+INPUT6                                                            Common block 
+  Decl      78
+  Set 
+  Used
+
+INPUT8                                                            Common block 
+  Decl      81
+  Set 
+  Used
+
+INPUT9                                                            Common block 
+  Decl      85
+  Set 
+  Used
+
+INPUTMC                                                           Common block 
+  Decl      93
+  Set 
+  Used
+
+INPUTMI                                                           Common block 
+  Decl      89
+  Set 
+  Used
+
+INPUTMR                                                           Common block 
+  Decl      92
+  Set 
+  Used
+
+IPSCAL                          /INPUT2/ offset=14400             INTEGER, Implicit type
+  Decl      22
+  Set 
+  Used
+
+IPSCO                           /INPUT2/ offset=14464             INTEGER, Implicit type
+  Decl      22
+  Set 
+  Used
+
+IRSTIM                          /INPUT2/ offset=14592             INTEGER, Implicit type
+  Decl      23
+  Set 
+  Used
+
+IRSTT                           /INPUT2/ offset=14560             INTEGER, Implicit type
+  Decl      23
+  Set 
+  Used
+
+IRSTV                           /INPUT2/ offset=14528             INTEGER, Implicit type
+  Decl      23
+  Set 
+  Used
+
+IZ                              Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     212
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     212     225     232
+
+K                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      212     212     225     225     232     232
+  Used     212     225     232
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used      16      17      20      28      29      30      33      74      81
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used      18
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used     198       6      55      59      65      66      87      73      74      75      76      78      81      82      85
+            90
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used      21      56
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LOCHIS                          /INPUT2/ offset=1600              INTEGER, Implicit type, DIMENSION(4, 100)
+  Decl      21
+  Set 
+  Used
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used     198       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used     198      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used     198      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MATIDS                          /INPUTMI/ offset=1696             INTEGER, Implicit type, DIMENSION(50)
+  Decl      90
+  Set 
+  Used
+
+MATINDX                         /INPUTMI/ offset=96               INTEGER, Implicit type, DIMENSION(50)
+  Decl      90
+  Set 
+  Used
+
+MATYPE                          /INPUT2/ offset=0                 INTEGER, Implicit type, DIMENSION(-5:10, 3)
+  Decl      20
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used      78
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used      18      23      78
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NAME                            Dummy Arg                         CHARACTER(13)
+  Decl     194     199
+  Set 
+  Used     203
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NEACT                           /INPUT9/ offset=13120             INTEGER, Implicit type
+  Decl      85
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used     201     222
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NGEOM                           /INPUT2/ offset=14784             INTEGER, Implicit type
+  Decl      24
+  Set 
+  Used
+
+NHIS                            /INPUT2/ offset=1568              INTEGER, Implicit type
+  Decl      21
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NKTONV                          /INPUT2/ offset=1536              INTEGER, Implicit type
+  Decl      21
+  Set 
+  Used
+
+NMEMBER                         /INPUT2/ offset=14624             INTEGER, Implicit type, DIMENSION(4)
+  Decl      23
+  Set 
+  Used
+
+NOBJ                            /INPUT2/ offset=14752             INTEGER, Implicit type
+  Decl      23
+  Set 
+  Used
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPSCAL                          /INPUT2/ offset=14432             INTEGER, Implicit type
+  Decl      22
+  Set 
+  Used
+
+NREFLE                          /CFILES/ offset=6336              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+NUMBCS                          /INPUTMI/ offset=64               INTEGER, Implicit type
+  Decl      89
+  Set 
+  Used
+
+NUMFLU                          /INPUTMI/ offset=0                INTEGER, Implicit type
+  Decl      89
+  Set 
+  Used
+
+NUMOTH                          /INPUTMI/ offset=32               INTEGER, Implicit type
+  Decl      89
+  Set 
+  Used
+
+NUMSTS                                                            INTEGER, Implicit type, PARAMETER
+  Decl      88
+  Set 
+  Used      90      91      92      93
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used     212     225     232
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used     209
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+OBJECT                          /INPUT6/ offset=13120             INTEGER, DIMENSION(4, 2460, 2)
+  Decl      78      79
+  Set 
+  Used
+
+OCODE                           /INPUT4/ offset=8800              CHARACTER(2), DIMENSION(8)
+  Decl      56      59
+  Set 
+  Used
+
+OREFLE                          /CFILES/ offset=5280              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+PARAM                           /INPUT1/ offset=0                 DOUBLE PRECISION, Implicit type, DIMENSION(200)
+  Decl      14
+  Set 
+  Used
+
+PATH                            /CFILE2/ offset=1056              CHARACTER(132)
+  Decl      68      69
+  Set 
+  Used
+
+QINTEG                          /INPUT1/ offset=22720             DOUBLE PRECISION, Implicit type, DIMENSION(5, 4)
+  Decl      18
+  Set 
+  Used
+
+RE2FLE                          /CFILE2/ offset=2112              CHARACTER(132)
+  Decl      68      69
+  Set 
+  Used
+
+REAFLE                          /CFILES/ offset=0                 CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+RSTIM                           /INPUT1/ offset=12800             DOUBLE PRECISION, Implicit type
+  Decl      15
+  Set 
+  Used
+
+RSTT                            /INPUT4/ offset=9040              CHARACTER(14)
+  Decl      56      61
+  Set 
+  Used
+
+RSTV                            /INPUT4/ offset=8928              CHARACTER(14)
+  Decl      56      61
+  Set 
+  Used
+
+SCHFLE                          /CFILES/ offset=4224              CHARACTER(132)
+  Decl      66      67
+  Set 
+  Used
+
+SESSION                         /CFILE2/ offset=0                 CHARACTER(132)
+  Decl      68      69
+  Set 
+  Used
+
+SOLVER_TYPE                     /INPUT8/ offset=295200            CHARACTER(3)
+  Decl      82      84
+  Set 
+  Used
+
+TEXTSW                          /INPUT4/ offset=25392             CHARACTER(40), DIMENSION(100, 2), EQUIVALENCE
+  Decl      57      62      64
+  Set 
+  Used
+
+TURBMOD                         /INPUT4/ offset=25392             CHARACTER(40), EQUIVALENCE
+  Decl      62      64
+  Set 
+  Used
+
+VNEKTON                         /INPUT1/ offset=12864             DOUBLE PRECISION, Implicit type
+  Decl      15
+  Set 
+  Used
+
+X                               Dummy Arg                         INTEGER, DIMENSION(10, 10, 10, 410)
+  Decl     194     198
+  Set 
+  Used     212     225     232
+
+XC                              /INPUT5/ offset=0                 DOUBLE PRECISION, Implicit type, DIMENSION(8, 410)
+  Decl      73
+  Set 
+  Used
+
+YC                              /INPUT5/ offset=209920            DOUBLE PRECISION, Implicit type, DIMENSION(8, 410)
+  Decl      73
+  Set 
+  Used
+
+ZC                              /INPUT5/ offset=419840            DOUBLE PRECISION, Implicit type, DIMENSION(8, 410)
+  Decl      73
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                 C r o s s   R e f e r e n c e   for   IAR2_OUT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+1                                                                 FORMAT label
+  Decl     249
+  Set 
+  Used
+
+6                                                                 FORMAT label
+  Decl     263
+  Set 
+  Used
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+IAR2_OUT                                                          Subroutine, EXTERNAL
+  Decl     240
+  Set 
+  Used
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     253     260
+
+K                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      253     253     260     260
+  Used     253     260
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used     243       6      55      59      65      66      87
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used     243      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used     243      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used     243      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NAME                            Dummy Arg                         CHARACTER(13)
+  Decl     240     244
+  Set 
+  Used     248
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used     246     250
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used     253     260
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+X                               Dummy Arg                         INTEGER, DIMENSION(10, 10, 10, 410)
+  Decl     240     243
+  Set 
+  Used     253     260
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+               C r o s s   R e f e r e n c e   for   SCSR_PERMUTE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+ABS                                                               Function, REAL, INTRINSIC
+  Decl
+  Set 
+  Used     318
+
+ACSR                            Dummy Arg                         DOUBLE PRECISION, DIMENSION(1)
+  Decl     267     286
+  Set 
+  Used     306     392     396
+
+BCSR                            Dummy Arg                         DOUBLE PRECISION, DIMENSION(1)
+  Decl     267     283
+  Set      392     396
+  Used     411
+
+EXITT                                                             Subroutine
+  Decl
+  Set 
+  Used       0     336     339
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     310     311     315     318     345     359     360     361     377     384     385     386     407     408
+
+IA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     267     287
+  Set 
+  Used     310     311     359     360     384     385
+
+IB                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     267     284
+  Set      375     377
+  Used     382     407     408
+
+ICALLD                          Static offset=0                   INTEGER, INITIALIZED, SAVE
+  Decl     295     296
+  Set      304
+  Used     297
+
+ICOPY                                                             Subroutine
+  Decl
+  Set 
+  Used     382
+
+ICPERM                          Dummy Arg                         INTEGER, DIMENSION(<exp>)
+  Decl     268     289
+  Set 
+  Used     345
+
+IERR                            Stack                             INTEGER, Implicit type
+  Decl
+  Set      333
+  Used     334     335     337     338     416
+
+II                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      361     386
+  Used     365     366     390     391     392     393     395
+
+INVERSE                         Dummy Arg                         INTEGER, DIMENSION(<exp>)
+  Decl     268     290
+  Set      345
+  Used     361     364     386     389     411
+
+ISORT                                                             Subroutine
+  Decl
+  Set 
+  Used     409
+
+ITYPE                           Stack                             INTEGER, Implicit type
+  Decl
+  Set      324     326
+  Used
+
+IZERO                                                             Subroutine, EXTERNAL
+  Decl
+  Set 
+  Used     357
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      314     363     388
+  Used     316     318     364     389
+
+JA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     267     287
+  Set 
+  Used     314     363     388
+
+JB                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     267     284
+  Set      391     395
+  Used     409
+
+JC                              Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     363     388     392     396
+
+JJ                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      364     389
+  Used     314     365     368     390     391     395     396     397
+
+M2                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      405
+  Used
+
+MAX                                                               Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used     318
+
+MAX_N                           Static offset=64                  INTEGER, INITIALIZED, SAVE
+  Decl     295     296
+  Set      417
+  Used     414     417
+
+MBW                             Stack                             INTEGER, Implicit type
+  Decl
+  Set      415
+  Used     416
+
+MBW_IN                          Stack                             INTEGER, Implicit type
+  Decl
+  Set      308     318
+  Used     416
+
+MNZ                             Stack                             INTEGER, Implicit type
+  Decl
+  Set      307     313
+  Used     315     316     322     327     416
+
+MOD                                                               Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used       0     414
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl     267
+  Set 
+  Used     289     290     306     309     321     326     344     358     376     382     383     406     414     416     417
+
+N1                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      310     359     384     407
+  Used     409     411
+
+N2                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      311     360     385     408
+  Used     312     362     387     405     409     411
+
+NONZERO                         Dummy Arg                         INTEGER, DIMENSION(2, 0:1)
+  Decl     268     289
+  Set      315     316     321     322
+  Used
+
+NZERO                           Dummy Arg                         INTEGER, DIMENSION(<exp>)
+  Decl     268     290
+  Set      366     368     393     397
+  Used     357     377     382     391     392     395     396     409     411
+
+SCSR_PERMUTE                                                      Subroutine, EXTERNAL
+  Decl     267
+  Set 
+  Used
+
+SWAP                                                              Subroutine
+  Decl
+  Set 
+  Used     411
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+               C r o s s   R e f e r e n c e   for   SCSR_TO_SPB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+ABD                             Dummy Arg                         DOUBLE PRECISION, DIMENSION(1)
+  Decl     423     430
+  Set 
+  Used     434
+
+ACSR                            Dummy Arg                         DOUBLE PRECISION, DIMENSION(1)
+  Decl     423     430
+  Set 
+  Used     434
+
+IA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     423     431
+  Set 
+  Used     434
+
+JA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     423     431
+  Set 
+  Used     434
+
+LDA                             Dummy Arg                         INTEGER, Implicit type
+  Decl     423
+  Set      433
+  Used     434
+
+M                               Stack                             INTEGER
+  Decl     431
+  Set 
+  Used
+
+N                               Dummy Arg                         INTEGER
+  Decl     423     431
+  Set 
+  Used     434
+
+SCSR_TO_SPB                                                       Subroutine, EXTERNAL
+  Decl     423
+  Set 
+  Used
+
+SCSR_TO_SPBM                                                      Subroutine
+  Decl
+  Set 
+  Used     434
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+               C r o s s   R e f e r e n c e   for   SCSR_TO_SPBM
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+ABD                             Dummy Arg                         DOUBLE PRECISION, DIMENSION(<exp>, 1)
+  Decl     439     441
+  Set      452
+  Used     444
+
+ACSR                            Dummy Arg                         DOUBLE PRECISION, DIMENSION(1)
+  Decl     439     441
+  Set 
+  Used     452
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     446     447     450
+
+IA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     439     442
+  Set 
+  Used     446     447
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      449
+  Used     450     451
+
+JA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     439     442
+  Set 
+  Used     449
+
+JC                              Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     449     452
+
+JLIN                            Stack                             INTEGER, Implicit type
+  Decl
+  Set      451
+  Used     452
+
+KLIN                            Stack                             INTEGER, Implicit type
+  Decl
+  Set      450
+  Used     452
+
+LDA                             Dummy Arg                         INTEGER, Implicit type
+  Decl     439
+  Set 
+  Used     441     450
+
+N                               Dummy Arg                         INTEGER
+  Decl     439     442
+  Set 
+  Used     445
+
+N1                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      446
+  Used
+
+N2                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      447
+  Used     448
+
+RZERO                                                             Subroutine, EXTERNAL
+  Decl
+  Set 
+  Used     444
+
+SCSR_TO_SPBM                                                      Subroutine, EXTERNAL
+  Decl     439
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                 C r o s s   R e f e r e n c e   for   MBW_CSR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+ABS                                                               Function, REAL, INTRINSIC
+  Decl
+  Set 
+  Used     469
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     465     466     469
+
+IA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     457     461
+  Set 
+  Used     465     466
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      468
+  Used     469
+
+JA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     457     461
+  Set 
+  Used     468
+
+JC                              Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     468
+
+M                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      463     469
+  Used     472
+
+MAX                                                               Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used     469
+
+MBW_CSR                                                           Function, INTEGER, Implicit type, RESULT(MBW_CSR), EXTERNAL
+  Decl     457
+  Set 
+  Used
+
+MBW_CSR                         Register                          INTEGER, Implicit type, Function result
+  Decl
+  Set      472
+  Used
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl     457
+  Set 
+  Used     464
+
+N1                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      465
+  Used
+
+N2                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      466
+  Used     467
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                C r o s s   R e f e r e n c e   for   OUT_SPBMAT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+1                                                                 FORMAT label
+  Decl     484
+  Set 
+  Used
+
+22                                                                FORMAT label
+  Decl     498
+  Set 
+  Used
+
+6                                                                 FORMAT label
+  Decl     497
+  Set 
+  Used
+
+A                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set      492
+  Used     493
+
+ABD                             Dummy Arg                         DOUBLE PRECISION, DIMENSION(<exp>, 1)
+  Decl     476     477
+  Set 
+  Used     492
+
+BLANK                                                             Subroutine, EXTERNAL
+  Decl
+  Set 
+  Used     488
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     489     491
+
+II                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      489
+  Used     492
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      491
+  Used     493
+
+K                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      495
+  Used     491     492     495
+
+LDA                             Dummy Arg                         INTEGER, Implicit type
+  Decl     476
+  Set 
+  Used     477     482     489
+
+M                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      482
+  Used     483     490     492
+
+MIN                                                               Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used     486
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl     476
+  Set 
+  Used     483     486     487
+
+N22                             Stack                             INTEGER, Implicit type
+  Decl
+  Set      486
+  Used     493     495
+
+NAME                            Dummy Arg                         CHARACTER(9)
+  Decl     476     479
+  Set 
+  Used     483
+
+OUT_SPBMAT                                                        Subroutine, EXTERNAL
+  Decl     476
+  Set 
+  Used
+
+S                               Stack                             CHARACTER(6), DIMENSION(22)
+  Decl     480
+  Set 
+  Used     488     493     495
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                   C r o s s   R e f e r e n c e   for   SWAP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+20                                                                Statement label
+  Decl     513
+  Set 
+  Used     510
+
+30                                                                Statement label
+  Decl     515
+  Set 
+  Used     514
+
+B                               Dummy Arg                         DOUBLE PRECISION, DIMENSION(1)
+  Decl     503     504
+  Set      515
+  Used     512
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     511     512     515
+
+IND                             Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     503     505
+  Set 
+  Used     511
+
+JJ                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      511
+  Used     512
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl     503
+  Set 
+  Used     510     514
+
+SWAP                                                              Subroutine, EXTERNAL
+  Decl     503
+  Set 
+  Used
+
+TEMP                            Dummy Arg                         DOUBLE PRECISION, DIMENSION(1)
+  Decl     503     504
+  Set      512
+  Used     515
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                 C r o s s   R e f e r e n c e   for   IPERMUTE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+A                               Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     519     520
+  Set      525
+  Used     523
+
+B                               Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     519     520
+  Set 
+  Used     523     525
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     525
+
+ICOPY                                                             Subroutine, EXTERNAL
+  Decl
+  Set 
+  Used     523
+
+ICPERM                          Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     519     521
+  Set 
+  Used     525
+
+IPERMUTE                                                          Subroutine, EXTERNAL
+  Decl     519
+  Set 
+  Used
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl     519
+  Set 
+  Used     523     524
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                C r o s s   R e f e r e n c e   for   OUT_CSRMAT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+1                                                                 FORMAT label
+  Decl     540
+  Set 
+  Used
+
+22                                                                FORMAT label
+  Decl     556
+  Set 
+  Used
+
+6                                                                 FORMAT label
+  Decl     555
+  Set 
+  Used
+
+A                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set      550
+  Used     551
+
+ACSR                            Dummy Arg                         DOUBLE PRECISION, DIMENSION(1)
+  Decl     530     531
+  Set 
+  Used     550
+
+BLANK                                                             Subroutine, EXTERNAL
+  Decl
+  Set 
+  Used     545
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     546     547
+
+IA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     530     532
+  Set 
+  Used     537     546     547
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      549
+  Used     551
+
+JA                              Dummy Arg                         INTEGER, DIMENSION(1)
+  Decl     530     532
+  Set 
+  Used     549
+
+JJ                              Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used     549     550
+
+K                               Stack                             INTEGER, Implicit type
+  Decl
+  Set      553
+  Used     553
+
+MIN                                                               Function, INTEGER, INTRINSIC
+  Decl
+  Set 
+  Used       0     543
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl     530
+  Set 
+  Used     537     539     542     543
+
+N1                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      546
+  Used
+
+N2                              Stack                             INTEGER, Implicit type
+  Decl
+  Set      547
+  Used     548
+
+N22                             Stack                             INTEGER, Implicit type
+  Decl
+  Set      542
+  Used     551     553
+
+N29                             Stack                             INTEGER, Implicit type
+  Decl
+  Set      543
+  Used     544
+
+NAME9                           Dummy Arg                         CHARACTER(9)
+  Decl     530     534
+  Set 
+  Used     539
+
+NNZ                             Stack                             INTEGER, Implicit type
+  Decl
+  Set      537
+  Used     539
+
+OUT_CSRMAT                                                        Subroutine, EXTERNAL
+  Decl     530
+  Set 
+  Used
+
+S                               Stack                             CHARACTER(6), DIMENSION(22)
+  Decl     535
+  Set 
+  Used     545     551     553
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                     C o m m o n   B l o c k   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CFILE2/                              Length: 528 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CFILES/                              Length: 924 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/DIMN/                                Length: 72 bytes
+
+     RARR_OUT                         
+     IAR2_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUT1/                              Length: 3000 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUT2/                              Length: 1852 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUT3/                              Length: 248 bytes
+
+     RARR_OUT                         Equivalence: IFNAV
+     IARR_OUT                         Equivalence: IFNAV
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUT4/                              Length: 11174 bytes
+
+     RARR_OUT                         Equivalence: TURBMOD
+     IARR_OUT                         Equivalence: TURBMOD
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUT5/                              Length: 711760 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUT6/                              Length: 80360 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUT8/                              Length: 36903 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUT9/                              Length: 1644 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUTMC/                             Length: 150 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUTMI/                             Length: 2252 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/INPUTMR/                             Length: 200 bytes
+
+     RARR_OUT                         
+     IARR_OUT                         
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                         E x t e r n a l   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name  Messages
+----  --------
+ABS(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   COMPRESS_ACSR (Line 55, file navier7.f)
+                   COMPRESS_ACSR (Line 64, file navier7.f)
+                   OUT_ACSR (Line 837, file navier7.f)
+                   OUTBOX (Line 988, file navier7.f)
+
+Name  Messages
+----  --------
+BLANK
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   SCSR_TO_SPB (Line 1007, file navier7.f)
+                   SWAP (Line 1064, file navier7.f)
+
+Name  Messages
+----  --------
+COMPRESS_ACSR
+      Defined as:  Subroutine (line 38, file navier7.f)
+
+      Interface:   None
+
+      Calls:       ABS(Intrinsic) (Line 55, file navier7.f)
+                   ABS(Intrinsic) (Line 64, file navier7.f)
+
+Name  Messages
+----  --------
+EXITT
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   OUT_ACSR (Line 821, file navier7.f)
+                   OUT_ACSR (Line 855, file navier7.f)
+                   OUT_ACSR (Line 858, file navier7.f)
+
+Name  Messages
+----  --------
+IAR2_OUT
+      Defined as:  Subroutine (line 650, file navier7.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+Name  Messages
+----  --------
+IARR_OUT
+      Defined as:  Subroutine (line 399, file navier7.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+Name  Messages
+----  --------
+ICOPY
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   OUT_ACSR (Line 901, file navier7.f)
+                   SCSR_TO_SPBM (Line 1042, file navier7.f)
+
+Name  Messages
+----  --------
+IMOUT
+      Defined as:  Subroutine (line 104, file navier7.f)
+
+      Interface:   None
+
+      Calls:       MIN(Intrinsic) (Line 108, file navier7.f)
+
+Name  Messages
+----  --------
+IPERMUTE
+      Defined as:  Subroutine (line 1038, file navier7.f)
+
+      Interface:   None
+
+      Calls:       ICOPY (Line 1042, file navier7.f)
+
+Name  Messages
+----  --------
+ISORT
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   OUT_ACSR (Line 928, file navier7.f)
+
+Name  Messages
+----  --------
+IZERO
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   OUT_ACSR (Line 876, file navier7.f)
+
+Name  Messages
+----  --------
+MAX(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   IAR2_OUT (Line 84, file navier7.f)
+                   OUT_ACSR (Line 837, file navier7.f)
+                   OUTBOX (Line 988, file navier7.f)
+
+Name  Messages
+----  --------
+MAX0(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   IPERMUTE (Line 131, file navier7.f)
+
+Name  Messages
+----  --------
+MBW_CSR
+      Defined as:  Function (line 976, file navier7.f)
+
+      Interface:   None
+
+      Called By:   OUT_ACSR (Line 934, file navier7.f)
+                   OUT_SPBMAT (Line 952, file navier7.f)
+
+      Calls:       ABS(Intrinsic) (Line 988, file navier7.f)
+                   MAX(Intrinsic) (Line 988, file navier7.f)
+
+Name  Messages
+----  --------
+MIN(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   IARR_OUT (Line 108, file navier7.f)
+                   SCSR_TO_SPB (Line 1005, file navier7.f)
+                   SWAP (Line 1061, file navier7.f)
+                   SWAP (Line 1062, file navier7.f)
+
+Name  Messages
+----  --------
+MOD(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   OUT_ACSR (Line 924, file navier7.f)
+                   OUT_ACSR (Line 933, file navier7.f)
+
+Name  Messages
+----  --------
+OUTBOX
+      Defined as:  Subroutine (line 80, file navier7.f)
+
+      Interface:   None
+
+      Calls:       MAX(Intrinsic) (Line 84, file navier7.f)
+
+Name  Messages
+----  --------
+OUT_ABD
+      Defined as:  Subroutine (line 116, file navier7.f)
+
+      Interface:   None
+
+      Calls:       MAX0(Intrinsic) (Line 131, file navier7.f)
+
+Name  Messages
+----  --------
+OUT_ACSR
+      Defined as:  Subroutine (line 2, file navier7.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+Name  Messages
+----  --------
+OUT_CSRMAT
+      Defined as:  Subroutine (line 1049, file navier7.f)
+
+      Interface:   None
+
+      Calls:       MIN(Intrinsic) (Line 1061, file navier7.f)
+                   MIN(Intrinsic) (Line 1062, file navier7.f)
+                   BLANK (Line 1064, file navier7.f)
+
+Name  Messages
+----  --------
+OUT_SPBMAT
+      Defined as:  Subroutine (line 995, file navier7.f)
+
+      Interface:   None
+
+      Calls:       MIN(Intrinsic) (Line 1005, file navier7.f)
+                   BLANK (Line 1007, file navier7.f)
+
+Name  Messages
+----  --------
+RARR_OUT
+      Defined as:  Subroutine (line 148, file navier7.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+Name  Messages
+----  --------
+RZERO
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   RARR_OUT (Line 963, file navier7.f)
+
+Name  Messages
+----  --------
+SCSR_PERMUTE
+      Defined as:  Subroutine (line 786, file navier7.f)
+
+      Interface:   None
+
+      Calls:       EXITT (Line 821, file navier7.f)
+                   EXITT (Line 855, file navier7.f)
+                   EXITT (Line 858, file navier7.f)
+                   ABS(Intrinsic) (Line 837, file navier7.f)
+                   MAX(Intrinsic) (Line 837, file navier7.f)
+                   IZERO (Line 876, file navier7.f)
+                   ICOPY (Line 901, file navier7.f)
+                   MOD(Intrinsic) (Line 924, file navier7.f)
+                   MOD(Intrinsic) (Line 933, file navier7.f)
+                   ISORT (Line 928, file navier7.f)
+                   SWAP (Line 930, file navier7.f)
+                   MBW_CSR (Line 934, file navier7.f)
+
+Name  Messages
+----  --------
+SCSR_TO_SPB
+      Defined as:  Subroutine (line 942, file navier7.f)
+
+      Interface:   None
+
+      Calls:       MBW_CSR (Line 952, file navier7.f)
+                   SCSR_TO_SPBM (Line 953, file navier7.f)
+
+Name  Messages
+----  --------
+SCSR_TO_SPBM
+      Defined as:  Subroutine (line 958, file navier7.f)
+
+      Interface:   None
+
+      Called By:   OUT_SPBMAT (Line 953, file navier7.f)
+
+      Calls:       RZERO (Line 963, file navier7.f)
+
+Name  Messages
+----  --------
+SWAP
+      Defined as:  Subroutine (line 1022, file navier7.f)
+
+      Interface:   None
+
+      Called By:   OUT_ACSR (Line 930, file navier7.f)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

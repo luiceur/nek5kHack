@@ -1,0 +1,341 @@
+      .version 3.1
+      .target sm_35
+      .address_size 64
+
+      // Cray Fortran : Version 8.3.0  (u83050f83142i83148p83243a83009z83243)
+
+      .file	1	"/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/plan4.f"
+
+      .entry opadd2cm_acc_$ck_L643_1(
+               .param .s64 $$arg_ptr_acc_b3_t6_t49,
+               .param .s64 $$arg_ptr_acc_b2_t8_t50,
+               .param .s64 $$arg_ptr_acc_b1_t10_t51,
+               .param .s64 $$arg_ptr_acc_a3_t12_t52,
+               .param .s64 $$arg_ptr_acc_a2_t14_t53,
+               .param .s64 $$arg_ptr_acc_a1_t16_t54,
+               .param .s32 $$_arg_acc_nelv_t20_t55,
+               .param .s32 $$_arg_acc_nx1_t21_t56,
+               .param .s32 $$_arg_acc_ny1_t22_t57,
+               .param .s32 $$_arg_acc_nz1_t23_t58,
+               .param .f64 $$_arg_acc_seat_c_t24_t59 )
+      {
+      .reg .pred %p<3>;
+      .reg .b32  %b<2>;
+      .reg .s32  %s<9>;
+      .reg .s64  %sd<14>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<11>;
+      //
+      .loc                 1  643  0
+      .loc                 1  644  0
+      ld.param.s32         %s3, [$$_arg_acc_nelv_t20_t55];// plan4.f:644 : $$_arg_acc_nelv_t20_t55
+      ld.param.s32         %s4, [$$_arg_acc_ny1_t22_t57];// plan4.f:644 : $$_arg_acc_ny1_t22_t57
+      mul.lo.s32           %s5, %s3, %s4;              // plan4.f:644
+      ld.param.s32         %s6, [$$_arg_acc_nx1_t21_t56];// plan4.f:644 : $$_arg_acc_nx1_t21_t56
+      ld.param.s32         %s7, [$$_arg_acc_nz1_t23_t58];// plan4.f:644 : $$_arg_acc_nz1_t23_t58
+      mul.lo.s32           %s8, %s6, %s7;              // plan4.f:644
+      mul.lo.s32           %s1, %s5, %s8;              // plan4.f:644 : $$lcs_nz1_1_t42
+      setp.le.s32          %p1, %s1, 0;                // plan4.f:644
+      @%p1 bra             $opadd2cm_acc_$ck_L643_1__l30__;// plan4.f:644
+      .loc                 1  644  0
+      mov.u32              %u1, %ntid.x;               // plan4.f:644
+      mov.u32              %u2, %ctaid.x;              // plan4.f:644
+      mov.u32              %u3, %tid.x;                // plan4.f:644
+      mad.lo.u32           %s2, %u1, %u2, %u3;         // plan4.f:644 : $$id_t19
+      setp.ge.s32          %p2, %s2, %s1;              // plan4.f:644
+      @%p2 bra             $opadd2cm_acc_$ck_L643_1__l30__;// plan4.f:644
+      .loc                 1  645  0
+      ld.param.f64         %fd1, [$$_arg_acc_seat_c_t24_t59];// plan4.f:645 : $$_arg_acc_seat_c_t24_t59
+      ld.param.s64         %sd1, [$$arg_ptr_acc_b1_t10_t51];// plan4.f:645 : $$arg_ptr_acc_b1_t10_t51
+      shl.b32              %b1, %s2, 3;                // plan4.f:645
+      cvt.s64.s32          %sd2, %b1;                  // plan4.f:645
+      add.s64              %sd3, %sd1, %sd2;           // plan4.f:645
+      ld.global.nc.f64     %fd2, [%sd3];               // plan4.f:645 : 0[$$arg_ptr_acc_b1_t10_t51,$$id_t19,ex].L
+      ld.param.s64         %sd4, [$$arg_ptr_acc_a1_t16_t54];// plan4.f:645 : $$arg_ptr_acc_a1_t16_t54
+      add.s64              %sd5, %sd4, %sd2;           // plan4.f:645
+      ld.global.f64        %fd3, [%sd5];               // plan4.f:645 : 0[$$arg_ptr_acc_a1_t16_t54,$$id_t19].L
+      mad.rn.f64           %fd4, %fd2, %fd1, %fd3;     // plan4.f:645
+      st.global.f64        [%sd5], %fd4;               // plan4.f:645 : 0[$$arg_ptr_acc_a1_t16_t54,$$id_t19].L
+      .loc                 1  646  0
+      ld.param.s64         %sd6, [$$arg_ptr_acc_b2_t8_t50];// plan4.f:646 : $$arg_ptr_acc_b2_t8_t50
+      ld.param.s64         %sd7, [$$arg_ptr_acc_a2_t14_t53];// plan4.f:646 : $$arg_ptr_acc_a2_t14_t53
+      add.s64              %sd8, %sd6, %sd2;           // plan4.f:646
+      ld.global.nc.f64     %fd5, [%sd8];               // plan4.f:646 : 0[$$arg_ptr_acc_b2_t8_t50,$$id_t19,ex].L
+      add.s64              %sd9, %sd7, %sd2;           // plan4.f:646
+      ld.global.f64        %fd6, [%sd9];               // plan4.f:646 : 0[$$arg_ptr_acc_a2_t14_t53,$$id_t19].L
+      mad.rn.f64           %fd7, %fd5, %fd1, %fd6;     // plan4.f:646
+      st.global.f64        [%sd9], %fd7;               // plan4.f:646 : 0[$$arg_ptr_acc_a2_t14_t53,$$id_t19].L
+      .loc                 1  647  0
+      ld.param.s64         %sd10, [$$arg_ptr_acc_b3_t6_t49];// plan4.f:647 : $$arg_ptr_acc_b3_t6_t49
+      ld.param.s64         %sd11, [$$arg_ptr_acc_a3_t12_t52];// plan4.f:647 : $$arg_ptr_acc_a3_t12_t52
+      add.s64              %sd12, %sd10, %sd2;         // plan4.f:647
+      ld.global.nc.f64     %fd8, [%sd12];              // plan4.f:647 : 0[$$arg_ptr_acc_b3_t6_t49,$$id_t19,ex].L
+      add.s64              %sd13, %sd11, %sd2;         // plan4.f:647
+      ld.global.f64        %fd9, [%sd13];              // plan4.f:647 : 0[$$arg_ptr_acc_a3_t12_t52,$$id_t19].L
+      mad.rn.f64           %fd10, %fd8, %fd1, %fd9;    // plan4.f:647
+      st.global.f64        [%sd13], %fd10;             // plan4.f:647 : 0[$$arg_ptr_acc_a3_t12_t52,$$id_t19].L
+$opadd2cm_acc_$ck_L643_1__l30__:
+      exit;
+      } // opadd2cm_acc_$ck_L643_1
+
+
+      .entry crespsp_acc_$ck_L876_2(
+               .param .s64 $$arg_ptr_acc_wa3_t36_t208,
+               .param .s64 $$arg_ptr_acc_wa2_t38_t209,
+               .param .s64 $$arg_ptr_acc_wa1_t40_t210,
+               .param .s64 $$arg_ptr_acc_b3_t78_t211,
+               .param .s64 $$arg_ptr_acc_b2_t80_t212,
+               .param .s64 $$arg_ptr_acc_b1_t82_t213,
+               .param .s32 $$_arg_acc_nelv_t110_t214,
+               .param .s32 $$_arg_acc_nx1_t111_t215,
+               .param .s32 $$_arg_acc_ny1_t112_t216,
+               .param .s32 $$_arg_acc_nz1_t113_t217 )
+      {
+      .reg .pred %p<3>;
+      .reg .b32  %b<2>;
+      .reg .s32  %s<9>;
+      .reg .s64  %sd<14>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<10>;
+      //
+      .loc                 1  876  0
+      .loc                 1  876  0
+      ld.param.s32         %s3, [$$_arg_acc_nelv_t110_t214];// plan4.f:876 : $$_arg_acc_nelv_t110_t214
+      ld.param.s32         %s4, [$$_arg_acc_ny1_t112_t216];// plan4.f:876 : $$_arg_acc_ny1_t112_t216
+      mul.lo.s32           %s5, %s3, %s4;              // plan4.f:876
+      ld.param.s32         %s6, [$$_arg_acc_nx1_t111_t215];// plan4.f:876 : $$_arg_acc_nx1_t111_t215
+      ld.param.s32         %s7, [$$_arg_acc_nz1_t113_t217];// plan4.f:876 : $$_arg_acc_nz1_t113_t217
+      mul.lo.s32           %s8, %s6, %s7;              // plan4.f:876
+      mul.lo.s32           %s1, %s5, %s8;              // plan4.f:876 : $$lcs_nz1_9_t201
+      setp.le.s32          %p1, %s1, 0;                // plan4.f:876
+      @%p1 bra             $crespsp_acc_$ck_L876_2__l303__;// plan4.f:876
+      .loc                 1  876  0
+      mov.u32              %u1, %ntid.x;               // plan4.f:876
+      mov.u32              %u2, %ctaid.x;              // plan4.f:876
+      mov.u32              %u3, %tid.x;                // plan4.f:876
+      mad.lo.u32           %s2, %u1, %u2, %u3;         // plan4.f:876 : $$id_t103
+      setp.ge.s32          %p2, %s2, %s1;              // plan4.f:876
+      @%p2 bra             $crespsp_acc_$ck_L876_2__l303__;// plan4.f:876
+      .loc                 1  876  0
+      ld.param.s64         %sd1, [$$arg_ptr_acc_b1_t82_t213];// plan4.f:876 : $$arg_ptr_acc_b1_t82_t213
+      shl.b32              %b1, %s2, 3;                // plan4.f:876
+      cvt.s64.s32          %sd2, %b1;                  // plan4.f:876
+      add.s64              %sd3, %sd1, %sd2;           // plan4.f:876
+      ld.global.nc.f64     %fd1, [%sd3];               // plan4.f:876 : 0[$$arg_ptr_acc_b1_t82_t213,$$id_t103,ex].L
+      ld.param.s64         %sd4, [$$arg_ptr_acc_wa1_t40_t210];// plan4.f:876 : $$arg_ptr_acc_wa1_t40_t210
+      add.s64              %sd5, %sd4, %sd2;           // plan4.f:876
+      ld.global.f64        %fd2, [%sd5];               // plan4.f:876 : 0[$$arg_ptr_acc_wa1_t40_t210,$$id_t103].L
+      mad.rn.f64           %fd3, 0dbff5555555555555, %fd1, %fd2;// plan4.f:876
+      st.global.f64        [%sd5], %fd3;               // plan4.f:876 : 0[$$arg_ptr_acc_wa1_t40_t210,$$id_t103].L
+      ld.param.s64         %sd6, [$$arg_ptr_acc_b2_t80_t212];// plan4.f:876 : $$arg_ptr_acc_b2_t80_t212
+      ld.param.s64         %sd7, [$$arg_ptr_acc_wa2_t38_t209];// plan4.f:876 : $$arg_ptr_acc_wa2_t38_t209
+      add.s64              %sd8, %sd6, %sd2;           // plan4.f:876
+      ld.global.nc.f64     %fd4, [%sd8];               // plan4.f:876 : 0[$$arg_ptr_acc_b2_t80_t212,$$id_t103,ex].L
+      add.s64              %sd9, %sd7, %sd2;           // plan4.f:876
+      ld.global.f64        %fd5, [%sd9];               // plan4.f:876 : 0[$$arg_ptr_acc_wa2_t38_t209,$$id_t103].L
+      mad.rn.f64           %fd6, 0dbff5555555555555, %fd4, %fd5;// plan4.f:876
+      st.global.f64        [%sd9], %fd6;               // plan4.f:876 : 0[$$arg_ptr_acc_wa2_t38_t209,$$id_t103].L
+      ld.param.s64         %sd10, [$$arg_ptr_acc_b3_t78_t211];// plan4.f:876 : $$arg_ptr_acc_b3_t78_t211
+      ld.param.s64         %sd11, [$$arg_ptr_acc_wa3_t36_t208];// plan4.f:876 : $$arg_ptr_acc_wa3_t36_t208
+      add.s64              %sd12, %sd10, %sd2;         // plan4.f:876
+      ld.global.nc.f64     %fd7, [%sd12];              // plan4.f:876 : 0[$$arg_ptr_acc_b3_t78_t211,$$id_t103,ex].L
+      add.s64              %sd13, %sd11, %sd2;         // plan4.f:876
+      ld.global.f64        %fd8, [%sd13];              // plan4.f:876 : 0[$$arg_ptr_acc_wa3_t36_t208,$$id_t103].L
+      mad.rn.f64           %fd9, 0dbff5555555555555, %fd7, %fd8;// plan4.f:876
+      st.global.f64        [%sd13], %fd9;              // plan4.f:876 : 0[$$arg_ptr_acc_wa3_t36_t208,$$id_t103].L
+$crespsp_acc_$ck_L876_2__l303__:
+      exit;
+      } // crespsp_acc_$ck_L876_2
+
+
+      .entry crespsp_acc_$ck_L889_3(
+               .param .s64 $$arg_ptr_acc_wa3_t36_t218,
+               .param .s64 $$arg_ptr_acc_wa2_t38_t219,
+               .param .s64 $$arg_ptr_acc_wa1_t40_t220,
+               .param .s64 $$arg_ptr_acc_ta3_t42_t221,
+               .param .s64 $$arg_ptr_acc_ta2_t44_t222,
+               .param .s64 $$arg_ptr_acc_ta1_t46_t223,
+               .param .s64 $$arg_ptr_acc_bfx_t66_t224,
+               .param .s64 $$arg_ptr_acc_vtrans_t70_t225,
+               .param .s64 $$arg_ptr_acc_bfy_t96_t226,
+               .param .s64 $$arg_ptr_acc_bfz_t98_t227,
+               .param .s32 $$_arg_acc_nelv_t114_t228,
+               .param .s32 $$_arg_acc_nx1_t115_t229,
+               .param .s32 $$_arg_acc_ny1_t116_t230,
+               .param .s32 $$_arg_acc_nz1_t117_t231 )
+      {
+      .reg .pred %p<3>;
+      .reg .b32  %b<2>;
+      .reg .s32  %s<9>;
+      .reg .s64  %sd<22>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<15>;
+      //
+      .loc                 1  889  0
+      .loc                 1  890  0
+      ld.param.s32         %s3, [$$_arg_acc_nelv_t114_t228];// plan4.f:890 : $$_arg_acc_nelv_t114_t228
+      ld.param.s32         %s4, [$$_arg_acc_ny1_t116_t230];// plan4.f:890 : $$_arg_acc_ny1_t116_t230
+      mul.lo.s32           %s5, %s3, %s4;              // plan4.f:890
+      ld.param.s32         %s6, [$$_arg_acc_nx1_t115_t229];// plan4.f:890 : $$_arg_acc_nx1_t115_t229
+      ld.param.s32         %s7, [$$_arg_acc_nz1_t117_t231];// plan4.f:890 : $$_arg_acc_nz1_t117_t231
+      mul.lo.s32           %s8, %s6, %s7;              // plan4.f:890
+      mul.lo.s32           %s1, %s5, %s8;              // plan4.f:890 : $$lcs_nz1_10_t192
+      setp.le.s32          %p1, %s1, 0;                // plan4.f:890
+      @%p1 bra             $crespsp_acc_$ck_L889_3__l312__;// plan4.f:890
+      .loc                 1  890  0
+      mov.u32              %u1, %ntid.x;               // plan4.f:890
+      mov.u32              %u2, %ctaid.x;              // plan4.f:890
+      mov.u32              %u3, %tid.x;                // plan4.f:890
+      mad.lo.u32           %s2, %u1, %u2, %u3;         // plan4.f:890 : $$id_t105
+      setp.ge.s32          %p2, %s2, %s1;              // plan4.f:890
+      @%p2 bra             $crespsp_acc_$ck_L889_3__l312__;// plan4.f:890
+      .loc                 1  891  0
+      ld.param.s64         %sd1, [$$arg_ptr_acc_vtrans_t70_t225];// plan4.f:891 : $$arg_ptr_acc_vtrans_t70_t225
+      shl.b32              %b1, %s2, 3;                // plan4.f:891
+      cvt.s64.s32          %sd2, %b1;                  // plan4.f:891
+      add.s64              %sd3, %sd1, %sd2;           // plan4.f:891
+      ld.global.nc.f64     %fd1, [%sd3];               // plan4.f:891 : 0[$$arg_ptr_acc_vtrans_t70_t225,$$id_t105,ex].L
+      rcp.rn.f64           %fd2, %fd1;                 // plan4.f:891
+      ld.param.s64         %sd4, [$$arg_ptr_acc_bfx_t66_t224];// plan4.f:891 : $$arg_ptr_acc_bfx_t66_t224
+      add.s64              %sd5, %sd4, %sd2;           // plan4.f:891
+      ld.global.nc.f64     %fd3, [%sd5];               // plan4.f:891 : 0[$$arg_ptr_acc_bfx_t66_t224,$$id_t105,ex].L
+      ld.param.s64         %sd6, [$$arg_ptr_acc_wa1_t40_t220];// plan4.f:891 : $$arg_ptr_acc_wa1_t40_t220
+      add.s64              %sd7, %sd6, %sd2;           // plan4.f:891
+      ld.global.nc.f64     %fd4, [%sd7];               // plan4.f:891 : 0[$$arg_ptr_acc_wa1_t40_t220,$$id_t105,ex].L
+      neg.f64              %fd5, %fd4;                 // plan4.f:891
+      mad.rn.f64           %fd6, %fd3, %fd2, %fd5;     // plan4.f:891
+      ld.param.s64         %sd8, [$$arg_ptr_acc_ta1_t46_t223];// plan4.f:891 : $$arg_ptr_acc_ta1_t46_t223
+      add.s64              %sd9, %sd8, %sd2;           // plan4.f:891
+      st.global.f64        [%sd9], %fd6;               // plan4.f:891 : 0[$$arg_ptr_acc_ta1_t46_t223,$$id_t105].L
+      .loc                 1  892  0
+      ld.param.s64         %sd10, [$$arg_ptr_acc_bfy_t96_t226];// plan4.f:892 : $$arg_ptr_acc_bfy_t96_t226
+      ld.param.s64         %sd11, [$$arg_ptr_acc_wa2_t38_t219];// plan4.f:892 : $$arg_ptr_acc_wa2_t38_t219
+      ld.param.s64         %sd12, [$$arg_ptr_acc_ta2_t44_t222];// plan4.f:892 : $$arg_ptr_acc_ta2_t44_t222
+      add.s64              %sd13, %sd10, %sd2;         // plan4.f:892
+      ld.global.nc.f64     %fd7, [%sd13];              // plan4.f:892 : 0[$$arg_ptr_acc_bfy_t96_t226,$$id_t105,ex].L
+      add.s64              %sd14, %sd11, %sd2;         // plan4.f:892
+      ld.global.nc.f64     %fd8, [%sd14];              // plan4.f:892 : 0[$$arg_ptr_acc_wa2_t38_t219,$$id_t105,ex].L
+      neg.f64              %fd9, %fd8;                 // plan4.f:892
+      mad.rn.f64           %fd10, %fd7, %fd2, %fd9;    // plan4.f:892
+      add.s64              %sd15, %sd12, %sd2;         // plan4.f:892
+      st.global.f64        [%sd15], %fd10;             // plan4.f:892 : 0[$$arg_ptr_acc_ta2_t44_t222,$$id_t105].L
+      .loc                 1  893  0
+      ld.param.s64         %sd16, [$$arg_ptr_acc_bfz_t98_t227];// plan4.f:893 : $$arg_ptr_acc_bfz_t98_t227
+      ld.param.s64         %sd17, [$$arg_ptr_acc_wa3_t36_t218];// plan4.f:893 : $$arg_ptr_acc_wa3_t36_t218
+      ld.param.s64         %sd18, [$$arg_ptr_acc_ta3_t42_t221];// plan4.f:893 : $$arg_ptr_acc_ta3_t42_t221
+      add.s64              %sd19, %sd16, %sd2;         // plan4.f:893
+      ld.global.nc.f64     %fd11, [%sd19];             // plan4.f:893 : 0[$$arg_ptr_acc_bfz_t98_t227,$$id_t105,ex].L
+      add.s64              %sd20, %sd17, %sd2;         // plan4.f:893
+      ld.global.nc.f64     %fd12, [%sd20];             // plan4.f:893 : 0[$$arg_ptr_acc_wa3_t36_t218,$$id_t105,ex].L
+      neg.f64              %fd13, %fd12;               // plan4.f:893
+      mad.rn.f64           %fd14, %fd11, %fd2, %fd13;  // plan4.f:893
+      add.s64              %sd21, %sd18, %sd2;         // plan4.f:893
+      st.global.f64        [%sd21], %fd14;             // plan4.f:893 : 0[$$arg_ptr_acc_ta3_t42_t221,$$id_t105].L
+$crespsp_acc_$ck_L889_3__l312__:
+      exit;
+      } // crespsp_acc_$ck_L889_3
+
+
+      .entry crespsp_acc_$ck_L905_4(
+               .param .s32 $$_arg_n_t232,
+               .param .s64 $$arg_ptr_acc_ta3_t42_t233,
+               .param .s64 $$arg_ptr_acc_ta2_t44_t234,
+               .param .s64 $$arg_ptr_acc_ta1_t46_t235,
+               .param .s64 $$arg_ptr_acc_binvm1_t100_t236 )
+      {
+      .reg .pred %p<3>;
+      .reg .b32  %b<2>;
+      .reg .s32  %s<3>;
+      .reg .s64  %sd<10>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<8>;
+      //
+      .loc                 1  905  0
+      .loc                 1  906  0
+      ld.param.s32         %s1, [$$_arg_n_t232];       // plan4.f:906 : $$mr_n_207_t179
+      setp.le.s32          %p1, %s1, 0;                // plan4.f:906
+      @%p1 bra             $crespsp_acc_$ck_L905_4__l321__;// plan4.f:906
+      .loc                 1  906  0
+      mov.u32              %u1, %ntid.x;               // plan4.f:906
+      mov.u32              %u2, %ctaid.x;              // plan4.f:906
+      mov.u32              %u3, %tid.x;                // plan4.f:906
+      mad.lo.u32           %s2, %u1, %u2, %u3;         // plan4.f:906 : $$id_t107
+      setp.ge.s32          %p2, %s2, %s1;              // plan4.f:906
+      @%p2 bra             $crespsp_acc_$ck_L905_4__l321__;// plan4.f:906
+      .loc                 1  907  0
+      ld.param.s64         %sd1, [$$arg_ptr_acc_binvm1_t100_t236];// plan4.f:907 : $$arg_ptr_acc_binvm1_t100_t236
+      shl.b32              %b1, %s2, 3;                // plan4.f:907
+      cvt.s64.s32          %sd2, %b1;                  // plan4.f:907
+      add.s64              %sd3, %sd1, %sd2;           // plan4.f:907
+      ld.global.nc.f64     %fd1, [%sd3];               // plan4.f:907 : 0[$$arg_ptr_acc_binvm1_t100_t236,$$id_t107,ex].L
+      ld.param.s64         %sd4, [$$arg_ptr_acc_ta1_t46_t235];// plan4.f:907 : $$arg_ptr_acc_ta1_t46_t235
+      add.s64              %sd5, %sd4, %sd2;           // plan4.f:907
+      ld.global.f64        %fd2, [%sd5];               // plan4.f:907 : 0[$$arg_ptr_acc_ta1_t46_t235,$$id_t107].L
+      mul.rn.f64           %fd3, %fd2, %fd1;           // plan4.f:907
+      st.global.f64        [%sd5], %fd3;               // plan4.f:907 : 0[$$arg_ptr_acc_ta1_t46_t235,$$id_t107].L
+      .loc                 1  908  0
+      ld.param.s64         %sd6, [$$arg_ptr_acc_ta2_t44_t234];// plan4.f:908 : $$arg_ptr_acc_ta2_t44_t234
+      add.s64              %sd7, %sd6, %sd2;           // plan4.f:908
+      ld.global.f64        %fd4, [%sd7];               // plan4.f:908 : 0[$$arg_ptr_acc_ta2_t44_t234,$$id_t107].L
+      mul.rn.f64           %fd5, %fd4, %fd1;           // plan4.f:908
+      st.global.f64        [%sd7], %fd5;               // plan4.f:908 : 0[$$arg_ptr_acc_ta2_t44_t234,$$id_t107].L
+      .loc                 1  909  0
+      ld.param.s64         %sd8, [$$arg_ptr_acc_ta3_t42_t233];// plan4.f:909 : $$arg_ptr_acc_ta3_t42_t233
+      add.s64              %sd9, %sd8, %sd2;           // plan4.f:909
+      ld.global.f64        %fd6, [%sd9];               // plan4.f:909 : 0[$$arg_ptr_acc_ta3_t42_t233,$$id_t107].L
+      mul.rn.f64           %fd7, %fd6, %fd1;           // plan4.f:909
+      st.global.f64        [%sd9], %fd7;               // plan4.f:909 : 0[$$arg_ptr_acc_ta3_t42_t233,$$id_t107].L
+$crespsp_acc_$ck_L905_4__l321__:
+      exit;
+      } // crespsp_acc_$ck_L905_4
+
+
+      .entry crespsp_acc_$ck_L919_5(
+               .param .s32 $$_arg_n_t237,
+               .param .s64 $$arg_ptr_acc_wa3_t36_t238,
+               .param .s64 $$arg_ptr_acc_wa2_t38_t239,
+               .param .s64 $$arg_ptr_acc_wa1_t40_t240,
+               .param .s64 $$arg_ptr_acc_respr_t76_t241 )
+      {
+      .reg .pred %p<3>;
+      .reg .b32  %b<2>;
+      .reg .s32  %s<3>;
+      .reg .s64  %sd<10>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<8>;
+      //
+      .loc                 1  919  0
+      .loc                 1  920  0
+      ld.param.s32         %s1, [$$_arg_n_t237];       // plan4.f:920 : $$mr_n_212_t175
+      setp.le.s32          %p1, %s1, 0;                // plan4.f:920
+      @%p1 bra             $crespsp_acc_$ck_L919_5__l330__;// plan4.f:920
+      .loc                 1  920  0
+      mov.u32              %u1, %ntid.x;               // plan4.f:920
+      mov.u32              %u2, %ctaid.x;              // plan4.f:920
+      mov.u32              %u3, %tid.x;                // plan4.f:920
+      mad.lo.u32           %s2, %u1, %u2, %u3;         // plan4.f:920 : $$id_t109
+      setp.ge.s32          %p2, %s2, %s1;              // plan4.f:920
+      @%p2 bra             $crespsp_acc_$ck_L919_5__l330__;// plan4.f:920
+      .loc                 1  921  0
+      shl.b32              %b1, %s2, 3;                // plan4.f:921
+      cvt.s64.s32          %sd1, %b1;                  // plan4.f:921
+      ld.param.s64         %sd2, [$$arg_ptr_acc_wa1_t40_t240];// plan4.f:921 : $$arg_ptr_acc_wa1_t40_t240
+      add.s64              %sd3, %sd2, %sd1;           // plan4.f:921
+      ld.param.s64         %sd4, [$$arg_ptr_acc_respr_t76_t241];// plan4.f:921 : $$arg_ptr_acc_respr_t76_t241
+      add.s64              %sd5, %sd4, %sd1;           // plan4.f:921
+      ld.global.f64        %fd1, [%sd5];               // plan4.f:921 : 0[$$arg_ptr_acc_respr_t76_t241,$$id_t109].L
+      ld.global.nc.f64     %fd2, [%sd3];               // plan4.f:921 : 0[$$arg_ptr_acc_wa1_t40_t240,$$id_t109,ex].L
+      add.rn.f64           %fd3, %fd1, %fd2;           // plan4.f:921
+      ld.param.s64         %sd6, [$$arg_ptr_acc_wa2_t38_t239];// plan4.f:921 : $$arg_ptr_acc_wa2_t38_t239
+      add.s64              %sd7, %sd6, %sd1;           // plan4.f:921
+      ld.global.nc.f64     %fd4, [%sd7];               // plan4.f:921 : 0[$$arg_ptr_acc_wa2_t38_t239,$$id_t109,ex].L
+      add.rn.f64           %fd5, %fd4, %fd3;           // plan4.f:921
+      ld.param.s64         %sd8, [$$arg_ptr_acc_wa3_t36_t238];// plan4.f:921 : $$arg_ptr_acc_wa3_t36_t238
+      add.s64              %sd9, %sd8, %sd1;           // plan4.f:921
+      ld.global.nc.f64     %fd6, [%sd9];               // plan4.f:921 : 0[$$arg_ptr_acc_wa3_t36_t238,$$id_t109,ex].L
+      add.rn.f64           %fd7, %fd6, %fd5;           // plan4.f:921
+      st.global.f64        [%sd5], %fd7;               // plan4.f:921 : 0[$$arg_ptr_acc_respr_t76_t241,$$id_t109].L
+$crespsp_acc_$ck_L919_5__l330__:
+      exit;
+      } // crespsp_acc_$ck_L919_5
+

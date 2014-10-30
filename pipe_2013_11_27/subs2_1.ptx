@@ -1,0 +1,58 @@
+      .version 3.1
+      .target sm_35
+      .address_size 64
+
+      // Cray Fortran : Version 8.3.0  (u83050f83142i83148p83243a83009z83243)
+
+      .file	1	"/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/subs2.f"
+
+      .entry cmult2_acc_$ck_L2507_1(
+               .param .s64 $$arg_ptr_acc_b_t6_t25,
+               .param .s64 $$arg_ptr_acc_a_t8_t26,
+               .param .s32 $$_arg_acc_seat_n_t12_t27,
+               .param .f64 $$_arg_acc_seat_const_t13_t28 )
+      {
+      .reg .pred %p<4>;
+      .reg .b32  %b<2>;
+      .reg .s32  %s<5>;
+      .reg .s64  %sd<6>;
+      .reg .u32  %u<6>;
+      .reg .f64  %fd<4>;
+      //
+      .loc                 1  2507  0
+      .loc                 1  2508  0
+      ld.param.s32         %s1, [$$_arg_acc_seat_n_t12_t27];// subs2.f:2508 : $$mr_n_16_t22
+      setp.le.s32          %p1, %s1, 0;                // subs2.f:2508
+      @%p1 bra             $cmult2_acc_$ck_L2507_1__l40__;// subs2.f:2508
+      .loc                 1  2508  0
+      mov.u32              %u1, %ntid.x;               // subs2.f:2508
+      mov.u32              %u2, %nctaid.x;             // subs2.f:2508
+      mul.lo.u32           %s3, %u1, %u2;              // subs2.f:2508 : $$numthrds_t10
+      mov.u32              %u3, %ctaid.x;              // subs2.f:2508
+      mov.u32              %u4, %tid.x;                // subs2.f:2508
+      mad.lo.u32           %u5, %u1, %u3, %u4;         // subs2.f:2508
+      mov.s32              %s2, %u5;                   // subs2.f:2508 : $$i_l2508_18_t19
+      mov.s32              %s4, %s1;                   // subs2.f:2508 : $$lis_b1_t21
+      setp.ge.s32          %p2, %u5, %s1;              // subs2.f:2508
+      @%p2 bra             $cmult2_acc_$ck_L2507_1__l40__;// subs2.f:2508
+      .loc                 1  2509  0
+      ld.param.f64         %fd1, [$$_arg_acc_seat_const_t13_t28];// subs2.f:2509 : $$lis_b0_t20
+$cmult2_acc_$ck_L2507_1__l9__:
+      .loc                 1  2509  0
+      shl.b32              %b1, %s2, 3;                // subs2.f:2509
+      cvt.s64.s32          %sd1, %b1;                  // subs2.f:2509
+      ld.param.s64         %sd2, [$$arg_ptr_acc_b_t6_t25];// subs2.f:2509 : $$arg_ptr_acc_b_t6_t25
+      add.s64              %sd3, %sd2, %sd1;           // subs2.f:2509
+      ld.global.nc.f64     %fd2, [%sd3];               // subs2.f:2509 : 0[$$arg_ptr_acc_b_t6_t25,$$i_l2508_18_t19,ex].L
+      mul.rn.f64           %fd3, %fd2, %fd1;           // subs2.f:2509
+      ld.param.s64         %sd4, [$$arg_ptr_acc_a_t8_t26];// subs2.f:2509 : $$arg_ptr_acc_a_t8_t26
+      add.s64              %sd5, %sd4, %sd1;           // subs2.f:2509
+      st.global.f64        [%sd5], %fd3;               // subs2.f:2509 : 0[$$arg_ptr_acc_a_t8_t26,$$i_l2508_18_t19].L
+      .loc                 1  2510  0
+      add.s32              %s2, %s3, %s2;              // subs2.f:2510 : $$i_l2508_18_t19
+      setp.lt.s32          %p3, %s2, %s4;              // subs2.f:2510
+      @%p3 bra             $cmult2_acc_$ck_L2507_1__l9__;// subs2.f:2510
+$cmult2_acc_$ck_L2507_1__l40__:
+      exit;
+      } // cmult2_acc_$ck_L2507_1
+

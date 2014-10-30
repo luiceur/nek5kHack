@@ -1,0 +1,1779 @@
+      .version 3.1
+      .target sm_35
+      .address_size 64
+
+      // Cray Fortran : Version 8.3.0  (u83050f83142i83148p83243a83009z83243)
+
+      .file	1	"/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier1.f"
+
+      .entry opcolv_acc_$ck_L5356_1(
+               .param .s64 $$arg_ptr_acc_c_t6_t29,
+               .param .s64 $$arg_ptr_acc_a3_t8_t30,
+               .param .s64 $$arg_ptr_acc_a2_t10_t31,
+               .param .s64 $$arg_ptr_acc_a1_t12_t32 )
+      {
+      .reg .pred %p<2>;
+      .reg .b32  %b<2>;
+      .reg .s32  %s<2>;
+      .reg .s64  %sd<10>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<8>;
+      //
+      .loc                 1  5356  0
+      .loc                 1  5357  0
+      mov.u32              %u1, %ntid.x;               // navier1.f:5357
+      mov.u32              %u2, %ctaid.x;              // navier1.f:5357
+      mov.u32              %u3, %tid.x;                // navier1.f:5357
+      mad.lo.u32           %s1, %u1, %u2, %u3;         // navier1.f:5357 : $$id_t15
+      setp.ge.s32          %p1, %s1, 410000;           // navier1.f:5357
+      @%p1 bra             $opcolv_acc_$ck_L5356_1__l66__;// navier1.f:5357
+      .loc                 1  5358  0
+      ld.param.s64         %sd1, [$$arg_ptr_acc_c_t6_t29];// navier1.f:5358 : $$arg_ptr_acc_c_t6_t29
+      shl.b32              %b1, %s1, 3;                // navier1.f:5358
+      cvt.s64.s32          %sd2, %b1;                  // navier1.f:5358
+      add.s64              %sd3, %sd1, %sd2;           // navier1.f:5358
+      ld.global.nc.f64     %fd1, [%sd3];               // navier1.f:5358 : 0[$$arg_ptr_acc_c_t6_t29,$$id_t15,ex].L
+      ld.param.s64         %sd4, [$$arg_ptr_acc_a1_t12_t32];// navier1.f:5358 : $$arg_ptr_acc_a1_t12_t32
+      add.s64              %sd5, %sd4, %sd2;           // navier1.f:5358
+      ld.global.f64        %fd2, [%sd5];               // navier1.f:5358 : 0[$$arg_ptr_acc_a1_t12_t32,$$id_t15].L
+      mul.rn.f64           %fd3, %fd2, %fd1;           // navier1.f:5358
+      st.global.f64        [%sd5], %fd3;               // navier1.f:5358 : 0[$$arg_ptr_acc_a1_t12_t32,$$id_t15].L
+      .loc                 1  5359  0
+      ld.param.s64         %sd6, [$$arg_ptr_acc_a2_t10_t31];// navier1.f:5359 : $$arg_ptr_acc_a2_t10_t31
+      add.s64              %sd7, %sd6, %sd2;           // navier1.f:5359
+      ld.global.f64        %fd4, [%sd7];               // navier1.f:5359 : 0[$$arg_ptr_acc_a2_t10_t31,$$id_t15].L
+      mul.rn.f64           %fd5, %fd4, %fd1;           // navier1.f:5359
+      st.global.f64        [%sd7], %fd5;               // navier1.f:5359 : 0[$$arg_ptr_acc_a2_t10_t31,$$id_t15].L
+      .loc                 1  5360  0
+      ld.param.s64         %sd8, [$$arg_ptr_acc_a3_t8_t30];// navier1.f:5360 : $$arg_ptr_acc_a3_t8_t30
+      add.s64              %sd9, %sd8, %sd2;           // navier1.f:5360
+      ld.global.f64        %fd6, [%sd9];               // navier1.f:5360 : 0[$$arg_ptr_acc_a3_t8_t30,$$id_t15].L
+      mul.rn.f64           %fd7, %fd6, %fd1;           // navier1.f:5360
+      st.global.f64        [%sd9], %fd7;               // navier1.f:5360 : 0[$$arg_ptr_acc_a3_t8_t30,$$id_t15].L
+$opcolv_acc_$ck_L5356_1__l66__:
+      exit;
+      } // opcolv_acc_$ck_L5356_1
+
+
+      .entry wgradm1_acc_$ck_L5554_2(
+               .param .s64 $$arg_ptr_acc_tzm1_t11_t134,
+               .param .s64 $$arg_ptr_acc_szm1_t13_t135,
+               .param .s64 $$arg_ptr_acc_rzm1_t15_t136,
+               .param .s64 $$arg_ptr_acc_tym1_t17_t137,
+               .param .s64 $$arg_ptr_acc_sym1_t19_t138,
+               .param .s64 $$arg_ptr_acc_rym1_t21_t139,
+               .param .s64 $$arg_ptr_acc_txm1_t23_t140,
+               .param .s64 $$arg_ptr_acc_sxm1_t25_t141,
+               .param .s64 $$arg_ptr_acc_rxm1_t27_t142,
+               .param .s64 $$arg_ptr_acc_w3m1_t29_t143,
+               .param .s64 $$arg_ptr_acc_u_t31_t144,
+               .param .s64 $$arg_ptr_acc_uz_t33_t145,
+               .param .s64 $$arg_ptr_acc_uy_t35_t146,
+               .param .s64 $$arg_ptr_acc_ux_t37_t147,
+               .param .s64 $$arg_ptr_acc_ut_t39_t148,
+               .param .s64 $$arg_ptr_acc_us_t41_t149,
+               .param .s64 $$arg_ptr_acc_ur_t43_t150,
+               .param .s64 $$arg_ptr_acc_dxm1_t45_t151,
+               .param .s32 $$_arg_acc_nx1_t49_t152,
+               .param .s32 $$_arg_acc_ny1_t50_t153,
+               .param .s32 $$_arg_acc_nz1_t51_t154,
+               .param .s32 $$_arg_acc_seat_nel_t52_t155 )
+      {
+      .reg .pred %p<11>;
+      .reg .b32  %b<30>;
+      .reg .s32  %s<65>;
+      .reg .s64  %sd<98>;
+      .reg .u32  %u<6>;
+      .reg .f64  %fd<59>;
+      //
+      .loc                 1  5554  0
+      .loc                 1  5555  0
+      ld.param.s32         %s4, [$$_arg_acc_seat_nel_t52_t155];// navier1.f:5555 : $$mr_nel_85_t99
+      setp.le.s32          %p1, %s4, 0;                // navier1.f:5555
+      @%p1 bra             $wgradm1_acc_$ck_L5554_2__l91__;// navier1.f:5555
+      .loc                 1  5557  0
+      ld.param.s32         %s3, [$$_arg_acc_nz1_t51_t154];// navier1.f:5557 : $$mr_nz1_86_t100
+      setp.le.s32          %p2, %s3, 0;                // navier1.f:5557
+      @%p2 bra             $wgradm1_acc_$ck_L5554_2__l91__;// navier1.f:5557
+      .loc                 1  5558  0
+      ld.param.s32         %s2, [$$_arg_acc_ny1_t50_t153];// navier1.f:5558 : $$mr_ny1_87_t101
+      setp.le.s32          %p3, %s2, 0;                // navier1.f:5558
+      @%p3 bra             $wgradm1_acc_$ck_L5554_2__l91__;// navier1.f:5558
+      .loc                 1  5559  0
+      ld.param.s32         %s1, [$$_arg_acc_nx1_t49_t152];// navier1.f:5559 : $$mr_nx1_88_t102
+      setp.le.s32          %p4, %s1, 0;                // navier1.f:5559
+      @%p4 bra             $wgradm1_acc_$ck_L5554_2__l91__;// navier1.f:5559
+      .loc                 1  5559  0
+      mov.u32              %u1, %ntid.x;               // navier1.f:5559
+      mov.u32              %u2, %nctaid.x;             // navier1.f:5559
+      mul.lo.u32           %s23, %u1, %u2;             // navier1.f:5559 : $$numthrds_t47
+      mov.u32              %u3, %ctaid.x;              // navier1.f:5559
+      mov.u32              %u4, %tid.x;                // navier1.f:5559
+      mad.lo.u32           %u5, %u1, %u3, %u4;         // navier1.f:5559
+      mov.s32              %s8, %u5;                   // navier1.f:5559 : $$i_l5559_132_t83
+      mov.s32              %s5, %s1;                   // navier1.f:5559 : $$lcs_nx1_24_t106
+      mul.lo.s32           %s6, %s2, %s1;              // navier1.f:5559 : $$lcs_ny1_25_t107
+      mul.lo.s32           %s25, %s3, %s2;             // navier1.f:5559
+      mul.lo.s32           %s26, %s4, %s1;             // navier1.f:5559
+      mul.lo.s32           %s24, %s25, %s26;           // navier1.f:5559 : $$lis_b11_t98
+      setp.ge.s32          %p5, %u5, %s24;             // navier1.f:5559
+      @%p5 bra             $wgradm1_acc_$ck_L5554_2__l91__;// navier1.f:5559
+      .loc                 1  5559  0
+      mul.lo.s32           %s27, %s3, %s5;             // navier1.f:5559
+      mul.lo.s32           %s7, %s2, %s27;             // navier1.f:5559 : $$lis_b6_t93
+      mul.lo.s32           %s9, %s3, %s6;              // navier1.f:5559 : $$lis_b7_t94
+      mul.lo.s32           %s10, %s2, %s1;             // navier1.f:5559 : $$lis_b8_t95
+      mul.lo.s32           %s11, %s5, %s2;             // navier1.f:5559 : $$lis_b9_t96
+      mov.s32              %s12, %s5;                  // navier1.f:5559 : $$lis_b10_t97
+$wgradm1_acc_$ck_L5554_2__l32__:
+      .loc                 1  5559  0
+      div.s32              %s28, %s8, %s7;             // navier1.f:5559
+      neg.s32              %s29, %s9;                  // navier1.f:5559
+      mad.lo.s32           %s30, %s28, %s29, %s8;      // navier1.f:5559
+      div.s32              %s31, %s30, %s10;           // navier1.f:5559
+      neg.s32              %s32, %s11;                 // navier1.f:5559
+      mad.lo.s32           %s33, %s31, %s32, %s30;     // navier1.f:5559
+      div.s32              %s34, %s33, %s12;           // navier1.f:5559
+      neg.s32              %s35, %s12;                 // navier1.f:5559
+      mad.lo.s32           %s36, %s34, %s35, %s33;     // navier1.f:5559
+      .loc                 1  5560  0
+      mul.lo.s32           %s37, %s28, 1000;           // navier1.f:5560
+      mul.lo.s32           %s38, %s31, 100;            // navier1.f:5560
+      add.s32              %s39, %s36, %s38;           // navier1.f:5560
+      mul.lo.s32           %s40, %s34, 10;             // navier1.f:5560
+      add.s32              %s22, %s39, %s40;           // navier1.f:5560 : $$cs_0_t114
+      add.s32              %s21, %s37, %s22;           // navier1.f:5560 : $$cs_1_t115
+      ld.param.s64         %sd3, [$$arg_ptr_acc_ur_t43_t150];// navier1.f:5560 : $$arg_ptr_acc_ur_t43_t150
+      shl.b32              %b1, %s21, 3;               // navier1.f:5560
+      cvt.s64.s32          %sd4, %b1;                  // navier1.f:5560
+      add.s64              %sd5, %sd3, %sd4;           // navier1.f:5560
+      .loc                 1  5564  0
+      mov.f64              %fd2, 0d0000000000000000;   // navier1.f:5564 : $sca_us_i0
+      mov.f64              %fd3, 0d0000000000000000;   // navier1.f:5564 : $sca_ut_i1
+      mov.f64              %fd1, 0d0000000000000000;   // navier1.f:5564 : $sca_ur_i2
+      mov.s32              %s15, 0;                    // navier1.f:5564 : $$i_l5564_126_t82
+      .loc                 1  5565  0
+      mov.s32              %s16, %s36;                 // navier1.f:5565 : $$sr_e3_t85
+      .loc                 1  5566  0
+      mov.s32              %s18, %s34;                 // navier1.f:5566 : $$sr_e4_t86
+      add.s32              %s17, %s37, %s39;           // navier1.f:5566 : $$sr_e5_t87
+      .loc                 1  5567  0
+      mov.s32              %s20, %s31;                 // navier1.f:5567 : $$sr_e6_t88
+      add.s32              %s41, %s36, %s37;           // navier1.f:5567
+      add.s32              %s19, %s40, %s41;           // navier1.f:5567 : $$sr_e8_t90
+      .loc                 1  5565  0
+      add.s32              %s42, %s37, %s38;           // navier1.f:5565
+      add.s32              %s14, %s40, %s42;           // navier1.f:5565 : $$lis_b4_t91
+      .loc                 1  5568  0
+      mov.s32              %s13, %s1;                  // navier1.f:5568 : $$lis_b5_t92
+      cvt.s64.s32          %sd6, %s1;                  // navier1.f:5568
+      setp.gt.s64          %p6, 4, %sd6;               // navier1.f:5568
+      .loc                 1  5560  0
+      st.global.f64        [%sd5], 0d0000000000000000; // navier1.f:5560 : 0[$$arg_ptr_acc_ur_t43_t150,$$cs_1_t115].L
+      .loc                 1  5561  0
+      ld.param.s64         %sd7, [$$arg_ptr_acc_us_t41_t149];// navier1.f:5561 : $$arg_ptr_acc_us_t41_t149
+      add.s64              %sd8, %sd7, %sd4;           // navier1.f:5561
+      st.global.f64        [%sd8], 0d0000000000000000; // navier1.f:5561 : 0[$$arg_ptr_acc_us_t41_t149,$$cs_1_t115].L
+      .loc                 1  5562  0
+      ld.param.s64         %sd9, [$$arg_ptr_acc_ut_t39_t148];// navier1.f:5562 : $$arg_ptr_acc_ut_t39_t148
+      add.s64              %sd10, %sd9, %sd4;          // navier1.f:5562
+      st.global.f64        [%sd10], 0d0000000000000000;// navier1.f:5562 : 0[$$arg_ptr_acc_ut_t39_t148,$$cs_1_t115].L
+      .loc                 1  5568  0
+      @%p6 bra             $wgradm1_acc_$ck_L5554_2__l40__;// navier1.f:5568
+      .loc                 1  5564  0
+      shr.s32              %s43, %s13, 1;              // navier1.f:5564
+      shr.b32              %b2, %s43, 30;              // navier1.f:5564
+      add.s32              %s44, %s13, %b2;            // navier1.f:5564
+      and.b32              %b3, %s44, 0xfffffffffffffffc;// navier1.f:5564
+      add.s32              %s45, %b3, 3;               // navier1.f:5564
+      shr.b32              %b4, %s45, 2;               // navier1.f:5564
+      neg.s32              %s46, %b4;                  // navier1.f:5564
+      cvt.s64.s32          %sd1, %s46;                 // navier1.f:5564 : $$induc01_s62_t122
+$wgradm1_acc_$ck_L5554_2__l36__:
+      .loc                 1  5565  0
+      add.s32              %s47, %s15, %s14;           // navier1.f:5565
+      shl.b32              %b5, %s47, 3;               // navier1.f:5565
+      cvt.s64.s32          %sd11, %b5;                 // navier1.f:5565
+      ld.param.s64         %sd12, [$$arg_ptr_acc_u_t31_t144];// navier1.f:5565 : $$arg_ptr_acc_u_t31_t144
+      add.s64              %sd13, %sd12, %sd11;        // navier1.f:5565
+      shl.b32              %b6, %s16, 3;               // navier1.f:5565
+      cvt.s64.s32          %sd14, %b6;                 // navier1.f:5565
+      ld.param.s64         %sd15, [$$arg_ptr_acc_dxm1_t45_t151];// navier1.f:5565 : $$arg_ptr_acc_dxm1_t45_t151
+      add.s64              %sd16, %sd15, %sd14;        // navier1.f:5565
+      ld.global.nc.f64     %fd4, [%sd16];              // navier1.f:5565 : 0[$$arg_ptr_acc_dxm1_t45_t151,$$sr_e3_t85,ex].L
+      ld.global.nc.f64     %fd5, [%sd13];              // navier1.f:5565 : 0[$$arg_ptr_acc_u_t31_t144,$$lcs_32_t113,ex].L
+      mad.rn.f64           %fd6, %fd4, %fd5, %fd1;     // navier1.f:5565
+      .loc                 1  5566  0
+      shl.b32              %b7, %s17, 3;               // navier1.f:5566
+      cvt.s64.s32          %sd17, %b7;                 // navier1.f:5566
+      add.s64              %sd18, %sd12, %sd17;        // navier1.f:5566
+      shl.b32              %b8, %s18, 3;               // navier1.f:5566
+      cvt.s64.s32          %sd19, %b8;                 // navier1.f:5566
+      add.s64              %sd20, %sd15, %sd19;        // navier1.f:5566
+      ld.global.nc.f64     %fd7, [%sd20];              // navier1.f:5566 : 0[$$arg_ptr_acc_dxm1_t45_t151,$$sr_e4_t86,ex].L
+      ld.global.nc.f64     %fd8, [%sd18];              // navier1.f:5566 : 0[$$arg_ptr_acc_u_t31_t144,$$sr_e5_t87,ex].L
+      mad.rn.f64           %fd9, %fd7, %fd8, %fd2;     // navier1.f:5566
+      .loc                 1  5567  0
+      shl.b32              %b9, %s19, 3;               // navier1.f:5567
+      cvt.s64.s32          %sd21, %b9;                 // navier1.f:5567
+      add.s64              %sd22, %sd12, %sd21;        // navier1.f:5567
+      shl.b32              %b10, %s20, 3;              // navier1.f:5567
+      cvt.s64.s32          %sd23, %b10;                // navier1.f:5567
+      add.s64              %sd24, %sd15, %sd23;        // navier1.f:5567
+      ld.global.nc.f64     %fd10, [%sd24];             // navier1.f:5567 : 0[$$arg_ptr_acc_dxm1_t45_t151,$$sr_e6_t88,ex].L
+      ld.global.nc.f64     %fd11, [%sd22];             // navier1.f:5567 : 0[$$arg_ptr_acc_u_t31_t144,$$sr_e8_t90,ex].L
+      mad.rn.f64           %fd12, %fd10, %fd11, %fd3;  // navier1.f:5567
+      .loc                 1  5565  0
+      add.s32              %s48, %s16, 10;             // navier1.f:5565
+      .loc                 1  5566  0
+      add.s32              %s49, %s18, 10;             // navier1.f:5566
+      add.s32              %s50, %s17, 10;             // navier1.f:5566
+      .loc                 1  5567  0
+      add.s32              %s51, %s20, 10;             // navier1.f:5567
+      add.s32              %s52, %s19, 100;            // navier1.f:5567
+      .loc                 1  5565  0
+      add.s64              %sd25, %sd12, %sd11;        // navier1.f:5565
+      ld.global.nc.f64     %fd13, [%sd25 + 8];         // navier1.f:5565 : 1[$$arg_ptr_acc_u_t31_t144,$$lcs_32_t113,ex].L
+      ld.global.nc.f64     %fd14, [%sd16 + 80];        // navier1.f:5565 : 0[$$arg_ptr_acc_dxm1_t45_t151,$sr_s13,ex].L
+      mad.rn.f64           %fd1, %fd14, %fd13, %fd6;   // navier1.f:5565 : $sca_ur_i2
+      .loc                 1  5566  0
+      ld.global.nc.f64     %fd15, [%sd20 + 80];        // navier1.f:5566 : 0[$$arg_ptr_acc_dxm1_t45_t151,$sr_s15,ex].L
+      ld.global.nc.f64     %fd16, [%sd18 + 80];        // navier1.f:5566 : 0[$$arg_ptr_acc_u_t31_t144,$sr_s14,ex].L
+      mad.rn.f64           %fd2, %fd15, %fd16, %fd9;   // navier1.f:5566 : $sca_us_i0
+      .loc                 1  5567  0
+      ld.global.nc.f64     %fd17, [%sd24 + 80];        // navier1.f:5567 : 0[$$arg_ptr_acc_dxm1_t45_t151,$sr_s17,ex].L
+      ld.global.nc.f64     %fd18, [%sd22 + 800];       // navier1.f:5567 : 0[$$arg_ptr_acc_u_t31_t144,$sr_s16,ex].L
+      mad.rn.f64           %fd3, %fd17, %fd18, %fd12;  // navier1.f:5567 : $sca_ut_i1
+      .loc                 1  5565  0
+      add.s32              %s53, %s48, 10;             // navier1.f:5565
+      .loc                 1  5566  0
+      add.s32              %s54, %s49, 10;             // navier1.f:5566
+      add.s32              %s55, %s50, 10;             // navier1.f:5566
+      .loc                 1  5567  0
+      add.s32              %s56, %s51, 10;             // navier1.f:5567
+      add.s32              %s57, %s52, 100;            // navier1.f:5567
+      .loc                 1  5565  0
+      shl.b32              %b11, %s48, 3;              // navier1.f:5565
+      cvt.s64.s32          %sd26, %b11;                // navier1.f:5565
+      add.s64              %sd27, %sd15, %sd26;        // navier1.f:5565
+      ld.global.nc.f64     %fd19, [%sd27 + 80];        // navier1.f:5565 : 0[$$arg_ptr_acc_dxm1_t45_t151,$sr_s18,ex].L
+      ld.global.nc.f64     %fd20, [%sd25 + 16];        // navier1.f:5565 : 2[$$arg_ptr_acc_u_t31_t144,$$lcs_32_t113,ex].L
+      mad.rn.f64           %fd1, %fd19, %fd20, %fd1;   // navier1.f:5565 : $sca_ur_i2
+      .loc                 1  5566  0
+      shl.b32              %b12, %s49, 3;              // navier1.f:5566
+      cvt.s64.s32          %sd28, %b12;                // navier1.f:5566
+      add.s64              %sd29, %sd15, %sd28;        // navier1.f:5566
+      shl.b32              %b13, %s50, 3;              // navier1.f:5566
+      cvt.s64.s32          %sd30, %b13;                // navier1.f:5566
+      add.s64              %sd31, %sd12, %sd30;        // navier1.f:5566
+      ld.global.nc.f64     %fd21, [%sd31 + 80];        // navier1.f:5566 : 0[$$arg_ptr_acc_u_t31_t144,$sr_s19,ex].L
+      ld.global.nc.f64     %fd22, [%sd29 + 80];        // navier1.f:5566 : 0[$$arg_ptr_acc_dxm1_t45_t151,$sr_s20,ex].L
+      mad.rn.f64           %fd2, %fd22, %fd21, %fd2;   // navier1.f:5566 : $sca_us_i0
+      .loc                 1  5567  0
+      shl.b32              %b14, %s51, 3;              // navier1.f:5567
+      cvt.s64.s32          %sd32, %b14;                // navier1.f:5567
+      add.s64              %sd33, %sd15, %sd32;        // navier1.f:5567
+      shl.b32              %b15, %s52, 3;              // navier1.f:5567
+      cvt.s64.s32          %sd34, %b15;                // navier1.f:5567
+      add.s64              %sd35, %sd12, %sd34;        // navier1.f:5567
+      ld.global.nc.f64     %fd23, [%sd35 + 800];       // navier1.f:5567 : 0[$$arg_ptr_acc_u_t31_t144,$sr_s21,ex].L
+      ld.global.nc.f64     %fd24, [%sd33 + 80];        // navier1.f:5567 : 0[$$arg_ptr_acc_dxm1_t45_t151,$sr_s22,ex].L
+      mad.rn.f64           %fd3, %fd24, %fd23, %fd3;   // navier1.f:5567 : $sca_ut_i1
+      .loc                 1  5565  0
+      add.s32              %s58, %s53, 10;             // navier1.f:5565
+      .loc                 1  5566  0
+      add.s32              %s59, %s54, 10;             // navier1.f:5566
+      add.s32              %s60, %s55, 10;             // navier1.f:5566
+      .loc                 1  5567  0
+      add.s32              %s61, %s56, 10;             // navier1.f:5567
+      add.s32              %s62, %s57, 100;            // navier1.f:5567
+      .loc                 1  5565  0
+      shl.b32              %b16, %s53, 3;              // navier1.f:5565
+      cvt.s64.s32          %sd36, %b16;                // navier1.f:5565
+      add.s64              %sd37, %sd15, %sd36;        // navier1.f:5565
+      shl.b32              %b17, %s47, 3;              // navier1.f:5565
+      cvt.s64.s32          %sd38, %b17;                // navier1.f:5565
+      add.s64              %sd39, %sd12, %sd38;        // navier1.f:5565
+      ld.global.nc.f64     %fd25, [%sd39 + 24];        // navier1.f:5565 : 3[$$arg_ptr_acc_u_t31_t144,$$lcs_32_t113,ex].L
+      ld.global.nc.f64     %fd26, [%sd37 + 80];        // navier1.f:5565 : 0[$$arg_ptr_acc_dxm1_t45_t151,$sr_s23,ex].L
+      mad.rn.f64           %fd1, %fd26, %fd25, %fd1;   // navier1.f:5565 : $sca_ur_i2
+      .loc                 1  5566  0
+      shl.b32              %b18, %s54, 3;              // navier1.f:5566
+      cvt.s64.s32          %sd40, %b18;                // navier1.f:5566
+      add.s64              %sd41, %sd15, %sd40;        // navier1.f:5566
+      shl.b32              %b19, %s55, 3;              // navier1.f:5566
+      cvt.s64.s32          %sd42, %b19;                // navier1.f:5566
+      add.s64              %sd43, %sd12, %sd42;        // navier1.f:5566
+      ld.global.nc.f64     %fd27, [%sd43 + 80];        // navier1.f:5566 : 0[$$arg_ptr_acc_u_t31_t144,$sr_s24,ex].L
+      ld.global.nc.f64     %fd28, [%sd41 + 80];        // navier1.f:5566 : 0[$$arg_ptr_acc_dxm1_t45_t151,$sr_s25,ex].L
+      mad.rn.f64           %fd2, %fd28, %fd27, %fd2;   // navier1.f:5566 : $sca_us_i0
+      .loc                 1  5567  0
+      shl.b32              %b20, %s56, 3;              // navier1.f:5567
+      cvt.s64.s32          %sd44, %b20;                // navier1.f:5567
+      add.s64              %sd45, %sd15, %sd44;        // navier1.f:5567
+      shl.b32              %b21, %s57, 3;              // navier1.f:5567
+      cvt.s64.s32          %sd46, %b21;                // navier1.f:5567
+      add.s64              %sd47, %sd12, %sd46;        // navier1.f:5567
+      ld.global.nc.f64     %fd29, [%sd47 + 800];       // navier1.f:5567 : 0[$$arg_ptr_acc_u_t31_t144,$sr_s26,ex].L
+      ld.global.nc.f64     %fd30, [%sd45 + 80];        // navier1.f:5567 : 0[$$arg_ptr_acc_dxm1_t45_t151,$sr_s27,ex].L
+      mad.rn.f64           %fd3, %fd30, %fd29, %fd3;   // navier1.f:5567 : $sca_ut_i1
+      .loc                 1  5565  0
+      add.s32              %s16, %s58, 10;             // navier1.f:5565 : $$sr_e3_t85
+      .loc                 1  5566  0
+      add.s32              %s18, %s59, 10;             // navier1.f:5566 : $$sr_e4_t86
+      add.s32              %s17, %s60, 10;             // navier1.f:5566 : $$sr_e5_t87
+      .loc                 1  5567  0
+      add.s32              %s20, %s61, 10;             // navier1.f:5567 : $$sr_e6_t88
+      add.s32              %s19, %s62, 100;            // navier1.f:5567 : $$sr_e8_t90
+      .loc                 1  5568  0
+      add.s32              %s15, %s15, 4;              // navier1.f:5568 : $$i_l5564_126_t82
+      .loc                 1  5564  0
+      add.s64              %sd1, %sd1, 1;              // navier1.f:5564 : $$induc01_s62_t122
+      setp.lt.s64          %p7, %sd1, 0;               // navier1.f:5564
+      @%p7 bra             $wgradm1_acc_$ck_L5554_2__l36__;// navier1.f:5564
+$wgradm1_acc_$ck_L5554_2__l40__:
+      .loc                 1  5564  0
+      cvt.s64.s32          %sd48, %s15;                // navier1.f:5564
+      cvt.s64.s32          %sd49, %s13;                // navier1.f:5564
+      setp.ge.s64          %p8, %sd48, %sd49;          // navier1.f:5564
+      @%p8 bra             $wgradm1_acc_$ck_L5554_2__l49__;// navier1.f:5564
+      .loc                 1  5564  0
+      sub.s32              %s63, %s15, %s13;           // navier1.f:5564
+      cvt.s64.s32          %sd2, %s63;                 // navier1.f:5564 : $$induc01_s69_t129
+$wgradm1_acc_$ck_L5554_2__l43__:
+      .loc                 1  5565  0
+      add.s32              %s64, %s15, %s14;           // navier1.f:5565
+      shl.b32              %b22, %s64, 3;              // navier1.f:5565
+      cvt.s64.s32          %sd50, %b22;                // navier1.f:5565
+      ld.param.s64         %sd51, [$$arg_ptr_acc_u_t31_t144];// navier1.f:5565 : $$arg_ptr_acc_u_t31_t144
+      add.s64              %sd52, %sd51, %sd50;        // navier1.f:5565
+      shl.b32              %b23, %s16, 3;              // navier1.f:5565
+      cvt.s64.s32          %sd53, %b23;                // navier1.f:5565
+      ld.param.s64         %sd54, [$$arg_ptr_acc_dxm1_t45_t151];// navier1.f:5565 : $$arg_ptr_acc_dxm1_t45_t151
+      add.s64              %sd55, %sd54, %sd53;        // navier1.f:5565
+      ld.global.nc.f64     %fd31, [%sd55];             // navier1.f:5565 : 0[$$arg_ptr_acc_dxm1_t45_t151,$$sr_e3_t85,ex].L
+      ld.global.nc.f64     %fd32, [%sd52];             // navier1.f:5565 : 0[$$arg_ptr_acc_u_t31_t144,$$i_l5564_126_t82 + $$lis_b4_t91,ex].L
+      mad.rn.f64           %fd1, %fd31, %fd32, %fd1;   // navier1.f:5565 : $sca_ur_i2
+      .loc                 1  5566  0
+      shl.b32              %b24, %s17, 3;              // navier1.f:5566
+      cvt.s64.s32          %sd56, %b24;                // navier1.f:5566
+      add.s64              %sd57, %sd51, %sd56;        // navier1.f:5566
+      shl.b32              %b25, %s18, 3;              // navier1.f:5566
+      cvt.s64.s32          %sd58, %b25;                // navier1.f:5566
+      add.s64              %sd59, %sd54, %sd58;        // navier1.f:5566
+      ld.global.nc.f64     %fd33, [%sd59];             // navier1.f:5566 : 0[$$arg_ptr_acc_dxm1_t45_t151,$$sr_e4_t86,ex].L
+      ld.global.nc.f64     %fd34, [%sd57];             // navier1.f:5566 : 0[$$arg_ptr_acc_u_t31_t144,$$sr_e5_t87,ex].L
+      mad.rn.f64           %fd2, %fd33, %fd34, %fd2;   // navier1.f:5566 : $sca_us_i0
+      .loc                 1  5567  0
+      shl.b32              %b26, %s19, 3;              // navier1.f:5567
+      cvt.s64.s32          %sd60, %b26;                // navier1.f:5567
+      add.s64              %sd61, %sd51, %sd60;        // navier1.f:5567
+      shl.b32              %b27, %s20, 3;              // navier1.f:5567
+      cvt.s64.s32          %sd62, %b27;                // navier1.f:5567
+      add.s64              %sd63, %sd54, %sd62;        // navier1.f:5567
+      ld.global.nc.f64     %fd35, [%sd63];             // navier1.f:5567 : 0[$$arg_ptr_acc_dxm1_t45_t151,$$sr_e6_t88,ex].L
+      ld.global.nc.f64     %fd36, [%sd61];             // navier1.f:5567 : 0[$$arg_ptr_acc_u_t31_t144,$$sr_e8_t90,ex].L
+      mad.rn.f64           %fd3, %fd35, %fd36, %fd3;   // navier1.f:5567 : $sca_ut_i1
+      .loc                 1  5565  0
+      add.s32              %s16, %s16, 10;             // navier1.f:5565 : $$sr_e3_t85
+      .loc                 1  5566  0
+      add.s32              %s18, %s18, 10;             // navier1.f:5566 : $$sr_e4_t86
+      add.s32              %s17, %s17, 10;             // navier1.f:5566 : $$sr_e5_t87
+      .loc                 1  5567  0
+      add.s32              %s20, %s20, 10;             // navier1.f:5567 : $$sr_e6_t88
+      add.s32              %s19, %s19, 100;            // navier1.f:5567 : $$sr_e8_t90
+      .loc                 1  5568  0
+      add.s32              %s15, %s15, 1;              // navier1.f:5568 : $$i_l5564_126_t82
+      .loc                 1  5564  0
+      add.s64              %sd2, %sd2, 1;              // navier1.f:5564 : $$induc01_s69_t129
+      .loc                 1  5568  0
+      setp.lt.s64          %p9, %sd2, 0;               // navier1.f:5568
+      @%p9 bra             $wgradm1_acc_$ck_L5554_2__l43__;// navier1.f:5568
+$wgradm1_acc_$ck_L5554_2__l49__:
+      .loc                 1  5564  0
+      ld.param.s64         %sd64, [$$arg_ptr_acc_ur_t43_t150];// navier1.f:5564 : $$arg_ptr_acc_ur_t43_t150
+      shl.b32              %b28, %s21, 3;              // navier1.f:5564
+      cvt.s64.s32          %sd65, %b28;                // navier1.f:5564
+      add.s64              %sd66, %sd64, %sd65;        // navier1.f:5564
+      .loc                 1  5569  0
+      shl.b32              %b29, %s22, 3;              // navier1.f:5569
+      cvt.s64.s32          %sd67, %b29;                // navier1.f:5569
+      .loc                 1  5580  0
+      add.s32              %s8, %s23, %s8;             // navier1.f:5580 : $$i_l5559_132_t83
+      setp.lt.s32          %p10, %s8, %s24;            // navier1.f:5580
+      .loc                 1  5564  0
+      st.global.f64        [%sd66], %fd1;              // navier1.f:5564 : 0[$$arg_ptr_acc_ur_t43_t150,$$cs_1_t115].L
+      ld.param.s64         %sd68, [$$arg_ptr_acc_ut_t39_t148];// navier1.f:5564 : $$arg_ptr_acc_ut_t39_t148
+      add.s64              %sd69, %sd68, %sd65;        // navier1.f:5564
+      st.global.f64        [%sd69], %fd3;              // navier1.f:5564 : 0[$$arg_ptr_acc_ut_t39_t148,$$cs_1_t115].L
+      ld.param.s64         %sd70, [$$arg_ptr_acc_us_t41_t149];// navier1.f:5564 : $$arg_ptr_acc_us_t41_t149
+      add.s64              %sd71, %sd70, %sd65;        // navier1.f:5564
+      st.global.f64        [%sd71], %fd2;              // navier1.f:5564 : 0[$$arg_ptr_acc_us_t41_t149,$$cs_1_t115].L
+      .loc                 1  5569  0
+      ld.param.s64         %sd72, [$$arg_ptr_acc_w3m1_t29_t143];// navier1.f:5569 : $$arg_ptr_acc_w3m1_t29_t143
+      ld.param.s64         %sd73, [$$arg_ptr_acc_txm1_t23_t140];// navier1.f:5569 : $$arg_ptr_acc_txm1_t23_t140
+      ld.param.s64         %sd74, [$$arg_ptr_acc_rxm1_t27_t142];// navier1.f:5569 : $$arg_ptr_acc_rxm1_t27_t142
+      ld.param.s64         %sd75, [$$arg_ptr_acc_sxm1_t25_t141];// navier1.f:5569 : $$arg_ptr_acc_sxm1_t25_t141
+      ld.param.s64         %sd76, [$$arg_ptr_acc_ux_t37_t147];// navier1.f:5569 : $$arg_ptr_acc_ux_t37_t147
+      add.s64              %sd77, %sd72, %sd67;        // navier1.f:5569
+      ld.global.nc.f64     %fd37, [%sd77];             // navier1.f:5569 : 0[$$arg_ptr_acc_w3m1_t29_t143,$$cs_0_t114,ex].L
+      add.s64              %sd78, %sd73, %sd65;        // navier1.f:5569
+      ld.global.nc.f64     %fd38, [%sd78];             // navier1.f:5569 : 0[$$arg_ptr_acc_txm1_t23_t140,$$cs_1_t115,ex].L
+      add.s64              %sd79, %sd74, %sd65;        // navier1.f:5569
+      ld.global.nc.f64     %fd39, [%sd79];             // navier1.f:5569 : 0[$$arg_ptr_acc_rxm1_t27_t142,$$cs_1_t115,ex].L
+      add.s64              %sd80, %sd75, %sd65;        // navier1.f:5569
+      ld.global.nc.f64     %fd40, [%sd80];             // navier1.f:5569 : 0[$$arg_ptr_acc_sxm1_t25_t141,$$cs_1_t115,ex].L
+      mul.rn.f64           %fd41, %fd2, %fd40;         // navier1.f:5569
+      mad.rn.f64           %fd42, %fd1, %fd39, %fd41;  // navier1.f:5569
+      mad.rn.f64           %fd43, %fd3, %fd38, %fd42;  // navier1.f:5569
+      mul.rn.f64           %fd44, %fd37, %fd43;        // navier1.f:5569
+      add.s64              %sd81, %sd76, %sd65;        // navier1.f:5569
+      st.global.f64        [%sd81], %fd44;             // navier1.f:5569 : 0[$$arg_ptr_acc_ux_t37_t147,$$cs_1_t115,na].L
+      .loc                 1  5573  0
+      ld.param.s64         %sd82, [$$arg_ptr_acc_tym1_t17_t137];// navier1.f:5573 : $$arg_ptr_acc_tym1_t17_t137
+      ld.param.s64         %sd83, [$$arg_ptr_acc_rym1_t21_t139];// navier1.f:5573 : $$arg_ptr_acc_rym1_t21_t139
+      ld.param.s64         %sd84, [$$arg_ptr_acc_sym1_t19_t138];// navier1.f:5573 : $$arg_ptr_acc_sym1_t19_t138
+      ld.param.s64         %sd85, [$$arg_ptr_acc_uy_t35_t146];// navier1.f:5573 : $$arg_ptr_acc_uy_t35_t146
+      add.s64              %sd86, %sd82, %sd65;        // navier1.f:5573
+      ld.global.nc.f64     %fd45, [%sd86];             // navier1.f:5573 : 0[$$arg_ptr_acc_tym1_t17_t137,$$cs_1_t115,ex].L
+      add.s64              %sd87, %sd83, %sd65;        // navier1.f:5573
+      ld.global.nc.f64     %fd46, [%sd87];             // navier1.f:5573 : 0[$$arg_ptr_acc_rym1_t21_t139,$$cs_1_t115,ex].L
+      add.s64              %sd88, %sd84, %sd65;        // navier1.f:5573
+      ld.global.nc.f64     %fd47, [%sd88];             // navier1.f:5573 : 0[$$arg_ptr_acc_sym1_t19_t138,$$cs_1_t115,ex].L
+      mul.rn.f64           %fd48, %fd2, %fd47;         // navier1.f:5573
+      mad.rn.f64           %fd49, %fd1, %fd46, %fd48;  // navier1.f:5573
+      mad.rn.f64           %fd50, %fd3, %fd45, %fd49;  // navier1.f:5573
+      mul.rn.f64           %fd51, %fd37, %fd50;        // navier1.f:5573
+      add.s64              %sd89, %sd85, %sd65;        // navier1.f:5573
+      st.global.f64        [%sd89], %fd51;             // navier1.f:5573 : 0[$$arg_ptr_acc_uy_t35_t146,$$cs_1_t115,na].L
+      .loc                 1  5577  0
+      ld.param.s64         %sd90, [$$arg_ptr_acc_tzm1_t11_t134];// navier1.f:5577 : $$arg_ptr_acc_tzm1_t11_t134
+      ld.param.s64         %sd91, [$$arg_ptr_acc_rzm1_t15_t136];// navier1.f:5577 : $$arg_ptr_acc_rzm1_t15_t136
+      ld.param.s64         %sd92, [$$arg_ptr_acc_szm1_t13_t135];// navier1.f:5577 : $$arg_ptr_acc_szm1_t13_t135
+      ld.param.s64         %sd93, [$$arg_ptr_acc_uz_t33_t145];// navier1.f:5577 : $$arg_ptr_acc_uz_t33_t145
+      add.s64              %sd94, %sd90, %sd65;        // navier1.f:5577
+      ld.global.nc.f64     %fd52, [%sd94];             // navier1.f:5577 : 0[$$arg_ptr_acc_tzm1_t11_t134,$$cs_1_t115,ex].L
+      add.s64              %sd95, %sd91, %sd65;        // navier1.f:5577
+      ld.global.nc.f64     %fd53, [%sd95];             // navier1.f:5577 : 0[$$arg_ptr_acc_rzm1_t15_t136,$$cs_1_t115,ex].L
+      add.s64              %sd96, %sd92, %sd65;        // navier1.f:5577
+      ld.global.nc.f64     %fd54, [%sd96];             // navier1.f:5577 : 0[$$arg_ptr_acc_szm1_t13_t135,$$cs_1_t115,ex].L
+      mul.rn.f64           %fd55, %fd2, %fd54;         // navier1.f:5577
+      mad.rn.f64           %fd56, %fd1, %fd53, %fd55;  // navier1.f:5577
+      mad.rn.f64           %fd57, %fd3, %fd52, %fd56;  // navier1.f:5577
+      mul.rn.f64           %fd58, %fd37, %fd57;        // navier1.f:5577
+      add.s64              %sd97, %sd93, %sd65;        // navier1.f:5577
+      st.global.f64        [%sd97], %fd58;             // navier1.f:5577 : 0[$$arg_ptr_acc_uz_t33_t145,$$cs_1_t115,na].L
+      .loc                 1  5580  0
+      @%p10 bra            $wgradm1_acc_$ck_L5554_2__l32__;// navier1.f:5580
+$wgradm1_acc_$ck_L5554_2__l91__:
+      exit;
+      } // wgradm1_acc_$ck_L5554_2
+
+
+      .entry multd_acc_$ck_L5783_3(
+               .param .s64 $$arg_ptr_acc_ut_t12_t107,
+               .param .s64 $$arg_ptr_acc_us_t14_t108,
+               .param .s64 $$arg_ptr_acc_ur_t16_t109,
+               .param .s64 $$arg_ptr_acc_jacm1_t18_t110,
+               .param .s64 $$arg_ptr_acc_bm1_t20_t111,
+               .param .s64 $$arg_ptr_acc_dzm12_t22_t112,
+               .param .s64 $$arg_ptr_acc_dym12_t24_t113,
+               .param .s64 $$arg_ptr_acc_dxm12_t26_t114,
+               .param .s64 $$arg_ptr_acc_tm2_t28_t115,
+               .param .s64 $$arg_ptr_acc_sm2_t30_t116,
+               .param .s64 $$arg_ptr_acc_rm2_t32_t117,
+               .param .s64 $$arg_ptr_acc_x_t34_t118,
+               .param .s64 $$arg_ptr_acc_dx_t36_t119,
+               .param .s32 $$_arg_acc_nelv_t40_t120,
+               .param .s32 $$_arg_acc_nx2_t41_t121,
+               .param .s32 $$_arg_acc_ny2_t42_t122,
+               .param .s32 $$_arg_acc_nz2_t43_t123 )
+      {
+      .reg .pred %p<10>;
+      .reg .b32  %b<29>;
+      .reg .s32  %s<63>;
+      .reg .s64  %sd<87>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<47>;
+      //
+      .loc                 1  5783  0
+      .loc                 1  5784  0
+      ld.param.s32         %s4, [$$_arg_acc_nelv_t40_t120];// navier1.f:5784 : $$mr_nelv_62_t75
+      setp.le.s32          %p1, %s4, 0;                // navier1.f:5784
+      @%p1 bra             $multd_acc_$ck_L5783_3__l78__;// navier1.f:5784
+      .loc                 1  5785  0
+      ld.param.s32         %s3, [$$_arg_acc_nz2_t43_t123];// navier1.f:5785 : $$mr_nz2_63_t76
+      setp.le.s32          %p2, %s3, 0;                // navier1.f:5785
+      @%p2 bra             $multd_acc_$ck_L5783_3__l78__;// navier1.f:5785
+      .loc                 1  5786  0
+      ld.param.s32         %s2, [$$_arg_acc_ny2_t42_t122];// navier1.f:5786 : $$mr_ny2_64_t77
+      setp.le.s32          %p3, %s2, 0;                // navier1.f:5786
+      @%p3 bra             $multd_acc_$ck_L5783_3__l78__;// navier1.f:5786
+      .loc                 1  5787  0
+      ld.param.s32         %s1, [$$_arg_acc_nx2_t41_t121];// navier1.f:5787 : $$mr_nx2_65_t78
+      setp.le.s32          %p4, %s1, 0;                // navier1.f:5787
+      @%p4 bra             $multd_acc_$ck_L5783_3__l78__;// navier1.f:5787
+      .loc                 1  5787  0
+      mov.u32              %u1, %ntid.x;               // navier1.f:5787
+      mov.u32              %u2, %ctaid.x;              // navier1.f:5787
+      mov.u32              %u3, %tid.x;                // navier1.f:5787
+      mad.lo.u32           %s6, %u1, %u2, %u3;         // navier1.f:5787 : $$id_t39
+      mov.s32              %s5, %s1;                   // navier1.f:5787 : $$lcs_nx2_1_t79
+      mov.s32              %s7, %s2;                   // navier1.f:5787 : $$lcs_ny2_2_t80
+      mul.lo.s32           %s17, %s3, %s1;             // navier1.f:5787
+      mul.lo.s32           %s18, %s4, %s2;             // navier1.f:5787
+      mul.lo.s32           %s19, %s17, %s18;           // navier1.f:5787
+      setp.ge.s32          %p5, %s6, %s19;             // navier1.f:5787
+      @%p5 bra             $multd_acc_$ck_L5783_3__l78__;// navier1.f:5787
+      .loc                 1  5787  0
+      mul.lo.s32           %s20, %s3, %s2;             // navier1.f:5787
+      mul.lo.s32           %s21, %s5, %s20;            // navier1.f:5787
+      div.s32              %s22, %s6, %s21;            // navier1.f:5787
+      mul.lo.s32           %s23, %s2, %s1;             // navier1.f:5787
+      mul.lo.s32           %s24, %s22, %s23;           // navier1.f:5787
+      neg.s32              %s25, %s24;                 // navier1.f:5787
+      mad.lo.s32           %s26, %s3, %s25, %s6;       // navier1.f:5787
+      mul.lo.s32           %s27, %s7, %s1;             // navier1.f:5787
+      div.s32              %s28, %s26, %s27;           // navier1.f:5787
+      mul.lo.s32           %s29, %s1, %s28;            // navier1.f:5787
+      neg.s32              %s30, %s29;                 // navier1.f:5787
+      mad.lo.s32           %s31, %s2, %s30, %s26;      // navier1.f:5787
+      div.s32              %s32, %s31, %s1;            // navier1.f:5787
+      neg.s32              %s33, %s1;                  // navier1.f:5787
+      mad.lo.s32           %s34, %s32, %s33, %s31;     // navier1.f:5787
+      .loc                 1  5788  0
+      mul.lo.s32           %s35, %s22, 1000;           // navier1.f:5788
+      add.s32              %s36, %s34, %s35;           // navier1.f:5788
+      mul.lo.s32           %s37, %s28, 100;            // navier1.f:5788
+      add.s32              %s38, %s36, %s37;           // navier1.f:5788
+      mul.lo.s32           %s39, %s32, 10;             // navier1.f:5788
+      add.s32              %s16, %s38, %s39;           // navier1.f:5788 : $$cs_1_t88
+      ld.param.s64         %sd3, [$$arg_ptr_acc_ur_t16_t109];// navier1.f:5788 : $$arg_ptr_acc_ur_t16_t109
+      shl.b32              %b1, %s16, 3;               // navier1.f:5788
+      cvt.s64.s32          %sd4, %b1;                  // navier1.f:5788
+      add.s64              %sd5, %sd3, %sd4;           // navier1.f:5788
+      .loc                 1  5792  0
+      mov.f64              %fd2, 0d0000000000000000;   // navier1.f:5792 : $sca_us_i0
+      mov.f64              %fd3, 0d0000000000000000;   // navier1.f:5792 : $sca_ut_i1
+      mov.f64              %fd1, 0d0000000000000000;   // navier1.f:5792 : $sca_ur_i2
+      mov.s32              %s10, 0;                    // navier1.f:5792 : $$i_l5792_92_t65
+      .loc                 1  5793  0
+      mov.s32              %s11, %s34;                 // navier1.f:5793 : $$sr_e1_t67
+      .loc                 1  5794  0
+      mov.s32              %s13, %s32;                 // navier1.f:5794 : $$sr_e2_t68
+      mov.s32              %s12, %s38;                 // navier1.f:5794 : $$sr_e3_t69
+      .loc                 1  5795  0
+      mov.s32              %s15, %s28;                 // navier1.f:5795 : $$sr_e4_t70
+      add.s32              %s14, %s36, %s39;           // navier1.f:5795 : $$sr_e6_t72
+      .loc                 1  5793  0
+      add.s32              %s40, %s35, %s37;           // navier1.f:5793
+      add.s32              %s9, %s39, %s40;            // navier1.f:5793 : $$lis_b0_t73
+      .loc                 1  5796  0
+      mov.s32              %s8, %s5;                   // navier1.f:5796 : $$lis_b1_t74
+      cvt.s64.s32          %sd6, %s5;                  // navier1.f:5796
+      setp.gt.s64          %p6, 4, %sd6;               // navier1.f:5796
+      .loc                 1  5788  0
+      st.global.f64        [%sd5], 0d0000000000000000; // navier1.f:5788 : 0[$$arg_ptr_acc_ur_t16_t109,$$cs_1_t88].L
+      .loc                 1  5789  0
+      ld.param.s64         %sd7, [$$arg_ptr_acc_us_t14_t108];// navier1.f:5789 : $$arg_ptr_acc_us_t14_t108
+      add.s64              %sd8, %sd7, %sd4;           // navier1.f:5789
+      st.global.f64        [%sd8], 0d0000000000000000; // navier1.f:5789 : 0[$$arg_ptr_acc_us_t14_t108,$$cs_1_t88].L
+      .loc                 1  5790  0
+      ld.param.s64         %sd9, [$$arg_ptr_acc_ut_t12_t107];// navier1.f:5790 : $$arg_ptr_acc_ut_t12_t107
+      add.s64              %sd10, %sd9, %sd4;          // navier1.f:5790
+      st.global.f64        [%sd10], 0d0000000000000000;// navier1.f:5790 : 0[$$arg_ptr_acc_ut_t12_t107,$$cs_1_t88].L
+      .loc                 1  5796  0
+      @%p6 bra             $multd_acc_$ck_L5783_3__l19__;// navier1.f:5796
+      .loc                 1  5792  0
+      shr.s32              %s41, %s8, 1;               // navier1.f:5792
+      shr.b32              %b2, %s41, 30;              // navier1.f:5792
+      add.s32              %s42, %s8, %b2;             // navier1.f:5792
+      and.b32              %b3, %s42, 0xfffffffffffffffc;// navier1.f:5792
+      add.s32              %s43, %b3, 3;               // navier1.f:5792
+      shr.b32              %b4, %s43, 2;               // navier1.f:5792
+      neg.s32              %s44, %b4;                  // navier1.f:5792
+      cvt.s64.s32          %sd1, %s44;                 // navier1.f:5792 : $$induc01_s43_t95
+$multd_acc_$ck_L5783_3__l15__:
+      .loc                 1  5793  0
+      add.s32              %s45, %s10, %s9;            // navier1.f:5793
+      shl.b32              %b5, %s45, 3;               // navier1.f:5793
+      cvt.s64.s32          %sd11, %b5;                 // navier1.f:5793
+      ld.param.s64         %sd12, [$$arg_ptr_acc_x_t34_t118];// navier1.f:5793 : $$arg_ptr_acc_x_t34_t118
+      add.s64              %sd13, %sd12, %sd11;        // navier1.f:5793
+      shl.b32              %b6, %s11, 3;               // navier1.f:5793
+      cvt.s64.s32          %sd14, %b6;                 // navier1.f:5793
+      ld.param.s64         %sd15, [$$arg_ptr_acc_dxm12_t26_t114];// navier1.f:5793 : $$arg_ptr_acc_dxm12_t26_t114
+      add.s64              %sd16, %sd15, %sd14;        // navier1.f:5793
+      ld.global.nc.f64     %fd4, [%sd16];              // navier1.f:5793 : 0[$$arg_ptr_acc_dxm12_t26_t114,$$sr_e1_t67,ex].L
+      ld.global.nc.f64     %fd5, [%sd13];              // navier1.f:5793 : 0[$$arg_ptr_acc_x_t34_t118,$$lcs_10_t86,ex].L
+      mad.rn.f64           %fd6, %fd4, %fd5, %fd1;     // navier1.f:5793
+      .loc                 1  5794  0
+      shl.b32              %b7, %s12, 3;               // navier1.f:5794
+      cvt.s64.s32          %sd17, %b7;                 // navier1.f:5794
+      add.s64              %sd18, %sd12, %sd17;        // navier1.f:5794
+      shl.b32              %b8, %s13, 3;               // navier1.f:5794
+      cvt.s64.s32          %sd19, %b8;                 // navier1.f:5794
+      ld.param.s64         %sd20, [$$arg_ptr_acc_dym12_t24_t113];// navier1.f:5794 : $$arg_ptr_acc_dym12_t24_t113
+      add.s64              %sd21, %sd20, %sd19;        // navier1.f:5794
+      ld.global.nc.f64     %fd7, [%sd21];              // navier1.f:5794 : 0[$$arg_ptr_acc_dym12_t24_t113,$$sr_e2_t68,ex].L
+      ld.global.nc.f64     %fd8, [%sd18];              // navier1.f:5794 : 0[$$arg_ptr_acc_x_t34_t118,$$sr_e3_t69,ex].L
+      mad.rn.f64           %fd9, %fd7, %fd8, %fd2;     // navier1.f:5794
+      .loc                 1  5795  0
+      shl.b32              %b9, %s14, 3;               // navier1.f:5795
+      cvt.s64.s32          %sd22, %b9;                 // navier1.f:5795
+      add.s64              %sd23, %sd12, %sd22;        // navier1.f:5795
+      shl.b32              %b10, %s15, 3;              // navier1.f:5795
+      cvt.s64.s32          %sd24, %b10;                // navier1.f:5795
+      ld.param.s64         %sd25, [$$arg_ptr_acc_dzm12_t22_t112];// navier1.f:5795 : $$arg_ptr_acc_dzm12_t22_t112
+      add.s64              %sd26, %sd25, %sd24;        // navier1.f:5795
+      ld.global.nc.f64     %fd10, [%sd26];             // navier1.f:5795 : 0[$$arg_ptr_acc_dzm12_t22_t112,$$sr_e4_t70,ex].L
+      ld.global.nc.f64     %fd11, [%sd23];             // navier1.f:5795 : 0[$$arg_ptr_acc_x_t34_t118,$$sr_e6_t72,ex].L
+      mad.rn.f64           %fd12, %fd10, %fd11, %fd3;  // navier1.f:5795
+      .loc                 1  5793  0
+      add.s32              %s46, %s11, 10;             // navier1.f:5793
+      .loc                 1  5794  0
+      add.s32              %s47, %s13, 10;             // navier1.f:5794
+      add.s32              %s48, %s12, 10;             // navier1.f:5794
+      .loc                 1  5795  0
+      add.s32              %s49, %s15, 10;             // navier1.f:5795
+      add.s32              %s50, %s14, 100;            // navier1.f:5795
+      .loc                 1  5793  0
+      add.s64              %sd27, %sd12, %sd11;        // navier1.f:5793
+      ld.global.nc.f64     %fd13, [%sd27 + 8];         // navier1.f:5793 : 1[$$arg_ptr_acc_x_t34_t118,$$lcs_10_t86,ex].L
+      ld.global.nc.f64     %fd14, [%sd16 + 80];        // navier1.f:5793 : 0[$$arg_ptr_acc_dxm12_t26_t114,$sr_s6,ex].L
+      mad.rn.f64           %fd1, %fd14, %fd13, %fd6;   // navier1.f:5793 : $sca_ur_i2
+      .loc                 1  5794  0
+      ld.global.nc.f64     %fd15, [%sd21 + 80];        // navier1.f:5794 : 0[$$arg_ptr_acc_dym12_t24_t113,$sr_s8,ex].L
+      ld.global.nc.f64     %fd16, [%sd18 + 80];        // navier1.f:5794 : 0[$$arg_ptr_acc_x_t34_t118,$sr_s7,ex].L
+      mad.rn.f64           %fd2, %fd15, %fd16, %fd9;   // navier1.f:5794 : $sca_us_i0
+      .loc                 1  5795  0
+      ld.global.nc.f64     %fd17, [%sd26 + 80];        // navier1.f:5795 : 0[$$arg_ptr_acc_dzm12_t22_t112,$sr_s10,ex].L
+      ld.global.nc.f64     %fd18, [%sd23 + 800];       // navier1.f:5795 : 0[$$arg_ptr_acc_x_t34_t118,$sr_s9,ex].L
+      mad.rn.f64           %fd3, %fd17, %fd18, %fd12;  // navier1.f:5795 : $sca_ut_i1
+      .loc                 1  5793  0
+      add.s32              %s51, %s46, 10;             // navier1.f:5793
+      .loc                 1  5794  0
+      add.s32              %s52, %s47, 10;             // navier1.f:5794
+      add.s32              %s53, %s48, 10;             // navier1.f:5794
+      .loc                 1  5795  0
+      add.s32              %s54, %s49, 10;             // navier1.f:5795
+      add.s32              %s55, %s50, 100;            // navier1.f:5795
+      .loc                 1  5793  0
+      shl.b32              %b11, %s46, 3;              // navier1.f:5793
+      cvt.s64.s32          %sd28, %b11;                // navier1.f:5793
+      add.s64              %sd29, %sd15, %sd28;        // navier1.f:5793
+      ld.global.nc.f64     %fd19, [%sd29 + 80];        // navier1.f:5793 : 0[$$arg_ptr_acc_dxm12_t26_t114,$sr_s11,ex].L
+      ld.global.nc.f64     %fd20, [%sd27 + 16];        // navier1.f:5793 : 2[$$arg_ptr_acc_x_t34_t118,$$lcs_10_t86,ex].L
+      mad.rn.f64           %fd1, %fd19, %fd20, %fd1;   // navier1.f:5793 : $sca_ur_i2
+      .loc                 1  5794  0
+      shl.b32              %b12, %s47, 3;              // navier1.f:5794
+      cvt.s64.s32          %sd30, %b12;                // navier1.f:5794
+      add.s64              %sd31, %sd20, %sd30;        // navier1.f:5794
+      shl.b32              %b13, %s48, 3;              // navier1.f:5794
+      cvt.s64.s32          %sd32, %b13;                // navier1.f:5794
+      add.s64              %sd33, %sd12, %sd32;        // navier1.f:5794
+      ld.global.nc.f64     %fd21, [%sd33 + 80];        // navier1.f:5794 : 0[$$arg_ptr_acc_x_t34_t118,$sr_s12,ex].L
+      ld.global.nc.f64     %fd22, [%sd31 + 80];        // navier1.f:5794 : 0[$$arg_ptr_acc_dym12_t24_t113,$sr_s13,ex].L
+      mad.rn.f64           %fd2, %fd22, %fd21, %fd2;   // navier1.f:5794 : $sca_us_i0
+      .loc                 1  5795  0
+      shl.b32              %b14, %s49, 3;              // navier1.f:5795
+      cvt.s64.s32          %sd34, %b14;                // navier1.f:5795
+      add.s64              %sd35, %sd25, %sd34;        // navier1.f:5795
+      shl.b32              %b15, %s50, 3;              // navier1.f:5795
+      cvt.s64.s32          %sd36, %b15;                // navier1.f:5795
+      add.s64              %sd37, %sd12, %sd36;        // navier1.f:5795
+      ld.global.nc.f64     %fd23, [%sd37 + 800];       // navier1.f:5795 : 0[$$arg_ptr_acc_x_t34_t118,$sr_s14,ex].L
+      ld.global.nc.f64     %fd24, [%sd35 + 80];        // navier1.f:5795 : 0[$$arg_ptr_acc_dzm12_t22_t112,$sr_s15,ex].L
+      mad.rn.f64           %fd3, %fd24, %fd23, %fd3;   // navier1.f:5795 : $sca_ut_i1
+      .loc                 1  5793  0
+      add.s32              %s56, %s51, 10;             // navier1.f:5793
+      .loc                 1  5794  0
+      add.s32              %s57, %s52, 10;             // navier1.f:5794
+      add.s32              %s58, %s53, 10;             // navier1.f:5794
+      .loc                 1  5795  0
+      add.s32              %s59, %s54, 10;             // navier1.f:5795
+      add.s32              %s60, %s55, 100;            // navier1.f:5795
+      .loc                 1  5793  0
+      shl.b32              %b16, %s51, 3;              // navier1.f:5793
+      cvt.s64.s32          %sd38, %b16;                // navier1.f:5793
+      add.s64              %sd39, %sd15, %sd38;        // navier1.f:5793
+      shl.b32              %b17, %s45, 3;              // navier1.f:5793
+      cvt.s64.s32          %sd40, %b17;                // navier1.f:5793
+      add.s64              %sd41, %sd12, %sd40;        // navier1.f:5793
+      ld.global.nc.f64     %fd25, [%sd41 + 24];        // navier1.f:5793 : 3[$$arg_ptr_acc_x_t34_t118,$$lcs_10_t86,ex].L
+      ld.global.nc.f64     %fd26, [%sd39 + 80];        // navier1.f:5793 : 0[$$arg_ptr_acc_dxm12_t26_t114,$sr_s16,ex].L
+      mad.rn.f64           %fd1, %fd26, %fd25, %fd1;   // navier1.f:5793 : $sca_ur_i2
+      .loc                 1  5794  0
+      shl.b32              %b18, %s52, 3;              // navier1.f:5794
+      cvt.s64.s32          %sd42, %b18;                // navier1.f:5794
+      add.s64              %sd43, %sd20, %sd42;        // navier1.f:5794
+      shl.b32              %b19, %s53, 3;              // navier1.f:5794
+      cvt.s64.s32          %sd44, %b19;                // navier1.f:5794
+      add.s64              %sd45, %sd12, %sd44;        // navier1.f:5794
+      ld.global.nc.f64     %fd27, [%sd45 + 80];        // navier1.f:5794 : 0[$$arg_ptr_acc_x_t34_t118,$sr_s17,ex].L
+      ld.global.nc.f64     %fd28, [%sd43 + 80];        // navier1.f:5794 : 0[$$arg_ptr_acc_dym12_t24_t113,$sr_s18,ex].L
+      mad.rn.f64           %fd2, %fd28, %fd27, %fd2;   // navier1.f:5794 : $sca_us_i0
+      .loc                 1  5795  0
+      shl.b32              %b20, %s54, 3;              // navier1.f:5795
+      cvt.s64.s32          %sd46, %b20;                // navier1.f:5795
+      add.s64              %sd47, %sd25, %sd46;        // navier1.f:5795
+      shl.b32              %b21, %s55, 3;              // navier1.f:5795
+      cvt.s64.s32          %sd48, %b21;                // navier1.f:5795
+      add.s64              %sd49, %sd12, %sd48;        // navier1.f:5795
+      ld.global.nc.f64     %fd29, [%sd49 + 800];       // navier1.f:5795 : 0[$$arg_ptr_acc_x_t34_t118,$sr_s19,ex].L
+      ld.global.nc.f64     %fd30, [%sd47 + 80];        // navier1.f:5795 : 0[$$arg_ptr_acc_dzm12_t22_t112,$sr_s20,ex].L
+      mad.rn.f64           %fd3, %fd30, %fd29, %fd3;   // navier1.f:5795 : $sca_ut_i1
+      .loc                 1  5793  0
+      add.s32              %s11, %s56, 10;             // navier1.f:5793 : $$sr_e1_t67
+      .loc                 1  5794  0
+      add.s32              %s13, %s57, 10;             // navier1.f:5794 : $$sr_e2_t68
+      add.s32              %s12, %s58, 10;             // navier1.f:5794 : $$sr_e3_t69
+      .loc                 1  5795  0
+      add.s32              %s15, %s59, 10;             // navier1.f:5795 : $$sr_e4_t70
+      add.s32              %s14, %s60, 100;            // navier1.f:5795 : $$sr_e6_t72
+      .loc                 1  5796  0
+      add.s32              %s10, %s10, 4;              // navier1.f:5796 : $$i_l5792_92_t65
+      .loc                 1  5792  0
+      add.s64              %sd1, %sd1, 1;              // navier1.f:5792 : $$induc01_s43_t95
+      setp.lt.s64          %p7, %sd1, 0;               // navier1.f:5792
+      @%p7 bra             $multd_acc_$ck_L5783_3__l15__;// navier1.f:5792
+$multd_acc_$ck_L5783_3__l19__:
+      .loc                 1  5792  0
+      cvt.s64.s32          %sd50, %s10;                // navier1.f:5792
+      cvt.s64.s32          %sd51, %s8;                 // navier1.f:5792
+      setp.ge.s64          %p8, %sd50, %sd51;          // navier1.f:5792
+      @%p8 bra             $multd_acc_$ck_L5783_3__l26__;// navier1.f:5792
+      .loc                 1  5792  0
+      sub.s32              %s61, %s10, %s8;            // navier1.f:5792
+      cvt.s64.s32          %sd2, %s61;                 // navier1.f:5792 : $$induc01_s50_t102
+$multd_acc_$ck_L5783_3__l22__:
+      .loc                 1  5793  0
+      add.s32              %s62, %s10, %s9;            // navier1.f:5793
+      shl.b32              %b22, %s62, 3;              // navier1.f:5793
+      cvt.s64.s32          %sd52, %b22;                // navier1.f:5793
+      ld.param.s64         %sd53, [$$arg_ptr_acc_x_t34_t118];// navier1.f:5793 : $$arg_ptr_acc_x_t34_t118
+      add.s64              %sd54, %sd53, %sd52;        // navier1.f:5793
+      shl.b32              %b23, %s11, 3;              // navier1.f:5793
+      cvt.s64.s32          %sd55, %b23;                // navier1.f:5793
+      ld.param.s64         %sd56, [$$arg_ptr_acc_dxm12_t26_t114];// navier1.f:5793 : $$arg_ptr_acc_dxm12_t26_t114
+      add.s64              %sd57, %sd56, %sd55;        // navier1.f:5793
+      ld.global.nc.f64     %fd31, [%sd57];             // navier1.f:5793 : 0[$$arg_ptr_acc_dxm12_t26_t114,$$sr_e1_t67,ex].L
+      ld.global.nc.f64     %fd32, [%sd54];             // navier1.f:5793 : 0[$$arg_ptr_acc_x_t34_t118,$$i_l5792_92_t65 + $$lis_b0_t73,ex].L
+      mad.rn.f64           %fd1, %fd31, %fd32, %fd1;   // navier1.f:5793 : $sca_ur_i2
+      .loc                 1  5794  0
+      shl.b32              %b24, %s12, 3;              // navier1.f:5794
+      cvt.s64.s32          %sd58, %b24;                // navier1.f:5794
+      add.s64              %sd59, %sd53, %sd58;        // navier1.f:5794
+      shl.b32              %b25, %s13, 3;              // navier1.f:5794
+      cvt.s64.s32          %sd60, %b25;                // navier1.f:5794
+      ld.param.s64         %sd61, [$$arg_ptr_acc_dym12_t24_t113];// navier1.f:5794 : $$arg_ptr_acc_dym12_t24_t113
+      add.s64              %sd62, %sd61, %sd60;        // navier1.f:5794
+      ld.global.nc.f64     %fd33, [%sd62];             // navier1.f:5794 : 0[$$arg_ptr_acc_dym12_t24_t113,$$sr_e2_t68,ex].L
+      ld.global.nc.f64     %fd34, [%sd59];             // navier1.f:5794 : 0[$$arg_ptr_acc_x_t34_t118,$$sr_e3_t69,ex].L
+      mad.rn.f64           %fd2, %fd33, %fd34, %fd2;   // navier1.f:5794 : $sca_us_i0
+      .loc                 1  5795  0
+      shl.b32              %b26, %s14, 3;              // navier1.f:5795
+      cvt.s64.s32          %sd63, %b26;                // navier1.f:5795
+      add.s64              %sd64, %sd53, %sd63;        // navier1.f:5795
+      shl.b32              %b27, %s15, 3;              // navier1.f:5795
+      cvt.s64.s32          %sd65, %b27;                // navier1.f:5795
+      ld.param.s64         %sd66, [$$arg_ptr_acc_dzm12_t22_t112];// navier1.f:5795 : $$arg_ptr_acc_dzm12_t22_t112
+      add.s64              %sd67, %sd66, %sd65;        // navier1.f:5795
+      ld.global.nc.f64     %fd35, [%sd67];             // navier1.f:5795 : 0[$$arg_ptr_acc_dzm12_t22_t112,$$sr_e4_t70,ex].L
+      ld.global.nc.f64     %fd36, [%sd64];             // navier1.f:5795 : 0[$$arg_ptr_acc_x_t34_t118,$$sr_e6_t72,ex].L
+      mad.rn.f64           %fd3, %fd35, %fd36, %fd3;   // navier1.f:5795 : $sca_ut_i1
+      .loc                 1  5793  0
+      add.s32              %s11, %s11, 10;             // navier1.f:5793 : $$sr_e1_t67
+      .loc                 1  5794  0
+      add.s32              %s13, %s13, 10;             // navier1.f:5794 : $$sr_e2_t68
+      add.s32              %s12, %s12, 10;             // navier1.f:5794 : $$sr_e3_t69
+      .loc                 1  5795  0
+      add.s32              %s15, %s15, 10;             // navier1.f:5795 : $$sr_e4_t70
+      add.s32              %s14, %s14, 100;            // navier1.f:5795 : $$sr_e6_t72
+      .loc                 1  5796  0
+      add.s32              %s10, %s10, 1;              // navier1.f:5796 : $$i_l5792_92_t65
+      .loc                 1  5792  0
+      add.s64              %sd2, %sd2, 1;              // navier1.f:5792 : $$induc01_s50_t102
+      .loc                 1  5796  0
+      setp.lt.s64          %p9, %sd2, 0;               // navier1.f:5796
+      @%p9 bra             $multd_acc_$ck_L5783_3__l22__;// navier1.f:5796
+$multd_acc_$ck_L5783_3__l26__:
+      .loc                 1  5792  0
+      ld.param.s64         %sd68, [$$arg_ptr_acc_ur_t16_t109];// navier1.f:5792 : $$arg_ptr_acc_ur_t16_t109
+      shl.b32              %b28, %s16, 3;              // navier1.f:5792
+      cvt.s64.s32          %sd69, %b28;                // navier1.f:5792
+      add.s64              %sd70, %sd68, %sd69;        // navier1.f:5792
+      st.global.f64        [%sd70], %fd1;              // navier1.f:5792 : 0[$$arg_ptr_acc_ur_t16_t109,$$cs_1_t88].L
+      ld.param.s64         %sd71, [$$arg_ptr_acc_ut_t12_t107];// navier1.f:5792 : $$arg_ptr_acc_ut_t12_t107
+      add.s64              %sd72, %sd71, %sd69;        // navier1.f:5792
+      st.global.f64        [%sd72], %fd3;              // navier1.f:5792 : 0[$$arg_ptr_acc_ut_t12_t107,$$cs_1_t88].L
+      ld.param.s64         %sd73, [$$arg_ptr_acc_us_t14_t108];// navier1.f:5792 : $$arg_ptr_acc_us_t14_t108
+      add.s64              %sd74, %sd73, %sd69;        // navier1.f:5792
+      st.global.f64        [%sd74], %fd2;              // navier1.f:5792 : 0[$$arg_ptr_acc_us_t14_t108,$$cs_1_t88].L
+      .loc                 1  5797  0
+      ld.param.s64         %sd75, [$$arg_ptr_acc_tm2_t28_t115];// navier1.f:5797 : $$arg_ptr_acc_tm2_t28_t115
+      ld.param.s64         %sd76, [$$arg_ptr_acc_rm2_t32_t117];// navier1.f:5797 : $$arg_ptr_acc_rm2_t32_t117
+      ld.param.s64         %sd77, [$$arg_ptr_acc_sm2_t30_t116];// navier1.f:5797 : $$arg_ptr_acc_sm2_t30_t116
+      .loc                 1  5801  0
+      ld.param.s64         %sd78, [$$arg_ptr_acc_bm1_t20_t111];// navier1.f:5801 : $$arg_ptr_acc_bm1_t20_t111
+      ld.param.s64         %sd79, [$$arg_ptr_acc_jacm1_t18_t110];// navier1.f:5801 : $$arg_ptr_acc_jacm1_t18_t110
+      ld.param.s64         %sd80, [$$arg_ptr_acc_dx_t36_t119];// navier1.f:5801 : $$arg_ptr_acc_dx_t36_t119
+      .loc                 1  5797  0
+      add.s64              %sd81, %sd75, %sd69;        // navier1.f:5797
+      ld.global.nc.f64     %fd37, [%sd81];             // navier1.f:5797 : 0[$$arg_ptr_acc_tm2_t28_t115,$$cs_1_t88,ex].L
+      add.s64              %sd82, %sd76, %sd69;        // navier1.f:5797
+      ld.global.nc.f64     %fd38, [%sd82];             // navier1.f:5797 : 0[$$arg_ptr_acc_rm2_t32_t117,$$cs_1_t88,ex].L
+      add.s64              %sd83, %sd77, %sd69;        // navier1.f:5797
+      ld.global.nc.f64     %fd39, [%sd83];             // navier1.f:5797 : 0[$$arg_ptr_acc_sm2_t30_t116,$$cs_1_t88,ex].L
+      mul.rn.f64           %fd40, %fd2, %fd39;         // navier1.f:5797
+      mad.rn.f64           %fd41, %fd1, %fd38, %fd40;  // navier1.f:5797
+      mad.rn.f64           %fd42, %fd3, %fd37, %fd41;  // navier1.f:5797
+      .loc                 1  5801  0
+      add.s64              %sd84, %sd78, %sd69;        // navier1.f:5801
+      ld.global.nc.f64     %fd43, [%sd84];             // navier1.f:5801 : 0[$$arg_ptr_acc_bm1_t20_t111,$$cs_1_t88,ex].L
+      mul.rn.f64           %fd44, %fd42, %fd43;        // navier1.f:5801
+      add.s64              %sd85, %sd79, %sd69;        // navier1.f:5801
+      ld.global.nc.f64     %fd45, [%sd85];             // navier1.f:5801 : 0[$$arg_ptr_acc_jacm1_t18_t110,$$cs_1_t88,ex].L
+      div.rn.f64           %fd46, %fd44, %fd45;        // navier1.f:5801
+      add.s64              %sd86, %sd80, %sd69;        // navier1.f:5801
+      st.global.f64        [%sd86], %fd46;             // navier1.f:5801 : 0[$$arg_ptr_acc_dx_t36_t119,$$cs_1_t88].L
+$multd_acc_$ck_L5783_3__l78__:
+      exit;
+      } // multd_acc_$ck_L5783_3
+
+
+      .entry dudxyz_acc_$ck_L5873_4(
+               .param .s32 $$_arg_nel_t98,
+               .param .s64 $$arg_ptr_acc_dzm1_t16_t99,
+               .param .s64 $$arg_ptr_acc_dym1_t18_t100,
+               .param .s64 $$arg_ptr_acc_dxm1_t20_t101,
+               .param .s64 $$arg_ptr_acc_tm1_t22_t102,
+               .param .s64 $$arg_ptr_acc_sm1_t24_t103,
+               .param .s64 $$arg_ptr_acc_rm1_t26_t104,
+               .param .s64 $$arg_ptr_acc_u_t28_t105,
+               .param .s64 $$arg_ptr_acc_du_t30_t106,
+               .param .s32 $$_arg_acc_nelt_t34_t107,
+               .param .s32 $$_arg_acc_nelv_t35_t108,
+               .param .s32 $$_arg_acc_nx1_t36_t109,
+               .param .s32 $$_arg_acc_ny1_t37_t110,
+               .param .s32 $$_arg_acc_nz1_t38_t111,
+               .param .s32 $$_arg_acc_seat_imsh_t39_t112 )
+      {
+      .reg .pred %p<12>;
+      .reg .b32  %b<28>;
+      .reg .s32  %s<68>;
+      .reg .s64  %sd<70>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<43>;
+      //
+      .loc                 1  5873  0
+      .loc                 1  5874  0
+      ld.param.s32         %s19, [$$_arg_acc_seat_imsh_t39_t112];// navier1.f:5874 : $$_arg_acc_seat_imsh_t39_t112
+      setp.ne.s32          %p1, %s19, 1;               // navier1.f:5874
+      ld.param.s32         %s20, [$$_arg_nel_t98];     // navier1.f:5874 : $$_arg_nel_t98
+      ld.param.s32         %s21, [$$_arg_acc_nelv_t35_t108];// navier1.f:5874 : $$_arg_acc_nelv_t35_t108
+      selp.s32             %s22, %s20, %s21, %p1;      // navier1.f:5874
+      setp.ne.s32          %p2, %s19, 2;               // navier1.f:5874
+      ld.param.s32         %s23, [$$_arg_acc_nelt_t34_t107];// navier1.f:5874 : $$_arg_acc_nelt_t34_t107
+      selp.s32             %s2, %s22, %s23, %p2;       // navier1.f:5874 : $$lcs_5_t74
+      setp.le.s32          %p3, %s2, 0;                // navier1.f:5874
+      @%p3 bra             $dudxyz_acc_$ck_L5873_4__l102__;// navier1.f:5874
+      .loc                 1  5875  0
+      ld.param.s32         %s4, [$$_arg_acc_nz1_t38_t111];// navier1.f:5875 : $$mr_nz1_62_t71
+      setp.le.s32          %p4, %s4, 0;                // navier1.f:5875
+      @%p4 bra             $dudxyz_acc_$ck_L5873_4__l102__;// navier1.f:5875
+      .loc                 1  5876  0
+      ld.param.s32         %s1, [$$_arg_acc_ny1_t37_t110];// navier1.f:5876 : $$mr_ny1_63_t72
+      setp.le.s32          %p5, %s1, 0;                // navier1.f:5876
+      @%p5 bra             $dudxyz_acc_$ck_L5873_4__l102__;// navier1.f:5876
+      .loc                 1  5877  0
+      ld.param.s32         %s3, [$$_arg_acc_nx1_t36_t109];// navier1.f:5877 : $$mr_nx1_64_t73
+      setp.le.s32          %p6, %s3, 0;                // navier1.f:5877
+      @%p6 bra             $dudxyz_acc_$ck_L5873_4__l102__;// navier1.f:5877
+      .loc                 1  5877  0
+      mov.u32              %u1, %ntid.x;               // navier1.f:5877
+      mov.u32              %u2, %ctaid.x;              // navier1.f:5877
+      mov.u32              %u3, %tid.x;                // navier1.f:5877
+      mad.lo.u32           %s5, %u1, %u2, %u3;         // navier1.f:5877 : $$id_t33
+      mov.s32              %s6, %s1;                   // navier1.f:5877 : $$lcs_ny1_6_t75
+      mul.lo.s32           %s24, %s3, %s2;             // navier1.f:5877
+      mul.lo.s32           %s25, %s4, %s1;             // navier1.f:5877
+      mul.lo.s32           %s26, %s24, %s25;           // navier1.f:5877
+      setp.ge.s32          %p7, %s5, %s26;             // navier1.f:5877
+      @%p7 bra             $dudxyz_acc_$ck_L5873_4__l102__;// navier1.f:5877
+      .loc                 1  5877  0
+      mul.lo.s32           %s27, %s4, %s1;             // navier1.f:5877
+      mul.lo.s32           %s28, %s3, %s27;            // navier1.f:5877
+      div.s32              %s17, %s5, %s28;            // navier1.f:5877 : $$i_l5874_90_t54
+      mul.lo.s32           %s29, %s3, %s6;             // navier1.f:5877
+      mul.lo.s32           %s30, %s17, %s29;           // navier1.f:5877
+      neg.s32              %s31, %s30;                 // navier1.f:5877
+      mad.lo.s32           %s32, %s4, %s31, %s5;       // navier1.f:5877
+      mul.lo.s32           %s33, %s1, %s3;             // navier1.f:5877
+      div.s32              %s14, %s32, %s33;           // navier1.f:5877 : $$sr_e5_t62
+      mov.s32              %s16, %s14;                 // navier1.f:5877 : $$i_l5875_88_t53
+      mul.lo.s32           %s34, %s3, %s14;            // navier1.f:5877
+      neg.s32              %s35, %s34;                 // navier1.f:5877
+      mad.lo.s32           %s36, %s1, %s35, %s32;      // navier1.f:5877
+      div.s32              %s12, %s36, %s3;            // navier1.f:5877 : $$sr_e3_t60
+      mov.s32              %s15, %s12;                 // navier1.f:5877 : $$i_l5876_86_t52
+      neg.s32              %s37, %s3;                  // navier1.f:5877
+      mad.lo.s32           %s10, %s12, %s37, %s36;     // navier1.f:5877 : $$sr_e2_t59
+      mov.s32              %s18, %s10;                 // navier1.f:5877 : $$clip_p1_t55
+      .loc                 1  5882  0
+      mov.s32              %s9, 0;                     // navier1.f:5882 : $$i_l5882_100_t57
+      .loc                 1  5885  0
+      mov.f64              %fd3, 0d0000000000000000;   // navier1.f:5885 : $sc_uz_i2
+      .loc                 1  5884  0
+      mov.f64              %fd2, 0d0000000000000000;   // navier1.f:5884 : $sc_uy_i1
+      .loc                 1  5883  0
+      mov.f64              %fd1, 0d0000000000000000;   // navier1.f:5883 : $sc_ux_i0
+      .loc                 1  5884  0
+      mul.lo.s32           %s38, %s17, 1000;           // navier1.f:5884
+      add.s32              %s39, %s10, %s38;           // navier1.f:5884
+      mul.lo.s32           %s40, %s14, 100;            // navier1.f:5884
+      add.s32              %s11, %s39, %s40;           // navier1.f:5884 : $$sr_e4_t61
+      .loc                 1  5885  0
+      mul.lo.s32           %s41, %s12, 10;             // navier1.f:5885
+      add.s32              %s13, %s39, %s41;           // navier1.f:5885 : $$sr_e7_t64
+      .loc                 1  5883  0
+      add.s32              %s42, %s38, %s40;           // navier1.f:5883
+      add.s32              %s8, %s41, %s42;            // navier1.f:5883 : $$lis_b5_t65
+      .loc                 1  5886  0
+      mov.s32              %s7, %s3;                   // navier1.f:5886 : $$lis_b6_t66
+      cvt.s64.s32          %sd3, %s3;                  // navier1.f:5886
+      setp.gt.s64          %p8, 4, %sd3;               // navier1.f:5886
+      @%p8 bra             $dudxyz_acc_$ck_L5873_4__l39__;// navier1.f:5886
+      .loc                 1  5882  0
+      shr.s32              %s43, %s7, 1;               // navier1.f:5882
+      shr.b32              %b1, %s43, 30;              // navier1.f:5882
+      add.s32              %s44, %s7, %b1;             // navier1.f:5882
+      and.b32              %b2, %s44, 0xfffffffffffffffc;// navier1.f:5882
+      add.s32              %s45, %b2, 3;               // navier1.f:5882
+      shr.b32              %b3, %s45, 2;               // navier1.f:5882
+      neg.s32              %s46, %b3;                  // navier1.f:5882
+      cvt.s64.s32          %sd1, %s46;                 // navier1.f:5882 : $$induc01_s35_t90
+$dudxyz_acc_$ck_L5873_4__l35__:
+      .loc                 1  5883  0
+      add.s32              %s47, %s9, %s8;             // navier1.f:5883
+      shl.b32              %b4, %s47, 3;               // navier1.f:5883
+      cvt.s64.s32          %sd4, %b4;                  // navier1.f:5883
+      ld.param.s64         %sd5, [$$arg_ptr_acc_u_t28_t105];// navier1.f:5883 : $$arg_ptr_acc_u_t28_t105
+      add.s64              %sd6, %sd5, %sd4;           // navier1.f:5883
+      shl.b32              %b5, %s10, 3;               // navier1.f:5883
+      cvt.s64.s32          %sd7, %b5;                  // navier1.f:5883
+      ld.param.s64         %sd8, [$$arg_ptr_acc_dxm1_t20_t101];// navier1.f:5883 : $$arg_ptr_acc_dxm1_t20_t101
+      add.s64              %sd9, %sd8, %sd7;           // navier1.f:5883
+      ld.global.nc.f64     %fd4, [%sd9];               // navier1.f:5883 : 0[$$arg_ptr_acc_dxm1_t20_t101,$$sr_e2_t59,ex].L
+      ld.global.nc.f64     %fd5, [%sd6];               // navier1.f:5883 : 0[$$arg_ptr_acc_u_t28_t105,$$lcs_13_t82,ex].L
+      mad.rn.f64           %fd6, %fd4, %fd5, %fd1;     // navier1.f:5883
+      .loc                 1  5884  0
+      shl.b32              %b6, %s11, 3;               // navier1.f:5884
+      cvt.s64.s32          %sd10, %b6;                 // navier1.f:5884
+      add.s64              %sd11, %sd5, %sd10;         // navier1.f:5884
+      shl.b32              %b7, %s12, 3;               // navier1.f:5884
+      cvt.s64.s32          %sd12, %b7;                 // navier1.f:5884
+      ld.param.s64         %sd13, [$$arg_ptr_acc_dym1_t18_t100];// navier1.f:5884 : $$arg_ptr_acc_dym1_t18_t100
+      add.s64              %sd14, %sd13, %sd12;        // navier1.f:5884
+      ld.global.nc.f64     %fd7, [%sd14];              // navier1.f:5884 : 0[$$arg_ptr_acc_dym1_t18_t100,$$sr_e3_t60,ex].L
+      ld.global.nc.f64     %fd8, [%sd11];              // navier1.f:5884 : 0[$$arg_ptr_acc_u_t28_t105,$$sr_e4_t61,ex].L
+      mad.rn.f64           %fd9, %fd7, %fd8, %fd2;     // navier1.f:5884
+      .loc                 1  5885  0
+      shl.b32              %b8, %s13, 3;               // navier1.f:5885
+      cvt.s64.s32          %sd15, %b8;                 // navier1.f:5885
+      add.s64              %sd16, %sd5, %sd15;         // navier1.f:5885
+      shl.b32              %b9, %s14, 3;               // navier1.f:5885
+      cvt.s64.s32          %sd17, %b9;                 // navier1.f:5885
+      ld.param.s64         %sd18, [$$arg_ptr_acc_dzm1_t16_t99];// navier1.f:5885 : $$arg_ptr_acc_dzm1_t16_t99
+      add.s64              %sd19, %sd18, %sd17;        // navier1.f:5885
+      ld.global.nc.f64     %fd10, [%sd19];             // navier1.f:5885 : 0[$$arg_ptr_acc_dzm1_t16_t99,$$sr_e5_t62,ex].L
+      ld.global.nc.f64     %fd11, [%sd16];             // navier1.f:5885 : 0[$$arg_ptr_acc_u_t28_t105,$$sr_e7_t64,ex].L
+      mad.rn.f64           %fd12, %fd10, %fd11, %fd3;  // navier1.f:5885
+      .loc                 1  5883  0
+      add.s32              %s48, %s10, 10;             // navier1.f:5883
+      .loc                 1  5884  0
+      add.s32              %s49, %s12, 10;             // navier1.f:5884
+      add.s32              %s50, %s11, 10;             // navier1.f:5884
+      .loc                 1  5885  0
+      add.s32              %s51, %s14, 10;             // navier1.f:5885
+      add.s32              %s52, %s13, 100;            // navier1.f:5885
+      .loc                 1  5883  0
+      add.s64              %sd20, %sd5, %sd4;          // navier1.f:5883
+      ld.global.nc.f64     %fd13, [%sd20 + 8];         // navier1.f:5883 : 1[$$arg_ptr_acc_u_t28_t105,$$lcs_13_t82,ex].L
+      ld.global.nc.f64     %fd14, [%sd9 + 80];         // navier1.f:5883 : 0[$$arg_ptr_acc_dxm1_t20_t101,$sr_s9,ex].L
+      mad.rn.f64           %fd1, %fd14, %fd13, %fd6;   // navier1.f:5883 : $sc_ux_i0
+      .loc                 1  5884  0
+      ld.global.nc.f64     %fd15, [%sd14 + 80];        // navier1.f:5884 : 0[$$arg_ptr_acc_dym1_t18_t100,$sr_s11,ex].L
+      ld.global.nc.f64     %fd16, [%sd11 + 80];        // navier1.f:5884 : 0[$$arg_ptr_acc_u_t28_t105,$sr_s10,ex].L
+      mad.rn.f64           %fd2, %fd15, %fd16, %fd9;   // navier1.f:5884 : $sc_uy_i1
+      .loc                 1  5885  0
+      ld.global.nc.f64     %fd17, [%sd19 + 80];        // navier1.f:5885 : 0[$$arg_ptr_acc_dzm1_t16_t99,$sr_s13,ex].L
+      ld.global.nc.f64     %fd18, [%sd16 + 800];       // navier1.f:5885 : 0[$$arg_ptr_acc_u_t28_t105,$sr_s12,ex].L
+      mad.rn.f64           %fd3, %fd17, %fd18, %fd12;  // navier1.f:5885 : $sc_uz_i2
+      .loc                 1  5883  0
+      add.s32              %s53, %s48, 10;             // navier1.f:5883
+      .loc                 1  5884  0
+      add.s32              %s54, %s49, 10;             // navier1.f:5884
+      add.s32              %s55, %s50, 10;             // navier1.f:5884
+      .loc                 1  5885  0
+      add.s32              %s56, %s51, 10;             // navier1.f:5885
+      add.s32              %s57, %s52, 100;            // navier1.f:5885
+      .loc                 1  5883  0
+      shl.b32              %b10, %s48, 3;              // navier1.f:5883
+      cvt.s64.s32          %sd21, %b10;                // navier1.f:5883
+      add.s64              %sd22, %sd8, %sd21;         // navier1.f:5883
+      ld.global.nc.f64     %fd19, [%sd22 + 80];        // navier1.f:5883 : 0[$$arg_ptr_acc_dxm1_t20_t101,$sr_s14,ex].L
+      ld.global.nc.f64     %fd20, [%sd20 + 16];        // navier1.f:5883 : 2[$$arg_ptr_acc_u_t28_t105,$$lcs_13_t82,ex].L
+      mad.rn.f64           %fd1, %fd19, %fd20, %fd1;   // navier1.f:5883 : $sc_ux_i0
+      .loc                 1  5884  0
+      shl.b32              %b11, %s49, 3;              // navier1.f:5884
+      cvt.s64.s32          %sd23, %b11;                // navier1.f:5884
+      add.s64              %sd24, %sd13, %sd23;        // navier1.f:5884
+      shl.b32              %b12, %s50, 3;              // navier1.f:5884
+      cvt.s64.s32          %sd25, %b12;                // navier1.f:5884
+      add.s64              %sd26, %sd5, %sd25;         // navier1.f:5884
+      ld.global.nc.f64     %fd21, [%sd26 + 80];        // navier1.f:5884 : 0[$$arg_ptr_acc_u_t28_t105,$sr_s15,ex].L
+      ld.global.nc.f64     %fd22, [%sd24 + 80];        // navier1.f:5884 : 0[$$arg_ptr_acc_dym1_t18_t100,$sr_s16,ex].L
+      mad.rn.f64           %fd2, %fd22, %fd21, %fd2;   // navier1.f:5884 : $sc_uy_i1
+      .loc                 1  5885  0
+      shl.b32              %b13, %s51, 3;              // navier1.f:5885
+      cvt.s64.s32          %sd27, %b13;                // navier1.f:5885
+      add.s64              %sd28, %sd18, %sd27;        // navier1.f:5885
+      shl.b32              %b14, %s52, 3;              // navier1.f:5885
+      cvt.s64.s32          %sd29, %b14;                // navier1.f:5885
+      add.s64              %sd30, %sd5, %sd29;         // navier1.f:5885
+      ld.global.nc.f64     %fd23, [%sd30 + 800];       // navier1.f:5885 : 0[$$arg_ptr_acc_u_t28_t105,$sr_s17,ex].L
+      ld.global.nc.f64     %fd24, [%sd28 + 80];        // navier1.f:5885 : 0[$$arg_ptr_acc_dzm1_t16_t99,$sr_s18,ex].L
+      mad.rn.f64           %fd3, %fd24, %fd23, %fd3;   // navier1.f:5885 : $sc_uz_i2
+      .loc                 1  5883  0
+      add.s32              %s58, %s53, 10;             // navier1.f:5883
+      .loc                 1  5884  0
+      add.s32              %s59, %s54, 10;             // navier1.f:5884
+      add.s32              %s60, %s55, 10;             // navier1.f:5884
+      .loc                 1  5885  0
+      add.s32              %s61, %s56, 10;             // navier1.f:5885
+      add.s32              %s62, %s57, 100;            // navier1.f:5885
+      .loc                 1  5883  0
+      shl.b32              %b15, %s53, 3;              // navier1.f:5883
+      cvt.s64.s32          %sd31, %b15;                // navier1.f:5883
+      add.s64              %sd32, %sd8, %sd31;         // navier1.f:5883
+      shl.b32              %b16, %s47, 3;              // navier1.f:5883
+      cvt.s64.s32          %sd33, %b16;                // navier1.f:5883
+      add.s64              %sd34, %sd5, %sd33;         // navier1.f:5883
+      ld.global.nc.f64     %fd25, [%sd34 + 24];        // navier1.f:5883 : 3[$$arg_ptr_acc_u_t28_t105,$$lcs_13_t82,ex].L
+      ld.global.nc.f64     %fd26, [%sd32 + 80];        // navier1.f:5883 : 0[$$arg_ptr_acc_dxm1_t20_t101,$sr_s19,ex].L
+      mad.rn.f64           %fd1, %fd26, %fd25, %fd1;   // navier1.f:5883 : $sc_ux_i0
+      .loc                 1  5884  0
+      shl.b32              %b17, %s54, 3;              // navier1.f:5884
+      cvt.s64.s32          %sd35, %b17;                // navier1.f:5884
+      add.s64              %sd36, %sd13, %sd35;        // navier1.f:5884
+      shl.b32              %b18, %s55, 3;              // navier1.f:5884
+      cvt.s64.s32          %sd37, %b18;                // navier1.f:5884
+      add.s64              %sd38, %sd5, %sd37;         // navier1.f:5884
+      ld.global.nc.f64     %fd27, [%sd38 + 80];        // navier1.f:5884 : 0[$$arg_ptr_acc_u_t28_t105,$sr_s20,ex].L
+      ld.global.nc.f64     %fd28, [%sd36 + 80];        // navier1.f:5884 : 0[$$arg_ptr_acc_dym1_t18_t100,$sr_s21,ex].L
+      mad.rn.f64           %fd2, %fd28, %fd27, %fd2;   // navier1.f:5884 : $sc_uy_i1
+      .loc                 1  5885  0
+      shl.b32              %b19, %s56, 3;              // navier1.f:5885
+      cvt.s64.s32          %sd39, %b19;                // navier1.f:5885
+      add.s64              %sd40, %sd18, %sd39;        // navier1.f:5885
+      shl.b32              %b20, %s57, 3;              // navier1.f:5885
+      cvt.s64.s32          %sd41, %b20;                // navier1.f:5885
+      add.s64              %sd42, %sd5, %sd41;         // navier1.f:5885
+      ld.global.nc.f64     %fd29, [%sd42 + 800];       // navier1.f:5885 : 0[$$arg_ptr_acc_u_t28_t105,$sr_s22,ex].L
+      ld.global.nc.f64     %fd30, [%sd40 + 80];        // navier1.f:5885 : 0[$$arg_ptr_acc_dzm1_t16_t99,$sr_s23,ex].L
+      mad.rn.f64           %fd3, %fd30, %fd29, %fd3;   // navier1.f:5885 : $sc_uz_i2
+      .loc                 1  5883  0
+      add.s32              %s10, %s58, 10;             // navier1.f:5883 : $$sr_e2_t59
+      .loc                 1  5884  0
+      add.s32              %s12, %s59, 10;             // navier1.f:5884 : $$sr_e3_t60
+      add.s32              %s11, %s60, 10;             // navier1.f:5884 : $$sr_e4_t61
+      .loc                 1  5885  0
+      add.s32              %s14, %s61, 10;             // navier1.f:5885 : $$sr_e5_t62
+      add.s32              %s13, %s62, 100;            // navier1.f:5885 : $$sr_e7_t64
+      .loc                 1  5886  0
+      add.s32              %s9, %s9, 4;                // navier1.f:5886 : $$i_l5882_100_t57
+      .loc                 1  5882  0
+      add.s64              %sd1, %sd1, 1;              // navier1.f:5882 : $$induc01_s35_t90
+      setp.lt.s64          %p9, %sd1, 0;               // navier1.f:5882
+      @%p9 bra             $dudxyz_acc_$ck_L5873_4__l35__;// navier1.f:5882
+$dudxyz_acc_$ck_L5873_4__l39__:
+      .loc                 1  5882  0
+      cvt.s64.s32          %sd43, %s9;                 // navier1.f:5882
+      cvt.s64.s32          %sd44, %s7;                 // navier1.f:5882
+      setp.ge.s64          %p10, %sd43, %sd44;         // navier1.f:5882
+      @%p10 bra            $dudxyz_acc_$ck_L5873_4__l46__;// navier1.f:5882
+      .loc                 1  5882  0
+      sub.s32              %s63, %s9, %s7;             // navier1.f:5882
+      cvt.s64.s32          %sd2, %s63;                 // navier1.f:5882 : $$induc01_s42_t97
+$dudxyz_acc_$ck_L5873_4__l42__:
+      .loc                 1  5883  0
+      add.s32              %s64, %s9, %s8;             // navier1.f:5883
+      shl.b32              %b21, %s64, 3;              // navier1.f:5883
+      cvt.s64.s32          %sd45, %b21;                // navier1.f:5883
+      ld.param.s64         %sd46, [$$arg_ptr_acc_u_t28_t105];// navier1.f:5883 : $$arg_ptr_acc_u_t28_t105
+      add.s64              %sd47, %sd46, %sd45;        // navier1.f:5883
+      shl.b32              %b22, %s10, 3;              // navier1.f:5883
+      cvt.s64.s32          %sd48, %b22;                // navier1.f:5883
+      ld.param.s64         %sd49, [$$arg_ptr_acc_dxm1_t20_t101];// navier1.f:5883 : $$arg_ptr_acc_dxm1_t20_t101
+      add.s64              %sd50, %sd49, %sd48;        // navier1.f:5883
+      ld.global.nc.f64     %fd31, [%sd50];             // navier1.f:5883 : 0[$$arg_ptr_acc_dxm1_t20_t101,$$sr_e2_t59,ex].L
+      ld.global.nc.f64     %fd32, [%sd47];             // navier1.f:5883 : 0[$$arg_ptr_acc_u_t28_t105,$$i_l5882_100_t57 + $$lis_b5_t65,ex].L
+      mad.rn.f64           %fd1, %fd31, %fd32, %fd1;   // navier1.f:5883 : $sc_ux_i0
+      .loc                 1  5884  0
+      shl.b32              %b23, %s11, 3;              // navier1.f:5884
+      cvt.s64.s32          %sd51, %b23;                // navier1.f:5884
+      add.s64              %sd52, %sd46, %sd51;        // navier1.f:5884
+      shl.b32              %b24, %s12, 3;              // navier1.f:5884
+      cvt.s64.s32          %sd53, %b24;                // navier1.f:5884
+      ld.param.s64         %sd54, [$$arg_ptr_acc_dym1_t18_t100];// navier1.f:5884 : $$arg_ptr_acc_dym1_t18_t100
+      add.s64              %sd55, %sd54, %sd53;        // navier1.f:5884
+      ld.global.nc.f64     %fd33, [%sd55];             // navier1.f:5884 : 0[$$arg_ptr_acc_dym1_t18_t100,$$sr_e3_t60,ex].L
+      ld.global.nc.f64     %fd34, [%sd52];             // navier1.f:5884 : 0[$$arg_ptr_acc_u_t28_t105,$$sr_e4_t61,ex].L
+      mad.rn.f64           %fd2, %fd33, %fd34, %fd2;   // navier1.f:5884 : $sc_uy_i1
+      .loc                 1  5885  0
+      shl.b32              %b25, %s13, 3;              // navier1.f:5885
+      cvt.s64.s32          %sd56, %b25;                // navier1.f:5885
+      add.s64              %sd57, %sd46, %sd56;        // navier1.f:5885
+      shl.b32              %b26, %s14, 3;              // navier1.f:5885
+      cvt.s64.s32          %sd58, %b26;                // navier1.f:5885
+      ld.param.s64         %sd59, [$$arg_ptr_acc_dzm1_t16_t99];// navier1.f:5885 : $$arg_ptr_acc_dzm1_t16_t99
+      add.s64              %sd60, %sd59, %sd58;        // navier1.f:5885
+      ld.global.nc.f64     %fd35, [%sd60];             // navier1.f:5885 : 0[$$arg_ptr_acc_dzm1_t16_t99,$$sr_e5_t62,ex].L
+      ld.global.nc.f64     %fd36, [%sd57];             // navier1.f:5885 : 0[$$arg_ptr_acc_u_t28_t105,$$sr_e7_t64,ex].L
+      mad.rn.f64           %fd3, %fd35, %fd36, %fd3;   // navier1.f:5885 : $sc_uz_i2
+      .loc                 1  5883  0
+      add.s32              %s10, %s10, 10;             // navier1.f:5883 : $$sr_e2_t59
+      .loc                 1  5884  0
+      add.s32              %s12, %s12, 10;             // navier1.f:5884 : $$sr_e3_t60
+      add.s32              %s11, %s11, 10;             // navier1.f:5884 : $$sr_e4_t61
+      .loc                 1  5885  0
+      add.s32              %s14, %s14, 10;             // navier1.f:5885 : $$sr_e5_t62
+      add.s32              %s13, %s13, 100;            // navier1.f:5885 : $$sr_e7_t64
+      .loc                 1  5886  0
+      add.s32              %s9, %s9, 1;                // navier1.f:5886 : $$i_l5882_100_t57
+      .loc                 1  5882  0
+      add.s64              %sd2, %sd2, 1;              // navier1.f:5882 : $$induc01_s42_t97
+      .loc                 1  5886  0
+      setp.lt.s64          %p11, %sd2, 0;              // navier1.f:5886
+      @%p11 bra            $dudxyz_acc_$ck_L5873_4__l42__;// navier1.f:5886
+$dudxyz_acc_$ck_L5873_4__l46__:
+      .loc                 1  5887  0
+      mad.lo.s32           %s65, 1000, %s17, %s18;     // navier1.f:5887
+      mad.lo.s32           %s66, 100, %s16, %s65;      // navier1.f:5887
+      mad.lo.s32           %s67, 10, %s15, %s66;       // navier1.f:5887
+      shl.b32              %b27, %s67, 3;              // navier1.f:5887
+      cvt.s64.s32          %sd61, %b27;                // navier1.f:5887
+      ld.param.s64         %sd62, [$$arg_ptr_acc_tm1_t22_t102];// navier1.f:5887 : $$arg_ptr_acc_tm1_t22_t102
+      add.s64              %sd63, %sd62, %sd61;        // navier1.f:5887
+      ld.param.s64         %sd64, [$$arg_ptr_acc_rm1_t26_t104];// navier1.f:5887 : $$arg_ptr_acc_rm1_t26_t104
+      add.s64              %sd65, %sd64, %sd61;        // navier1.f:5887
+      ld.param.s64         %sd66, [$$arg_ptr_acc_sm1_t24_t103];// navier1.f:5887 : $$arg_ptr_acc_sm1_t24_t103
+      add.s64              %sd67, %sd66, %sd61;        // navier1.f:5887
+      ld.global.nc.f64     %fd37, [%sd67];             // navier1.f:5887 : 0[$$arg_ptr_acc_sm1_t24_t103,$$lcs_14_t83,ex].L
+      mul.rn.f64           %fd38, %fd2, %fd37;         // navier1.f:5887
+      ld.global.nc.f64     %fd39, [%sd65];             // navier1.f:5887 : 0[$$arg_ptr_acc_rm1_t26_t104,$$lcs_14_t83,ex].L
+      mad.rn.f64           %fd40, %fd1, %fd39, %fd38;  // navier1.f:5887
+      ld.global.nc.f64     %fd41, [%sd63];             // navier1.f:5887 : 0[$$arg_ptr_acc_tm1_t22_t102,$$lcs_14_t83,ex].L
+      mad.rn.f64           %fd42, %fd3, %fd41, %fd40;  // navier1.f:5887
+      ld.param.s64         %sd68, [$$arg_ptr_acc_du_t30_t106];// navier1.f:5887 : $$arg_ptr_acc_du_t30_t106
+      add.s64              %sd69, %sd68, %sd61;        // navier1.f:5887
+      st.global.f64        [%sd69], %fd42;             // navier1.f:5887 : 0[$$arg_ptr_acc_du_t30_t106,$$lcs_14_t83].L
+$dudxyz_acc_$ck_L5873_4__l102__:
+      exit;
+      } // dudxyz_acc_$ck_L5873_4
+
+
+      .entry cdtp_acc_$ck_L5980_5(
+               .param .s64 $$arg_ptr_acc_jacm1_t25_t182,
+               .param .s64 $$arg_ptr_acc_bm1_t27_t183,
+               .param .s64 $$arg_ptr_acc_work1_t29_t184,
+               .param .s64 $$arg_ptr_acc_tmp3_t31_t185,
+               .param .s64 $$arg_ptr_acc_tmp2_t33_t186,
+               .param .s64 $$arg_ptr_acc_tmp1_t35_t187,
+               .param .s64 $$arg_ptr_acc_tm2_t37_t188,
+               .param .s64 $$arg_ptr_acc_sm2_t39_t189,
+               .param .s64 $$arg_ptr_acc_rm2_t41_t190,
+               .param .s64 $$arg_ptr_acc_x_t43_t191,
+               .param .s32 $$_arg_acc_nelv_t63_t192,
+               .param .s32 $$_arg_acc_nx2_t64_t193,
+               .param .s32 $$_arg_acc_ny2_t65_t194,
+               .param .s32 $$_arg_acc_nz2_t66_t195 )
+      {
+      .reg .pred %p<12>;
+      .reg .b32  %b<6>;
+      .reg .s32  %s<16>;
+      .reg .s64  %sd<52>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<34>;
+      //
+      .loc                 1  5980  0
+      .loc                 1  5981  0
+      ld.param.s32         %s1, [$$_arg_acc_nelv_t63_t192];// navier1.f:5981 : $$mr_nelv_6_t154
+      setp.le.s32          %p1, %s1, 0;                // navier1.f:5981
+      @%p1 bra             $cdtp_acc_$ck_L5980_5__l95__;// navier1.f:5981
+      .loc                 1  5982  0
+      ld.param.s32         %s3, [$$_arg_acc_nz2_t66_t195];// navier1.f:5982 : $$mr_nz2_7_t155
+      setp.le.s32          %p2, %s3, 0;                // navier1.f:5982
+      @%p2 bra             $cdtp_acc_$ck_L5980_5__l95__;// navier1.f:5982
+      .loc                 1  5983  0
+      ld.param.s32         %s5, [$$_arg_acc_ny2_t65_t194];// navier1.f:5983 : $$mr_ny2_8_t156
+      setp.le.s32          %p3, %s5, 0;                // navier1.f:5983
+      @%p3 bra             $cdtp_acc_$ck_L5980_5__l95__;// navier1.f:5983
+      .loc                 1  5984  0
+      ld.param.s32         %s6, [$$_arg_acc_nx2_t64_t193];// navier1.f:5984 : $$mr_nx2_9_t157
+      setp.le.s32          %p4, %s6, 0;                // navier1.f:5984
+      @%p4 bra             $cdtp_acc_$ck_L5980_5__l95__;// navier1.f:5984
+      .loc                 1  5981  0
+      mov.u32              %u1, %ntid.x;               // navier1.f:5981
+      mov.u32              %u2, %ctaid.x;              // navier1.f:5981
+      mov.u32              %u3, %tid.x;                // navier1.f:5981
+      mad.lo.u32           %s2, %u1, %u2, %u3;         // navier1.f:5981 : $$id_t54
+      setp.ge.s32          %p5, %s2, %s1;              // navier1.f:5981
+      @%p5 bra             $cdtp_acc_$ck_L5980_5__l95__;// navier1.f:5981
+      .loc                 1  5985  0
+      mul.lo.s32           %s4, %s2, 1000;             // navier1.f:5985 : $$sr_e3_t117
+      .loc                 1  5991  0
+      cvt.s64.s32          %sd5, %s3;                  // navier1.f:5991
+      .loc                 1  5982  0
+      neg.s64              %sd4, %sd5;                 // navier1.f:5982 : $$induc03_s51_t181
+$cdtp_acc_$ck_L5980_5__l22__:
+      .loc                 1  5985  0
+      mov.s32              %s9, %s4;                   // navier1.f:5985 : $$sr_e1_t115
+      .loc                 1  5990  0
+      cvt.s64.s32          %sd6, %s5;                  // navier1.f:5990
+      .loc                 1  5983  0
+      neg.s64              %sd3, %sd6;                 // navier1.f:5983 : $$induc02_s50_t180
+$cdtp_acc_$ck_L5980_5__l25__:
+      .loc                 1  5984  0
+      mov.s32              %s8, 0;                     // navier1.f:5984 : $$i_l5984_188_t111
+      .loc                 1  5989  0
+      mov.s32              %s7, %s6;                   // navier1.f:5989 : $$lis_b0_t118
+      cvt.s64.s32          %sd7, %s6;                  // navier1.f:5989
+      setp.gt.s64          %p6, 2, %sd7;               // navier1.f:5989
+      @%p6 bra             $cdtp_acc_$ck_L5980_5__l33__;// navier1.f:5989
+      .loc                 1  5984  0
+      shr.b32              %b1, %s7, 31;               // navier1.f:5984
+      add.s32              %s10, %s7, %b1;             // navier1.f:5984
+      and.b32              %b2, %s10, 0xfffffffffffffffe;// navier1.f:5984
+      add.s32              %s11, %b2, 1;               // navier1.f:5984
+      shr.b32              %b3, %s11, 1;               // navier1.f:5984
+      neg.s32              %s12, %b3;                  // navier1.f:5984
+      cvt.s64.s32          %sd1, %s12;                 // navier1.f:5984 : $$induc01_s39_t169
+$cdtp_acc_$ck_L5980_5__l29__:
+      .loc                 1  5985  0
+      add.s32              %s13, %s9, %s8;             // navier1.f:5985
+      ld.param.s64         %sd8, [$$arg_ptr_acc_x_t43_t191];// navier1.f:5985 : $$arg_ptr_acc_x_t43_t191
+      shl.b32              %b4, %s13, 3;               // navier1.f:5985
+      cvt.s64.s32          %sd9, %b4;                  // navier1.f:5985
+      add.s64              %sd10, %sd8, %sd9;          // navier1.f:5985
+      ld.global.nc.f64     %fd1, [%sd10];              // navier1.f:5985 : 0[$$arg_ptr_acc_x_t43_t191,$$lcs_0_t158,ex].L
+      ld.global.nc.f64     %fd2, [%sd10 + 8];          // navier1.f:5985 : 1[$$arg_ptr_acc_x_t43_t191,$$lcs_0_t158,ex].L
+      ld.param.s64         %sd11, [$$arg_ptr_acc_bm1_t27_t183];// navier1.f:5985 : $$arg_ptr_acc_bm1_t27_t183
+      add.s64              %sd12, %sd11, %sd9;         // navier1.f:5985
+      ld.global.nc.f64     %fd3, [%sd12];              // navier1.f:5985 : 0[$$arg_ptr_acc_bm1_t27_t183,$$lcs_0_t158,ex].L
+      ld.global.nc.f64     %fd4, [%sd12 + 8];          // navier1.f:5985 : 1[$$arg_ptr_acc_bm1_t27_t183,$$lcs_0_t158,ex].L
+      ld.param.s64         %sd13, [$$arg_ptr_acc_jacm1_t25_t182];// navier1.f:5985 : $$arg_ptr_acc_jacm1_t25_t182
+      add.s64              %sd14, %sd13, %sd9;         // navier1.f:5985
+      ld.global.nc.f64     %fd5, [%sd14];              // navier1.f:5985 : 0[$$arg_ptr_acc_jacm1_t25_t182,$$lcs_0_t158,ex].L
+      ld.global.nc.f64     %fd6, [%sd14 + 8];          // navier1.f:5985 : 1[$$arg_ptr_acc_jacm1_t25_t182,$$lcs_0_t158,ex].L
+      mul.rn.f64           %fd7, %fd3, %fd1;           // navier1.f:5985
+      div.rn.f64           %fd8, %fd7, %fd5;           // navier1.f:5985
+      ld.param.s64         %sd15, [$$arg_ptr_acc_work1_t29_t184];// navier1.f:5985 : $$arg_ptr_acc_work1_t29_t184
+      add.s64              %sd16, %sd15, %sd9;         // navier1.f:5985
+      mul.rn.f64           %fd9, %fd4, %fd2;           // navier1.f:5985
+      div.rn.f64           %fd10, %fd9, %fd6;          // navier1.f:5985
+      .loc                 1  5989  0
+      add.s32              %s8, %s8, 2;                // navier1.f:5989 : $$i_l5984_188_t111
+      .loc                 1  5984  0
+      add.s64              %sd1, %sd1, 1;              // navier1.f:5984 : $$induc01_s39_t169
+      setp.lt.s64          %p7, %sd1, 0;               // navier1.f:5984
+      .loc                 1  5985  0
+      st.global.f64        [%sd16], %fd8;              // navier1.f:5985 : 0[$$arg_ptr_acc_work1_t29_t184,$$lcs_0_t158,na].L
+      .loc                 1  5986  0
+      ld.param.s64         %sd17, [$$arg_ptr_acc_rm2_t41_t190];// navier1.f:5986 : $$arg_ptr_acc_rm2_t41_t190
+      ld.param.s64         %sd18, [$$arg_ptr_acc_tmp1_t35_t187];// navier1.f:5986 : $$arg_ptr_acc_tmp1_t35_t187
+      add.s64              %sd19, %sd17, %sd9;         // navier1.f:5986
+      ld.global.nc.f64     %fd11, [%sd19];             // navier1.f:5986 : 0[$$arg_ptr_acc_rm2_t41_t190,$$lcs_0_t158,ex].L
+      ld.global.nc.f64     %fd12, [%sd19 + 8];         // navier1.f:5986 : 1[$$arg_ptr_acc_rm2_t41_t190,$$lcs_0_t158,ex].L
+      mul.rn.f64           %fd13, %fd8, %fd11;         // navier1.f:5986
+      add.s64              %sd20, %sd18, %sd9;         // navier1.f:5986
+      mul.rn.f64           %fd14, %fd10, %fd12;        // navier1.f:5986
+      st.global.f64        [%sd20], %fd13;             // navier1.f:5986 : 0[$$arg_ptr_acc_tmp1_t35_t187,$$lcs_0_t158,na].L
+      .loc                 1  5987  0
+      ld.param.s64         %sd21, [$$arg_ptr_acc_sm2_t39_t189];// navier1.f:5987 : $$arg_ptr_acc_sm2_t39_t189
+      ld.param.s64         %sd22, [$$arg_ptr_acc_tmp2_t33_t186];// navier1.f:5987 : $$arg_ptr_acc_tmp2_t33_t186
+      add.s64              %sd23, %sd21, %sd9;         // navier1.f:5987
+      ld.global.nc.f64     %fd15, [%sd23];             // navier1.f:5987 : 0[$$arg_ptr_acc_sm2_t39_t189,$$lcs_0_t158,ex].L
+      ld.global.nc.f64     %fd16, [%sd23 + 8];         // navier1.f:5987 : 1[$$arg_ptr_acc_sm2_t39_t189,$$lcs_0_t158,ex].L
+      mul.rn.f64           %fd17, %fd8, %fd15;         // navier1.f:5987
+      add.s64              %sd24, %sd22, %sd9;         // navier1.f:5987
+      mul.rn.f64           %fd18, %fd10, %fd16;        // navier1.f:5987
+      st.global.f64        [%sd24], %fd17;             // navier1.f:5987 : 0[$$arg_ptr_acc_tmp2_t33_t186,$$lcs_0_t158,na].L
+      .loc                 1  5988  0
+      ld.param.s64         %sd25, [$$arg_ptr_acc_tm2_t37_t188];// navier1.f:5988 : $$arg_ptr_acc_tm2_t37_t188
+      ld.param.s64         %sd26, [$$arg_ptr_acc_tmp3_t31_t185];// navier1.f:5988 : $$arg_ptr_acc_tmp3_t31_t185
+      add.s64              %sd27, %sd25, %sd9;         // navier1.f:5988
+      ld.global.nc.f64     %fd19, [%sd27];             // navier1.f:5988 : 0[$$arg_ptr_acc_tm2_t37_t188,$$lcs_0_t158,ex].L
+      ld.global.nc.f64     %fd20, [%sd27 + 8];         // navier1.f:5988 : 1[$$arg_ptr_acc_tm2_t37_t188,$$lcs_0_t158,ex].L
+      .loc                 1  5985  0
+      st.global.f64        [%sd16 + 8], %fd10;         // navier1.f:5985 : 1[$$arg_ptr_acc_work1_t29_t184,$$lcs_0_t158,na].L
+      .loc                 1  5986  0
+      st.global.f64        [%sd20 + 8], %fd14;         // navier1.f:5986 : 1[$$arg_ptr_acc_tmp1_t35_t187,$$lcs_0_t158,na].L
+      .loc                 1  5987  0
+      st.global.f64        [%sd24 + 8], %fd18;         // navier1.f:5987 : 1[$$arg_ptr_acc_tmp2_t33_t186,$$lcs_0_t158,na].L
+      .loc                 1  5988  0
+      mul.rn.f64           %fd21, %fd8, %fd19;         // navier1.f:5988
+      add.s64              %sd28, %sd26, %sd9;         // navier1.f:5988
+      st.global.f64        [%sd28], %fd21;             // navier1.f:5988 : 0[$$arg_ptr_acc_tmp3_t31_t185,$$lcs_0_t158,na].L
+      mul.rn.f64           %fd22, %fd10, %fd20;        // navier1.f:5988
+      st.global.f64        [%sd28 + 8], %fd22;         // navier1.f:5988 : 1[$$arg_ptr_acc_tmp3_t31_t185,$$lcs_0_t158,na].L
+      .loc                 1  5984  0
+      @%p7 bra             $cdtp_acc_$ck_L5980_5__l29__;// navier1.f:5984
+$cdtp_acc_$ck_L5980_5__l33__:
+      .loc                 1  5984  0
+      cvt.s64.s32          %sd29, %s8;                 // navier1.f:5984
+      cvt.s64.s32          %sd30, %s7;                 // navier1.f:5984
+      setp.ge.s64          %p8, %sd29, %sd30;          // navier1.f:5984
+      @%p8 bra             $cdtp_acc_$ck_L5980_5__l42__;// navier1.f:5984
+      .loc                 1  5984  0
+      sub.s32              %s14, %s8, %s7;             // navier1.f:5984
+      cvt.s64.s32          %sd2, %s14;                 // navier1.f:5984 : $$induc01_s49_t179
+$cdtp_acc_$ck_L5980_5__l36__:
+      .loc                 1  5985  0
+      add.s32              %s15, %s9, %s8;             // navier1.f:5985
+      ld.param.s64         %sd31, [$$arg_ptr_acc_x_t43_t191];// navier1.f:5985 : $$arg_ptr_acc_x_t43_t191
+      shl.b32              %b5, %s15, 3;               // navier1.f:5985
+      cvt.s64.s32          %sd32, %b5;                 // navier1.f:5985
+      add.s64              %sd33, %sd31, %sd32;        // navier1.f:5985
+      ld.global.nc.f64     %fd23, [%sd33];             // navier1.f:5985 : 0[$$arg_ptr_acc_x_t43_t191,$$lcs_1_t159,ex].L
+      ld.param.s64         %sd34, [$$arg_ptr_acc_bm1_t27_t183];// navier1.f:5985 : $$arg_ptr_acc_bm1_t27_t183
+      add.s64              %sd35, %sd34, %sd32;        // navier1.f:5985
+      ld.global.nc.f64     %fd24, [%sd35];             // navier1.f:5985 : 0[$$arg_ptr_acc_bm1_t27_t183,$$lcs_1_t159,ex].L
+      ld.param.s64         %sd36, [$$arg_ptr_acc_jacm1_t25_t182];// navier1.f:5985 : $$arg_ptr_acc_jacm1_t25_t182
+      add.s64              %sd37, %sd36, %sd32;        // navier1.f:5985
+      ld.global.nc.f64     %fd25, [%sd37];             // navier1.f:5985 : 0[$$arg_ptr_acc_jacm1_t25_t182,$$lcs_1_t159,ex].L
+      mul.rn.f64           %fd26, %fd24, %fd23;        // navier1.f:5985
+      div.rn.f64           %fd27, %fd26, %fd25;        // navier1.f:5985
+      ld.param.s64         %sd38, [$$arg_ptr_acc_work1_t29_t184];// navier1.f:5985 : $$arg_ptr_acc_work1_t29_t184
+      add.s64              %sd39, %sd38, %sd32;        // navier1.f:5985
+      .loc                 1  5989  0
+      add.s32              %s8, %s8, 1;                // navier1.f:5989 : $$i_l5984_188_t111
+      .loc                 1  5984  0
+      add.s64              %sd2, %sd2, 1;              // navier1.f:5984 : $$induc01_s49_t179
+      .loc                 1  5989  0
+      setp.lt.s64          %p9, %sd2, 0;               // navier1.f:5989
+      .loc                 1  5985  0
+      st.global.f64        [%sd39], %fd27;             // navier1.f:5985 : 0[$$arg_ptr_acc_work1_t29_t184,$$lcs_1_t159,na].L
+      .loc                 1  5986  0
+      ld.param.s64         %sd40, [$$arg_ptr_acc_rm2_t41_t190];// navier1.f:5986 : $$arg_ptr_acc_rm2_t41_t190
+      ld.param.s64         %sd41, [$$arg_ptr_acc_tmp1_t35_t187];// navier1.f:5986 : $$arg_ptr_acc_tmp1_t35_t187
+      add.s64              %sd42, %sd40, %sd32;        // navier1.f:5986
+      ld.global.nc.f64     %fd28, [%sd42];             // navier1.f:5986 : 0[$$arg_ptr_acc_rm2_t41_t190,$$lcs_1_t159,ex].L
+      mul.rn.f64           %fd29, %fd27, %fd28;        // navier1.f:5986
+      add.s64              %sd43, %sd41, %sd32;        // navier1.f:5986
+      st.global.f64        [%sd43], %fd29;             // navier1.f:5986 : 0[$$arg_ptr_acc_tmp1_t35_t187,$$lcs_1_t159,na].L
+      .loc                 1  5987  0
+      ld.param.s64         %sd44, [$$arg_ptr_acc_sm2_t39_t189];// navier1.f:5987 : $$arg_ptr_acc_sm2_t39_t189
+      ld.param.s64         %sd45, [$$arg_ptr_acc_tmp2_t33_t186];// navier1.f:5987 : $$arg_ptr_acc_tmp2_t33_t186
+      add.s64              %sd46, %sd44, %sd32;        // navier1.f:5987
+      ld.global.nc.f64     %fd30, [%sd46];             // navier1.f:5987 : 0[$$arg_ptr_acc_sm2_t39_t189,$$lcs_1_t159,ex].L
+      mul.rn.f64           %fd31, %fd27, %fd30;        // navier1.f:5987
+      add.s64              %sd47, %sd45, %sd32;        // navier1.f:5987
+      st.global.f64        [%sd47], %fd31;             // navier1.f:5987 : 0[$$arg_ptr_acc_tmp2_t33_t186,$$lcs_1_t159,na].L
+      .loc                 1  5988  0
+      ld.param.s64         %sd48, [$$arg_ptr_acc_tm2_t37_t188];// navier1.f:5988 : $$arg_ptr_acc_tm2_t37_t188
+      ld.param.s64         %sd49, [$$arg_ptr_acc_tmp3_t31_t185];// navier1.f:5988 : $$arg_ptr_acc_tmp3_t31_t185
+      add.s64              %sd50, %sd48, %sd32;        // navier1.f:5988
+      ld.global.nc.f64     %fd32, [%sd50];             // navier1.f:5988 : 0[$$arg_ptr_acc_tm2_t37_t188,$$lcs_1_t159,ex].L
+      mul.rn.f64           %fd33, %fd27, %fd32;        // navier1.f:5988
+      add.s64              %sd51, %sd49, %sd32;        // navier1.f:5988
+      st.global.f64        [%sd51], %fd33;             // navier1.f:5988 : 0[$$arg_ptr_acc_tmp3_t31_t185,$$lcs_1_t159,na].L
+      .loc                 1  5989  0
+      @%p9 bra             $cdtp_acc_$ck_L5980_5__l36__;// navier1.f:5989
+$cdtp_acc_$ck_L5980_5__l42__:
+      .loc                 1  5985  0
+      add.s32              %s9, %s9, 10;               // navier1.f:5985 : $$sr_e1_t115
+      .loc                 1  5983  0
+      add.s64              %sd3, %sd3, 1;              // navier1.f:5983 : $$induc02_s50_t180
+      .loc                 1  5990  0
+      setp.lt.s64          %p10, %sd3, 0;              // navier1.f:5990
+      @%p10 bra            $cdtp_acc_$ck_L5980_5__l25__;// navier1.f:5990
+      .loc                 1  5985  0
+      add.s32              %s4, %s4, 100;              // navier1.f:5985 : $$sr_e3_t117
+      .loc                 1  5982  0
+      add.s64              %sd4, %sd4, 1;              // navier1.f:5982 : $$induc03_s51_t181
+      .loc                 1  5991  0
+      setp.lt.s64          %p11, %sd4, 0;              // navier1.f:5991
+      @%p11 bra            $cdtp_acc_$ck_L5980_5__l22__;// navier1.f:5991
+$cdtp_acc_$ck_L5980_5__l95__:
+      exit;
+      } // cdtp_acc_$ck_L5980_5
+
+
+      .entry cdtp_acc_$ck_L5995_6(
+               .param .s64 $$arg_ptr_acc_dztm12_t19_t196,
+               .param .s64 $$arg_ptr_acc_dytm12_t21_t197,
+               .param .s64 $$arg_ptr_acc_dxtm12_t23_t198,
+               .param .s64 $$arg_ptr_acc_tmp3_t31_t199,
+               .param .s64 $$arg_ptr_acc_tmp2_t33_t200,
+               .param .s64 $$arg_ptr_acc_tmp1_t35_t201,
+               .param .s64 $$arg_ptr_acc_dtx_t45_t202,
+               .param .s64 $$arg_ptr_acc_dudr_t47_t203,
+               .param .s64 $$arg_ptr_acc_duds_t49_t204,
+               .param .s64 $$arg_ptr_acc_dudt_t51_t205,
+               .param .s32 $$_arg_acc_nelv_t67_t206,
+               .param .s32 $$_arg_acc_nx1_t68_t207,
+               .param .s32 $$_arg_acc_nx2_t69_t208,
+               .param .s32 $$_arg_acc_ny2_t70_t209,
+               .param .s32 $$_arg_acc_nz2_t71_t210 )
+      {
+      .reg .pred %p<11>;
+      .reg .b32  %b<30>;
+      .reg .s32  %s<64>;
+      .reg .s64  %sd<88>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<42>;
+      //
+      .loc                 1  5995  0
+      .loc                 1  5996  0
+      ld.param.s32         %s4, [$$_arg_acc_nelv_t67_t206];// navier1.f:5996 : $$mr_nelv_28_t121
+      setp.le.s32          %p1, %s4, 0;                // navier1.f:5996
+      @%p1 bra             $cdtp_acc_$ck_L5995_6__l98__;// navier1.f:5996
+      .loc                 1  5997  0
+      ld.param.s32         %s3, [$$_arg_acc_nz2_t71_t210];// navier1.f:5997 : $$mr_nz2_29_t122
+      setp.le.s32          %p2, %s3, 0;                // navier1.f:5997
+      @%p2 bra             $cdtp_acc_$ck_L5995_6__l98__;// navier1.f:5997
+      .loc                 1  5998  0
+      ld.param.s32         %s2, [$$_arg_acc_ny2_t70_t209];// navier1.f:5998 : $$mr_ny2_30_t123
+      setp.le.s32          %p3, %s2, 0;                // navier1.f:5998
+      @%p3 bra             $cdtp_acc_$ck_L5995_6__l98__;// navier1.f:5998
+      .loc                 1  5999  0
+      ld.param.s32         %s1, [$$_arg_acc_nx2_t69_t208];// navier1.f:5999 : $$mr_nx2_31_t124
+      setp.le.s32          %p4, %s1, 0;                // navier1.f:5999
+      @%p4 bra             $cdtp_acc_$ck_L5995_6__l98__;// navier1.f:5999
+      .loc                 1  5999  0
+      mov.u32              %u1, %ntid.x;               // navier1.f:5999
+      mov.u32              %u2, %ctaid.x;              // navier1.f:5999
+      mov.u32              %u3, %tid.x;                // navier1.f:5999
+      mad.lo.u32           %s6, %u1, %u2, %u3;         // navier1.f:5999 : $$id_t62
+      mov.s32              %s5, %s1;                   // navier1.f:5999 : $$lcs_nx2_2_t126
+      mov.s32              %s7, %s2;                   // navier1.f:5999 : $$lcs_ny2_3_t127
+      mul.lo.s32           %s26, %s3, %s1;             // navier1.f:5999
+      mul.lo.s32           %s27, %s4, %s2;             // navier1.f:5999
+      mul.lo.s32           %s28, %s26, %s27;           // navier1.f:5999
+      setp.ge.s32          %p5, %s6, %s28;             // navier1.f:5999
+      @%p5 bra             $cdtp_acc_$ck_L5995_6__l98__;// navier1.f:5999
+      .loc                 1  5999  0
+      mul.lo.s32           %s29, %s3, %s2;             // navier1.f:5999
+      mul.lo.s32           %s30, %s5, %s29;            // navier1.f:5999
+      div.s32              %s31, %s6, %s30;            // navier1.f:5999
+      mul.lo.s32           %s32, %s2, %s1;             // navier1.f:5999
+      mul.lo.s32           %s33, %s31, %s32;           // navier1.f:5999
+      neg.s32              %s34, %s33;                 // navier1.f:5999
+      mad.lo.s32           %s35, %s3, %s34, %s6;       // navier1.f:5999
+      mul.lo.s32           %s36, %s7, %s1;             // navier1.f:5999
+      div.s32              %s11, %s35, %s36;           // navier1.f:5999 : $$i_l5997_166_t97
+      mul.lo.s32           %s37, %s1, %s11;            // navier1.f:5999
+      neg.s32              %s38, %s37;                 // navier1.f:5999
+      mad.lo.s32           %s39, %s2, %s38, %s35;      // navier1.f:5999
+      div.s32              %s9, %s39, %s1;             // navier1.f:5999 : $$i_l5998_162_t96
+      neg.s32              %s40, %s1;                  // navier1.f:5999
+      mad.lo.s32           %s8, %s9, %s40, %s39;       // navier1.f:5999 : $$clip_p0_t99
+      .loc                 1  6000  0
+      mul.lo.s32           %s15, %s31, 1000;           // navier1.f:6000 : $$lcs_il5996_9_t131
+      add.s32              %s13, %s8, %s15;            // navier1.f:6000 : $$lcs_i_l5999_8_t130
+      mul.lo.s32           %s14, %s11, 100;            // navier1.f:6000 : $$lcs_il5997_10_t132
+      add.s32              %s10, %s13, %s14;           // navier1.f:6000 : $$cs_1_t134
+      mul.lo.s32           %s12, %s9, 10;              // navier1.f:6000 : $$lcs_il5998_7_t129
+      add.s32              %s25, %s10, %s12;           // navier1.f:6000 : $$cs_2_t135
+      ld.param.s64         %sd3, [$$arg_ptr_acc_dudr_t47_t203];// navier1.f:6000 : $$arg_ptr_acc_dudr_t47_t203
+      shl.b32              %b1, %s25, 3;               // navier1.f:6000
+      cvt.s64.s32          %sd4, %b1;                  // navier1.f:6000
+      add.s64              %sd5, %sd3, %sd4;           // navier1.f:6000
+      st.global.f64        [%sd5], 0d0000000000000000; // navier1.f:6000 : 0[$$arg_ptr_acc_dudr_t47_t203,$$cs_2_t135].L
+      .loc                 1  6001  0
+      ld.param.s64         %sd6, [$$arg_ptr_acc_duds_t49_t204];// navier1.f:6001 : $$arg_ptr_acc_duds_t49_t204
+      add.s64              %sd7, %sd6, %sd4;           // navier1.f:6001
+      st.global.f64        [%sd7], 0d0000000000000000; // navier1.f:6001 : 0[$$arg_ptr_acc_duds_t49_t204,$$cs_2_t135].L
+      .loc                 1  6002  0
+      ld.param.s64         %sd8, [$$arg_ptr_acc_dudt_t51_t205];// navier1.f:6002 : $$arg_ptr_acc_dudt_t51_t205
+      add.s64              %sd9, %sd8, %sd4;           // navier1.f:6002
+      st.global.f64        [%sd9], 0d0000000000000000; // navier1.f:6002 : 0[$$arg_ptr_acc_dudt_t51_t205,$$cs_2_t135].L
+      .loc                 1  6004  0
+      ld.param.s32         %s16, [$$_arg_acc_nx1_t68_t207];// navier1.f:6004 : $$mr_nx1_32_t125
+      setp.le.s32          %p6, %s16, 0;               // navier1.f:6004
+      @%p6 bra             $cdtp_acc_$ck_L5995_6__l73__;// navier1.f:6004
+      .loc                 1  6004  0
+      mov.f64              %fd1, 0d0000000000000000;   // navier1.f:6004 : $sca_dudr_i0
+      mov.f64              %fd2, 0d0000000000000000;   // navier1.f:6004 : $sca_duds_i1
+      mov.f64              %fd3, 0d0000000000000000;   // navier1.f:6004 : $sca_dudt_i2
+      mov.s32              %s19, 0;                    // navier1.f:6004 : $$i_l6004_190_t101
+      .loc                 1  6005  0
+      mov.s32              %s20, %s8;                  // navier1.f:6005 : $$sr_e5_t103
+      .loc                 1  6006  0
+      mov.s32              %s22, %s9;                  // navier1.f:6006 : $$sr_e6_t104
+      mov.s32              %s21, %s10;                 // navier1.f:6006 : $$sr_e7_t105
+      .loc                 1  6007  0
+      mov.s32              %s24, %s11;                 // navier1.f:6007 : $$sr_e8_t106
+      add.s32              %s23, %s13, %s12;           // navier1.f:6007 : $$sr_e10_t108
+      .loc                 1  6005  0
+      add.s32              %s41, %s15, %s14;           // navier1.f:6005
+      add.s32              %s18, %s12, %s41;           // navier1.f:6005 : $$lis_b3_t109
+      .loc                 1  6008  0
+      mov.s32              %s17, %s16;                 // navier1.f:6008 : $$lis_b4_t110
+      cvt.s64.s32          %sd10, %s16;                // navier1.f:6008
+      setp.gt.s64          %p7, 4, %sd10;              // navier1.f:6008
+      @%p7 bra             $cdtp_acc_$ck_L5995_6__l65__;// navier1.f:6008
+      .loc                 1  6004  0
+      shr.s32              %s42, %s17, 1;              // navier1.f:6004
+      shr.b32              %b2, %s42, 30;              // navier1.f:6004
+      add.s32              %s43, %s17, %b2;            // navier1.f:6004
+      and.b32              %b3, %s43, 0xfffffffffffffffc;// navier1.f:6004
+      add.s32              %s44, %b3, 3;               // navier1.f:6004
+      shr.b32              %b4, %s44, 2;               // navier1.f:6004
+      neg.s32              %s45, %b4;                  // navier1.f:6004
+      cvt.s64.s32          %sd1, %s45;                 // navier1.f:6004 : $$induc01_s61_t142
+$cdtp_acc_$ck_L5995_6__l61__:
+      .loc                 1  6005  0
+      add.s32              %s46, %s19, %s18;           // navier1.f:6005
+      shl.b32              %b5, %s46, 3;               // navier1.f:6005
+      cvt.s64.s32          %sd11, %b5;                 // navier1.f:6005
+      ld.param.s64         %sd12, [$$arg_ptr_acc_tmp1_t35_t201];// navier1.f:6005 : $$arg_ptr_acc_tmp1_t35_t201
+      add.s64              %sd13, %sd12, %sd11;        // navier1.f:6005
+      shl.b32              %b6, %s20, 3;               // navier1.f:6005
+      cvt.s64.s32          %sd14, %b6;                 // navier1.f:6005
+      ld.param.s64         %sd15, [$$arg_ptr_acc_dxtm12_t23_t198];// navier1.f:6005 : $$arg_ptr_acc_dxtm12_t23_t198
+      add.s64              %sd16, %sd15, %sd14;        // navier1.f:6005
+      ld.global.nc.f64     %fd4, [%sd16];              // navier1.f:6005 : 0[$$arg_ptr_acc_dxtm12_t23_t198,$$sr_e5_t103,ex].L
+      ld.global.nc.f64     %fd5, [%sd13];              // navier1.f:6005 : 0[$$arg_ptr_acc_tmp1_t35_t201,$$lcs_11_t133,ex].L
+      mad.rn.f64           %fd6, %fd4, %fd5, %fd1;     // navier1.f:6005
+      .loc                 1  6006  0
+      shl.b32              %b7, %s21, 3;               // navier1.f:6006
+      cvt.s64.s32          %sd17, %b7;                 // navier1.f:6006
+      ld.param.s64         %sd18, [$$arg_ptr_acc_tmp2_t33_t200];// navier1.f:6006 : $$arg_ptr_acc_tmp2_t33_t200
+      add.s64              %sd19, %sd18, %sd17;        // navier1.f:6006
+      shl.b32              %b8, %s22, 3;               // navier1.f:6006
+      cvt.s64.s32          %sd20, %b8;                 // navier1.f:6006
+      ld.param.s64         %sd21, [$$arg_ptr_acc_dytm12_t21_t197];// navier1.f:6006 : $$arg_ptr_acc_dytm12_t21_t197
+      add.s64              %sd22, %sd21, %sd20;        // navier1.f:6006
+      ld.global.nc.f64     %fd7, [%sd22];              // navier1.f:6006 : 0[$$arg_ptr_acc_dytm12_t21_t197,$$sr_e6_t104,ex].L
+      ld.global.nc.f64     %fd8, [%sd19];              // navier1.f:6006 : 0[$$arg_ptr_acc_tmp2_t33_t200,$$sr_e7_t105,ex].L
+      mad.rn.f64           %fd9, %fd7, %fd8, %fd2;     // navier1.f:6006
+      .loc                 1  6007  0
+      shl.b32              %b9, %s23, 3;               // navier1.f:6007
+      cvt.s64.s32          %sd23, %b9;                 // navier1.f:6007
+      ld.param.s64         %sd24, [$$arg_ptr_acc_tmp3_t31_t199];// navier1.f:6007 : $$arg_ptr_acc_tmp3_t31_t199
+      add.s64              %sd25, %sd24, %sd23;        // navier1.f:6007
+      shl.b32              %b10, %s24, 3;              // navier1.f:6007
+      cvt.s64.s32          %sd26, %b10;                // navier1.f:6007
+      ld.param.s64         %sd27, [$$arg_ptr_acc_dztm12_t19_t196];// navier1.f:6007 : $$arg_ptr_acc_dztm12_t19_t196
+      add.s64              %sd28, %sd27, %sd26;        // navier1.f:6007
+      ld.global.nc.f64     %fd10, [%sd28];             // navier1.f:6007 : 0[$$arg_ptr_acc_dztm12_t19_t196,$$sr_e8_t106,ex].L
+      ld.global.nc.f64     %fd11, [%sd25];             // navier1.f:6007 : 0[$$arg_ptr_acc_tmp3_t31_t199,$$sr_e10_t108,ex].L
+      mad.rn.f64           %fd12, %fd10, %fd11, %fd3;  // navier1.f:6007
+      .loc                 1  6005  0
+      add.s32              %s47, %s20, 10;             // navier1.f:6005
+      .loc                 1  6006  0
+      add.s32              %s48, %s22, 10;             // navier1.f:6006
+      add.s32              %s49, %s21, 10;             // navier1.f:6006
+      .loc                 1  6007  0
+      add.s32              %s50, %s24, 10;             // navier1.f:6007
+      add.s32              %s51, %s23, 100;            // navier1.f:6007
+      .loc                 1  6005  0
+      add.s64              %sd29, %sd12, %sd11;        // navier1.f:6005
+      ld.global.nc.f64     %fd13, [%sd29 + 8];         // navier1.f:6005 : 1[$$arg_ptr_acc_tmp1_t35_t201,$$lcs_11_t133,ex].L
+      ld.global.nc.f64     %fd14, [%sd16 + 80];        // navier1.f:6005 : 0[$$arg_ptr_acc_dxtm12_t23_t198,$sr_s11,ex].L
+      mad.rn.f64           %fd1, %fd14, %fd13, %fd6;   // navier1.f:6005 : $sca_dudr_i0
+      .loc                 1  6006  0
+      ld.global.nc.f64     %fd15, [%sd22 + 80];        // navier1.f:6006 : 0[$$arg_ptr_acc_dytm12_t21_t197,$sr_s13,ex].L
+      ld.global.nc.f64     %fd16, [%sd19 + 80];        // navier1.f:6006 : 0[$$arg_ptr_acc_tmp2_t33_t200,$sr_s12,ex].L
+      mad.rn.f64           %fd2, %fd15, %fd16, %fd9;   // navier1.f:6006 : $sca_duds_i1
+      .loc                 1  6007  0
+      ld.global.nc.f64     %fd17, [%sd28 + 80];        // navier1.f:6007 : 0[$$arg_ptr_acc_dztm12_t19_t196,$sr_s15,ex].L
+      ld.global.nc.f64     %fd18, [%sd25 + 800];       // navier1.f:6007 : 0[$$arg_ptr_acc_tmp3_t31_t199,$sr_s14,ex].L
+      mad.rn.f64           %fd3, %fd17, %fd18, %fd12;  // navier1.f:6007 : $sca_dudt_i2
+      .loc                 1  6005  0
+      add.s32              %s52, %s47, 10;             // navier1.f:6005
+      .loc                 1  6006  0
+      add.s32              %s53, %s48, 10;             // navier1.f:6006
+      add.s32              %s54, %s49, 10;             // navier1.f:6006
+      .loc                 1  6007  0
+      add.s32              %s55, %s50, 10;             // navier1.f:6007
+      add.s32              %s56, %s51, 100;            // navier1.f:6007
+      .loc                 1  6005  0
+      shl.b32              %b11, %s47, 3;              // navier1.f:6005
+      cvt.s64.s32          %sd30, %b11;                // navier1.f:6005
+      add.s64              %sd31, %sd15, %sd30;        // navier1.f:6005
+      ld.global.nc.f64     %fd19, [%sd31 + 80];        // navier1.f:6005 : 0[$$arg_ptr_acc_dxtm12_t23_t198,$sr_s16,ex].L
+      ld.global.nc.f64     %fd20, [%sd29 + 16];        // navier1.f:6005 : 2[$$arg_ptr_acc_tmp1_t35_t201,$$lcs_11_t133,ex].L
+      mad.rn.f64           %fd1, %fd19, %fd20, %fd1;   // navier1.f:6005 : $sca_dudr_i0
+      .loc                 1  6006  0
+      shl.b32              %b12, %s48, 3;              // navier1.f:6006
+      cvt.s64.s32          %sd32, %b12;                // navier1.f:6006
+      add.s64              %sd33, %sd21, %sd32;        // navier1.f:6006
+      shl.b32              %b13, %s49, 3;              // navier1.f:6006
+      cvt.s64.s32          %sd34, %b13;                // navier1.f:6006
+      add.s64              %sd35, %sd18, %sd34;        // navier1.f:6006
+      ld.global.nc.f64     %fd21, [%sd35 + 80];        // navier1.f:6006 : 0[$$arg_ptr_acc_tmp2_t33_t200,$sr_s17,ex].L
+      ld.global.nc.f64     %fd22, [%sd33 + 80];        // navier1.f:6006 : 0[$$arg_ptr_acc_dytm12_t21_t197,$sr_s18,ex].L
+      mad.rn.f64           %fd2, %fd22, %fd21, %fd2;   // navier1.f:6006 : $sca_duds_i1
+      .loc                 1  6007  0
+      shl.b32              %b14, %s50, 3;              // navier1.f:6007
+      cvt.s64.s32          %sd36, %b14;                // navier1.f:6007
+      add.s64              %sd37, %sd27, %sd36;        // navier1.f:6007
+      shl.b32              %b15, %s51, 3;              // navier1.f:6007
+      cvt.s64.s32          %sd38, %b15;                // navier1.f:6007
+      add.s64              %sd39, %sd24, %sd38;        // navier1.f:6007
+      ld.global.nc.f64     %fd23, [%sd39 + 800];       // navier1.f:6007 : 0[$$arg_ptr_acc_tmp3_t31_t199,$sr_s19,ex].L
+      ld.global.nc.f64     %fd24, [%sd37 + 80];        // navier1.f:6007 : 0[$$arg_ptr_acc_dztm12_t19_t196,$sr_s20,ex].L
+      mad.rn.f64           %fd3, %fd24, %fd23, %fd3;   // navier1.f:6007 : $sca_dudt_i2
+      .loc                 1  6005  0
+      add.s32              %s57, %s52, 10;             // navier1.f:6005
+      .loc                 1  6006  0
+      add.s32              %s58, %s53, 10;             // navier1.f:6006
+      add.s32              %s59, %s54, 10;             // navier1.f:6006
+      .loc                 1  6007  0
+      add.s32              %s60, %s55, 10;             // navier1.f:6007
+      add.s32              %s61, %s56, 100;            // navier1.f:6007
+      .loc                 1  6005  0
+      shl.b32              %b16, %s52, 3;              // navier1.f:6005
+      cvt.s64.s32          %sd40, %b16;                // navier1.f:6005
+      add.s64              %sd41, %sd15, %sd40;        // navier1.f:6005
+      shl.b32              %b17, %s46, 3;              // navier1.f:6005
+      cvt.s64.s32          %sd42, %b17;                // navier1.f:6005
+      add.s64              %sd43, %sd12, %sd42;        // navier1.f:6005
+      ld.global.nc.f64     %fd25, [%sd43 + 24];        // navier1.f:6005 : 3[$$arg_ptr_acc_tmp1_t35_t201,$$lcs_11_t133,ex].L
+      ld.global.nc.f64     %fd26, [%sd41 + 80];        // navier1.f:6005 : 0[$$arg_ptr_acc_dxtm12_t23_t198,$sr_s21,ex].L
+      mad.rn.f64           %fd1, %fd26, %fd25, %fd1;   // navier1.f:6005 : $sca_dudr_i0
+      .loc                 1  6006  0
+      shl.b32              %b18, %s53, 3;              // navier1.f:6006
+      cvt.s64.s32          %sd44, %b18;                // navier1.f:6006
+      add.s64              %sd45, %sd21, %sd44;        // navier1.f:6006
+      shl.b32              %b19, %s54, 3;              // navier1.f:6006
+      cvt.s64.s32          %sd46, %b19;                // navier1.f:6006
+      add.s64              %sd47, %sd18, %sd46;        // navier1.f:6006
+      ld.global.nc.f64     %fd27, [%sd47 + 80];        // navier1.f:6006 : 0[$$arg_ptr_acc_tmp2_t33_t200,$sr_s22,ex].L
+      ld.global.nc.f64     %fd28, [%sd45 + 80];        // navier1.f:6006 : 0[$$arg_ptr_acc_dytm12_t21_t197,$sr_s23,ex].L
+      mad.rn.f64           %fd2, %fd28, %fd27, %fd2;   // navier1.f:6006 : $sca_duds_i1
+      .loc                 1  6007  0
+      shl.b32              %b20, %s55, 3;              // navier1.f:6007
+      cvt.s64.s32          %sd48, %b20;                // navier1.f:6007
+      add.s64              %sd49, %sd27, %sd48;        // navier1.f:6007
+      shl.b32              %b21, %s56, 3;              // navier1.f:6007
+      cvt.s64.s32          %sd50, %b21;                // navier1.f:6007
+      add.s64              %sd51, %sd24, %sd50;        // navier1.f:6007
+      ld.global.nc.f64     %fd29, [%sd51 + 800];       // navier1.f:6007 : 0[$$arg_ptr_acc_tmp3_t31_t199,$sr_s24,ex].L
+      ld.global.nc.f64     %fd30, [%sd49 + 80];        // navier1.f:6007 : 0[$$arg_ptr_acc_dztm12_t19_t196,$sr_s25,ex].L
+      mad.rn.f64           %fd3, %fd30, %fd29, %fd3;   // navier1.f:6007 : $sca_dudt_i2
+      .loc                 1  6005  0
+      add.s32              %s20, %s57, 10;             // navier1.f:6005 : $$sr_e5_t103
+      .loc                 1  6006  0
+      add.s32              %s22, %s58, 10;             // navier1.f:6006 : $$sr_e6_t104
+      add.s32              %s21, %s59, 10;             // navier1.f:6006 : $$sr_e7_t105
+      .loc                 1  6007  0
+      add.s32              %s24, %s60, 10;             // navier1.f:6007 : $$sr_e8_t106
+      add.s32              %s23, %s61, 100;            // navier1.f:6007 : $$sr_e10_t108
+      .loc                 1  6008  0
+      add.s32              %s19, %s19, 4;              // navier1.f:6008 : $$i_l6004_190_t101
+      .loc                 1  6004  0
+      add.s64              %sd1, %sd1, 1;              // navier1.f:6004 : $$induc01_s61_t142
+      setp.lt.s64          %p8, %sd1, 0;               // navier1.f:6004
+      @%p8 bra             $cdtp_acc_$ck_L5995_6__l61__;// navier1.f:6004
+$cdtp_acc_$ck_L5995_6__l65__:
+      .loc                 1  6004  0
+      cvt.s64.s32          %sd52, %s19;                // navier1.f:6004
+      cvt.s64.s32          %sd53, %s17;                // navier1.f:6004
+      setp.ge.s64          %p9, %sd52, %sd53;          // navier1.f:6004
+      @%p9 bra             $cdtp_acc_$ck_L5995_6__l72__;// navier1.f:6004
+      .loc                 1  6004  0
+      sub.s32              %s62, %s19, %s17;           // navier1.f:6004
+      cvt.s64.s32          %sd2, %s62;                 // navier1.f:6004 : $$induc01_s68_t149
+$cdtp_acc_$ck_L5995_6__l68__:
+      .loc                 1  6005  0
+      add.s32              %s63, %s19, %s18;           // navier1.f:6005
+      shl.b32              %b22, %s63, 3;              // navier1.f:6005
+      cvt.s64.s32          %sd54, %b22;                // navier1.f:6005
+      ld.param.s64         %sd55, [$$arg_ptr_acc_tmp1_t35_t201];// navier1.f:6005 : $$arg_ptr_acc_tmp1_t35_t201
+      add.s64              %sd56, %sd55, %sd54;        // navier1.f:6005
+      shl.b32              %b23, %s20, 3;              // navier1.f:6005
+      cvt.s64.s32          %sd57, %b23;                // navier1.f:6005
+      ld.param.s64         %sd58, [$$arg_ptr_acc_dxtm12_t23_t198];// navier1.f:6005 : $$arg_ptr_acc_dxtm12_t23_t198
+      add.s64              %sd59, %sd58, %sd57;        // navier1.f:6005
+      ld.global.nc.f64     %fd31, [%sd59];             // navier1.f:6005 : 0[$$arg_ptr_acc_dxtm12_t23_t198,$$sr_e5_t103,ex].L
+      ld.global.nc.f64     %fd32, [%sd56];             // navier1.f:6005 : 0[$$arg_ptr_acc_tmp1_t35_t201,$$i_l6004_190_t101 + $$lis_b3_t109,ex].L
+      mad.rn.f64           %fd1, %fd31, %fd32, %fd1;   // navier1.f:6005 : $sca_dudr_i0
+      .loc                 1  6006  0
+      shl.b32              %b24, %s21, 3;              // navier1.f:6006
+      cvt.s64.s32          %sd60, %b24;                // navier1.f:6006
+      ld.param.s64         %sd61, [$$arg_ptr_acc_tmp2_t33_t200];// navier1.f:6006 : $$arg_ptr_acc_tmp2_t33_t200
+      add.s64              %sd62, %sd61, %sd60;        // navier1.f:6006
+      shl.b32              %b25, %s22, 3;              // navier1.f:6006
+      cvt.s64.s32          %sd63, %b25;                // navier1.f:6006
+      ld.param.s64         %sd64, [$$arg_ptr_acc_dytm12_t21_t197];// navier1.f:6006 : $$arg_ptr_acc_dytm12_t21_t197
+      add.s64              %sd65, %sd64, %sd63;        // navier1.f:6006
+      ld.global.nc.f64     %fd33, [%sd65];             // navier1.f:6006 : 0[$$arg_ptr_acc_dytm12_t21_t197,$$sr_e6_t104,ex].L
+      ld.global.nc.f64     %fd34, [%sd62];             // navier1.f:6006 : 0[$$arg_ptr_acc_tmp2_t33_t200,$$sr_e7_t105,ex].L
+      mad.rn.f64           %fd2, %fd33, %fd34, %fd2;   // navier1.f:6006 : $sca_duds_i1
+      .loc                 1  6007  0
+      shl.b32              %b26, %s23, 3;              // navier1.f:6007
+      cvt.s64.s32          %sd66, %b26;                // navier1.f:6007
+      ld.param.s64         %sd67, [$$arg_ptr_acc_tmp3_t31_t199];// navier1.f:6007 : $$arg_ptr_acc_tmp3_t31_t199
+      add.s64              %sd68, %sd67, %sd66;        // navier1.f:6007
+      shl.b32              %b27, %s24, 3;              // navier1.f:6007
+      cvt.s64.s32          %sd69, %b27;                // navier1.f:6007
+      ld.param.s64         %sd70, [$$arg_ptr_acc_dztm12_t19_t196];// navier1.f:6007 : $$arg_ptr_acc_dztm12_t19_t196
+      add.s64              %sd71, %sd70, %sd69;        // navier1.f:6007
+      ld.global.nc.f64     %fd35, [%sd71];             // navier1.f:6007 : 0[$$arg_ptr_acc_dztm12_t19_t196,$$sr_e8_t106,ex].L
+      ld.global.nc.f64     %fd36, [%sd68];             // navier1.f:6007 : 0[$$arg_ptr_acc_tmp3_t31_t199,$$sr_e10_t108,ex].L
+      mad.rn.f64           %fd3, %fd35, %fd36, %fd3;   // navier1.f:6007 : $sca_dudt_i2
+      .loc                 1  6005  0
+      add.s32              %s20, %s20, 10;             // navier1.f:6005 : $$sr_e5_t103
+      .loc                 1  6006  0
+      add.s32              %s22, %s22, 10;             // navier1.f:6006 : $$sr_e6_t104
+      add.s32              %s21, %s21, 10;             // navier1.f:6006 : $$sr_e7_t105
+      .loc                 1  6007  0
+      add.s32              %s24, %s24, 10;             // navier1.f:6007 : $$sr_e8_t106
+      add.s32              %s23, %s23, 100;            // navier1.f:6007 : $$sr_e10_t108
+      .loc                 1  6008  0
+      add.s32              %s19, %s19, 1;              // navier1.f:6008 : $$i_l6004_190_t101
+      .loc                 1  6004  0
+      add.s64              %sd2, %sd2, 1;              // navier1.f:6004 : $$induc01_s68_t149
+      .loc                 1  6008  0
+      setp.lt.s64          %p10, %sd2, 0;              // navier1.f:6008
+      @%p10 bra            $cdtp_acc_$ck_L5995_6__l68__;// navier1.f:6008
+$cdtp_acc_$ck_L5995_6__l72__:
+      .loc                 1  6004  0
+      ld.param.s64         %sd72, [$$arg_ptr_acc_dudt_t51_t205];// navier1.f:6004 : $$arg_ptr_acc_dudt_t51_t205
+      shl.b32              %b28, %s25, 3;              // navier1.f:6004
+      cvt.s64.s32          %sd73, %b28;                // navier1.f:6004
+      add.s64              %sd74, %sd72, %sd73;        // navier1.f:6004
+      st.global.f64        [%sd74], %fd3;              // navier1.f:6004 : 0[$$arg_ptr_acc_dudt_t51_t205,$$cs_2_t135].L
+      ld.param.s64         %sd75, [$$arg_ptr_acc_duds_t49_t204];// navier1.f:6004 : $$arg_ptr_acc_duds_t49_t204
+      add.s64              %sd76, %sd75, %sd73;        // navier1.f:6004
+      st.global.f64        [%sd76], %fd2;              // navier1.f:6004 : 0[$$arg_ptr_acc_duds_t49_t204,$$cs_2_t135].L
+      ld.param.s64         %sd77, [$$arg_ptr_acc_dudr_t47_t203];// navier1.f:6004 : $$arg_ptr_acc_dudr_t47_t203
+      add.s64              %sd78, %sd77, %sd73;        // navier1.f:6004
+      st.global.f64        [%sd78], %fd1;              // navier1.f:6004 : 0[$$arg_ptr_acc_dudr_t47_t203,$$cs_2_t135].L
+$cdtp_acc_$ck_L5995_6__l73__:
+      .loc                 1  6009  0
+      shl.b32              %b29, %s25, 3;              // navier1.f:6009
+      cvt.s64.s32          %sd79, %b29;                // navier1.f:6009
+      ld.param.s64         %sd80, [$$arg_ptr_acc_duds_t49_t204];// navier1.f:6009 : $$arg_ptr_acc_duds_t49_t204
+      add.s64              %sd81, %sd80, %sd79;        // navier1.f:6009
+      ld.param.s64         %sd82, [$$arg_ptr_acc_dudr_t47_t203];// navier1.f:6009 : $$arg_ptr_acc_dudr_t47_t203
+      add.s64              %sd83, %sd82, %sd79;        // navier1.f:6009
+      ld.global.f64        %fd37, [%sd83];             // navier1.f:6009 : 0[$$arg_ptr_acc_dudr_t47_t203,$$cs_2_t135].L
+      ld.global.f64        %fd38, [%sd81];             // navier1.f:6009 : 0[$$arg_ptr_acc_duds_t49_t204,$$cs_2_t135].L
+      add.rn.f64           %fd39, %fd37, %fd38;        // navier1.f:6009
+      ld.param.s64         %sd84, [$$arg_ptr_acc_dudt_t51_t205];// navier1.f:6009 : $$arg_ptr_acc_dudt_t51_t205
+      add.s64              %sd85, %sd84, %sd79;        // navier1.f:6009
+      ld.global.f64        %fd40, [%sd85];             // navier1.f:6009 : 0[$$arg_ptr_acc_dudt_t51_t205,$$cs_2_t135].L
+      add.rn.f64           %fd41, %fd40, %fd39;        // navier1.f:6009
+      ld.param.s64         %sd86, [$$arg_ptr_acc_dtx_t45_t202];// navier1.f:6009 : $$arg_ptr_acc_dtx_t45_t202
+      add.s64              %sd87, %sd86, %sd79;        // navier1.f:6009
+      st.global.f64        [%sd87], %fd41;             // navier1.f:6009 : 0[$$arg_ptr_acc_dtx_t45_t202,$$cs_2_t135].L
+$cdtp_acc_$ck_L5995_6__l98__:
+      exit;
+      } // cdtp_acc_$ck_L5995_6
+

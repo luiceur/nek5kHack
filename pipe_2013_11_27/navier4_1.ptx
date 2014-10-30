@@ -1,0 +1,248 @@
+      .version 3.1
+      .target sm_35
+      .address_size 64
+
+      // Cray Fortran : Version 8.3.0  (u83050f83142i83148p83243a83009z83243)
+
+      .file	1	"/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier4.f"
+
+      .entry vlsc3_acc_$ck_L877_1(
+               .param .s64 $$arg_ptr_acc_b_t7_t59,
+               .param .s64 $$arg_ptr_acc_y_t9_t60,
+               .param .s64 $$arg_ptr_acc_x_t11_t61,
+               .param .s64 $$arg_ptr_reduc_ctl_t16_t62,
+               .param .s64 $$arg_ptr_reduc_val_t19_t63,
+               .param .s32 $$_arg_acc_seat_n_t21_t64,
+               .param .s64 $$arg_ptr_accshare_t23_t65 )
+      {
+      .shared .s32 reduc_share_ctl_c3__f1s109;
+      .shared .u64 $$_redfold_t42__f1s191[128];
+      //
+      .reg .pred %p<15>;
+      .reg .b32  %b<3>;
+      .reg .b64  %bd<8>;
+      .reg .s32  %s<12>;
+      .reg .s64  %sd<34>;
+      .reg .u32  %u<21>;
+      .reg .f64  %fd<31>;
+      //
+      .loc                 1  877  0
+      .loc                 1  878  0
+      ld.param.s32         %s1, [$$_arg_acc_seat_n_t21_t64];// navier4.f:878 : $$mr_n_40_t49
+      setp.le.s32          %p1, %s1, 0;                // navier4.f:878
+      @%p1 bra             $vlsc3_acc_$ck_L877_1__l116__;// navier4.f:878
+      .loc                 1  877  0
+      mov.f64              %fd2, 0d0000000000000000;   // navier4.f:877 : $$_dt_t5
+      .loc                 1  878  0
+      mov.u32              %u7, %ntid.x;               // navier4.f:878
+      mov.u32              %u8, %nctaid.x;             // navier4.f:878
+      mul.lo.u32           %s3, %u7, %u8;              // navier4.f:878 : $$numthrds_t13
+      mov.u32              %u9, %ctaid.x;              // navier4.f:878
+      mov.u32              %u10, %tid.x;               // navier4.f:878
+      mad.lo.u32           %u11, %u7, %u9, %u10;       // navier4.f:878
+      mov.s32              %s2, %u11;                  // navier4.f:878 : $$i_l878_18_t37
+      mov.s32              %s4, %s1;                   // navier4.f:878 : $$lis_b0_t39
+      setp.ge.s32          %p2, %u11, %s1;             // navier4.f:878
+      @%p2 bra             $vlsc3_acc_$ck_L877_1__l84__;// navier4.f:878
+      .loc                 1  879  0
+      mov.f64              %fd1, 0d0000000000000000;   // navier4.f:879 : $sc_dt_i0
+$vlsc3_acc_$ck_L877_1__l79__:
+      .loc                 1  879  0
+      shl.b32              %b1, %s2, 3;                // navier4.f:879
+      cvt.s64.s32          %sd1, %b1;                  // navier4.f:879
+      ld.param.s64         %sd2, [$$arg_ptr_acc_b_t7_t59];// navier4.f:879 : $$arg_ptr_acc_b_t7_t59
+      add.s64              %sd3, %sd2, %sd1;           // navier4.f:879
+      ld.param.s64         %sd4, [$$arg_ptr_acc_y_t9_t60];// navier4.f:879 : $$arg_ptr_acc_y_t9_t60
+      add.s64              %sd5, %sd4, %sd1;           // navier4.f:879
+      ld.param.s64         %sd6, [$$arg_ptr_acc_x_t11_t61];// navier4.f:879 : $$arg_ptr_acc_x_t11_t61
+      add.s64              %sd7, %sd6, %sd1;           // navier4.f:879
+      ld.global.nc.f64     %fd8, [%sd7];               // navier4.f:879 : 0[$$arg_ptr_acc_x_t11_t61,$$i_l878_18_t37,ex].L
+      ld.global.nc.f64     %fd9, [%sd5];               // navier4.f:879 : 0[$$arg_ptr_acc_y_t9_t60,$$i_l878_18_t37,ex].L
+      mul.rn.f64           %fd10, %fd8, %fd9;          // navier4.f:879
+      ld.global.nc.f64     %fd11, [%sd3];              // navier4.f:879 : 0[$$arg_ptr_acc_b_t7_t59,$$i_l878_18_t37,ex].L
+      mad.rn.f64           %fd1, %fd11, %fd10, %fd1;   // navier4.f:879 : $sc_dt_i0
+      .loc                 1  880  0
+      add.s32              %s2, %s3, %s2;              // navier4.f:880 : $$i_l878_18_t37
+      setp.lt.s32          %p3, %s2, %s4;              // navier4.f:880
+      @%p3 bra             $vlsc3_acc_$ck_L877_1__l79__;// navier4.f:880
+      .loc                 1  879  0
+      mov.f64              %fd2, %fd1;                 // navier4.f:879 : $$_dt_t5
+$vlsc3_acc_$ck_L877_1__l84__:
+      .loc                 1  881  0
+      mov.u32              %u12, %tid.x;               // navier4.f:881
+      mov.u32              %u1, %tid.x;                // navier4.f:881 : $$lcs_6_t53
+      cvt.s64.u32          %sd8, %tid.x;               // navier4.f:881
+      shl.b64              %bd1, %sd8, 3;              // navier4.f:881
+      mov.s64              %sd9, $$_redfold_t42__f1s191;// navier4.f:881
+      add.s64              %sd10, %bd1, %sd9;          // navier4.f:881
+      st.volatile.shared.f64 [%sd10], %fd2;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_6_t53].L
+      bar.sync             0;                          // navier4.f:881
+      ld.volatile.shared.f64 %fd3, [%sd10];            // navier4.f:881 : $redfold_left_temp_t43
+      setp.ge.u32          %p4, %u12, 64;              // navier4.f:881
+      @%p4 bra             $vlsc3_acc_$ck_L877_1__l87__;// navier4.f:881
+      .loc                 1  881  0
+      cvt.s64.u32          %sd11, %u1;                 // navier4.f:881
+      shl.b64              %bd2, %sd11, 3;             // navier4.f:881
+      mov.s64              %sd12, $$_redfold_t42__f1s191;// navier4.f:881
+      add.s64              %sd13, %bd2, %sd12;         // navier4.f:881
+      ld.volatile.shared.f64 %fd12, [%sd13 + 512];     // navier4.f:881 : 64[ _&$$_redfold_t42,$$lcs_6_t53].L
+      add.rn.f64           %fd3, %fd3, %fd12;          // navier4.f:881 : $redfold_left_temp_t43
+      st.volatile.shared.f64 [%sd13], %fd3;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_6_t53].L
+$vlsc3_acc_$ck_L877_1__l87__:
+      .loc                 1  881  0
+      bar.sync             0;                          // navier4.f:881
+      mov.u32              %u13, %tid.x;               // navier4.f:881
+      mov.u32              %u2, %tid.x;                // navier4.f:881 : $$lcs_7_t54
+      setp.ge.u32          %p5, %u13, 32;              // navier4.f:881
+      @%p5 bra             $vlsc3_acc_$ck_L877_1__l90__;// navier4.f:881
+      .loc                 1  881  0
+      cvt.s64.u32          %sd14, %u2;                 // navier4.f:881
+      shl.b64              %bd3, %sd14, 3;             // navier4.f:881
+      mov.s64              %sd15, $$_redfold_t42__f1s191;// navier4.f:881
+      add.s64              %sd16, %bd3, %sd15;         // navier4.f:881
+      ld.volatile.shared.f64 %fd13, [%sd16 + 256];     // navier4.f:881 : 32[ _&$$_redfold_t42,$$lcs_7_t54].L
+      add.rn.f64           %fd3, %fd3, %fd13;          // navier4.f:881 : $redfold_left_temp_t43
+      st.volatile.shared.f64 [%sd16], %fd3;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_7_t54].L
+      ld.volatile.shared.f64 %fd14, [%sd16 + 128];     // navier4.f:881 : 16[ _&$$_redfold_t42,$$lcs_7_t54].L
+      add.rn.f64           %fd3, %fd3, %fd14;          // navier4.f:881 : $redfold_left_temp_t43
+      st.volatile.shared.f64 [%sd16], %fd3;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_7_t54].L
+      ld.volatile.shared.f64 %fd15, [%sd16 + 64];      // navier4.f:881 : 8[ _&$$_redfold_t42,$$lcs_7_t54].L
+      add.rn.f64           %fd3, %fd3, %fd15;          // navier4.f:881 : $redfold_left_temp_t43
+      st.volatile.shared.f64 [%sd16], %fd3;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_7_t54].L
+      ld.volatile.shared.f64 %fd16, [%sd16 + 32];      // navier4.f:881 : 4[ _&$$_redfold_t42,$$lcs_7_t54].L
+      add.rn.f64           %fd3, %fd3, %fd16;          // navier4.f:881 : $redfold_left_temp_t43
+      st.volatile.shared.f64 [%sd16], %fd3;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_7_t54].L
+      ld.volatile.shared.f64 %fd17, [%sd16 + 16];      // navier4.f:881 : 2[ _&$$_redfold_t42,$$lcs_7_t54].L
+      add.rn.f64           %fd3, %fd3, %fd17;          // navier4.f:881 : $redfold_left_temp_t43
+      st.volatile.shared.f64 [%sd16], %fd3;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_7_t54].L
+      ld.volatile.shared.f64 %fd18, [%sd16 + 8];       // navier4.f:881 : 1[ _&$$_redfold_t42,$$lcs_7_t54].L
+      add.rn.f64           %fd19, %fd3, %fd18;         // navier4.f:881
+      st.volatile.shared.f64 [%sd16], %fd19;           // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_7_t54].L
+      mov.f64              %fd3, %fd19;                // navier4.f:881 : $redfold_left_temp_t43
+$vlsc3_acc_$ck_L877_1__l90__:
+      .loc                 1  881  0
+      bar.sync             0;                          // navier4.f:881
+      ld.volatile.shared.f64 %fd5, [$$_redfold_t42__f1s191];// navier4.f:881 : $$reduc_pvt_t18
+      mov.f64              %fd4, %fd5;                 // navier4.f:881 : $redfinal_t45
+      bar.sync             0;                          // navier4.f:881
+      mov.u32              %u14, %tid.x;               // navier4.f:881
+      setp.ne.u32          %p6, %u14, 0;               // navier4.f:881
+      @%p6 bra             $vlsc3_acc_$ck_L877_1__l93__;// navier4.f:881
+      .loc                 1  881  0
+      cvt.s64.u32          %sd17, %ctaid.x;            // navier4.f:881
+      shl.b64              %bd4, %sd17, 3;             // navier4.f:881
+      ld.param.s64         %sd18, [$$arg_ptr_reduc_val_t19_t63];// navier4.f:881 : $$arg_ptr_reduc_val_t19_t63
+      add.s64              %sd19, %sd18, %bd4;         // navier4.f:881
+      st.global.f64        [%sd19], %fd4;              // navier4.f:881 : 0[$$arg_ptr_reduc_val_t19_t63,_acc_read_hw_reg(%ctaid.x)].L
+$vlsc3_acc_$ck_L877_1__l93__:
+      .loc                 1  881  0
+      membar.gl;                                       // navier4.f:881
+      mov.u32              %u15, %tid.x;               // navier4.f:881
+      setp.ne.u32          %p7, %u15, 0;               // navier4.f:881
+      @%p7 bra             $vlsc3_acc_$ck_L877_1__l96__;// navier4.f:881
+      .loc                 1  881  0
+      cvt.s32.u32          %s6, %nctaid.x;             // navier4.f:881
+      sub.s32              %s7, 1, %s6;                // navier4.f:881
+      mov.u32              %u16, %ctaid.x;             // navier4.f:881
+      setp.eq.u32          %p8, %u16, 0;               // navier4.f:881
+      selp.s32             %s8, %s7, 1, %p8;           // navier4.f:881
+      ld.param.s64         %sd20, [$$arg_ptr_reduc_ctl_t16_t62];// navier4.f:881 : $$arg_ptr_reduc_ctl_t16_t62
+      atom.global.add.s32  %s9, [%sd20], %s8;          // navier4.f:881
+      add.s32              %s10, %s8, %s9;             // navier4.f:881
+      st.volatile.shared.s32 [reduc_share_ctl_c3__f1s109], %s10;// navier4.f:881 : reduc_share_ctl_c3
+$vlsc3_acc_$ck_L877_1__l96__:
+      .loc                 1  881  0
+      bar.sync             0;                          // navier4.f:881
+      ld.volatile.shared.s32 %s11, [reduc_share_ctl_c3__f1s109];// navier4.f:881 : reduc_share_ctl_c3
+      setp.ne.s32          %p9, %s11, 0;               // navier4.f:881
+      @%p9 bra             $vlsc3_acc_$ck_L877_1__l116__;// navier4.f:881
+      .loc                 1  881  0
+      mov.f64              %fd5, 0d0000000000000000;   // navier4.f:881 : $$reduc_pvt_t18
+      cvt.s32.u32          %s5, %tid.x;                // navier4.f:881 : $$induc_p0_t38
+      mov.u32              %u17, %nctaid.x;            // navier4.f:881
+      mov.u32              %u4, %nctaid.x;             // navier4.f:881 : $$lis_b2_t41
+      setp.ge.u32          %p10, %s5, %u17;            // navier4.f:881
+      @%p10 bra            $vlsc3_acc_$ck_L877_1__l107__;// navier4.f:881
+      .loc                 1  881  0
+      mov.u32              %u3, %ntid.x;               // navier4.f:881 : $$lis_b1_t40
+$vlsc3_acc_$ck_L877_1__l103__:
+      .loc                 1  881  0
+      shl.b32              %b2, %s5, 3;                // navier4.f:881
+      cvt.s64.s32          %sd21, %b2;                 // navier4.f:881
+      ld.param.s64         %sd22, [$$arg_ptr_reduc_val_t19_t63];// navier4.f:881 : $$arg_ptr_reduc_val_t19_t63
+      add.s64              %sd23, %sd22, %sd21;        // navier4.f:881
+      ld.global.f64        %fd20, [%sd23];             // navier4.f:881 : 0[$$arg_ptr_reduc_val_t19_t63,$$induc_p0_t38].L
+      add.rn.f64           %fd5, %fd5, %fd20;          // navier4.f:881 : $$reduc_pvt_t18
+      add.u32              %s5, %s5, %u3;              // navier4.f:881 : $$induc_p0_t38
+      setp.lt.u32          %p11, %s5, %u4;             // navier4.f:881
+      @%p11 bra            $vlsc3_acc_$ck_L877_1__l103__;// navier4.f:881
+$vlsc3_acc_$ck_L877_1__l107__:
+      .loc                 1  881  0
+      mov.u32              %u18, %tid.x;               // navier4.f:881
+      mov.u32              %u5, %tid.x;                // navier4.f:881 : $$lcs_10_t57
+      cvt.s64.u32          %sd24, %tid.x;              // navier4.f:881
+      shl.b64              %bd5, %sd24, 3;             // navier4.f:881
+      mov.s64              %sd25, $$_redfold_t42__f1s191;// navier4.f:881
+      add.s64              %sd26, %bd5, %sd25;         // navier4.f:881
+      st.volatile.shared.f64 [%sd26], %fd5;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_10_t57].L
+      bar.sync             0;                          // navier4.f:881
+      ld.volatile.shared.f64 %fd6, [%sd26];            // navier4.f:881 : $redfold_left_temp_t46
+      setp.ge.u32          %p12, %u18, 64;             // navier4.f:881
+      @%p12 bra            $vlsc3_acc_$ck_L877_1__l110__;// navier4.f:881
+      .loc                 1  881  0
+      cvt.s64.u32          %sd27, %u5;                 // navier4.f:881
+      shl.b64              %bd6, %sd27, 3;             // navier4.f:881
+      mov.s64              %sd28, $$_redfold_t42__f1s191;// navier4.f:881
+      add.s64              %sd29, %bd6, %sd28;         // navier4.f:881
+      ld.volatile.shared.f64 %fd21, [%sd29 + 512];     // navier4.f:881 : 64[ _&$$_redfold_t42,$$lcs_10_t57].L
+      add.rn.f64           %fd6, %fd6, %fd21;          // navier4.f:881 : $redfold_left_temp_t46
+      st.volatile.shared.f64 [%sd29], %fd6;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_10_t57].L
+$vlsc3_acc_$ck_L877_1__l110__:
+      .loc                 1  881  0
+      bar.sync             0;                          // navier4.f:881
+      mov.u32              %u19, %tid.x;               // navier4.f:881
+      mov.u32              %u6, %tid.x;                // navier4.f:881 : $$lcs_11_t58
+      setp.ge.u32          %p13, %u19, 32;             // navier4.f:881
+      @%p13 bra            $vlsc3_acc_$ck_L877_1__l113__;// navier4.f:881
+      .loc                 1  881  0
+      cvt.s64.u32          %sd30, %u6;                 // navier4.f:881
+      shl.b64              %bd7, %sd30, 3;             // navier4.f:881
+      mov.s64              %sd31, $$_redfold_t42__f1s191;// navier4.f:881
+      add.s64              %sd32, %bd7, %sd31;         // navier4.f:881
+      ld.volatile.shared.f64 %fd22, [%sd32 + 256];     // navier4.f:881 : 32[ _&$$_redfold_t42,$$lcs_11_t58].L
+      add.rn.f64           %fd6, %fd6, %fd22;          // navier4.f:881 : $redfold_left_temp_t46
+      st.volatile.shared.f64 [%sd32], %fd6;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_11_t58].L
+      ld.volatile.shared.f64 %fd23, [%sd32 + 128];     // navier4.f:881 : 16[ _&$$_redfold_t42,$$lcs_11_t58].L
+      add.rn.f64           %fd6, %fd6, %fd23;          // navier4.f:881 : $redfold_left_temp_t46
+      st.volatile.shared.f64 [%sd32], %fd6;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_11_t58].L
+      ld.volatile.shared.f64 %fd24, [%sd32 + 64];      // navier4.f:881 : 8[ _&$$_redfold_t42,$$lcs_11_t58].L
+      add.rn.f64           %fd6, %fd6, %fd24;          // navier4.f:881 : $redfold_left_temp_t46
+      st.volatile.shared.f64 [%sd32], %fd6;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_11_t58].L
+      ld.volatile.shared.f64 %fd25, [%sd32 + 32];      // navier4.f:881 : 4[ _&$$_redfold_t42,$$lcs_11_t58].L
+      add.rn.f64           %fd6, %fd6, %fd25;          // navier4.f:881 : $redfold_left_temp_t46
+      st.volatile.shared.f64 [%sd32], %fd6;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_11_t58].L
+      ld.volatile.shared.f64 %fd26, [%sd32 + 16];      // navier4.f:881 : 2[ _&$$_redfold_t42,$$lcs_11_t58].L
+      add.rn.f64           %fd6, %fd6, %fd26;          // navier4.f:881 : $redfold_left_temp_t46
+      st.volatile.shared.f64 [%sd32], %fd6;            // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_11_t58].L
+      ld.volatile.shared.f64 %fd27, [%sd32 + 8];       // navier4.f:881 : 1[ _&$$_redfold_t42,$$lcs_11_t58].L
+      add.rn.f64           %fd28, %fd6, %fd27;         // navier4.f:881
+      st.volatile.shared.f64 [%sd32], %fd28;           // navier4.f:881 : 0[ _&$$_redfold_t42,$$lcs_11_t58].L
+      mov.f64              %fd6, %fd28;                // navier4.f:881 : $redfold_left_temp_t46
+$vlsc3_acc_$ck_L877_1__l113__:
+      .loc                 1  881  0
+      bar.sync             0;                          // navier4.f:881
+      ld.volatile.shared.f64 %fd5, [$$_redfold_t42__f1s191];// navier4.f:881 : $$reduc_pvt_t18
+      mov.f64              %fd7, %fd5;                 // navier4.f:881 : $redfinal_t48
+      bar.sync             0;                          // navier4.f:881
+      mov.u32              %u20, %tid.x;               // navier4.f:881
+      setp.ne.u32          %p14, %u20, 0;              // navier4.f:881
+      @%p14 bra            $vlsc3_acc_$ck_L877_1__l116__;// navier4.f:881
+      .loc                 1  881  0
+      ld.param.s64         %sd33, [$$arg_ptr_accshare_t23_t65];// navier4.f:881 : $$arg_ptr_accshare_t23_t65
+      ld.global.f64        %fd29, [%sd33];             // navier4.f:881 : 0[$$arg_ptr_accshare_t23_t65,0].L
+      add.rn.f64           %fd30, %fd29, %fd7;         // navier4.f:881
+      st.global.f64        [%sd33], %fd30;             // navier4.f:881 : 0[$$arg_ptr_accshare_t23_t65,0].L
+$vlsc3_acc_$ck_L877_1__l116__:
+      exit;
+      } // vlsc3_acc_$ck_L877_1
+

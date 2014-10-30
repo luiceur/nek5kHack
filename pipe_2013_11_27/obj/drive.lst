@@ -1,0 +1,237 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S u m m a r y   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Compilation
+-----------
+File     : /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/drive.f
+Compiled : 10/28/14  13:45:02
+Compiler : Version 8.3.0
+Ftnlx    : Version 8316 (libcif 83015)
+Target   : x86-64
+Command  : ftn_driver.exe -hcpu=interlagos -haccel=nvidia_35 -hdynamic
+           -D__CRAYXE -D__CRAYXT_COMPUTE_LINUX_TARGET -hnetwork=gemini
+           -I/opt/cray/perftools/6.2.0/include -DCRAYPAT -homp_trace
+           -hpat_trace -L/opt/cray/perftools/6.2.0/lib64 -c -O2 -hacc -ra
+           -sreal64 -eZ -em -Rc -rm -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE
+           -DGLOBAL_LONG_LONG
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./
+           -oobj/drive.o -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/libsci_acc/3.0.3.1/CRAY/83/x86_64/include
+           -I/opt/cray/libsci/13.0.0/CRAY/83/interlagos/include
+           -I/opt/cray/mpt/7.0.0/gni/mpich2-cray/83/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/extras/CUPTI/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/nvvm/include
+           -I/opt/cray/rca/1.0.0-2.0502.53711.3.125.gem/include
+           -I/opt/cray/pmi/5.0.4-1.0000.10161.132.18.gem/include
+           -I/opt/cray/xpmem/0.1-2.0502.55507.3.2.gem/include
+           -I/opt/cray/dmapp/7.0.1-1.0502.9501.5.211.gem/include
+           -I/opt/cray/gni-headers/3.0-1.0502.9684.5.2.gem/include
+           -I/opt/cray/ugni/5.0-1.0502.9685.4.24.gem/include
+           -I/opt/cray/udreg/2.3.2-1.0502.9275.1.25.gem/include
+           -I/opt/cray/alps/5.2.1-2.0502.9041.11.6.gem/include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/pkgconfig/../include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/wlm_detect/1.0-1.0502.53341.1.1.gem/include
+           -I/opt/cray/krca/1.0.0-2.0502.53880.4.103.gem/include
+           -I/opt/cray-hss-devel/7.2.0/include /lustre/atlas/scratch/csep22/trn0
+           01/nek5_acc/nek_2013_11_27/drive.f
+
+ftnlx report
+------------
+Source   : /lustre/atlas1/trn001/scratch/csep22/nek5_acc/pipe_2013_11_27//lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/drive.f
+Date     : 10/28/2014  13:45:03
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          O p t i o n s   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Options :  -O cache2,fp2,scalar2,thread2,vector2,mpi0,modinline,ipa3,noaggress
+           -O autoprefetch,noautothread,fusion2,nomsgs,negmsgs,nooverindex
+           -O pattern,shortcircuit2,unroll2,nozeroinc
+           -h noadd_paren,align_arrays,caf,noconcurrent,nocontiguous,nofp_trap
+           -h nofunc_trace,nomessage,noomp_analyze,omp_trace,pat_trace
+           -h omp,acc
+           -h acc_model=auto_async_kernel:fast_addr:no_deep_copy
+           -h cpu=x86-64,interlagos,gemini,accel=NVIDIA_GPU
+           -s real64
+           -eh
+           -d acdgjnopvBDEIPQRS0
+           -e mqswACFTZ
+           -J bj
+           -R c 
+           -f fixed
+           -m3
+           -N72
+           -S /tmp/scratch/pe_8044/drive_1.s
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+     %%%    L o o p m a r k   L e g e n d    %%%
+
+     Primary Loop Type        Modifiers
+     ------- ---- ----        ---------
+     A - Pattern matched      a - atomic memory operation
+                              b - blocked
+     C - Collapsed            c - conditional and/or computed
+     D - Deleted               
+     E - Cloned                
+     F - Flat - No calls      f - fused
+     G - Accelerated          g - partitioned
+     I - Inlined              i - interchanged
+     M - Multithreaded        m - partitioned
+                              n - non-blocking remote transfer
+                              p - partial
+                              r - unrolled
+                              s - shortloop
+     V - Vectorized           w - unwound
+
+     + - More messages listed at end of listing
+     ------------------------------------------
+
+
+    1.           program NEKTON
+    2.     c
+    3.     c NEK5000: Spectral Element Computational Fluid Dynamics Solver
+    4.     c COPYRIGHT (c) 2008-2010 UCHICAGO ARGONNE, LLC
+    5.     c
+    6.     c The UChicago Argonne, LLC as Operator of Argonne National 
+    7.     c Laboratory holds copyright in the Software. The copyright holder 
+    8.     c reserves all rights except those expressly granted to licensees,
+    9.     c and U.S. Government license rights.
+   10.     c 
+   11.     c License
+   12.     c 
+   13.     c    NEK5000 is free software: you can redistribute it and/or modify
+   14.     c    it under the terms of the GNU General Public License as published by
+   15.     c    the Free Software Foundation, either version 3 of the License, or
+   16.     c    (at your option) any later version.
+   17.     c
+   18.     c    NEK5000 is distributed in the hope that it will be useful,
+   19.     c    but WITHOUT ANY WARRANTY; without even the implied warranty of
+   20.     c    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   21.     c    GNU General Public License for more details.
+   22.     c
+   23.     c    You should have received a copy of the GNU General Public License
+   24.     c    along with NEK5000.  If not, see <http://www.gnu.org/licenses/>.
+   25.     c
+   26.  +        call nek_init(intracomm)
+   27.  +        call nek_solve()
+   28.  +        call nek_end()
+   29.     
+   30.  +        call exitt()
+   31.     
+   32.           end
+
+ftn-3021 ftn: IPA File = drive.f, Line = 26 
+  "nek_init" (called from "nekton") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = drive.f, Line = 27 
+  "nek_solve" (called from "nekton") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = drive.f, Line = 28 
+  "nek_end" (called from "nekton") was not inlined because the compiler was unable to locate the routine.
+
+ftn-3021 ftn: IPA File = drive.f, Line = 30 
+  "exitt" (called from "nekton") was not inlined because the compiler was unable to locate the routine.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                  C r o s s   R e f e r e n c e   for   NEKTON
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+EXITT                                                             Subroutine, EXTERNAL
+  Decl
+  Set 
+  Used      30
+
+INTRACOMM                       Static offset=0                   INTEGER, Implicit type, SAVE
+  Decl
+  Set 
+  Used      26
+
+NEKTON                                                            Main program
+  Decl       1
+  Set 
+  Used
+
+NEK_END                                                           Subroutine, EXTERNAL
+  Decl
+  Set 
+  Used      28
+
+NEK_INIT                                                          Subroutine
+  Decl
+  Set 
+  Used      26
+
+NEK_SOLVE                                                         Subroutine, EXTERNAL
+  Decl
+  Set 
+  Used      27
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                         E x t e r n a l   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name  Messages
+----  --------
+EXITT
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   NEKTON (Line 30, file drive.f)
+
+Name  Messages
+----  --------
+NEKTON
+      Defined as:  Program (line 1, file drive.f)
+
+      Calls:       NEK_INIT (Line 26, file drive.f)
+                   NEK_SOLVE (Line 27, file drive.f)
+                   NEK_END (Line 28, file drive.f)
+                   EXITT (Line 30, file drive.f)
+
+Name  Messages
+----  --------
+NEK_END
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   NEKTON (Line 28, file drive.f)
+
+Name  Messages
+----  --------
+NEK_INIT
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   NEKTON (Line 26, file drive.f)
+
+Name  Messages
+----  --------
+NEK_SOLVE
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   NEKTON (Line 27, file drive.f)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,5 @@
+c     parameter (lgmres=50) !max number of gmres iterations between restarts
+      common /gmre1/  v_acc(lx2*ly2*lz2*lelv,lgmres)
+      common /gmre2/  z_acc(lx2*ly2*lz2*lelv,lgmres)
+      real v_acc,z_acc
+

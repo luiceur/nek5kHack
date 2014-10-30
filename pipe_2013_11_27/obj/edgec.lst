@@ -1,0 +1,991 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S u m m a r y   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Compilation
+-----------
+File     : /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/edgec.f
+Compiled : 10/28/14  13:45:25
+Compiler : Version 8.3.0
+Ftnlx    : Version 8316 (libcif 83015)
+Target   : x86-64
+Command  : ftn_driver.exe -hcpu=interlagos -haccel=nvidia_35 -hdynamic
+           -D__CRAYXE -D__CRAYXT_COMPUTE_LINUX_TARGET -hnetwork=gemini
+           -I/opt/cray/perftools/6.2.0/include -DCRAYPAT -homp_trace
+           -hpat_trace -L/opt/cray/perftools/6.2.0/lib64 -c -O2 -hacc -ra
+           -sreal64 -eZ -em -Rc -rm -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE
+           -DGLOBAL_LONG_LONG
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./
+           -oobj/edgec.o -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/libsci_acc/3.0.3.1/CRAY/83/x86_64/include
+           -I/opt/cray/libsci/13.0.0/CRAY/83/interlagos/include
+           -I/opt/cray/mpt/7.0.0/gni/mpich2-cray/83/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/extras/CUPTI/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/nvvm/include
+           -I/opt/cray/rca/1.0.0-2.0502.53711.3.125.gem/include
+           -I/opt/cray/pmi/5.0.4-1.0000.10161.132.18.gem/include
+           -I/opt/cray/xpmem/0.1-2.0502.55507.3.2.gem/include
+           -I/opt/cray/dmapp/7.0.1-1.0502.9501.5.211.gem/include
+           -I/opt/cray/gni-headers/3.0-1.0502.9684.5.2.gem/include
+           -I/opt/cray/ugni/5.0-1.0502.9685.4.24.gem/include
+           -I/opt/cray/udreg/2.3.2-1.0502.9275.1.25.gem/include
+           -I/opt/cray/alps/5.2.1-2.0502.9041.11.6.gem/include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/pkgconfig/../include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/wlm_detect/1.0-1.0502.53341.1.1.gem/include
+           -I/opt/cray/krca/1.0.0-2.0502.53880.4.103.gem/include
+           -I/opt/cray-hss-devel/7.2.0/include /lustre/atlas/scratch/csep22/trn0
+           01/nek5_acc/nek_2013_11_27/edgec.f
+
+ftnlx report
+------------
+Source   : /lustre/atlas1/trn001/scratch/csep22/nek5_acc/pipe_2013_11_27//lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/edgec.f
+Date     : 10/28/2014  13:45:25
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          O p t i o n s   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Options :  -O cache2,fp2,scalar2,thread2,vector2,mpi0,modinline,ipa3,noaggress
+           -O autoprefetch,noautothread,fusion2,nomsgs,negmsgs,nooverindex
+           -O pattern,shortcircuit2,unroll2,nozeroinc
+           -h noadd_paren,align_arrays,caf,noconcurrent,nocontiguous,nofp_trap
+           -h nofunc_trace,nomessage,noomp_analyze,omp_trace,pat_trace
+           -h omp,acc
+           -h acc_model=auto_async_kernel:fast_addr:no_deep_copy
+           -h cpu=x86-64,interlagos,gemini,accel=NVIDIA_GPU
+           -s real64
+           -eh
+           -d acdgjnopvBDEIPQRS0
+           -e mqswACFTZ
+           -J bj
+           -R c 
+           -f fixed
+           -m3
+           -N72
+           -S /tmp/scratch/pe_8671/edgec_1.s
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+     %%%    L o o p m a r k   L e g e n d    %%%
+
+     Primary Loop Type        Modifiers
+     ------- ---- ----        ---------
+     There are no optimizations or loops to mark
+
+
+    1.          BLOCKDATA EDGEC
+    2.    C
+    3.    C     Note, for some (lesser) compilers, the BLOCKDATA statement
+    4.    C     needs to be compiled in a separate file.  Therefore, do not
+    5.    C     include any other modules in this file.
+    6.    C
+    7.          INCLUDE 'SIZE'
+    8.          INCLUDE 'TOPOL'
+    9.          DATA    IEDGFC /  5,7,9,11,  6,8,10,12,   
+   10.         $                  1,3,9,10,  2,4,11,12,
+   11.         $                  1,2,5,6,   3,4,7,8    /
+   12.          DATA    ICEDG / 1,2,1,   3,4,1,   5,6,1,   7,8,1,
+   13.         $                1,3,2,   2,4,2,   5,7,2,   6,8,2,
+   14.         $                1,5,3,   2,6,3,   3,7,3,   4,8,3,
+   15.    C      -2D-
+   16.         $                1,2,1,   3,4,1,   1,3,2,   2,4,2 /
+   17.          DATA    ICFACE/ 1,3,5,7, 2,4,6,8,
+   18.         $                1,2,5,6, 3,4,7,8,
+   19.         $                1,2,3,4, 5,6,7,8,
+   20.    C      -2D-
+   21.         $                1,3,0,0, 2,4,0,0,
+   22.         $                1,2,0,0, 3,4,0,0  /
+   23.    C
+   24.          END
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LDIMT3" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LELG" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "MAXOBJ" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = edgec.f, Line = 24 
+  Named Constant "LBY1" is not used.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                  C r o s s   R e f e r e n c e   for   EDGEC
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+CEDGES                                                            Common block 
+  Decl       8
+  Set 
+  Used
+
+CFACES                                                            Common block 
+  Decl       4
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+EDGEC                                                             Block data
+  Decl       1
+  Set 
+  Used
+
+EDGES                                                             Common block 
+  Decl      20
+  Set 
+  Used
+
+EFACE                           /CFACES/ offset=1728              INTEGER, DIMENSION(6)
+  Decl       5       7
+  Set 
+  Used
+
+EFACE1                          /CFACES/ offset=1920              INTEGER, DIMENSION(6)
+  Decl       5       7
+  Set 
+  Used
+
+ESKIP                           /CEDGES/ offset=0                 INTEGER, DIMENSION(-12:12, 3)
+  Decl       8      17
+  Set 
+  Used
+
+GCNNUM                          /CEDGES/ offset=108800            INTEGER, DIMENSION(8, 410, 0:3)
+  Decl      13      18
+  Set 
+  Used
+
+GEDNUM                          /CEDGES/ offset=948480            INTEGER, DIMENSION(12, 410, 0:3)
+  Decl      14      18
+  Set 
+  Used
+
+GEDTYP                          /CEDGES/ offset=2208000           INTEGER, DIMENSION(12, 410, 0:3)
+  Decl      15      18
+  Set 
+  Used
+
+GROUP                           /CFACES/ offset=384               INTEGER, DIMENSION(6)
+  Decl       4       7
+  Set 
+  Used
+
+ICEDG                           /EDGES/ offset=3712               INTEGER, Implicit type, DIMENSION(3, 16), INITIALIZED, SAVE
+  Decl      21
+  Set 
+  Used
+
+ICFACE                          /EDGES/ offset=6016               INTEGER, Implicit type, DIMENSION(4, 10), INITIALIZED, SAVE
+  Decl      21
+  Set 
+  Used
+
+IEDGE                           /EDGES/ offset=0                  INTEGER, Implicit type, DIMENSION(20)
+  Decl      20
+  Set 
+  Used
+
+IEDGEF                          /EDGES/ offset=640                INTEGER, Implicit type, DIMENSION(2, 4, 6, 0:1)
+  Decl      20
+  Set 
+  Used
+
+IEDGFC                          /EDGES/ offset=5248               INTEGER, Implicit type, DIMENSION(4, 6), INITIALIZED, SAVE
+  Decl      21
+  Set 
+  Used
+
+INDX                            /EDGES/ offset=7296               INTEGER, Implicit type, DIMENSION(8)
+  Decl      22
+  Set 
+  Used
+
+INVEDG                          /EDGES/ offset=7552               INTEGER, Implicit type, DIMENSION(27)
+  Decl      22
+  Set 
+  Used
+
+IXCN                            /CEDGES/ offset=2528              INTEGER, DIMENSION(8)
+  Decl       9      17
+  Set 
+  Used
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCNNUM                          /CEDGES/ offset=528640            INTEGER, DIMENSION(8, 410, 0:3)
+  Decl      13      18
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used       9      10      11      12      13      14      15      16
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used
+
+LEDNUM                          /CEDGES/ offset=1578240           INTEGER, DIMENSION(12, 410, 0:3)
+  Decl      14      18
+  Set 
+  Used
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      55      59      65      66      87      12      13      14      15
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMLT                          /CEDGES/ offset=3168              INTEGER
+  Decl      10      17
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NCMP                            /CEDGES/ offset=2496              INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NEDG                            /CEDGES/ offset=2400              INTEGER, DIMENSION(3)
+  Decl       8      17
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NGCOMM                          /CEDGES/ offset=2837760           INTEGER, DIMENSION(2, 0:3)
+  Decl      16      19
+  Set 
+  Used
+
+NGSPCN                          /CEDGES/ offset=3328              INTEGER, DIMENSION(0:3)
+  Decl      11      17
+  Set 
+  Used
+
+NGSPED                          /CEDGES/ offset=3456              INTEGER, DIMENSION(3, 0:3)
+  Decl      11      17
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NMLINV                          /CFACES/ offset=192               INTEGER, DIMENSION(6)
+  Decl       4       7
+  Set 
+  Used
+
+NOFFST                          /CEDGES/ offset=2784              INTEGER, DIMENSION(3, 0:3)
+  Decl       9      17
+  Set 
+  Used
+
+NOMLIS                          /CFACES/ offset=0                 INTEGER, DIMENSION(2, 3)
+  Decl       4       7
+  Set 
+  Used
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NSPMAX                          /CEDGES/ offset=3200              INTEGER, DIMENSION(0:3)
+  Decl      10      17
+  Set 
+  Used
+
+NUMSCN                          /CEDGES/ offset=3840              INTEGER, DIMENSION(410, 0:3)
+  Decl      12      18
+  Set 
+  Used
+
+NUMSED                          /CEDGES/ offset=56320             INTEGER, DIMENSION(410, 0:3)
+  Decl      12      18
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+SKPDAT                          /CFACES/ offset=576               INTEGER, DIMENSION(6, 6)
+  Decl       4       7
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                     C o m m o n   B l o c k   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CEDGES/                              Length: 354752 bytes
+
+     EDGEC                            
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CFACES/                              Length: 264 bytes
+
+     EDGEC                            
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/DIMN/                                Length: 72 bytes
+
+     EDGEC                            
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/EDGES/                               Length: 1052 bytes
+
+     EDGEC                            Initialized: ICEDG
+                                                   IEDGFC
+                                                   ICFACE
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                         E x t e r n a l   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name  Messages
+----  --------
+EDGEC
+      Defined as:  Blockdata (line 1, file edgec.f)
+
+                   Does not use any module
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

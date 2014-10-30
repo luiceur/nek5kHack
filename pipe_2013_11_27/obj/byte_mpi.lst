@@ -1,0 +1,6737 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S u m m a r y   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Compilation
+-----------
+File     : /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/byte_mpi.f
+Compiled : 10/28/14  13:46:57
+Compiler : Version 8.3.0
+Ftnlx    : Version 8316 (libcif 83015)
+Target   : x86-64
+Command  : ftn_driver.exe -hcpu=interlagos -haccel=nvidia_35 -hdynamic
+           -D__CRAYXE -D__CRAYXT_COMPUTE_LINUX_TARGET -hnetwork=gemini
+           -I/opt/cray/perftools/6.2.0/include -DCRAYPAT -homp_trace
+           -hpat_trace -L/opt/cray/perftools/6.2.0/lib64 -c -O2 -hacc -ra
+           -sreal64 -eZ -em -Rc -rm -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE
+           -DGLOBAL_LONG_LONG
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./
+           -oobj/byte_mpi.o -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/libsci_acc/3.0.3.1/CRAY/83/x86_64/include
+           -I/opt/cray/libsci/13.0.0/CRAY/83/interlagos/include
+           -I/opt/cray/mpt/7.0.0/gni/mpich2-cray/83/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/extras/CUPTI/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/nvvm/include
+           -I/opt/cray/rca/1.0.0-2.0502.53711.3.125.gem/include
+           -I/opt/cray/pmi/5.0.4-1.0000.10161.132.18.gem/include
+           -I/opt/cray/xpmem/0.1-2.0502.55507.3.2.gem/include
+           -I/opt/cray/dmapp/7.0.1-1.0502.9501.5.211.gem/include
+           -I/opt/cray/gni-headers/3.0-1.0502.9684.5.2.gem/include
+           -I/opt/cray/ugni/5.0-1.0502.9685.4.24.gem/include
+           -I/opt/cray/udreg/2.3.2-1.0502.9275.1.25.gem/include
+           -I/opt/cray/alps/5.2.1-2.0502.9041.11.6.gem/include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/pkgconfig/../include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/wlm_detect/1.0-1.0502.53341.1.1.gem/include
+           -I/opt/cray/krca/1.0.0-2.0502.53880.4.103.gem/include
+           -I/opt/cray-hss-devel/7.2.0/include /lustre/atlas/scratch/csep22/trn0
+           01/nek5_acc/nek_2013_11_27/byte_mpi.f
+
+ftnlx report
+------------
+Source   : /lustre/atlas1/trn001/scratch/csep22/nek5_acc/pipe_2013_11_27//lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/byte_mpi.f
+Date     : 10/28/2014  13:46:57
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          O p t i o n s   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Options :  -O cache2,fp2,scalar2,thread2,vector2,mpi0,modinline,ipa3,noaggress
+           -O autoprefetch,noautothread,fusion2,nomsgs,negmsgs,nooverindex
+           -O pattern,shortcircuit2,unroll2,nozeroinc
+           -h noadd_paren,align_arrays,caf,noconcurrent,nocontiguous,nofp_trap
+           -h nofunc_trace,nomessage,noomp_analyze,omp_trace,pat_trace
+           -h omp,acc
+           -h acc_model=auto_async_kernel:fast_addr:no_deep_copy
+           -h cpu=x86-64,interlagos,gemini,accel=NVIDIA_GPU
+           -s real64
+           -eh
+           -d acdgjnopvBDEIPQRS0
+           -e mqswACFTZ
+           -J bj
+           -R c 
+           -f fixed
+           -m3
+           -N72
+           -S /tmp/scratch/pe_10443/byte_mpi_1.s
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+     %%%    L o o p m a r k   L e g e n d    %%%
+
+     Primary Loop Type        Modifiers
+     ------- ---- ----        ---------
+     A - Pattern matched      a - atomic memory operation
+                              b - blocked
+     C - Collapsed            c - conditional and/or computed
+     D - Deleted               
+     E - Cloned                
+     F - Flat - No calls      f - fused
+     G - Accelerated          g - partitioned
+     I - Inlined              i - interchanged
+     M - Multithreaded        m - partitioned
+                              n - non-blocking remote transfer
+                              p - partial
+                              r - unrolled
+                              s - shortloop
+     V - Vectorized           w - unwound
+
+     + - More messages listed at end of listing
+     ------------------------------------------
+
+
+    1.              subroutine byte_sync_mpi(mpi_fh)
+    2.        
+    3.        #ifdef MPIIO
+    4.    D         include 'mpif.h'
+    5.    D         call MPI_file_sync(mpi_fh,ierr)
+    6.        #endif
+    7.        
+    8.              return
+    9.              end
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 9 
+  Dummy Argument "MPI_FH" is not referenced or defined.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   10.        C--------------------------------------------------------------------------
+   11.              subroutine byte_open_mpi(fname,mpi_fh,ierr)
+   12.        
+   13.              include 'SIZE'
+   14.              include 'RESTART'
+   15.        
+   16.        #ifdef MPIIO
+   17.    D         include 'mpif.h'
+   18.    D   
+   19.    D         character*132 fname
+   20.    D   
+   21.    D         if(nid.eq.pid0 .or. nid.eq.pid0r) then
+   22.    D   c        write(*,*) nid, 'call MPI_file_open',fname
+   23.    D           call MPI_file_open(nekcomm_io,fname,
+   24.    D        &                     MPI_MODE_RDWR+MPI_MODE_CREATE,
+   25.    D        &                     MPI_INFO_NULL,mpi_fh,ierr)
+   26.    D           if(ierr.ne.0) then
+   27.    D             write(6,*) 'ABORT: Error in byte_open_mpi ', ierr
+   28.    D             return
+   29.    D           endif
+   30.    D         endif
+   31.        #else
+   32.              write(6,*) 'byte_open_mpi: No MPI-IO support!'
+   33.              ierr=1
+   34.              return
+   35.        #endif
+   36.              ierr=0
+   37.              return
+   38.              end
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Dummy Argument "MPI_FH" is not referenced or defined.
+
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Dummy Argument "FNAME" is not referenced or defined.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "IHEADERSIZE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LDIMT3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "MAXOBJ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5012 ftn: NOTE File = byte_mpi.f, Line = 38 
+  Local variable "RDCODE1" is equivalenced but not referenced.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   39.        C--------------------------------------------------------------------------
+   40.              subroutine byte_read_mpi(buf,icount,iorank,mpi_fh,ierr)
+   41.        
+   42.              include 'SIZE'
+   43.              include 'RESTART'
+   44.        
+   45.        #ifdef MPIIO
+   46.    D         include 'mpif.h'
+   47.    D   
+   48.    D         real*4 buf(1)          ! buffer
+   49.    D   
+   50.    D         if(nid.eq.pid0 .or. nid.eq.pid0r) then
+   51.    D           iout = 4*icount ! icount is in 4-byte words
+   52.    D           if(iorank.ge.0 .and. nid.ne.iorank) iout = 0
+   53.    D   c        write(*,*) 'byte_read_mpi', nid, iout/4
+   54.        #ifdef MPIIO_NOCOL
+   55.    D           call MPI_file_read(mpi_fh,buf,iout,MPI_BYTE,
+   56.    D        &                     MPI_STATUS_IGNORE,ierr)
+   57.        #else
+   58.    D           call MPI_file_read_all(mpi_fh,buf,iout,MPI_BYTE,
+   59.    D        &                         MPI_STATUS_IGNORE,ierr)
+   60.        #endif
+   61.    D           if(ierr.ne.0) then
+   62.    D             write(6,*) 'ABORT: Error in byte_read_mpi ', ierr
+   63.    D             return
+   64.    D           endif
+   65.    D         endif
+   66.        #else
+   67.              write(6,*) 'byte_read_mpi: No MPI-IO support!'
+   68.              ierr=1
+   69.              return
+   70.        #endif
+   71.             
+   72.              ierr=0
+   73.        
+   74.              return
+   75.              end
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Dummy Argument "IORANK" is not referenced or defined.
+
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Dummy Argument "MPI_FH" is not referenced or defined.
+
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Dummy Argument "ICOUNT" is not referenced or defined.
+
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Dummy Argument "BUF" is not referenced or defined.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "IHEADERSIZE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LDIMT3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "MAXOBJ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5012 ftn: NOTE File = byte_mpi.f, Line = 75 
+  Local variable "RDCODE1" is equivalenced but not referenced.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   76.        C--------------------------------------------------------------------------
+   77.              subroutine byte_write_mpi(buf,icount,iorank,mpi_fh,ierr)
+   78.        
+   79.              include 'SIZE'
+   80.              include 'RESTART'
+   81.        
+   82.        #ifdef MPIIO
+   83.    D         include 'mpif.h'
+   84.    D   
+   85.    D         real*4 buf(1)          ! buffer
+   86.    D   
+   87.    D         if(nid.eq.pid0 .or. nid.eq.pid0r) then
+   88.    D           iout = 4*icount ! icount is in 4-byte words
+   89.    D           if(iorank.ge.0 .and. nid.ne.iorank) iout = 0
+   90.    D   c        write(*,*) 'byte_write', nid, iout/4
+   91.        #ifdef MPIIO_NOCOL
+   92.    D           call MPI_file_write(mpi_fh,buf,iout,MPI_BYTE,
+   93.    D        &                      MPI_STATUS_IGNORE,ierr)
+   94.        #else
+   95.    D           call MPI_file_write_all(mpi_fh,buf,iout,MPI_BYTE,
+   96.    D        &                          MPI_STATUS_IGNORE,ierr)
+   97.        #endif
+   98.    D           if(ierr.ne.0) then
+   99.    D             write(6,*) 'ABORT: Error in byte_write_mpi ', ierr
+  100.    D             return
+  101.    D           endif
+  102.    D         endif
+  103.        #else
+  104.              write(6,*) 'byte_write_mpi: No MPI-IO support!'
+  105.              ierr=1
+  106.              return
+  107.        #endif
+  108.              ierr=0
+  109.              return
+  110.              end
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Dummy Argument "IORANK" is not referenced or defined.
+
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Dummy Argument "MPI_FH" is not referenced or defined.
+
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Dummy Argument "ICOUNT" is not referenced or defined.
+
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Dummy Argument "BUF" is not referenced or defined.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "IHEADERSIZE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LDIMT3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "MAXOBJ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5012 ftn: NOTE File = byte_mpi.f, Line = 110 
+  Local variable "RDCODE1" is equivalenced but not referenced.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  111.        C--------------------------------------------------------------------------
+  112.              subroutine byte_close_mpi(mpi_fh,ierr)
+  113.        
+  114.              include 'SIZE'
+  115.              include 'RESTART'
+  116.        
+  117.        #ifdef MPIIO
+  118.    D         include 'mpif.h'
+  119.    D         if(nid.eq.pid0 .or. nid.eq.pid0r) then
+  120.    D           call MPI_file_close(mpi_fh,ierr)
+  121.    D         endif
+  122.    D         if(ierr.ne.0) then
+  123.    D            write(6,*) 'ABORT: Error in byte_close_mpi ', ierr
+  124.    D            return
+  125.    D         endif
+  126.        #else
+  127.              if(nid.eq.0) write(6,*) 'byte_close_mpi: No MPI-IO support!'
+  128.              ierr=1
+  129.              return
+  130.        #endif
+  131.        
+  132.              return
+  133.              end
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Dummy Argument "MPI_FH" is not referenced or defined.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "IHEADERSIZE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LDIMT3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "MAXOBJ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5012 ftn: NOTE File = byte_mpi.f, Line = 133 
+  Local variable "RDCODE1" is equivalenced but not referenced.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  134.        C--------------------------------------------------------------------------
+  135.              subroutine byte_set_view(ioff_in,mpi_fh)
+  136.        
+  137.              include 'SIZE'
+  138.              include 'RESTART'
+  139.        
+  140.        #ifdef MPIIO
+  141.    D         include 'mpif.h'
+  142.    D         integer*8 ioff_in
+  143.    D       
+  144.    D         if(nid.eq.pid0 .or. nid.eq.pid0r) then
+  145.    D            if(ioff_in.lt.0) then
+  146.    D              write(6,*) 'byte_set_view: offset<0!'
+  147.    D              call exitt
+  148.    D            endif
+  149.    D   c         write(*,*) 'dataoffset', nid, ioff_in
+  150.    D            call MPI_file_set_view(mpi_fh,ioff_in,MPI_BYTE,MPI_BYTE,
+  151.    D        &                          'native',MPI_INFO_NULL,ierr)
+  152.    D            if(ierr.ne.0) then
+  153.    D              write(6,*) 'ABORT: Error in byte_set_view ', ierr
+  154.    D              call exitt
+  155.    D            endif
+  156.    D         endif
+  157.        #endif
+  158.        
+  159.              return
+  160.              end
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Dummy Argument "MPI_FH" is not referenced or defined.
+
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Dummy Argument "IOFF_IN" is not referenced or defined.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "IHEADERSIZE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LDIMT3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "MAXOBJ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5012 ftn: NOTE File = byte_mpi.f, Line = 160 
+  Local variable "RDCODE1" is equivalenced but not referenced.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  161.        C--------------------------------------------------------------------------
+  162.              subroutine nek_comm_io(nn)
+  163.        
+  164.              include 'SIZE'
+  165.              include 'RESTART'
+  166.              include 'PARALLEL'
+  167.        
+  168.        #ifdef MPIIO
+  169.    D         include 'mpif.h'
+  170.    D         common /nekmpi/ mid,mp,nekcomm,nekgroup,nekreal
+  171.    D         common /scrns/  irank_io(0:lp-1)
+  172.    D   
+  173.        #ifdef MPIIO_NOCOL
+  174.    D         if(nid.eq.0) then
+  175.    D           j = 0
+  176.    D           if(nid.eq.pid0 .or. nid.eq.pid0r) then
+  177.    D             irank_io(j) = nid
+  178.    D             j = j + 1
+  179.    D           endif
+  180.    D           do ir = 1,np-1
+  181.    D             call csend(ir,idum,4,ir,0)           ! handshake
+  182.    D             call crecv(ir,ibuf,4)
+  183.    D             if(ibuf.gt.0) then 
+  184.    D               irank_io(j) = ibuf
+  185.    D               j = j + 1
+  186.    D             endif 
+  187.    D           enddo
+  188.    D         else
+  189.    D            mtype = nid
+  190.    D            ibuf = -1
+  191.    D            if(nid.eq.pid0) then
+  192.    D              ibuf = nid
+  193.    D            endif
+  194.    D            call crecv(mtype,idum,4)                ! hand-shake
+  195.    D            call csend(mtype,ibuf,4,0,0)            ! u4 :=: u8
+  196.    D         endif
+  197.    D   
+  198.    D         call bcast(irank_io,isize*nn)
+  199.    D   
+  200.    D   c      write(6,*) 'nid', nid, (irank_io(i),i=0,nn-1)
+  201.    D   
+  202.    D         call mpi_comm_group (nekcomm,nekgroup,ierr)
+  203.    D         if(ierr.gt.0) call exitt
+  204.    D         call mpi_group_incl (nekgroup,nn,irank_io,nekgroup_io,ierr)
+  205.    D         if(ierr.gt.0) call exitt
+  206.    D         call mpi_comm_create(nekcomm,nekgroup_io,nekcomm_io,ierr)
+  207.    D         if(ierr.gt.0) call exitt
+  208.    D         call mpi_group_free (nekgroup_io,ierr)
+  209.    D         if(ierr.gt.0) call exitt
+  210.    D         call mpi_group_free (nekgroup,ierr)
+  211.    D         if(ierr.gt.0) call exitt
+  212.        #else
+  213.    D         nekcomm_io = nekcomm
+  214.    D         return    
+  215.        #endif
+  216.    D   
+  217.        #endif
+  218.        
+  219.              return
+  220.              end
+ftn-5004 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Dummy Argument "NN" is not referenced or defined.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "IHEADERSIZE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "NELGT_MAX" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Named Constant "MAXOBJ" is not used.
+
+ftn-5012 ftn: NOTE File = byte_mpi.f, Line = 220 
+  Local variable "RDCODE1" is equivalenced but not referenced.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+              C r o s s   R e f e r e n c e   for   BYTE_SYNC_MPI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+BYTE_SYNC_MPI                                                     Subroutine, EXTERNAL
+  Decl       1
+  Set 
+  Used
+
+MPI_FH                          Dummy Arg                         INTEGER, Implicit type
+  Decl       1
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+              C r o s s   R e f e r e n c e   for   BYTE_OPEN_MPI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+BYTE_OPEN_MPI                                                     Subroutine, EXTERNAL
+  Decl      11
+  Set 
+  Used
+
+CMFI_C                                                            Common block 
+  Decl      18
+  Set 
+  Used
+
+CMFI_I                                                            Common block 
+  Decl       7
+  Set 
+  Used
+
+CMFI_L                                                            Common block 
+  Decl      26
+  Set 
+  Used
+
+CMFI_P                                                            Common block 
+  Decl      39
+  Set 
+  Used
+
+CMFI_R                                                            Common block 
+  Decl      16
+  Set 
+  Used
+
+CRST_I                                                            Common block 
+  Decl       5
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+ER                              /CMFI_I/ offset=544               INTEGER, DIMENSION(410)
+  Decl      11      12
+  Set 
+  Used
+
+FID0                            /CMFI_P/ offset=0                 INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+FID0R                           /CMFI_P/ offset=32                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+FNAME                           Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl      11
+  Set 
+  Used
+
+I4MPIIO                                                           Common block 
+  Decl      43
+  Set 
+  Used
+
+IERR                            Dummy Arg                         INTEGER, Implicit type
+  Decl      11
+  Set       33      36
+  Used
+
+IFDIRO                          /CMFI_L/ offset=608               LOGICAL
+  Decl      31      37
+  Set 
+  Used
+
+IFGETP                          /CMFI_L/ offset=64                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETPR                         /CMFI_L/ offset=320               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETT                          /CMFI_L/ offset=96                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETTR                         /CMFI_L/ offset=352               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETU                          /CMFI_L/ offset=32                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETUR                         /CMFI_L/ offset=288               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETW                          /CMFI_L/ offset=576               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGETX                          /CMFI_L/ offset=0                 LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETXR                         /CMFI_L/ offset=256               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETZ                          /CMFI_L/ offset=544               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGTIM                          /CMFI_L/ offset=224               LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGTIMR                         /CMFI_L/ offset=480               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGTPS                          /CMFI_L/ offset=128               LOGICAL, DIMENSION(3)
+  Decl      27      33
+  Set 
+  Used
+
+IFGTPSR                         /CMFI_L/ offset=384               LOGICAL, DIMENSION(3)
+  Decl      28      34
+  Set 
+  Used
+
+IFH_MBYTE                       /I4MPIIO/ offset=32               INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+IFILER                          /CMFI_I/ offset=192               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+IF_BYTE_SW                      /CMFI_L/ offset=512               LOGICAL
+  Decl      29      35
+  Set 
+  Used
+
+IHDR                            /CMFI_C/ offset=0                 CHARACTER(3)
+  Decl      18      19
+  Set 
+  Used
+
+IHEADERSIZE                                                       INTEGER, Implicit type, PARAMETER
+  Decl      14
+  Set 
+  Used
+
+ISTPR                           /CMFI_I/ offset=160               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used      27      28
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used       3
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELR                                                              INTEGER, Implicit type, PARAMETER
+  Decl       3
+  Set 
+  Used      11
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      55      59      65      66      87
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAX_RST                         /CRST_I/ offset=0                 INTEGER, Implicit type
+  Decl       5
+  Set 
+  Used
+
+MFI_FNAME                       /CMFI_C/ offset=104               CHARACTER(80)
+  Decl      18      21
+  Set 
+  Used
+
+MPI_FH                          Dummy Arg                         INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NEKCOMM_IO                      /I4MPIIO/ offset=0                INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+NELB                            /CMFI_I/ offset=13664             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELBR                           /CMFI_I/ offset=13696             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELGR                           /CMFI_I/ offset=128               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELR                            /CMFI_I/ offset=96                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NFILEO                          /CMFI_I/ offset=448               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NFILER                          /CMFI_I/ offset=224               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NFLDR                           /CMFI_I/ offset=512               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPROC_O                         /CMFI_I/ offset=480               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NRG                             /CMFI_I/ offset=352               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NXO                             /CMFI_I/ offset=256               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NXR                             /CMFI_I/ offset=0                 INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NYO                             /CMFI_I/ offset=288               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NYR                             /CMFI_I/ offset=32                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZO                             /CMFI_I/ offset=320               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NZR                             /CMFI_I/ offset=64                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+PID0                            /CMFI_P/ offset=64                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID00                           /CMFI_P/ offset=192               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID0R                           /CMFI_P/ offset=128               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1                            /CMFI_P/ offset=96                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1R                           /CMFI_P/ offset=160               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+RDCODE                          /CMFI_C/ offset=24                CHARACTER(10), EQUIVALENCE
+  Decl      18      20      24
+  Set 
+  Used
+
+RDCODE1                         /CMFI_C/ offset=24                CHARACTER(1), DIMENSION(10), EQUIVALENCE
+  Decl      23      24
+  Set 
+  Used
+
+TIMER                           /CMFI_R/ offset=0                 DOUBLE PRECISION, Implicit type
+  Decl      16
+  Set 
+  Used
+
+WDSIZO                          /CMFI_I/ offset=416               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+WDSIZR                          /CMFI_I/ offset=384               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+              C r o s s   R e f e r e n c e   for   BYTE_READ_MPI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+BUF                             Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl      40
+  Set 
+  Used
+
+BYTE_READ_MPI                                                     Subroutine, EXTERNAL
+  Decl      40
+  Set 
+  Used
+
+CMFI_C                                                            Common block 
+  Decl      18
+  Set 
+  Used
+
+CMFI_I                                                            Common block 
+  Decl       7
+  Set 
+  Used
+
+CMFI_L                                                            Common block 
+  Decl      26
+  Set 
+  Used
+
+CMFI_P                                                            Common block 
+  Decl      39
+  Set 
+  Used
+
+CMFI_R                                                            Common block 
+  Decl      16
+  Set 
+  Used
+
+CRST_I                                                            Common block 
+  Decl       5
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+ER                              /CMFI_I/ offset=544               INTEGER, DIMENSION(410)
+  Decl      11      12
+  Set 
+  Used
+
+FID0                            /CMFI_P/ offset=0                 INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+FID0R                           /CMFI_P/ offset=32                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+I4MPIIO                                                           Common block 
+  Decl      43
+  Set 
+  Used
+
+ICOUNT                          Dummy Arg                         INTEGER, Implicit type
+  Decl      40
+  Set 
+  Used
+
+IERR                            Dummy Arg                         INTEGER, Implicit type
+  Decl      40
+  Set       68      72
+  Used
+
+IFDIRO                          /CMFI_L/ offset=608               LOGICAL
+  Decl      31      37
+  Set 
+  Used
+
+IFGETP                          /CMFI_L/ offset=64                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETPR                         /CMFI_L/ offset=320               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETT                          /CMFI_L/ offset=96                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETTR                         /CMFI_L/ offset=352               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETU                          /CMFI_L/ offset=32                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETUR                         /CMFI_L/ offset=288               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETW                          /CMFI_L/ offset=576               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGETX                          /CMFI_L/ offset=0                 LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETXR                         /CMFI_L/ offset=256               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETZ                          /CMFI_L/ offset=544               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGTIM                          /CMFI_L/ offset=224               LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGTIMR                         /CMFI_L/ offset=480               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGTPS                          /CMFI_L/ offset=128               LOGICAL, DIMENSION(3)
+  Decl      27      33
+  Set 
+  Used
+
+IFGTPSR                         /CMFI_L/ offset=384               LOGICAL, DIMENSION(3)
+  Decl      28      34
+  Set 
+  Used
+
+IFH_MBYTE                       /I4MPIIO/ offset=32               INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+IFILER                          /CMFI_I/ offset=192               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+IF_BYTE_SW                      /CMFI_L/ offset=512               LOGICAL
+  Decl      29      35
+  Set 
+  Used
+
+IHDR                            /CMFI_C/ offset=0                 CHARACTER(3)
+  Decl      18      19
+  Set 
+  Used
+
+IHEADERSIZE                                                       INTEGER, Implicit type, PARAMETER
+  Decl      14
+  Set 
+  Used
+
+IORANK                          Dummy Arg                         INTEGER, Implicit type
+  Decl      40
+  Set 
+  Used
+
+ISTPR                           /CMFI_I/ offset=160               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used      27      28
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used       3
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELR                                                              INTEGER, Implicit type, PARAMETER
+  Decl       3
+  Set 
+  Used      11
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      55      59      65      66      87
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAX_RST                         /CRST_I/ offset=0                 INTEGER, Implicit type
+  Decl       5
+  Set 
+  Used
+
+MFI_FNAME                       /CMFI_C/ offset=104               CHARACTER(80)
+  Decl      18      21
+  Set 
+  Used
+
+MPI_FH                          Dummy Arg                         INTEGER, Implicit type
+  Decl      40
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NEKCOMM_IO                      /I4MPIIO/ offset=0                INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+NELB                            /CMFI_I/ offset=13664             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELBR                           /CMFI_I/ offset=13696             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELGR                           /CMFI_I/ offset=128               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELR                            /CMFI_I/ offset=96                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NFILEO                          /CMFI_I/ offset=448               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NFILER                          /CMFI_I/ offset=224               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NFLDR                           /CMFI_I/ offset=512               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPROC_O                         /CMFI_I/ offset=480               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NRG                             /CMFI_I/ offset=352               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NXO                             /CMFI_I/ offset=256               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NXR                             /CMFI_I/ offset=0                 INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NYO                             /CMFI_I/ offset=288               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NYR                             /CMFI_I/ offset=32                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZO                             /CMFI_I/ offset=320               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NZR                             /CMFI_I/ offset=64                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+PID0                            /CMFI_P/ offset=64                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID00                           /CMFI_P/ offset=192               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID0R                           /CMFI_P/ offset=128               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1                            /CMFI_P/ offset=96                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1R                           /CMFI_P/ offset=160               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+RDCODE                          /CMFI_C/ offset=24                CHARACTER(10), EQUIVALENCE
+  Decl      18      20      24
+  Set 
+  Used
+
+RDCODE1                         /CMFI_C/ offset=24                CHARACTER(1), DIMENSION(10), EQUIVALENCE
+  Decl      23      24
+  Set 
+  Used
+
+TIMER                           /CMFI_R/ offset=0                 DOUBLE PRECISION, Implicit type
+  Decl      16
+  Set 
+  Used
+
+WDSIZO                          /CMFI_I/ offset=416               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+WDSIZR                          /CMFI_I/ offset=384               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+              C r o s s   R e f e r e n c e   for   BYTE_WRITE_MPI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+BUF                             Dummy Arg                         DOUBLE PRECISION, Implicit type
+  Decl      77
+  Set 
+  Used
+
+BYTE_WRITE_MPI                                                    Subroutine, EXTERNAL
+  Decl      77
+  Set 
+  Used
+
+CMFI_C                                                            Common block 
+  Decl      18
+  Set 
+  Used
+
+CMFI_I                                                            Common block 
+  Decl       7
+  Set 
+  Used
+
+CMFI_L                                                            Common block 
+  Decl      26
+  Set 
+  Used
+
+CMFI_P                                                            Common block 
+  Decl      39
+  Set 
+  Used
+
+CMFI_R                                                            Common block 
+  Decl      16
+  Set 
+  Used
+
+CRST_I                                                            Common block 
+  Decl       5
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+ER                              /CMFI_I/ offset=544               INTEGER, DIMENSION(410)
+  Decl      11      12
+  Set 
+  Used
+
+FID0                            /CMFI_P/ offset=0                 INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+FID0R                           /CMFI_P/ offset=32                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+I4MPIIO                                                           Common block 
+  Decl      43
+  Set 
+  Used
+
+ICOUNT                          Dummy Arg                         INTEGER, Implicit type
+  Decl      77
+  Set 
+  Used
+
+IERR                            Dummy Arg                         INTEGER, Implicit type
+  Decl      77
+  Set      105     108
+  Used
+
+IFDIRO                          /CMFI_L/ offset=608               LOGICAL
+  Decl      31      37
+  Set 
+  Used
+
+IFGETP                          /CMFI_L/ offset=64                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETPR                         /CMFI_L/ offset=320               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETT                          /CMFI_L/ offset=96                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETTR                         /CMFI_L/ offset=352               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETU                          /CMFI_L/ offset=32                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETUR                         /CMFI_L/ offset=288               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETW                          /CMFI_L/ offset=576               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGETX                          /CMFI_L/ offset=0                 LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETXR                         /CMFI_L/ offset=256               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETZ                          /CMFI_L/ offset=544               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGTIM                          /CMFI_L/ offset=224               LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGTIMR                         /CMFI_L/ offset=480               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGTPS                          /CMFI_L/ offset=128               LOGICAL, DIMENSION(3)
+  Decl      27      33
+  Set 
+  Used
+
+IFGTPSR                         /CMFI_L/ offset=384               LOGICAL, DIMENSION(3)
+  Decl      28      34
+  Set 
+  Used
+
+IFH_MBYTE                       /I4MPIIO/ offset=32               INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+IFILER                          /CMFI_I/ offset=192               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+IF_BYTE_SW                      /CMFI_L/ offset=512               LOGICAL
+  Decl      29      35
+  Set 
+  Used
+
+IHDR                            /CMFI_C/ offset=0                 CHARACTER(3)
+  Decl      18      19
+  Set 
+  Used
+
+IHEADERSIZE                                                       INTEGER, Implicit type, PARAMETER
+  Decl      14
+  Set 
+  Used
+
+IORANK                          Dummy Arg                         INTEGER, Implicit type
+  Decl      77
+  Set 
+  Used
+
+ISTPR                           /CMFI_I/ offset=160               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used      27      28
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used       3
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELR                                                              INTEGER, Implicit type, PARAMETER
+  Decl       3
+  Set 
+  Used      11
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      55      59      65      66      87
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAX_RST                         /CRST_I/ offset=0                 INTEGER, Implicit type
+  Decl       5
+  Set 
+  Used
+
+MFI_FNAME                       /CMFI_C/ offset=104               CHARACTER(80)
+  Decl      18      21
+  Set 
+  Used
+
+MPI_FH                          Dummy Arg                         INTEGER, Implicit type
+  Decl      77
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NEKCOMM_IO                      /I4MPIIO/ offset=0                INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+NELB                            /CMFI_I/ offset=13664             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELBR                           /CMFI_I/ offset=13696             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELGR                           /CMFI_I/ offset=128               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELR                            /CMFI_I/ offset=96                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NFILEO                          /CMFI_I/ offset=448               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NFILER                          /CMFI_I/ offset=224               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NFLDR                           /CMFI_I/ offset=512               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPROC_O                         /CMFI_I/ offset=480               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NRG                             /CMFI_I/ offset=352               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NXO                             /CMFI_I/ offset=256               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NXR                             /CMFI_I/ offset=0                 INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NYO                             /CMFI_I/ offset=288               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NYR                             /CMFI_I/ offset=32                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZO                             /CMFI_I/ offset=320               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NZR                             /CMFI_I/ offset=64                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+PID0                            /CMFI_P/ offset=64                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID00                           /CMFI_P/ offset=192               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID0R                           /CMFI_P/ offset=128               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1                            /CMFI_P/ offset=96                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1R                           /CMFI_P/ offset=160               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+RDCODE                          /CMFI_C/ offset=24                CHARACTER(10), EQUIVALENCE
+  Decl      18      20      24
+  Set 
+  Used
+
+RDCODE1                         /CMFI_C/ offset=24                CHARACTER(1), DIMENSION(10), EQUIVALENCE
+  Decl      23      24
+  Set 
+  Used
+
+TIMER                           /CMFI_R/ offset=0                 DOUBLE PRECISION, Implicit type
+  Decl      16
+  Set 
+  Used
+
+WDSIZO                          /CMFI_I/ offset=416               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+WDSIZR                          /CMFI_I/ offset=384               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+              C r o s s   R e f e r e n c e   for   BYTE_CLOSE_MPI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+BYTE_CLOSE_MPI                                                    Subroutine, EXTERNAL
+  Decl     112
+  Set 
+  Used
+
+CMFI_C                                                            Common block 
+  Decl      18
+  Set 
+  Used
+
+CMFI_I                                                            Common block 
+  Decl       7
+  Set 
+  Used
+
+CMFI_L                                                            Common block 
+  Decl      26
+  Set 
+  Used
+
+CMFI_P                                                            Common block 
+  Decl      39
+  Set 
+  Used
+
+CMFI_R                                                            Common block 
+  Decl      16
+  Set 
+  Used
+
+CRST_I                                                            Common block 
+  Decl       5
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+ER                              /CMFI_I/ offset=544               INTEGER, DIMENSION(410)
+  Decl      11      12
+  Set 
+  Used
+
+FID0                            /CMFI_P/ offset=0                 INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+FID0R                           /CMFI_P/ offset=32                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+I4MPIIO                                                           Common block 
+  Decl      43
+  Set 
+  Used
+
+IERR                            Dummy Arg                         INTEGER, Implicit type
+  Decl     112
+  Set      128
+  Used
+
+IFDIRO                          /CMFI_L/ offset=608               LOGICAL
+  Decl      31      37
+  Set 
+  Used
+
+IFGETP                          /CMFI_L/ offset=64                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETPR                         /CMFI_L/ offset=320               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETT                          /CMFI_L/ offset=96                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETTR                         /CMFI_L/ offset=352               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETU                          /CMFI_L/ offset=32                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETUR                         /CMFI_L/ offset=288               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETW                          /CMFI_L/ offset=576               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGETX                          /CMFI_L/ offset=0                 LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETXR                         /CMFI_L/ offset=256               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETZ                          /CMFI_L/ offset=544               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGTIM                          /CMFI_L/ offset=224               LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGTIMR                         /CMFI_L/ offset=480               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGTPS                          /CMFI_L/ offset=128               LOGICAL, DIMENSION(3)
+  Decl      27      33
+  Set 
+  Used
+
+IFGTPSR                         /CMFI_L/ offset=384               LOGICAL, DIMENSION(3)
+  Decl      28      34
+  Set 
+  Used
+
+IFH_MBYTE                       /I4MPIIO/ offset=32               INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+IFILER                          /CMFI_I/ offset=192               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+IF_BYTE_SW                      /CMFI_L/ offset=512               LOGICAL
+  Decl      29      35
+  Set 
+  Used
+
+IHDR                            /CMFI_C/ offset=0                 CHARACTER(3)
+  Decl      18      19
+  Set 
+  Used
+
+IHEADERSIZE                                                       INTEGER, Implicit type, PARAMETER
+  Decl      14
+  Set 
+  Used
+
+ISTPR                           /CMFI_I/ offset=160               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used      27      28
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used       3
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELR                                                              INTEGER, Implicit type, PARAMETER
+  Decl       3
+  Set 
+  Used      11
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      55      59      65      66      87
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAX_RST                         /CRST_I/ offset=0                 INTEGER, Implicit type
+  Decl       5
+  Set 
+  Used
+
+MFI_FNAME                       /CMFI_C/ offset=104               CHARACTER(80)
+  Decl      18      21
+  Set 
+  Used
+
+MPI_FH                          Dummy Arg                         INTEGER, Implicit type
+  Decl     112
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NEKCOMM_IO                      /I4MPIIO/ offset=0                INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+NELB                            /CMFI_I/ offset=13664             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELBR                           /CMFI_I/ offset=13696             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELGR                           /CMFI_I/ offset=128               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELR                            /CMFI_I/ offset=96                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NFILEO                          /CMFI_I/ offset=448               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NFILER                          /CMFI_I/ offset=224               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NFLDR                           /CMFI_I/ offset=512               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used     127
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPROC_O                         /CMFI_I/ offset=480               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NRG                             /CMFI_I/ offset=352               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NXO                             /CMFI_I/ offset=256               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NXR                             /CMFI_I/ offset=0                 INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NYO                             /CMFI_I/ offset=288               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NYR                             /CMFI_I/ offset=32                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZO                             /CMFI_I/ offset=320               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NZR                             /CMFI_I/ offset=64                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+PID0                            /CMFI_P/ offset=64                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID00                           /CMFI_P/ offset=192               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID0R                           /CMFI_P/ offset=128               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1                            /CMFI_P/ offset=96                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1R                           /CMFI_P/ offset=160               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+RDCODE                          /CMFI_C/ offset=24                CHARACTER(10), EQUIVALENCE
+  Decl      18      20      24
+  Set 
+  Used
+
+RDCODE1                         /CMFI_C/ offset=24                CHARACTER(1), DIMENSION(10), EQUIVALENCE
+  Decl      23      24
+  Set 
+  Used
+
+TIMER                           /CMFI_R/ offset=0                 DOUBLE PRECISION, Implicit type
+  Decl      16
+  Set 
+  Used
+
+WDSIZO                          /CMFI_I/ offset=416               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+WDSIZR                          /CMFI_I/ offset=384               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+              C r o s s   R e f e r e n c e   for   BYTE_SET_VIEW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+BYTE_SET_VIEW                                                     Subroutine, EXTERNAL
+  Decl     135
+  Set 
+  Used
+
+CMFI_C                                                            Common block 
+  Decl      18
+  Set 
+  Used
+
+CMFI_I                                                            Common block 
+  Decl       7
+  Set 
+  Used
+
+CMFI_L                                                            Common block 
+  Decl      26
+  Set 
+  Used
+
+CMFI_P                                                            Common block 
+  Decl      39
+  Set 
+  Used
+
+CMFI_R                                                            Common block 
+  Decl      16
+  Set 
+  Used
+
+CRST_I                                                            Common block 
+  Decl       5
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+ER                              /CMFI_I/ offset=544               INTEGER, DIMENSION(410)
+  Decl      11      12
+  Set 
+  Used
+
+FID0                            /CMFI_P/ offset=0                 INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+FID0R                           /CMFI_P/ offset=32                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+I4MPIIO                                                           Common block 
+  Decl      43
+  Set 
+  Used
+
+IFDIRO                          /CMFI_L/ offset=608               LOGICAL
+  Decl      31      37
+  Set 
+  Used
+
+IFGETP                          /CMFI_L/ offset=64                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETPR                         /CMFI_L/ offset=320               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETT                          /CMFI_L/ offset=96                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETTR                         /CMFI_L/ offset=352               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETU                          /CMFI_L/ offset=32                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETUR                         /CMFI_L/ offset=288               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETW                          /CMFI_L/ offset=576               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGETX                          /CMFI_L/ offset=0                 LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETXR                         /CMFI_L/ offset=256               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETZ                          /CMFI_L/ offset=544               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGTIM                          /CMFI_L/ offset=224               LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGTIMR                         /CMFI_L/ offset=480               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGTPS                          /CMFI_L/ offset=128               LOGICAL, DIMENSION(3)
+  Decl      27      33
+  Set 
+  Used
+
+IFGTPSR                         /CMFI_L/ offset=384               LOGICAL, DIMENSION(3)
+  Decl      28      34
+  Set 
+  Used
+
+IFH_MBYTE                       /I4MPIIO/ offset=32               INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+IFILER                          /CMFI_I/ offset=192               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+IF_BYTE_SW                      /CMFI_L/ offset=512               LOGICAL
+  Decl      29      35
+  Set 
+  Used
+
+IHDR                            /CMFI_C/ offset=0                 CHARACTER(3)
+  Decl      18      19
+  Set 
+  Used
+
+IHEADERSIZE                                                       INTEGER, Implicit type, PARAMETER
+  Decl      14
+  Set 
+  Used
+
+IOFF_IN                         Dummy Arg                         INTEGER, Implicit type
+  Decl     135
+  Set 
+  Used
+
+ISTPR                           /CMFI_I/ offset=160               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used      27      28
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used       3
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELR                                                              INTEGER, Implicit type, PARAMETER
+  Decl       3
+  Set 
+  Used      11
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      55      59      65      66      87
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAX_RST                         /CRST_I/ offset=0                 INTEGER, Implicit type
+  Decl       5
+  Set 
+  Used
+
+MFI_FNAME                       /CMFI_C/ offset=104               CHARACTER(80)
+  Decl      18      21
+  Set 
+  Used
+
+MPI_FH                          Dummy Arg                         INTEGER, Implicit type
+  Decl     135
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NEKCOMM_IO                      /I4MPIIO/ offset=0                INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+NELB                            /CMFI_I/ offset=13664             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELBR                           /CMFI_I/ offset=13696             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELGR                           /CMFI_I/ offset=128               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELR                            /CMFI_I/ offset=96                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NFILEO                          /CMFI_I/ offset=448               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NFILER                          /CMFI_I/ offset=224               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NFLDR                           /CMFI_I/ offset=512               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPROC_O                         /CMFI_I/ offset=480               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NRG                             /CMFI_I/ offset=352               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NXO                             /CMFI_I/ offset=256               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NXR                             /CMFI_I/ offset=0                 INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NYO                             /CMFI_I/ offset=288               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NYR                             /CMFI_I/ offset=32                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZO                             /CMFI_I/ offset=320               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NZR                             /CMFI_I/ offset=64                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+PID0                            /CMFI_P/ offset=64                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID00                           /CMFI_P/ offset=192               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID0R                           /CMFI_P/ offset=128               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1                            /CMFI_P/ offset=96                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1R                           /CMFI_P/ offset=160               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+RDCODE                          /CMFI_C/ offset=24                CHARACTER(10), EQUIVALENCE
+  Decl      18      20      24
+  Set 
+  Used
+
+RDCODE1                         /CMFI_C/ offset=24                CHARACTER(1), DIMENSION(10), EQUIVALENCE
+  Decl      23      24
+  Set 
+  Used
+
+TIMER                           /CMFI_R/ offset=0                 DOUBLE PRECISION, Implicit type
+  Decl      16
+  Set 
+  Used
+
+WDSIZO                          /CMFI_I/ offset=416               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+WDSIZR                          /CMFI_I/ offset=384               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+               C r o s s   R e f e r e n c e   for   NEK_COMM_IO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+CMFI_C                                                            Common block 
+  Decl      18
+  Set 
+  Used
+
+CMFI_I                                                            Common block 
+  Decl       7
+  Set 
+  Used
+
+CMFI_L                                                            Common block 
+  Decl      26
+  Set 
+  Used
+
+CMFI_P                                                            Common block 
+  Decl      39
+  Set 
+  Used
+
+CMFI_R                                                            Common block 
+  Decl      16
+  Set 
+  Used
+
+COMM_HANDLES                                                      Common block 
+  Decl      29
+  Set 
+  Used
+
+CRST_I                                                            Common block 
+  Decl       5
+  Set 
+  Used
+
+CR_H                            /COMM_HANDLES/ offset=0           INTEGER
+  Decl      29      30
+  Set 
+  Used
+
+CSIZE                           /PRECSN/ offset=96                INTEGER
+  Decl      22      24
+  Set 
+  Used
+
+CUBE1                                                             Common block 
+  Decl       4
+  Set 
+  Used
+
+DIAGL                                                             Common block 
+  Decl      20
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+ER                              /CMFI_I/ offset=544               INTEGER, DIMENSION(410)
+  Decl      11      12
+  Set 
+  Used
+
+FID0                            /CMFI_P/ offset=0                 INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+FID0R                           /CMFI_P/ offset=32                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+GLLEL                           /HCGLB/ offset=13312              INTEGER, DIMENSION(410)
+  Decl      13      17
+  Set 
+  Used
+
+GLLNID                          /HCGLB/ offset=26432              INTEGER, DIMENSION(410)
+  Decl      14      17
+  Set 
+  Used
+
+GSH                             /COMM_HANDLES/ offset=32          INTEGER
+  Decl      29      30
+  Set 
+  Used
+
+GSH_FLD                         /COMM_HANDLES/ offset=64          INTEGER, DIMENSION(0:5)
+  Decl      29      30
+  Set 
+  Used
+
+HCGLB                                                             Common block 
+  Decl      11
+  Set 
+  Used
+
+I4MPIIO                                                           Common block 
+  Decl      43
+  Set 
+  Used
+
+IFDBLAS                         /PRECSL/ offset=0                 LOGICAL
+  Decl      23      25
+  Set 
+  Used
+
+IFDIRO                          /CMFI_L/ offset=608               LOGICAL
+  Decl      31      37
+  Set 
+  Used
+
+IFGETP                          /CMFI_L/ offset=64                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETPR                         /CMFI_L/ offset=320               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETT                          /CMFI_L/ offset=96                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETTR                         /CMFI_L/ offset=352               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETU                          /CMFI_L/ offset=32                LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETUR                         /CMFI_L/ offset=288               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETW                          /CMFI_L/ offset=576               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGETX                          /CMFI_L/ offset=0                 LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGETXR                         /CMFI_L/ offset=256               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGETZ                          /CMFI_L/ offset=544               LOGICAL
+  Decl      30      36
+  Set 
+  Used
+
+IFGPRNT                         /DIAGL/ offset=0                  LOGICAL
+  Decl      20      21
+  Set 
+  Used
+
+IFGTIM                          /CMFI_L/ offset=224               LOGICAL
+  Decl      27      33
+  Set 
+  Used
+
+IFGTIMR                         /CMFI_L/ offset=480               LOGICAL
+  Decl      28      34
+  Set 
+  Used
+
+IFGTPS                          /CMFI_L/ offset=128               LOGICAL, DIMENSION(3)
+  Decl      27      33
+  Set 
+  Used
+
+IFGTPSR                         /CMFI_L/ offset=384               LOGICAL, DIMENSION(3)
+  Decl      28      34
+  Set 
+  Used
+
+IFH_MBYTE                       /I4MPIIO/ offset=32               INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+IFILER                          /CMFI_I/ offset=192               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+IF_BYTE_SW                      /CMFI_L/ offset=512               LOGICAL
+  Decl      29      35
+  Set 
+  Used
+
+IHDR                            /CMFI_C/ offset=0                 CHARACTER(3)
+  Decl      18      19
+  Set 
+  Used
+
+IHEADERSIZE                                                       INTEGER, Implicit type, PARAMETER
+  Decl      14
+  Set 
+  Used
+
+ISIZE                           /PRECSN/ offset=32                INTEGER
+  Decl      22      24
+  Set 
+  Used
+
+ISTPR                           /CMFI_I/ offset=160               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used      27      28      11
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used      29
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used       3      13      14
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELR                                                              INTEGER, Implicit type, PARAMETER
+  Decl       3
+  Set 
+  Used      11
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      55      59      65      66      87      12
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGLEL                           /HCGLB/ offset=192                INTEGER, DIMENSION(410)
+  Decl      12      17
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSIZE                           /PRECSN/ offset=64                INTEGER
+  Decl      22      24
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAX_RST                         /CRST_I/ offset=0                 INTEGER, Implicit type
+  Decl       5
+  Set 
+  Used
+
+MFI_FNAME                       /CMFI_C/ offset=104               CHARACTER(80)
+  Decl      18      21
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NEKCOMM_IO                      /I4MPIIO/ offset=0                INTEGER
+  Decl      42      43
+  Set 
+  Used
+
+NEK_COMM_IO                                                       Subroutine, EXTERNAL
+  Decl     162
+  Set 
+  Used
+
+NELB                            /CMFI_I/ offset=13664             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELBR                           /CMFI_I/ offset=13696             INTEGER, Implicit type
+  Decl      11
+  Set 
+  Used
+
+NELG                            /HCGLB/ offset=64                 INTEGER, Implicit type, DIMENSION(0:3)
+  Decl      11
+  Set 
+  Used
+
+NELGR                           /CMFI_I/ offset=128               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELGT                           /HCGLB/ offset=39584              INTEGER, Implicit type
+  Decl      15
+  Set 
+  Used
+
+NELGT_MAX                                                         INTEGER, Implicit type, PARAMETER
+  Decl       9
+  Set 
+  Used
+
+NELGV                           /HCGLB/ offset=39552              INTEGER, Implicit type
+  Decl      15
+  Set 
+  Used
+
+NELR                            /CMFI_I/ offset=96                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NFILEO                          /CMFI_I/ offset=448               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NFILER                          /CMFI_I/ offset=224               INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NFLDR                           /CMFI_I/ offset=512               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NN                              Dummy Arg                         INTEGER, Implicit type
+  Decl     162
+  Set 
+  Used
+
+NODE                            /CUBE1/ offset=0                  INTEGER
+  Decl       4       5
+  Set 
+  Used
+
+NODE0                           /CUBE1/ offset=128                INTEGER
+  Decl       4       5
+  Set 
+  Used
+
+NP                              /CUBE1/ offset=64                 INTEGER
+  Decl       4       5
+  Set 
+  Used
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NPROC_O                         /CMFI_I/ offset=480               INTEGER, Implicit type
+  Decl      10
+  Set 
+  Used
+
+NRG                             /CMFI_I/ offset=352               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NULLPID                         /CUBE1/ offset=96                 INTEGER
+  Decl       4       5
+  Set 
+  Used
+
+NVTOT                           /HCGLB/ offset=0                  INTEGER*8
+  Decl      11      18
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NXO                             /CMFI_I/ offset=256               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NXR                             /CMFI_I/ offset=0                 INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NYO                             /CMFI_I/ offset=288               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NYR                             /CMFI_I/ offset=32                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZO                             /CMFI_I/ offset=320               INTEGER, Implicit type
+  Decl       8
+  Set 
+  Used
+
+NZR                             /CMFI_I/ offset=64                INTEGER, Implicit type
+  Decl       7
+  Set 
+  Used
+
+PID                             /CUBE1/ offset=32                 INTEGER
+  Decl       4       5
+  Set 
+  Used
+
+PID0                            /CMFI_P/ offset=64                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID00                           /CMFI_P/ offset=192               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID0R                           /CMFI_P/ offset=128               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1                            /CMFI_P/ offset=96                INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PID1R                           /CMFI_P/ offset=160               INTEGER
+  Decl      39      40
+  Set 
+  Used
+
+PRECSL                                                            Common block 
+  Decl      23
+  Set 
+  Used
+
+PRECSN                                                            Common block 
+  Decl      22
+  Set 
+  Used
+
+RDCODE                          /CMFI_C/ offset=24                CHARACTER(10), EQUIVALENCE
+  Decl      18      20      24
+  Set 
+  Used
+
+RDCODE1                         /CMFI_C/ offset=24                CHARACTER(1), DIMENSION(10), EQUIVALENCE
+  Decl      23      24
+  Set 
+  Used
+
+TIMER                           /CMFI_R/ offset=0                 DOUBLE PRECISION, Implicit type
+  Decl      16
+  Set 
+  Used
+
+WDSIZE                          /PRECSN/ offset=0                 INTEGER
+  Decl      22      24
+  Set 
+  Used
+
+WDSIZO                          /CMFI_I/ offset=416               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+WDSIZR                          /CMFI_I/ offset=384               INTEGER
+  Decl       9      12
+  Set 
+  Used
+
+XXTH                            /COMM_HANDLES/ offset=256         INTEGER, DIMENSION(5)
+  Decl      29      30
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                     C o m m o n   B l o c k   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CMFI_C/                              Length: 93 bytes
+
+     BYTE_OPEN_MPI                    Equivalence: RDCODE1
+     NEK_COMM_IO                      Equivalence: RDCODE1
+     BYTE_SET_VIEW                    Equivalence: RDCODE1
+     BYTE_CLOSE_MPI                   Equivalence: RDCODE1
+     BYTE_WRITE_MPI                   Equivalence: RDCODE1
+     BYTE_READ_MPI                    Equivalence: RDCODE1
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CMFI_I/                              Length: 1716 bytes
+
+     BYTE_OPEN_MPI                    
+     NEK_COMM_IO                      
+     BYTE_SET_VIEW                    
+     BYTE_CLOSE_MPI                   
+     BYTE_WRITE_MPI                   
+     BYTE_READ_MPI                    
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CMFI_L/                              Length: 80 bytes
+
+     BYTE_OPEN_MPI                    
+     NEK_COMM_IO                      
+     BYTE_SET_VIEW                    
+     BYTE_CLOSE_MPI                   
+     BYTE_WRITE_MPI                   
+     BYTE_READ_MPI                    
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CMFI_P/                              Length: 28 bytes
+
+     BYTE_OPEN_MPI                    
+     NEK_COMM_IO                      
+     BYTE_SET_VIEW                    
+     BYTE_CLOSE_MPI                   
+     BYTE_WRITE_MPI                   
+     BYTE_READ_MPI                    
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CMFI_R/                              Length: 8 bytes
+
+     BYTE_OPEN_MPI                    
+     NEK_COMM_IO                      
+     BYTE_SET_VIEW                    
+     BYTE_CLOSE_MPI                   
+     BYTE_WRITE_MPI                   
+     BYTE_READ_MPI                    
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CRST_I/                              Length: 4 bytes
+
+     BYTE_OPEN_MPI                    
+     NEK_COMM_IO                      
+     BYTE_SET_VIEW                    
+     BYTE_CLOSE_MPI                   
+     BYTE_WRITE_MPI                   
+     BYTE_READ_MPI                    
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/DIMN/                                Length: 72 bytes
+
+     BYTE_OPEN_MPI                    
+     NEK_COMM_IO                      
+     BYTE_SET_VIEW                    
+     BYTE_CLOSE_MPI                   
+     BYTE_WRITE_MPI                   
+     BYTE_READ_MPI                    
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/I4MPIIO/                             Length: 8 bytes
+
+     BYTE_OPEN_MPI                    
+     NEK_COMM_IO                      
+     BYTE_SET_VIEW                    
+     BYTE_CLOSE_MPI                   
+     BYTE_WRITE_MPI                   
+     BYTE_READ_MPI                    
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/COMM_HANDLES/                        Length: 52 bytes
+
+     NEK_COMM_IO                      
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CUBE1/                               Length: 20 bytes
+
+     NEK_COMM_IO                      
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/DIAGL/                               Length: 4 bytes
+
+     NEK_COMM_IO                      
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/HCGLB/                               Length: 4952 bytes
+
+     NEK_COMM_IO                      
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/PRECSL/                              Length: 4 bytes
+
+     NEK_COMM_IO                      
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/PRECSN/                              Length: 16 bytes
+
+     NEK_COMM_IO                      
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                         E x t e r n a l   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name  Messages
+----  --------
+BYTE_CLOSE_MPI
+      Defined as:  Subroutine (line 568, file byte_mpi.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+Name  Messages
+----  --------
+BYTE_OPEN_MPI
+      Defined as:  Subroutine (line 11, file byte_mpi.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+Name  Messages
+----  --------
+BYTE_READ_MPI
+      Defined as:  Subroutine (line 192, file byte_mpi.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+Name  Messages
+----  --------
+BYTE_SET_VIEW
+      Defined as:  Subroutine (line 743, file byte_mpi.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+Name  Messages
+----  --------
+BYTE_SYNC_MPI
+      Defined as:  Subroutine (line 1, file byte_mpi.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+Name  Messages
+----  --------
+BYTE_WRITE_MPI
+      Defined as:  Subroutine (line 381, file byte_mpi.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+Name  Messages
+----  --------
+NEK_COMM_IO
+      Defined as:  Subroutine (line 922, file byte_mpi.f)
+
+                   No calls.  It is not called and does not use any procedure.
+
+      Interface:   None
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

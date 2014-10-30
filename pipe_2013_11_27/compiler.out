@@ -1,0 +1,741 @@
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/drive.f -o obj/drive.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/drive1.f -o obj/drive1.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/drive2.f -o obj/drive2.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/plan4.f -o obj/plan4.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/bdry.f -o obj/bdry.o
+
+
+ftn-7212 crayftn: WARNING NEK_INIT, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/drive1.f, Line = 116 
+  Variable "fintime" is used before it is defined.
+
+Cray Fortran : Version 8.3.0 (u83050f83142i83148p83243a83009e83011z83243)
+Cray Fortran :               (x8316r83014w83011t8311b83031)
+Cray Fortran : Tue Oct 28, 2014  13:45:02
+Cray Fortran : Compile time:  0.2480 seconds
+Cray Fortran : 2893 source lines
+Cray Fortran : 0 errors, 0 warnings, 0 other messages, 0 ansi
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/coef.f -o obj/coef.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/conduct.f -o obj/conduct.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/connect1.f -o obj/connect1.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/connect2.f -o obj/connect2.o
+
+
+ftn-7212 crayftn: WARNING THYPAB, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/conduct.f, Line = 437 
+  Variable "dtau" is used before it is defined.
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/dssum.f -o obj/dssum.o
+
+
+ftn-3143 crayftn: WARNING SETUPDS_HSMG_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/dssum.f, Line = 768, Column = 12 
+  The declared extent of dummy argument "vertex" is greater than the declared extent of the associated actual argument "vertex".
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/edgec.f -o obj/edgec.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/eigsolv.f -o obj/eigsolv.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/gauss.f -o obj/gauss.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/genxyz.f -o obj/genxyz.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier1.f -o obj/navier1.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/makeq.f -o obj/makeq.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier0.f -o obj/navier0.o
+
+
+ftn-3143 crayftn: WARNING BIN_RD1_MESH, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/connect2.f, Line = 2323, Column = 20 
+  The declared extent of dummy argument "buf" is greater than the declared extent of the associated actual argument "buf".
+
+
+ftn-3143 crayftn: WARNING BIN_RD1_MESH, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/connect2.f, Line = 2330, Column = 20 
+  The declared extent of dummy argument "buf" is greater than the declared extent of the associated actual argument "buf".
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier2.f -o obj/navier2.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier3.f -o obj/navier3.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier4.f -o obj/navier4.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/prepost.f -o obj/prepost.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/speclib.f -o obj/speclib.o
+
+
+ftn-3143 crayftn: WARNING HSOLVE, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier4.f, Line = 841, Column = 15 
+  The declared extent of dummy argument "napprox" is greater than the declared extent of the associated actual argument "napprox".
+
+
+ftn-3143 crayftn: WARNING HSOLVE, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier4.f, Line = 843, Column = 15 
+  The declared extent of dummy argument "napprox" is greater than the declared extent of the associated actual argument "napprox".
+
+
+ftn-3143 crayftn: WARNING HSOLVE_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier4.f, Line = 943, Column = 15 
+  The declared extent of dummy argument "napprox" is greater than the declared extent of the associated actual argument "napprox".
+
+
+ftn-3143 crayftn: WARNING HSOLVE_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier4.f, Line = 945, Column = 15 
+  The declared extent of dummy argument "napprox" is greater than the declared extent of the associated actual argument "napprox".
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/map2.f -o obj/map2.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/turb.f -o obj/turb.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/mvmesh.f -o obj/mvmesh.o
+
+
+ftn-1278 crayftn: WARNING MFO_OPEN_FILES, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/prepost.f, Line = 1644, Column = 38 
+  Procedure "I_FIND_PREFIX" is defined at line 1111 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/prepost.f).  Dummy argument "PREFIX" is scalar.  This argument is an array argument.
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f -o obj/ic.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ssolv.f -o obj/ssolv.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/planx.f -o obj/planx.o
+ftn -c  -O3 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/math.f -o obj/math.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/mxm_wrapper.f -o obj/mxm_wrapper.o 
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hmholtz.f -o obj/hmholtz.o
+
+
+ftn-3143 crayftn: WARNING SETBD, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 1888, Column = 15 
+  The declared extent of dummy argument "dt" is greater than the declared extent of the associated actual argument "dtbd".
+
+
+ftn-3143 crayftn: WARNING OPHYPRKN, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 2039, Column = 12 
+  The declared extent of dummy argument "vel1" is greater than the declared extent of the associated actual argument "vel1".
+
+
+ftn-3143 crayftn: WARNING OPHYPRKN, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 2039, Column = 12 
+  The declared extent of dummy argument "vel3" is greater than the declared extent of the associated actual argument "vel3".
+
+
+ftn-3143 crayftn: WARNING OPHYPRKN, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 2039, Column = 12 
+  The declared extent of dummy argument "vel2" is greater than the declared extent of the associated actual argument "vel2".
+
+
+ftn-3143 crayftn: WARNING OPHYPAB, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 2147, Column = 12 
+  The declared extent of dummy argument "vel3" is greater than the declared extent of the associated actual argument "vel3".
+
+
+ftn-3143 crayftn: WARNING OPHYPAB, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 2147, Column = 12 
+  The declared extent of dummy argument "vel1" is greater than the declared extent of the associated actual argument "vel1".
+
+
+ftn-3143 crayftn: WARNING OPHYPAB, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 2147, Column = 12 
+  The declared extent of dummy argument "vel2" is greater than the declared extent of the associated actual argument "vel2".
+
+
+ftn-7212 crayftn: WARNING OPHYPAB, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 2156 
+  Variable "dtau" is used before it is defined.
+
+
+ftn-3143 crayftn: WARNING VELCONV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 2264, Column = 12 
+  The declared extent of dummy argument "vlag" is greater than the declared extent of the associated actual argument "vxlag".
+
+
+ftn-3143 crayftn: WARNING VELCONV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 2265, Column = 12 
+  The declared extent of dummy argument "vlag" is greater than the declared extent of the associated actual argument "vylag".
+
+
+ftn-3143 crayftn: WARNING VELCONV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 2267, Column = 12 
+  The declared extent of dummy argument "vlag" is greater than the declared extent of the associated actual argument "vzlag".
+
+
+ftn-3143 crayftn: WARNING CONV1D, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 3824, Column = 12 
+  The declared extent of dummy argument "m1" is greater than the declared extent of the associated actual argument "dfi".
+
+
+ftn-3143 crayftn: WARNING VELCONVV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 4092, Column = 12 
+  The declared extent of dummy argument "vlag" is greater than the declared extent of the associated actual argument "vxlag".
+
+
+ftn-3143 crayftn: WARNING VELCONVV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 4093, Column = 12 
+  The declared extent of dummy argument "vlag" is greater than the declared extent of the associated actual argument "vylag".
+
+
+ftn-3143 crayftn: WARNING VELCONVV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 4095, Column = 12 
+  The declared extent of dummy argument "vlag" is greater than the declared extent of the associated actual argument "vzlag".
+
+
+ftn-3143 crayftn: WARNING OPHYPRK, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 4493, Column = 12 
+  The declared extent of dummy argument "vel3" is greater than the declared extent of the associated actual argument "vel3".
+
+
+ftn-3143 crayftn: WARNING OPHYPRK, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 4493, Column = 12 
+  The declared extent of dummy argument "vel1" is greater than the declared extent of the associated actual argument "vel1".
+
+
+ftn-3143 crayftn: WARNING OPHYPRK, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 4493, Column = 12 
+  The declared extent of dummy argument "vel2" is greater than the declared extent of the associated actual argument "vel2".
+
+
+ftn-375 crayftn: WARNING WGRADM1_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 5598, Column = 16 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING WGRADM1_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 5598, Column = 38 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING WGRADM1_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 5599, Column = 38 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING WGRADM1_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 5600, Column = 16 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING WGRADM1_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 5600, Column = 38 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING WGRADM1_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier1.f, Line = 5601, Column = 38 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+
+ftn-1278 crayftn: WARNING INDX_CUT, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 1441, Column = 16 
+  Procedure "INDX1" is defined at line 1416 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  Dummy argument "S1" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING INDX_CUT, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 1441, Column = 19 
+  Procedure "INDX1" is defined at line 1416 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  Dummy argument "S2" is scalar.  This argument is an array argument.
+
+
+ftn-1615 crayftn: WARNING CSPLIT, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 1465, Column = 19 
+  Procedure "INDX_CUT" is defined at line 1434 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  Dummy argument "S1" is an array argument.  This argument is scalar.
+
+
+ftn-1615 crayftn: WARNING CSPLIT, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 1465, Column = 22 
+  Procedure "INDX_CUT" is defined at line 1434 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  Dummy argument "S2" is an array argument.  This argument is scalar.
+
+
+ftn-1615 crayftn: WARNING IFGTRL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 1774, Column = 18 
+  Procedure "LJUST" is defined at line 1492 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  Dummy argument "STRING" is an array argument.  This argument is scalar.
+
+
+ftn-1615 crayftn: WARNING IFGTIL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 1806, Column = 18 
+  Procedure "LJUST" is defined at line 1492 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  Dummy argument "STRING" is an array argument.  This argument is scalar.
+
+
+ftn-1279 crayftn: WARNING MFI_GETS, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2112, Column = 30 
+  Procedure "MAPAB4R" is defined at line 1323 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "X".
+
+
+ftn-1279 crayftn: WARNING MFI_GETS, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2112, Column = 39 
+  Procedure "MAPAB4R" is defined at line 1323 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "Y".
+
+
+ftn-1279 crayftn: WARNING MFI_GETS, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2114, Column = 39 
+  Procedure "MAPAB" is defined at line 1265 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "Y".
+
+
+ftn-1279 crayftn: WARNING MFI_GETV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2257, Column = 30 
+  Procedure "MAPAB4R" is defined at line 1323 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "X".
+
+
+ftn-1279 crayftn: WARNING MFI_GETV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2257, Column = 39 
+  Procedure "MAPAB4R" is defined at line 1323 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "Y".
+
+
+ftn-1279 crayftn: WARNING MFI_GETV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2258, Column = 30 
+  Procedure "MAPAB4R" is defined at line 1323 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "X".
+
+
+ftn-1279 crayftn: WARNING MFI_GETV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2258, Column = 39 
+  Procedure "MAPAB4R" is defined at line 1323 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "Y".
+
+
+ftn-1279 crayftn: WARNING MFI_GETV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2260, Column = 30 
+  Procedure "MAPAB4R" is defined at line 1323 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "X".
+
+
+ftn-1279 crayftn: WARNING MFI_GETV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2260, Column = 38 
+  Procedure "MAPAB4R" is defined at line 1323 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "Y".
+
+
+ftn-1279 crayftn: WARNING MFI_GETV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2262, Column = 39 
+  Procedure "MAPAB" is defined at line 1265 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "Y".
+
+
+ftn-1279 crayftn: WARNING MFI_GETV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2263, Column = 39 
+  Procedure "MAPAB" is defined at line 1265 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "Y".
+
+
+ftn-1279 crayftn: WARNING MFI_GETV, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2265, Column = 39 
+  Procedure "MAPAB" is defined at line 1265 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "Y".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2467, Column = 39 
+  Procedure "MFI_GETV" is defined at line 2125 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2469, Column = 39 
+  Procedure "MFI_GETV" is defined at line 2125 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2480, Column = 39 
+  Procedure "MFI_GETV" is defined at line 2125 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2483, Column = 39 
+  Procedure "MFI_GETV" is defined at line 2125 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2486, Column = 36 
+  Procedure "MFI_GETV" is defined at line 2125 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2496, Column = 31 
+  Procedure "MFI_GETS" is defined at line 1984 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2498, Column = 31 
+  Procedure "MFI_GETS" is defined at line 1984 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2508, Column = 29 
+  Procedure "MFI_GETS" is defined at line 1984 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2510, Column = 29 
+  Procedure "MFI_GETS" is defined at line 1984 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2522, Column = 45 
+  Procedure "MFI_GETS" is defined at line 1984 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+
+ftn-1279 crayftn: WARNING MFI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/ic.f, Line = 2524, Column = 45 
+  Procedure "MFI_GETS" is defined at line 1984 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/ic.f).  The type of this argument does not agree with dummy argument "WK".
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/gfdm_par.f -o obj/gfdm_par.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/gfdm_op.f -o obj/gfdm_op.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/gfdm_solve.f -o obj/gfdm_solve.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/subs1.f -o obj/subs1.o
+
+
+ftn-7212 crayftn: WARNING SET_1D_E_MAT, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/gfdm_op.f, Line = 173 
+  Variable "nx1" is used before it is defined.
+
+
+ftn-7212 crayftn: WARNING SET_1D_E_MAT, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/gfdm_op.f, Line = 173 
+  Variable "ny1" is used before it is defined.
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/subs2.f -o obj/subs2.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/genbox.f -o obj/genbox.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/gmres.f -o obj/gmres.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f -o obj/hsmg.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/convect.f -o obj/convect.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/induct.f -o obj/induct.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/perturb.f -o obj/perturb.o
+
+
+ftn-7212 crayftn: WARNING INT_VEL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/convect.f, Line = 208 
+  Variable "m0" is used before it is defined.
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier5.f -o obj/navier5.o
+
+
+ftn-1278 crayftn: WARNING ELSASSERH, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/induct.f, Line = 900, Column = 22 
+  Procedure "INCOMPRN" is defined at line 281 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/induct.f).  Dummy argument "UX" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING ELSASSERH, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/induct.f, Line = 900, Column = 25 
+  Procedure "INCOMPRN" is defined at line 281 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/induct.f).  Dummy argument "UY" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING ELSASSERH, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/induct.f, Line = 900, Column = 28 
+  Procedure "INCOMPRN" is defined at line 281 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/induct.f).  Dummy argument "UZ" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING ELSASSERH, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/induct.f, Line = 900, Column = 31 
+  Procedure "INCOMPRN" is defined at line 281 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/induct.f).  Dummy argument "UP" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING ELSASSERH, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/induct.f, Line = 911, Column = 22 
+  Procedure "INCOMPRN" is defined at line 281 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/induct.f).  Dummy argument "UX" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING ELSASSERH, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/induct.f, Line = 911, Column = 25 
+  Procedure "INCOMPRN" is defined at line 281 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/induct.f).  Dummy argument "UY" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING ELSASSERH, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/induct.f, Line = 911, Column = 28 
+  Procedure "INCOMPRN" is defined at line 281 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/induct.f).  Dummy argument "UZ" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING ELSASSERH, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/induct.f, Line = 911, Column = 31 
+  Procedure "INCOMPRN" is defined at line 281 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/induct.f).  Dummy argument "UP" is scalar.  This argument is an array argument.
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier6.f -o obj/navier6.o
+
+
+ftn-7212 crayftn: WARNING COMPUTELYAP1, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/perturb.f, Line = 1269 
+  Variable "pertporm" is used before it is defined.
+
+
+ftn-7212 crayftn: WARNING COMPUTELYAP1, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/perturb.f, Line = 1275 
+  Variable "timeinit" is used before it is defined.
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier7.f -o obj/navier7.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier8.f -o obj/navier8.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/fast3d.f -o obj/fast3d.o
+
+
+ftn-3143 crayftn: WARNING A_CRS_ENRICHED, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier8.f, Line = 591, Column = 18 
+  The declared extent of dummy argument "h1" is greater than the declared extent of the associated actual argument "h1".
+
+
+ftn-3143 crayftn: WARNING A_CRS_ENRICHED, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier8.f, Line = 591, Column = 18 
+  The declared extent of dummy argument "h2" is greater than the declared extent of the associated actual argument "h2".
+
+
+ftn-1278 crayftn: WARNING MAPH1_TO_L2, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier8.f, Line = 1140, Column = 30 
+  Procedure "SPECMPN" is defined at line 922 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier8.f).  Dummy argument "BA" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING MAPH1_TO_L2, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier8.f, Line = 1140, Column = 34 
+  Procedure "SPECMPN" is defined at line 922 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier8.f).  Dummy argument "AB" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING MAPH1_TO_L2T, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier8.f, Line = 1179, Column = 30 
+  Procedure "SPECMPN" is defined at line 922 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier8.f).  Dummy argument "BA" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING MAPH1_TO_L2T, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier8.f, Line = 1179, Column = 35 
+  Procedure "SPECMPN" is defined at line 922 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier8.f).  Dummy argument "AB" is scalar.  This argument is an array argument.
+
+
+ftn-1615 crayftn: WARNING GBTUPLE_RANK, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier8.f, Line = 2003, Column = 34 
+  Procedure "ITUPLE_SORT" is defined at line 308 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier8.f).  Dummy argument "KEY" is an array argument.  This argument is scalar.
+
+
+ftn-1278 crayftn: WARNING MAP_TO_CRS, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier8.f, Line = 2575, Column = 30 
+  Procedure "SPECMPN" is defined at line 922 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier8.f).  Dummy argument "BA" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING MAP_TO_CRS, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier8.f, Line = 2575, Column = 34 
+  Procedure "SPECMPN" is defined at line 922 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier8.f).  Dummy argument "AB" is scalar.  This argument is an array argument.
+
+
+ftn-375 crayftn: WARNING MAP_C_TO_F_H1_BILIN_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier8.f, Line = 2753, Column = 52 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/fasts.f -o obj/fasts.o
+
+
+ftn-1278 crayftn: WARNING H1MG_SCHWARZ_PART1, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 498, Column = 31 
+  Procedure "HSMG_SCHWARZ_DSSUM" is defined at line 376 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "U" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING H1MG_SCHWARZ_PART1, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 515, Column = 23 
+  Procedure "HSMG_DSSUM" is defined at line 347 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "U" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING HSMG_SCHWARZ, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 555, Column = 31 
+  Procedure "HSMG_SCHWARZ_DSSUM" is defined at line 376 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "U" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING HSMG_SCHWARZ, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 572, Column = 23 
+  Procedure "HSMG_DSSUM" is defined at line 347 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "U" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING HSMG_SETUP_RSTR_WT, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 1055, Column = 23 
+  Procedure "HSMG_DSSUM" is defined at line 347 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "U" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING H1MG_AXM, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 2025, Column = 24 
+  Procedure "HSMG_DSSUM" is defined at line 347 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "U" is scalar.  This argument is an array argument.
+
+
+ftn-3143 crayftn: WARNING H1MG_AXML, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 2065, Column = 15 
+  The declared extent of dummy argument "mask" is greater than the declared extent of the associated actual argument "mask".
+
+
+ftn-3143 crayftn: WARNING H1MG_MASK, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 2081, Column = 15 
+  The declared extent of dummy argument "mask" is greater than the declared extent of the associated actual argument "mask".
+
+
+ftn-1278 crayftn: WARNING H1MG_RSTR, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 2257, Column = 36 
+  Procedure "HSMG_DSSUM" is defined at line 347 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "U" is scalar.  This argument is an array argument.
+
+
+ftn-1279 crayftn: WARNING MG_SET_GB, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 2863, Column = 64 
+  Procedure "MG_INTP_GFC_E" is defined at line 2689 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  The type of this argument does not agree with dummy argument "E".
+
+
+ftn-1279 crayftn: WARNING MG_SET_GB, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 2866, Column = 64 
+  Procedure "MG_INTP_FC_E" is defined at line 2638 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  The type of this argument does not agree with dummy argument "E".
+
+
+ftn-1278 crayftn: WARNING H1MG_SETUP_SCHWARZ_WT_1, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3119, Column = 23 
+  Procedure "HSMG_DSSUM" is defined at line 347 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "U" is scalar.  This argument is an array argument.
+
+
+ftn-1615 crayftn: WARNING HSMG_SCHWARZ_WT_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3209, Column = 11 
+  Procedure "HSMG_SCHWARZ_WT2D" is defined at line 1284 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "E" is an array argument.  This argument is scalar.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3601, Column = 33 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3601, Column = 44 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3602, Column = 33 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3602, Column = 45 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3604, Column = 16 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3604, Column = 24 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3604, Column = 32 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3606, Column = 33 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3606, Column = 44 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3607, Column = 33 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-375 crayftn: WARNING HSMG_DO_FAST_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3607, Column = 45 
+  The number of subscripts is smaller than the number of declared dimensions.
+
+
+ftn-3143 crayftn: WARNING H1MG_SCHWARZ_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3880, Column = 12 
+  The declared extent of dummy argument "e" is greater than the declared extent of the associated actual argument "e".
+
+
+ftn-3143 crayftn: WARNING H1MG_SCHWARZ_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3880, Column = 12 
+  The declared extent of dummy argument "r" is greater than the declared extent of the associated actual argument "r".
+
+
+ftn-1278 crayftn: WARNING H1MG_SCHWARZ_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3881, Column = 36 
+  Procedure "HSMG_SCHWARZ_WT_ACC" is defined at line 3203 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "E" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING H1MG_SCHWARZ_PART1_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3923, Column = 35 
+  Procedure "HSMG_SCHWARZ_DSSUM_ACC" is defined at line 3183 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "U" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING H1MG_SCHWARZ_PART1_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/hsmg.f, Line = 3927, Column = 36 
+  Procedure "HSMG_FDM_ACC" is defined at line 3573 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/hsmg.f).  Dummy argument "R" is scalar.  This argument is an array argument.
+
+
+
+ftn-3143 crayftn: WARNING SET_UP_FAST_1D_FEM, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/fast3d.f, Line = 553, Column = 12 
+  The declared extent of dummy argument "z" is greater than the declared extent of the associated actual argument "z".
+
+
+ftn-3143 crayftn: WARNING SET_UP_FAST_1D_FEM_AX, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/fast3d.f, Line = 932, Column = 12 
+  The declared extent of dummy argument "z" is greater than the declared extent of the associated actual argument "z".
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/calcz.f -o obj/calcz.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/byte.c -o obj/byte.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/chelpers.c -o obj/chelpers.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/byte_mpi.f -o obj/byte_mpi.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/postpro.f -o obj/postpro.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/cvode_driver.f -o obj/cvode_driver.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/nek_comm.c -o obj/nek_comm.o
+
+
+ftn-1615 crayftn: WARNING BUILD_LEGEND_TRANSFORM, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 1396, Column = 52 
+  Procedure "GAUJORDF" is defined at line 957 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier5.f).  Dummy argument "RMULT" is an array argument.  This argument is scalar.
+
+
+ftn-7212 crayftn: WARNING COMP_SIJ, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 2293 
+  Variable "yyyr" is used before it is defined.
+
+
+ftn-1278 crayftn: WARNING Y2D, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 2693, Column = 32 
+  Procedure "Y_AVG_BUFF" is defined at line 2499 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier5.f).  Dummy argument "C2" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING Y2D, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 2694, Column = 32 
+  Procedure "Y_AVG_BUFF" is defined at line 2499 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier5.f).  Dummy argument "C2" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING Y2D, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 2701, Column = 32 
+  Procedure "Y_AVG_BUFF" is defined at line 2499 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier5.f).  Dummy argument "C2" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING Y2D, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 2703, Column = 32 
+  Procedure "Y_INS_BUFF" is defined at line 2553 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier5.f).  Dummy argument "C2" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING Z2D, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 2737, Column = 32 
+  Procedure "Z_AVG_BUFF" is defined at line 2526 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier5.f).  Dummy argument "C2" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING Z2D, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 2738, Column = 32 
+  Procedure "Z_AVG_BUFF" is defined at line 2526 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier5.f).  Dummy argument "C2" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING Z2D, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 2745, Column = 32 
+  Procedure "Z_AVG_BUFF" is defined at line 2526 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier5.f).  Dummy argument "C2" is scalar.  This argument is an array argument.
+
+
+ftn-1278 crayftn: WARNING Z2D, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 2747, Column = 32 
+  Procedure "Z_INS_BUFF" is defined at line 2580 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/navier5.f).  Dummy argument "C2" is scalar.  This argument is an array argument.
+
+
+ftn-7212 crayftn: WARNING GET_STRSMAX, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/navier5.f, Line = 3079 
+  Variable "a" is used before it is defined.
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/init_plugin.f -o obj/init_plugin.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/setprop.f -o obj/setprop.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/qthermal.f -o obj/qthermal.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/cvode_aux.f -o obj/cvode_aux.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/makeq_aux.f -o obj/makeq_aux.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/papi.f -o obj/papi.o
+ftn -c  -O0      -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/3rd_party/ssygv.f -o obj/ssygv.o
+ftn -c  -O0      -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/3rd_party/dsygv.f -o obj/dsygv.o
+ftn -c   -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/3rd_party/nek_in_situ.f -o obj/nek_in_situ.o
+ftn -c  -O3 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/mxm_std.f -o obj/mxm_std.o
+
+
+ftn-1615 crayftn: WARNING G2GI, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/postpro.f, Line = 1271, Column = 21 
+  Procedure "LOAD_FLD" is defined at line 1 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/postpro.f).  Dummy argument "STRING" is an array argument.  This argument is scalar.
+
+ftn -c  -O0      -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/3rd_party/blas.f -o obj/blas.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f -o obj/comm_mpi.o
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/singlmesh.f -o obj/singlmesh.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/gs.c -o obj/jl_gs.o
+
+
+ftn-7212 crayftn: WARNING EXITT, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 522 
+  Variable "papi_flops" is used before it is defined.
+
+
+ftn-1279 crayftn: WARNING PINGPONGO, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 730, Column = 32 
+  Procedure "IRECV" is defined at line 345 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "X".
+
+
+ftn-1279 crayftn: WARNING PINGPONGO, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 731, Column = 30 
+  Procedure "CSEND" is defined at line 196 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1279 crayftn: WARNING PINGPONGO, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 758, Column = 30 
+  Procedure "CRECV" is defined at line 206 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1279 crayftn: WARNING PINGPONGO, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 759, Column = 30 
+  Procedure "CSEND" is defined at line 196 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1615 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 801, Column = 16 
+  Procedure "GOP" is defined at line 94 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  Dummy argument "X" is an array argument.  This argument is scalar.
+
+
+ftn-1615 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 801, Column = 21 
+  Procedure "GOP" is defined at line 94 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  Dummy argument "W" is an array argument.  This argument is scalar.
+
+
+ftn-1279 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 806, Column = 25 
+  Procedure "IRECV" is defined at line 345 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "X".
+
+
+ftn-1279 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 807, Column = 23 
+  Procedure "CSEND" is defined at line 196 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1279 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 812, Column = 28 
+  Procedure "IRECV" is defined at line 345 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "X".
+
+
+ftn-1279 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 813, Column = 26 
+  Procedure "CSEND" is defined at line 196 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1279 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 822, Column = 23 
+  Procedure "CRECV" is defined at line 206 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1279 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 823, Column = 23 
+  Procedure "CSEND" is defined at line 196 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1279 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 827, Column = 26 
+  Procedure "CRECV" is defined at line 206 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1279 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 828, Column = 26 
+  Procedure "CSEND" is defined at line 196 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1615 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 836, Column = 16 
+  Procedure "GOP" is defined at line 94 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  Dummy argument "X" is an array argument.  This argument is scalar.
+
+
+ftn-1615 crayftn: WARNING GET_MSG_VOL, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 836, Column = 21 
+  Procedure "GOP" is defined at line 94 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  Dummy argument "W" is an array argument.  This argument is scalar.
+
+
+ftn-1279 crayftn: WARNING GP2, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 1021, Column = 29 
+  Procedure "CRECV" is defined at line 206 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1279 crayftn: WARNING GP2, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 1043, Column = 39 
+  Procedure "CSEND" is defined at line 196 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1279 crayftn: WARNING GP2, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 1054, Column = 23 
+  Procedure "CSEND" is defined at line 196 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "MTYPE".
+
+
+ftn-1279 crayftn: WARNING GP2, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 1054, Column = 29 
+  Procedure "CSEND" is defined at line 196 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+
+ftn-1279 crayftn: WARNING GP2, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 1056, Column = 23 
+  Procedure "CRECV" is defined at line 206 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "MTYPE".
+
+
+ftn-1279 crayftn: WARNING GP2, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/comm_mpi.f, Line = 1056, Column = 29 
+  Procedure "CRECV" is defined at line 206 (/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/comm_mpi.f).  The type of this argument does not agree with dummy argument "BUF".
+
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/sort.c -o obj/jl_sort.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/sarray_transfer.c -o obj/jl_sarray_transfer.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/sarray_sort.c -o obj/jl_sarray_sort.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/gs_local.c -o obj/jl_gs_local.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/crystal.c -o obj/jl_crystal.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/comm.c -o obj/jl_comm.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/tensor.c -o obj/jl_tensor.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/fail.c -o obj/jl_fail.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/fcrystal.c -o obj/jl_fcrystal.o
+CC-223 craycc: WARNING File = /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/fail.c, Line = 16
+  The function "exitt_" is declared implicitly.
+
+    nek_exitt();
+    ^
+
+Total warnings detected in /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/fail.c: 1
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/findpts.c -o obj/jl_findpts.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/findpts_local.c -o obj/jl_findpts_local.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/obbox.c -o obj/jl_obbox.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/poly.c -o obj/jl_poly.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/lob_bnd.c -o obj/jl_lob_bnd.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/findpts_el_3.c -o obj/jl_findpts_el_3.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/findpts_el_2.c -o obj/jl_findpts_el_2.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/sparse_cholesky.c -o obj/jl_sparse_cholesky.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/xxt.c -o obj/jl_xxt.o
+cc -c  -O2 -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG  -DPREFIX=jl_ /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/jl/fcrs.c -o obj/jl_fcrs.o
+
+
+ftn-7271 crayftn: WARNING MXF12_ACC, File = ../../../../lustre/atlas1/trn001/scratch/csep22/nek5_acc/nek_2013_11_27/mxm_std.f, Line = 4416 
+  Unsupported OpenACC vector_length expression: Converting 16 to 1.
+
+ftn -c  -O2 -hacc -ra -s real64 -eZ -em -Rc -rm  -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE -DGLOBAL_LONG_LONG -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27 -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./ /lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27/stenosis.f    -o obj/stenosis.o 
+ftn -o nek5000  obj/stenosis.o obj/drive.o obj/drive1.o obj/drive2.o obj/plan4.o obj/bdry.o obj/coef.o obj/conduct.o obj/connect1.o obj/connect2.o obj/dssum.o obj/edgec.o obj/eigsolv.o obj/gauss.o obj/genxyz.o obj/navier1.o obj/makeq.o obj/navier0.o obj/navier2.o obj/navier3.o obj/navier4.o obj/prepost.o obj/speclib.o obj/map2.o obj/turb.o obj/mvmesh.o obj/ic.o obj/ssolv.o obj/planx.o obj/math.o obj/mxm_wrapper.o obj/hmholtz.o obj/gfdm_par.o obj/gfdm_op.o obj/gfdm_solve.o obj/subs1.o obj/subs2.o obj/genbox.o obj/gmres.o obj/hsmg.o obj/convect.o obj/induct.o obj/perturb.o obj/navier5.o obj/navier6.o obj/navier7.o obj/navier8.o obj/fast3d.o obj/fasts.o obj/calcz.o obj/byte.o obj/chelpers.o obj/byte_mpi.o obj/postpro.o obj/cvode_driver.o obj/nek_comm.o obj/init_plugin.o obj/setprop.o obj/qthermal.o obj/cvode_aux.o obj/makeq_aux.o obj/papi.o obj/ssygv.o obj/dsygv.o obj/nek_in_situ.o obj/mxm_std.o obj/blas.o obj/comm_mpi.o obj/singlmesh.o obj/jl_gs.o obj/jl_sort.o obj/jl_sarray_transfer.o obj/jl_sarray_sort.o obj/jl_gs_local.o obj/jl_crystal.o obj/jl_comm.o obj/jl_tensor.o obj/jl_fail.o obj/jl_fcrystal.o obj/jl_findpts.o obj/jl_findpts_local.o obj/jl_obbox.o obj/jl_poly.o obj/jl_lob_bnd.o obj/jl_findpts_el_3.o obj/jl_findpts_el_2.o obj/jl_sparse_cholesky.o obj/jl_xxt.o obj/jl_fcrs.o 
+#############################################################
+#                  Compilation successful!                  #
+#############################################################
+   text	   data	    bss	    dec	    hex	filename
+6189353	1096504	1766972688	1774258545	69c10971	nek5000
+
+

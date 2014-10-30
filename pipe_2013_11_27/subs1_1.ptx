@@ -1,0 +1,56 @@
+      .version 3.1
+      .target sm_35
+      .address_size 64
+
+      // Cray Fortran : Version 8.3.0  (u83050f83142i83148p83243a83009z83243)
+
+      .file	1	"/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/subs1.f"
+
+      .entry sethlm_acc_$ck_L1769_1(
+               .param .f64 $$_arg_dtbd_t31,
+               .param .s32 $$_arg_ntot1_t32,
+               .param .s64 $$arg_ptr_acc_vtrans_t8_t33,
+               .param .s64 $$arg_ptr_acc_h2_t10_t34,
+               .param .s64 $$arg_ptr_acc_param_t14_t35,
+               .param .s32 $$_arg_acc_ifield_t18_t36 )
+      {
+      .reg .pred %p<3>;
+      .reg .b32  %b<3>;
+      .reg .s32  %s<5>;
+      .reg .s64  %sd<8>;
+      .reg .u32  %u<4>;
+      .reg .f64  %fd<5>;
+      //
+      .loc                 1  1769  0
+      .loc                 1  1770  0
+      ld.param.s32         %s1, [$$_arg_ntot1_t32];    // subs1.f:1770 : $$mr_ntot1_35_t30
+      setp.le.s32          %p1, %s1, 0;                // subs1.f:1770
+      @%p1 bra             $sethlm_acc_$ck_L1769_1__l90__;// subs1.f:1770
+      .loc                 1  1770  0
+      mov.u32              %u1, %ntid.x;               // subs1.f:1770
+      mov.u32              %u2, %ctaid.x;              // subs1.f:1770
+      mov.u32              %u3, %tid.x;                // subs1.f:1770
+      mad.lo.u32           %s2, %u1, %u2, %u3;         // subs1.f:1770 : $$id_t17
+      setp.ge.s32          %p2, %s2, %s1;              // subs1.f:1770
+      @%p2 bra             $sethlm_acc_$ck_L1769_1__l90__;// subs1.f:1770
+      .loc                 1  1771  0
+      ld.param.s32         %s3, [$$_arg_acc_ifield_t18_t36];// subs1.f:1771 : $$_arg_acc_ifield_t18_t36
+      mad.lo.s32           %s4, 410000, %s3, %s2;      // subs1.f:1771
+      shl.b32              %b1, %s4, 3;                // subs1.f:1771
+      cvt.s64.s32          %sd1, %b1;                  // subs1.f:1771
+      ld.param.s64         %sd2, [$$arg_ptr_acc_vtrans_t8_t33];// subs1.f:1771 : $$arg_ptr_acc_vtrans_t8_t33
+      add.s64              %sd3, %sd2, %sd1;           // subs1.f:1771
+      ld.param.s64         %sd4, [$$arg_ptr_acc_param_t14_t35];// subs1.f:1771 : $$arg_ptr_acc_param_t14_t35
+      ld.global.nc.f64     %fd1, [%sd4 + 848];         // subs1.f:1771 : 106[$$arg_ptr_acc_param_t14_t35,0,ex].L
+      ld.param.f64         %fd2, [$$_arg_dtbd_t31];    // subs1.f:1771 : $$_arg_dtbd_t31
+      ld.global.nc.f64     %fd3, [%sd3 + -3280000];    // subs1.f:1771 : -410000[$$arg_ptr_acc_vtrans_t8_t33,_madd(410000,$$_arg_acc_ifield_t18_t36,$$id_t17),ex].L
+      mad.rn.f64           %fd4, %fd2, %fd3, %fd1;     // subs1.f:1771
+      shl.b32              %b2, %s2, 3;                // subs1.f:1771
+      cvt.s64.s32          %sd5, %b2;                  // subs1.f:1771
+      ld.param.s64         %sd6, [$$arg_ptr_acc_h2_t10_t34];// subs1.f:1771 : $$arg_ptr_acc_h2_t10_t34
+      add.s64              %sd7, %sd6, %sd5;           // subs1.f:1771
+      st.global.f64        [%sd7], %fd4;               // subs1.f:1771 : 0[$$arg_ptr_acc_h2_t10_t34,$$id_t17].L
+$sethlm_acc_$ck_L1769_1__l90__:
+      exit;
+      } // sethlm_acc_$ck_L1769_1
+

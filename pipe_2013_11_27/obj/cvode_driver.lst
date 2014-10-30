@@ -1,0 +1,2795 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S u m m a r y   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Compilation
+-----------
+File     : /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/cvode_driver.f
+Compiled : 10/28/14  13:46:58
+Compiler : Version 8.3.0
+Ftnlx    : Version 8316 (libcif 83015)
+Target   : x86-64
+Command  : ftn_driver.exe -hcpu=interlagos -haccel=nvidia_35 -hdynamic
+           -D__CRAYXE -D__CRAYXT_COMPUTE_LINUX_TARGET -hnetwork=gemini
+           -I/opt/cray/perftools/6.2.0/include -DCRAYPAT -homp_trace
+           -hpat_trace -L/opt/cray/perftools/6.2.0/lib64 -c -O2 -hacc -ra
+           -sreal64 -eZ -em -Rc -rm -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE
+           -DGLOBAL_LONG_LONG
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./
+           -oobj/cvode_driver.o -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/libsci_acc/3.0.3.1/CRAY/83/x86_64/include
+           -I/opt/cray/libsci/13.0.0/CRAY/83/interlagos/include
+           -I/opt/cray/mpt/7.0.0/gni/mpich2-cray/83/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/extras/CUPTI/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/nvvm/include
+           -I/opt/cray/rca/1.0.0-2.0502.53711.3.125.gem/include
+           -I/opt/cray/pmi/5.0.4-1.0000.10161.132.18.gem/include
+           -I/opt/cray/xpmem/0.1-2.0502.55507.3.2.gem/include
+           -I/opt/cray/dmapp/7.0.1-1.0502.9501.5.211.gem/include
+           -I/opt/cray/gni-headers/3.0-1.0502.9684.5.2.gem/include
+           -I/opt/cray/ugni/5.0-1.0502.9685.4.24.gem/include
+           -I/opt/cray/udreg/2.3.2-1.0502.9275.1.25.gem/include
+           -I/opt/cray/alps/5.2.1-2.0502.9041.11.6.gem/include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/pkgconfig/../include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/wlm_detect/1.0-1.0502.53341.1.1.gem/include
+           -I/opt/cray/krca/1.0.0-2.0502.53880.4.103.gem/include
+           -I/opt/cray-hss-devel/7.2.0/include /lustre/atlas/scratch/csep22/trn0
+           01/nek5_acc/nek_2013_11_27/cvode_driver.f
+
+ftnlx report
+------------
+Source   : /lustre/atlas1/trn001/scratch/csep22/nek5_acc/pipe_2013_11_27//lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/cvode_driver.f
+Date     : 10/28/2014  13:46:58
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          O p t i o n s   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Options :  -O cache2,fp2,scalar2,thread2,vector2,mpi0,modinline,ipa3,noaggress
+           -O autoprefetch,noautothread,fusion2,nomsgs,negmsgs,nooverindex
+           -O pattern,shortcircuit2,unroll2,nozeroinc
+           -h noadd_paren,align_arrays,caf,noconcurrent,nocontiguous,nofp_trap
+           -h nofunc_trace,nomessage,noomp_analyze,omp_trace,pat_trace
+           -h omp,acc
+           -h acc_model=auto_async_kernel:fast_addr:no_deep_copy
+           -h cpu=x86-64,interlagos,gemini,accel=NVIDIA_GPU
+           -s real64
+           -eh
+           -d acdgjnopvBDEIPQRS0
+           -e mqswACFTZ
+           -J bj
+           -R c 
+           -f fixed
+           -m3
+           -N72
+           -S /tmp/scratch/pe_10468/cvode_driver_1.s
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+     %%%    L o o p m a r k   L e g e n d    %%%
+
+     Primary Loop Type        Modifiers
+     ------- ---- ----        ---------
+     A - Pattern matched      a - atomic memory operation
+                              b - blocked
+     C - Collapsed            c - conditional and/or computed
+     D - Deleted               
+     E - Cloned                
+     F - Flat - No calls      f - fused
+     G - Accelerated          g - partitioned
+     I - Inlined              i - interchanged
+     M - Multithreaded        m - partitioned
+                              n - non-blocking remote transfer
+                              p - partial
+                              r - unrolled
+                              s - shortloop
+     V - Vectorized           w - unwound
+
+     + - More messages listed at end of listing
+     ------------------------------------------
+
+
+    1.        #ifndef CVODE
+    2.              subroutine cv_setsize(n_in,nfld_last)
+    3.        
+    4.              include 'SIZE'
+    5.              if(nid.eq.0) write(6,*) 'ABORT: not compiled with CVODE support!'
+    6.  +           call exitt
+    7.        
+    8.              return
+    9.              end
+ftn-5004 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Dummy Argument "N_IN" is not referenced or defined.
+
+ftn-5004 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Dummy Argument "NFLD_LAST" is not referenced or defined.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LDIMT1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LDIMT3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LELG" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "MAXMOR" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "MAXOBJ" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 9 
+  Named Constant "AZ2" is not used.
+
+
+ftn-3021 ftn: IPA File = cvode_driver.f, Line = 6 
+  "exitt" (called from "cv_setsize") was not inlined because the compiler was unable to locate the routine.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   10.        c----------------------------------------------------------------------
+   11.              subroutine cv_init
+   12.        
+   13.              include 'SIZE'
+   14.              if(nid.eq.0) write(6,*) 'ABORT: not compiled with CVODE support!'
+   15.  +           call exitt
+   16.        
+   17.              return
+   18.              end
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LDIMT1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LDIMT3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LELG" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "MAXOBJ" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 18 
+  Named Constant "MAXMOR" is not used.
+
+
+ftn-3021 ftn: IPA File = cvode_driver.f, Line = 15 
+  "exitt" (called from "cv_init") was not inlined because the compiler was unable to locate the routine.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   19.        c----------------------------------------------------------------------
+   20.              subroutine cdscal_cvode(igeom)
+   21.        
+   22.              include 'SIZE'
+   23.              if(nid.eq.0) write(6,*) 'ABORT: not compiled with CVODE support!'
+   24.  +           call exitt
+   25.        
+   26.              return
+   27.              end
+ftn-5004 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Dummy Argument "IGEOM" is not referenced or defined.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "AZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "AZ1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LBELT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LBELV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LBX1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LBX2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LBY1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LBY2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LBZ1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LBZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LCTMP0" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LCTMP1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LDIMT1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LDIMT3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LELG" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LELGEC" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LELX" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LELY" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LELZ" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LFDM" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LGMRES" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LHIS" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LMAXP" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LMAXT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LMAXV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LORDER" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LP" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "AX1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "AY1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "AY2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LPART" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "MAXOBJ" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "MXPREV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "AX2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LPELT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LPELV" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LPERT" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LPX1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LPX2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LPY1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LPY2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LPZ1" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LPZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LSTORE" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LVEC" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LX1M" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LX3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LXO" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LXYZ2" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LXZ" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LXZ21" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LY1M" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LY3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LYD" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LYS" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LZ1M" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LZ3" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LZD" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LZL" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "LZS" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "MAXMBR" is not used.
+
+ftn-5008 ftn: NOTE File = cvode_driver.f, Line = 27 
+  Named Constant "MAXMOR" is not used.
+
+
+ftn-3021 ftn: IPA File = cvode_driver.f, Line = 24 
+  "exitt" (called from "cdscal_cvode") was not inlined because the compiler was unable to locate the routine.
+
+   28.        #else
+   29.    D         subroutine cv_setsize(n_in,nfld_last)
+   30.    D   
+   31.    D         include 'SIZE'
+   32.    D         include 'TOTAL'
+   33.    D         include 'CVODE'
+   34.    D   
+   35.    D         integer LongIntSize
+   36.        #ifdef LONGINT8
+   37.    D         integer*8 iout,iout_old,ipar
+   38.    D         data  LongIntSize / 8 /
+   39.        #else
+   40.    D         integer*4 iout,iout_old,ipar
+   41.    D         data LongIntSize / 4 /
+   42.        #endif
+   43.    D         ! cvode will not allocate these arrays
+   44.    D         common /cv_rout/ rout(6),rpar(1)
+   45.    D         common /cv_iout/ iout(21),iout_old(21),ipar(1)
+   46.    D   
+   47.    D         integer sizeOfLongInt
+   48.    D         external sizeOfLongInt
+   49.    D   
+   50.    D         integer*8 nn,i8glsum
+   51.    D   
+   52.    D         if (sizeOfLongInt() .ne. LongIntSize) then
+   53.    D           if(nid.eq.0) write(6,*)
+   54.    D        &  'ABORT cv_setsize(): invalid long int size! ', 
+   55.    D        &   sizeOfLongInt(), LongIntSize
+   56.    D           call exitt
+   57.    D         endif
+   58.    D   
+   59.    D         nxyz = nx1*ny1*nz1
+   60.    D   
+   61.    D         cv_nfld = nfld_last
+   62.    D   
+   63.    D         ! set local ODE size
+   64.    D         ipar(1) = n_in
+   65.    D         do i=2,cv_nfld
+   66.    D            ntot = nxyz*nelfld(i)
+   67.    D            ipar(1) = ipar(1) + ntot
+   68.    D         enddo
+   69.    D         ! determine global ODE size 
+   70.    D         nn = ipar(1)
+   71.    D         cv_nglobal = i8glsum(nn,1)
+   72.    D   
+   73.    D         return
+   74.    D         end
+   75.    D   c----------------------------------------------------------------------
+   76.    D         subroutine cv_init
+   77.    D   c
+   78.    D   c     Initialize CVODE
+   79.    D   c
+   80.    D   c     Note:  In contrast to the default CVODE version
+   81.    D   c            cv_nglobal is defined as 'long long int'
+   82.    D   c 
+   83.    D         include 'SIZE'
+   84.    D         include 'TOTAL'
+   85.    D         include 'CVODE'
+   86.    D   
+   87.    D         ! use TLAG as scratch space (be careful!)
+   88.    D         common /VPTSOL/  dummy(6*lx1*ly1*lz1*lelv)
+   89.    D        &                ,y0(lx1*ly1*lz1*lelt*ldimt+1)
+   90.        #ifdef LONGINT8
+   91.    D         integer*8 iout,iout_old,ipar
+   92.        #else
+   93.    D         integer*4 iout,iout_old,ipar
+   94.        #endif
+   95.    D         ! cvode will not allocate these arrays
+   96.    D         integer cvcomm
+   97.    D         common /cv_rout/ rout(6),rpar(1)
+   98.    D         common /cv_iout/ iout(21),iout_old(21),ipar(1),cvcomm
+   99.    D   
+  100.    D         real*8 etime1
+  101.    D   
+  102.    D         etime1=dnekclock_sync()
+  103.    D   
+  104.    D         nxyz = nx1*ny1*nz1
+  105.    D         ifcvodeinit   = .false.
+  106.    D         cv_time       = time
+  107.    D   
+  108.    D         if(nid.eq.0) write(*,*) 'initializing ODE integrator ...'
+  109.    D   
+  110.    D         if(cv_nfld.lt.2) then
+  111.    D           if(nid.eq.0) write(6,*)
+  112.    D        &  'ABORT cv_init(): invalid cv_nfld index!', cv_nfld
+  113.    D           call exitt
+  114.    D         endif
+  115.    D   
+  116.    D         if(ldimt.lt.2) then
+  117.    D           if(nid.eq.0) write(6,*)
+  118.    D        &  'ABORT cv_init(): ldimt has to be >= 2!', ldimt
+  119.    D           call exitt
+  120.    D         endif
+  121.    D   
+  122.    D         ! set dirichlet BCs
+  123.    D         ! note: these values will never change in time (ydot=0)
+  124.    D         !       time varying dirichlet bcs are not supported for now
+  125.    D         do ifield=2,cv_nfld
+  126.    D           call bcdirsc (t(1,1,1,1,ifield-1))
+  127.    D         enddo
+  128.    D   
+  129.    D         ! set solver tolerances
+  130.    D         cv_rtol = tolrel
+  131.    D         cv_atol = tolabs
+  132.    D   
+  133.    D         ! initialize vector module
+  134.    D         call create_comm(cvcomm)
+  135.        #ifdef MPI
+  136.    D         call fnvinitp(cvcomm, 1, ipar(1), cv_nglobal, ier)
+  137.        #else
+  138.    D         call fnvinits(1, ipar(1), ier)
+  139.        #endif
+  140.    D         if (ier.ne.0) then
+  141.    D           write(*,'(a,i3)') 'ABORT cv_init(): fnvinitp ier=', ier
+  142.    D           call exitt
+  143.    D         endif
+  144.    D   
+  145.    D         ! set initial integrator state
+  146.    D         call cv_pack_sol(y0)
+  147.    D   
+  148.    D         ! initialize main solver
+  149.    D         call fcvmalloc(cv_time, y0, meth, itmeth, iatol,
+  150.    D        &               cv_rtol, cv_atol, iout, rout, ipar, rpar, ier)
+  151.    D         if (ier.ne.0) then
+  152.    D           write(*,'(a,i3)') 'ABORT cv_init(): fcvmalloc ier=', ier
+  153.    D           call exitt
+  154.    D         endif
+  155.    D   
+  156.    D         ! initialize linear solver
+  157.    D         call fcvspGMR(0,igstype,cv_maxl,cv_delt,ier)
+  158.    D         if (ier .ne. 0) then
+  159.    D           write(*,'(a,i3)') 'ABORT cv_init(): fcvspgmr ier=', ier
+  160.    D           call exitt
+  161.    D         endif
+  162.    D   
+  163.    D         ! limit time integration order
+  164.    D   c      call fcvsetiin('MAX_ORD',3,ier)
+  165.    D   c      if (ier .ne. 0) then
+  166.    D   c        write(*,'(a,i3)') 'ABORT cv_init(): fcvsetiin ier=', ier
+  167.    D   c        call exitt
+  168.    D   c      endif
+  169.    D   
+  170.    D          ! limit maximum integration step size
+  171.    D   c      call fcvsetrin('MAX_STEP',dt,ier)
+  172.    D   c      if (ier .ne. 0) then
+  173.    D   c        write(*,'(a,i3)') 'ABORT cv_init(): fcvsetrin ier=', ier
+  174.    D   c        call exitt
+  175.    D   c      endif
+  176.    D   
+  177.    D         ! check for user-supplied Jacobian routine
+  178.    D         if(abs(PARAM(16)).ge.3) then 
+  179.    D           call FCVSPILSSETJAC(1, ier)
+  180.    D           if(nid.eq.0) then 
+  181.    D             write(6,*) '  user-supplied Jacobian enabled'
+  182.    D             write(6,'(A,4x,e7.1)') '   DQ perturbation scaling factor :',
+  183.    D        &                            CV_SIGS
+  184.    D           endif
+  185.    D         endif
+  186.    D   
+  187.    D         etime1 = dnekclock_sync() - etime1
+  188.    D         if(nid.eq.0) then
+  189.    D           write(6,'(A,i11)')     '   degrees of freedom            : ',
+  190.    D        &                         cv_nglobal
+  191.    D           write(6,'(A,7x,i4)')   '   krylov dimension              : ',
+  192.    D        &                         cv_maxl
+  193.    D           write(6,'(A,6x,f5.2)') '   linear convergence factor     : ',
+  194.    D        &                         cv_delt
+  195.    D           write(6,'(A,7x,i4)')   '   last field index to integrate : ',
+  196.    D        &                         cv_nfld
+  197.    D           write(6,'(A,g15.3,A,/)') ' done :: initializing ODE integrator',
+  198.    D        &                         etime1, ' sec'
+  199.    D         endif
+  200.    D   
+  201.    D         ifcvodeinit = .true.
+  202.    D   
+  203.    D         return
+  204.    D         end
+  205.    D   c----------------------------------------------------------------------
+  206.    D         subroutine cdscal_cvode(igeom)
+  207.    D   c
+  208.    D   c     Top level driver for the ODE integrator CVODE
+  209.    D   c     webpage: https://computation.llnl.gov/casc/sundials 
+  210.    D   c
+  211.    D   c     Integrate the IVP d/dt[y] = f(y(t),t); y(t=t0) := f0
+  212.    D   c     using BDF(stiff) or AM(non-stiff).
+  213.    D   c     f denotes the RHS function and is evaluated in fcvfun().
+  214.    D   c
+  215.    D         include 'SIZE'
+  216.    D         include 'TOTAL'
+  217.    D         include 'CVODE'
+  218.    D   
+  219.    D         ! use TLAG as scratch space (be careful!)
+  220.    D         common /VPTSOL/  dummy(6*lx1*ly1*lz1*lelv)
+  221.    D        &                ,y   (lx1*ly1*lz1*lelt*ldimt)
+  222.    D        &                ,vx_ (lx1,ly1,lz1,lelv)
+  223.    D        &                ,vy_ (lx1,ly1,lz1,lelv)
+  224.    D        &                ,vz_ (lx1,ly1,lz1,lelv)
+  225.    D   
+  226.        #ifdef LONGINT8
+  227.    D         integer*8 iout,iout_old,ipar
+  228.        #else
+  229.    D         integer*4 iout,iout_old,ipar
+  230.        #endif
+  231.    D         common /cv_iout/ iout(21),iout_old(21),ipar(1)
+  232.    D   
+  233.    D         real nfe_avg,nli_nni_avg,nli_nni
+  234.    D         save nfe_avg,nli_nni_avg
+  235.    D   
+  236.    D         data nfe_avg / 0 /
+  237.    D         data nli_nni_avg / 0 /
+  238.    D   
+  239.    D         real nni_sum,nli_sum,nfe_sum
+  240.    D         save nni_sum,nli_sum,nfe_sum
+  241.    D         data nni_sum / 0 /
+  242.    D         data nli_sum / 0 / 
+  243.    D         data nfe_sum / 0 /
+  244.    D   
+  245.    D         nxyz = nx1*ny1*nz1
+  246.    D   
+  247.    D         if (.not.ifcvodeinit) then
+  248.    D           write(6,*) 'ABORT: cv_init() was not called!'
+  249.    D           call exitt
+  250.    D         endif 
+  251.    D   
+  252.    D         ! save old output values
+  253.    D         do i=1,21
+  254.    D            iout_old(i) = iout(i)
+  255.    D         enddo
+  256.    D   
+  257.    D         ! recompute fine grid velocities
+  258.    D         if(ifchar) call set_convect_new(vxd,vyd,vzd,vx,vy,vz)
+  259.    D   
+  260.    D         cv_time=0.0
+  261.    D         call store_vel(vx_,vy_,vz_)
+  262.    D         call fcvode(time,cv_time,y,itask,ier)
+  263.    D         call set_vel(vx_,vy_,vz_)
+  264.    D         call set_convect_new(vxd,vyd,vzd,vx,vy,vz)
+  265.    D    
+  266.    D         ! copy the cvode solution (y) back into internal array (t)
+  267.    D         call cv_unpack_sol(y)
+  268.    D   
+  269.    D         ! print solver statistics 
+  270.    D         if (nid.eq.0) then
+  271.    D            nstp        = iout(3)-iout_old(3) 
+  272.    D            nfe         = iout(4)-iout_old(4)+iout(20)-iout_old(20)
+  273.    D            nni         = iout(7)-iout_old(7)  
+  274.    D            nli         = iout(20)-iout_old(20)
+  275.    D            nfe_sum     = nfe_sum + nfe
+  276.    D            nfe_avg     = (1.-1./istep)*nfe_avg + float(nfe)/istep
+  277.    D            nli_sum     = nli_sum + nli
+  278.    D            nni_sum     = nni_sum + nni
+  279.    D            nli_nni     = float(nli)/max(1,nni)
+  280.    D            nli_nni_avg = (1.-1./istep)*nli_nni_avg + nli_nni/istep
+  281.    D            
+  282.    D            write(*,'(13x,a8,i8,3x,a8,i8,3x,a10,f5.1)')
+  283.    D        &    'nsteps: ',   nstp     ,
+  284.    D        &    'nfe:    ',   nfe      ,
+  285.    D        &    '<nfe>:    ', nfe_avg
+  286.    D            write(*,'(13x,a8,i8,3x,a8,i8,3x,a10,f5.1)')  
+  287.    D        &    'nni:    ',   nni      ,
+  288.    D        &    'nli:    ',   nli      ,
+  289.    D        &    '<nli/nni>:', nli_nni_avg
+  290.    D            write(*,'(13x,a8,i8,3x,a8,i8,3x,a10,i5)') 
+  291.    D        &    'ncfn:   '  ,iout(6)-iout_old(6),
+  292.    D        &    'ncfl:   '  ,iout(21)-iout_old(21),  
+  293.    D        &    'netf:     ',iout(5)-iout_old(5) 
+  294.    D         endif
+  295.    D   
+  296.    D         if (time.ne.cv_time .or. ier.lt.0) then
+  297.    D            if (nid.eq.0) then
+  298.    D               write(*,*) 'ABORT: integration error tout=',cv_time
+  299.    D               write(*,'(a,i3)') 'fcvode returned ier =', ier
+  300.    D            endif
+  301.    D            call exitt
+  302.    D         endif
+  303.    D   
+  304.    D         return
+  305.    D         end
+  306.    D   c----------------------------------------------------------------------
+  307.    D         SUBROUTINE FCVJTIMES (V,FJV,TT,Y,FY,H,IPAR,RPAR,WORK,IER)
+  308.    D   c
+  309.    D   c     Compute Jacobian Vetor product FJV
+  310.    D   c
+  311.    D         REAL V(1), FJV(1), TT, Y(1), FY(1), H, RPAR(1), WORK(1)
+  312.    D   
+  313.    D         INCLUDE 'SIZE'
+  314.    D         INCLUDE 'INPUT'
+  315.    D         INCLUDE 'CVODE'
+  316.    D   
+  317.        #ifdef LONGINT8
+  318.    D         integer*8 ipar(1),neql
+  319.        #else
+  320.    D         integer*4 ipar(1),neql
+  321.        #endif
+  322.    D         logical ifcdjv
+  323.    D         data    ifcdjv / .false. /
+  324.    D   
+  325.    D         common /VPTSOL/  dummy(6*lx1*ly1*lz1*lelv)
+  326.    D        &                ,FJV_(lx1*ly1*lz1*lelt*ldimt)
+  327.    D   
+  328.    D         if(abs(PARAM(16)).eq.3.1) ifcdjv = .true.
+  329.    D   
+  330.    D         ! set local size
+  331.    D         neql = ipar(1)
+  332.    D   
+  333.    D         ! compute weighted rms norm ||v||
+  334.    D         sum = 0.0
+  335.    D         do i = 1,neql
+  336.    D            EWT = 1./(cv_rtol*abs(Y(i)) + cv_atol)   
+  337.    D            dnorm = V(i)*EWT
+  338.    D            sum = sum + dnorm*dnorm
+  339.    D         enddo
+  340.    D         sum = sqrt(glsum(sum,1)/cv_nglobal)
+  341.    D        
+  342.    D         ! set perturbation sig to 1/||v||
+  343.    D         sig =  1./sum
+  344.    D   
+  345.    D         ! scale perturbation with user supplied constant
+  346.    D         sig = cv_sigs * sig
+  347.    D   
+  348.    D         ! set FJV = f(t, y + sigs*v/||v||)
+  349.    D         do i = 1,NEQL
+  350.    D            WORK(i) = Y(i) + sig*V(i)
+  351.    D         enddo
+  352.    D         call FCVFUN(TT,WORK,FJV,IPAR,RPAR,IER)
+  353.    D   
+  354.    D         if(ifcdjv) then ! approximate Jacobian by 2nd-order fd quotient
+  355.    D           do i = 1,NEQL
+  356.    D              WORK(i) = Y(i) - sig*V(i)
+  357.    D           enddo
+  358.    D           call FCVFUN(TT,WORK,FJV_,IPAR,RPAR,IER)
+  359.    D            siginv = 1./(2*sig)
+  360.    D           do i = 1,NEQL
+  361.    D   c           FJV(i) = FJV(i)*siginv - FJV_(i)*siginv
+  362.    D              FJV(i) = (FJV(i) - FJV_(i))*siginv
+  363.    D           enddo
+  364.    D         else ! approximate Jacobian by 1st-order fd quotient 
+  365.    D           siginv = 1./sig
+  366.    D           do i = 1,NEQL
+  367.    D   c           FJV(i) = (FJV(i) - FY(i))*siginv
+  368.    D              FJV(i) = FJV(i)*siginv - FY(i)*siginv
+  369.    D           enddo
+  370.    D         endif
+  371.    D   
+  372.    D         ier = 0
+  373.    D   
+  374.    D         return
+  375.    D         end
+  376.    D   c----------------------------------------------------------------------
+  377.    D         subroutine store_vel(vx_,vy_,vz_)
+  378.    D    
+  379.    D         include 'SIZE'
+  380.    D         include 'TOTAL'
+  381.    D    
+  382.    D         real vx_(1),vy_(1),vz_(1)
+  383.    D    
+  384.    D         ntot  = nx1*ny1*nz1*nelv
+  385.    D    
+  386.    D         ! save velocities
+  387.    D         call copy(vx_,vx,ntot)
+  388.    D         call copy(vy_,vy,ntot)
+  389.    D         if (if3d) call copy(vz_,vz,ntot)
+  390.    D    
+  391.    D         return
+  392.    D         end
+  393.    D   c----------------------------------------------------------------------
+  394.    D         subroutine set_vel(vx_,vy_,vz_)
+  395.    D    
+  396.    D         include 'SIZE'
+  397.    D         include 'TOTAL'
+  398.    D    
+  399.    D         real vx_(1),vy_(1),vz_(1)
+  400.    D    
+  401.    D         ntot  = nx1*ny1*nz1*nelv
+  402.    D    
+  403.    D         ! save velocities
+  404.    D         call copy(vx,vx_,ntot)
+  405.    D         call copy(vy,vy_,ntot)
+  406.    D         if (if3d) call copy(vz,vz_,ntot)
+  407.    D    
+  408.    D         return
+  409.    D         end
+  410.    D   c----------------------------------------------------------------------
+  411.    D         subroutine update_vel(time_)
+  412.    D   c
+  413.    D   c     extrapolated volocity at t=time_
+  414.    D   c
+  415.    D         include 'SIZE'
+  416.    D         include 'TOTAL'
+  417.    D         ! use TLAG as scratch space (this can get tricky!)
+  418.    D         common /VPTSOL/  ttmp(6*lx1*ly1*lz1*lelv)
+  419.    D        &                ,y   (lx1*ly1*lz1*lelt*ldimt)
+  420.    D        &                ,vx_ (lx1,ly1,lz1,lelt)
+  421.    D        &                ,vy_ (lx1,ly1,lz1,lelt)
+  422.    D        &                ,vz_ (lx1,ly1,lz1,lelt)
+  423.    D   
+  424.    D         real dtlag_(3),ab_(3)
+  425.    D         real timel
+  426.    D         save timel
+  427.    D         data timel /-1.0/
+  428.    D         real tmp(lx1,ly1,lz1,lelt)
+  429.    D   
+  430.    D         if (time_ .eq. timel) return
+  431.    D   
+  432.    D   c      if(nid.eq.0) write(6,*) 'recompute extrapolated velocity'
+  433.    D         timel = time_
+  434.    D   
+  435.    D         ntot = nx1*ny1*nz1*nelv
+  436.    D         ! restore velocities from previous time step 
+  437.    D         call copy(vx,vx_,ntot)
+  438.    D         call copy(vy,vy_,ntot)
+  439.    D         if(if3d) call copy(vz,vz_,ntot)
+  440.    D   
+  441.    D         ! compute extrapolate velocities
+  442.    D         dt_ = time_ - (time-dt)
+  443.    D         dtlag_(1) = dt_
+  444.    D         dtlag_(2) = dtlag(2)
+  445.    D         dtlag_(3) = dtlag(3)
+  446.    D         N = 3
+  447.    D         if(istep.le.2) N = istep
+  448.    D         call rzero(ab_,3)
+  449.    D         call setabbd (ab_,dtlag_,N,NBD)
+  450.    D         ab0 = ab_(1)
+  451.    D         ab1 = ab_(2)
+  452.    D         ab2 = ab_(3)
+  453.    D         call add3s2(tmp,vxlag(1,1,1,1,1),vxlag(1,1,1,1,2),ab1,ab2,ntot)
+  454.    D         call add2s1(vx,tmp,ab0,ntot)
+  455.    D         call add3s2(tmp,vylag(1,1,1,1,1),vylag(1,1,1,1,2),ab1,ab2,ntot)
+  456.    D         call add2s1(vy,tmp,ab0,ntot)
+  457.    D         if (if3d) then
+  458.    D            call add3s2(tmp,vzlag(1,1,1,1,1),vzlag(1,1,1,1,2),ab1,ab2,ntot)
+  459.    D            call add2s1(vz,tmp,ab0,ntot)
+  460.    D         endif
+  461.    D    
+  462.    D         ! update fine grid velocity
+  463.    D         if (param(99).gt.0) call set_convect_new(vxd,vyd,vzd,vx,vy,vz)
+  464.    D    
+  465.    D         return
+  466.    D         end
+  467.    D   c----------------------------------------------------------------------
+  468.    D         subroutine fcvfun (cv_time, y, ydot, ipar, rpar, ier)
+  469.    D   c
+  470.    D   c     Compute RHS function f (allocated within cvode)
+  471.    D   c     NOTE: working array is ydot, do not change! 
+  472.    D   c
+  473.    D         include 'SIZE'
+  474.    D         include 'TOTAL'
+  475.    D         include 'CVODE'
+  476.    D   
+  477.    D         real cv_time,y(1),ydot(1),rpar(1)
+  478.        #ifdef LONGINT8
+  479.    D         integer*8 ipar(1)
+  480.        #else
+  481.    D         integer*4 ipar(1)
+  482.        #endif
+  483.    D         data timel / -1 /
+  484.    D         save timel
+  485.    D   
+  486.    D         nxyz = nx1*ny1*nz1
+  487.    D   
+  488.    D         if (cv_time.ne.timel) then
+  489.    D           timel = cv_time
+  490.    D           if(nid.eq.0) write(6,10) cv_time
+  491.    D     10                 format(14X,'substepping t=',1pE14.7)
+  492.    D         endif
+  493.    D   
+  494.    D         call cv_unpack_sol(y)
+  495.    D   
+  496.    D         ! extrapolate velocity using CVODE's internal time
+  497.    D         if(abs(PARAM(16)).eq.3) call update_vel(cv_time)
+  498.    D   
+  499.    D         ntflds = 0
+  500.    D         j = 1
+  501.    D         do ifield=2,cv_nfld
+  502.    D            ntot = nxyz*nelfld(ifield)
+  503.    D            if (iftmsh(ifield)) ntflds = ntflds + 1
+  504.    D            call makeq
+  505.    D            call invcol3(ydot(j),bq(1,1,1,1,ifield-1),
+  506.    D        &               vtrans(1,1,1,1,ifield),ntot)
+  507.    D            j = j + ntot
+  508.    D         enddo
+  509.    D   
+  510.    D         j = 1
+  511.    D         if(ntflds.gt.0) then
+  512.    D           do ifield = 2,cv_nfld
+  513.    D              call dssum (ydot(j),nx1,ny1,nz1)
+  514.    D              j = j + nxyz*nelfld(ifield)
+  515.    D           enddo
+  516.    D         else ! same gs handle; use vector dssum
+  517.    D           ntot = nxyz*nelv
+  518.    D           if(cv_nfld-1.gt.0) 
+  519.    D        &    call nvec_dssum (ydot,ntot,cv_nfld-1,gsh_fld(1))
+  520.    D         endif
+  521.    D   
+  522.    D         j = 1
+  523.    D         do ifield=2,cv_nfld
+  524.    D            ntot = nxyz*nelfld(ifield)
+  525.    D            if (iftmsh(ifield)) then
+  526.    D               call col2(ydot(j),bintm1,ntot)
+  527.    D            else
+  528.    D               call col2(ydot(j),binvm1,ntot)
+  529.    D            endif
+  530.    D            j = j + ntot
+  531.    D         enddo
+  532.    D   
+  533.    D         call add_fcvfun_usr(ydot,j)
+  534.    D   
+  535.    D         j = 1
+  536.    D         do ifield=2,cv_nfld
+  537.    D            ntot = nxyz*nelfld(ifield)
+  538.    D            call col2(ydot(j),tmask(1,1,1,1,ifield-1),ntot)
+  539.    D            j = j + ntot
+  540.    D         enddo
+  541.    D   
+  542.    D         ier = 0
+  543.    D   
+  544.    D         return
+  545.    D         end
+  546.    D   
+  547.        #endif
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                C r o s s   R e f e r e n c e   for   CV_SETSIZE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+CV_SETSIZE                                                        Subroutine, EXTERNAL
+  Decl       2
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+EXITT                                                             Subroutine
+  Decl
+  Set 
+  Used       6
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      55      59      65      66      87
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NFLD_LAST                       Dummy Arg                         INTEGER, Implicit type
+  Decl       2
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used       5
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+N_IN                            Dummy Arg                         INTEGER, Implicit type
+  Decl       2
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                 C r o s s   R e f e r e n c e   for   CV_INIT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+CV_INIT                                                           Subroutine, EXTERNAL
+  Decl      11
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+EXITT                                                             Subroutine
+  Decl
+  Set 
+  Used      15
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      55      59      65      66      87
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used      14
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+               C r o s s   R e f e r e n c e   for   CDSCAL_CVODE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+AX1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AX2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AY2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ1                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+AZ2                                                               INTEGER, PARAMETER
+  Decl     102     103
+  Set 
+  Used
+
+CDSCAL_CVODE                                                      Subroutine, EXTERNAL
+  Decl      20
+  Set 
+  Used
+
+DIMN                                                              Common block 
+  Decl      91
+  Set 
+  Used
+
+EXITT                                                             Subroutine
+  Decl
+  Set 
+  Used      24
+
+IGEOM                           Dummy Arg                         INTEGER, Implicit type
+  Decl      20
+  Set 
+  Used
+
+LBELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      38
+  Set 
+  Used
+
+LBX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LBZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      39
+  Set 
+  Used
+
+LBZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      40
+  Set 
+  Used
+
+LCTMP0                                                            INTEGER, Implicit type, PARAMETER
+  Decl      65
+  Set 
+  Used
+
+LCTMP1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      66
+  Set 
+  Used
+
+LDIM                                                              INTEGER, Implicit type, PARAMETER
+  Decl       5
+  Set 
+  Used      10     106
+
+LDIMT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      44
+  Set 
+  Used      45      46
+
+LDIMT1                                                            INTEGER, Implicit type, PARAMETER
+  Decl      45
+  Set 
+  Used
+
+LDIMT3                                                            INTEGER, Implicit type, PARAMETER
+  Decl      46
+  Set 
+  Used
+
+LELG                                                              INTEGER, Implicit type, PARAMETER
+  Decl      24
+  Set 
+  Used
+
+LELGEC                                                            INTEGER, Implicit type, PARAMETER
+  Decl      50
+  Set 
+  Used
+
+LELT                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      55      59      65      66      87
+
+LELV                                                              INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      54      56
+
+LELX                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELY                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LELZ                                                              INTEGER, Implicit type, PARAMETER
+  Decl       8
+  Set 
+  Used
+
+LFDM                                                              INTEGER, Implicit type, PARAMETER
+  Decl     109
+  Set 
+  Used
+
+LGMRES                                                            INTEGER, Implicit type, PARAMETER
+  Decl      77
+  Set 
+  Used
+
+LHIS                                                              INTEGER, Implicit type, PARAMETER
+  Decl      60
+  Set 
+  Used
+
+LMAXP                                                             INTEGER, Implicit type, PARAMETER
+  Decl      56
+  Set 
+  Used
+
+LMAXT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      55
+  Set 
+  Used
+
+LMAXV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      54
+  Set 
+  Used
+
+LMVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      81
+  Set 
+  Used      83
+
+LORDER                                                            INTEGER, Implicit type, PARAMETER
+  Decl      58
+  Set 
+  Used
+
+LP                                                                INTEGER, Implicit type, PARAMETER
+  Decl      23
+  Set 
+  Used
+
+LPART                                                             INTEGER, Implicit type, PARAMETER
+  Decl      99
+  Set 
+  Used
+
+LPELT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPELV                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPERT                                                             INTEGER, Implicit type, PARAMETER
+  Decl      30
+  Set 
+  Used
+
+LPX1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPX2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPY1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPY2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LPZ1                                                              INTEGER, Implicit type, PARAMETER
+  Decl      31
+  Set 
+  Used
+
+LPZ2                                                              INTEGER, Implicit type, PARAMETER
+  Decl      32
+  Set 
+  Used
+
+LSTORE                                                            INTEGER, Implicit type, PARAMETER
+  Decl      83
+  Set 
+  Used
+
+LSVEC                                                             INTEGER, Implicit type, PARAMETER
+  Decl      82
+  Set 
+  Used      83
+
+LVEC                                                              INTEGER, Implicit type, PARAMETER
+  Decl      72
+  Set 
+  Used
+
+LX1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used       6      15      19      54      55      57      65      66      96     103
+
+LX1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LX2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      15
+  Set 
+  Used      56     103
+
+LX3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      19
+  Set 
+  Used
+
+LXD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used       7
+
+LXO                                                               INTEGER, Implicit type, PARAMETER
+  Decl      96
+  Set 
+  Used
+
+LXS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used     106
+
+LXYZ2                                                             INTEGER, Implicit type, PARAMETER
+  Decl      51
+  Set 
+  Used
+
+LXZ                                                               INTEGER, Implicit type, PARAMETER
+  Decl      57
+  Set 
+  Used
+
+LXZ21                                                             INTEGER, Implicit type, PARAMETER
+  Decl      52
+  Set 
+  Used
+
+LY1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      16      20      54      55      65      66     103
+
+LY1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LY2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      16
+  Set 
+  Used      56     103
+
+LY3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      20
+  Set 
+  Used
+
+LYD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LYS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+LZ1                                                               INTEGER, Implicit type, PARAMETER
+  Decl       6
+  Set 
+  Used      17      21      54      55      57      65      66     103
+
+LZ1M                                                              INTEGER, Implicit type, PARAMETER
+  Decl      43
+  Set 
+  Used
+
+LZ2                                                               INTEGER, Implicit type, PARAMETER
+  Decl      17
+  Set 
+  Used      56     103
+
+LZ3                                                               INTEGER, Implicit type, PARAMETER
+  Decl      21
+  Set 
+  Used
+
+LZD                                                               INTEGER, Implicit type, PARAMETER
+  Decl       7
+  Set 
+  Used
+
+LZL                                                               INTEGER, Implicit type, PARAMETER
+  Decl      10
+  Set 
+  Used
+
+LZS                                                               INTEGER, Implicit type, PARAMETER
+  Decl     106
+  Set 
+  Used
+
+MAXMBR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MAXMOR                                                            INTEGER, Implicit type, PARAMETER
+  Decl      87
+  Set 
+  Used
+
+MAXOBJ                                                            INTEGER, Implicit type, PARAMETER
+  Decl      59
+  Set 
+  Used
+
+MXPREV                                                            INTEGER, Implicit type, PARAMETER
+  Decl      76
+  Set 
+  Used
+
+NDIM                            /DIMN/ offset=352                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NELT                            /DIMN/ offset=32                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NELV                            /DIMN/ offset=0                   INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NFIELD                          /DIMN/ offset=384                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NID                             /DIMN/ offset=448                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used      23
+
+NPERT                           /DIMN/ offset=416                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NX1                             /DIMN/ offset=64                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX2                             /DIMN/ offset=160                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NX3                             /DIMN/ offset=256                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NXD                             /DIMN/ offset=480                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NY1                             /DIMN/ offset=96                  INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY2                             /DIMN/ offset=192                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NY3                             /DIMN/ offset=288                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NYD                             /DIMN/ offset=512                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+NZ1                             /DIMN/ offset=128                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ2                             /DIMN/ offset=224                 INTEGER, Implicit type
+  Decl      91
+  Set 
+  Used
+
+NZ3                             /DIMN/ offset=320                 INTEGER, Implicit type
+  Decl      92
+  Set 
+  Used
+
+NZD                             /DIMN/ offset=544                 INTEGER, Implicit type
+  Decl      93
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                     C o m m o n   B l o c k   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/DIMN/                                Length: 72 bytes
+
+     CV_SETSIZE                       
+     CDSCAL_CVODE                     
+     CV_INIT                          
+
+     Member Comparison
+     -----------------
+     The common block members are declared the same.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                         E x t e r n a l   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name  Messages
+----  --------
+CDSCAL_CVODE
+      Defined as:  Subroutine (line 238, file cvode_driver.f)
+
+      Interface:   None
+
+      Calls:       EXITT (Line 351, file cvode_driver.f)
+
+Name  Messages
+----  --------
+CV_INIT
+      Defined as:  Subroutine (line 120, file cvode_driver.f)
+
+      Interface:   None
+
+      Calls:       EXITT (Line 233, file cvode_driver.f)
+
+Name  Messages
+----  --------
+CV_SETSIZE
+      Defined as:  Subroutine (line 2, file cvode_driver.f)
+
+      Interface:   None
+
+      Calls:       EXITT (Line 115, file cvode_driver.f)
+
+Name  Messages
+----  --------
+EXITT
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   CDSCAL_CVODE (Line 115, file cvode_driver.f)
+                   CV_SETSIZE (Line 233, file cvode_driver.f)
+                   EXITT (Line 351, file cvode_driver.f)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

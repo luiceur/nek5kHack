@@ -1,0 +1,14 @@
+digraph G {
+	node [shape=record,style=filled,labeljust=c,height=0.2];
+	0 [pos="0,0", label="/", fillcolor="#AAAAAA",fontcolor="#FFFFFF"];
+	435162879 [pos="0,0", label="convop_fst_3d_acc_@convect.f:1626", fillcolor="#f1c71c",fontcolor="#FFFFFF"];
+	-733009647 [pos="0,0", label="[empty]@0x2aaaab65a3d7", fillcolor="#f1c71c",fontcolor="#FFFFFF"];
+	1035318637 [pos="0,0", label="select@0x2aaab9df9f63", fillcolor="#f1c71c",fontcolor="#FFFFFF"];
+	-2134501904 [pos="0,0", label="[Fault Summary]", fillcolor="#f1c71c",fontcolor="#FFFFFF"];
+	-576080587 [pos="0,0", label="[SIGSEGV(11)]", fillcolor="#f1c71c",fontcolor="#FFFFFF"];
+	0 -> 435162879 [label="[0]"]
+	0 -> -733009647 [label="[0]"]
+	-733009647 -> 1035318637 [label="[0]"]
+	0 -> -2134501904 [label="[0]"]
+	-2134501904 -> -576080587 [label="[0]"]
+}

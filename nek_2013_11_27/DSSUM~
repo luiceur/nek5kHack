@@ -1,0 +1,2 @@
+      parameter (lds=lx1*ly1*lz1*lelt)
+      common /newdss/ ids_lgl1(-1:lds),ids_lgl2(-1:lds),ids_ptr(lds)

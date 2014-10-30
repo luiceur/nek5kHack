@@ -1,0 +1,13 @@
+On Titan using cray cce
+
+> module add craype-accel-nvidia35
+
+> cd pipe_2013_11_17
+> ./makenak clean
+> ./makenek stenosis
+
+> modifiy the run_script.sh
+ (maximum 4 GPU/processors)
+
+> qusb run_script.sh
+

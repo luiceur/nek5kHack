@@ -1,0 +1,656 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S u m m a r y   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Compilation
+-----------
+File     : /lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/gauss.f
+Compiled : 10/28/14  13:45:26
+Compiler : Version 8.3.0
+Ftnlx    : Version 8316 (libcif 83015)
+Target   : x86-64
+Command  : ftn_driver.exe -hcpu=interlagos -haccel=nvidia_35 -hdynamic
+           -D__CRAYXE -D__CRAYXT_COMPUTE_LINUX_TARGET -hnetwork=gemini
+           -I/opt/cray/perftools/6.2.0/include -DCRAYPAT -homp_trace
+           -hpat_trace -L/opt/cray/perftools/6.2.0/lib64 -c -O2 -hacc -ra
+           -sreal64 -eZ -em -Rc -rm -DPTRSIZE8 -DMPI -DLONGINT8 -DUNDERSCORE
+           -DGLOBAL_LONG_LONG
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/pipe_2013_11_27
+           -I/lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27 -I./
+           -oobj/gauss.o -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/libsci_acc/3.0.3.1/CRAY/83/x86_64/include
+           -I/opt/cray/libsci/13.0.0/CRAY/83/interlagos/include
+           -I/opt/cray/mpt/7.0.0/gni/mpich2-cray/83/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/extras/CUPTI/include
+           -I/opt/nvidia/cudatoolkit/5.5.22-1.0502.7944.3.1/nvvm/include
+           -I/opt/cray/rca/1.0.0-2.0502.53711.3.125.gem/include
+           -I/opt/cray/pmi/5.0.4-1.0000.10161.132.18.gem/include
+           -I/opt/cray/xpmem/0.1-2.0502.55507.3.2.gem/include
+           -I/opt/cray/dmapp/7.0.1-1.0502.9501.5.211.gem/include
+           -I/opt/cray/gni-headers/3.0-1.0502.9684.5.2.gem/include
+           -I/opt/cray/ugni/5.0-1.0502.9685.4.24.gem/include
+           -I/opt/cray/udreg/2.3.2-1.0502.9275.1.25.gem/include
+           -I/opt/cray/alps/5.2.1-2.0502.9041.11.6.gem/include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/pkgconfig/../include
+           -I/opt/cray/cce/8.3.0/craylibs/x86-64/include
+           -I/opt/cray/wlm_detect/1.0-1.0502.53341.1.1.gem/include
+           -I/opt/cray/krca/1.0.0-2.0502.53880.4.103.gem/include
+           -I/opt/cray-hss-devel/7.2.0/include /lustre/atlas/scratch/csep22/trn0
+           01/nek5_acc/nek_2013_11_27/gauss.f
+
+ftnlx report
+------------
+Source   : /lustre/atlas1/trn001/scratch/csep22/nek5_acc/pipe_2013_11_27//lustre/atlas/scratch/csep22/trn001/nek5_acc/nek_2013_11_27/gauss.f
+Date     : 10/28/2014  13:45:27
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          O p t i o n s   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Options :  -O cache2,fp2,scalar2,thread2,vector2,mpi0,modinline,ipa3,noaggress
+           -O autoprefetch,noautothread,fusion2,nomsgs,negmsgs,nooverindex
+           -O pattern,shortcircuit2,unroll2,nozeroinc
+           -h noadd_paren,align_arrays,caf,noconcurrent,nocontiguous,nofp_trap
+           -h nofunc_trace,nomessage,noomp_analyze,omp_trace,pat_trace
+           -h omp,acc
+           -h acc_model=auto_async_kernel:fast_addr:no_deep_copy
+           -h cpu=x86-64,interlagos,gemini,accel=NVIDIA_GPU
+           -s real64
+           -eh
+           -d acdgjnopvBDEIPQRS0
+           -e mqswACFTZ
+           -J bj
+           -R c 
+           -f fixed
+           -m3
+           -N72
+           -S /tmp/scratch/pe_8711/gauss_1.s
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+     %%%    L o o p m a r k   L e g e n d    %%%
+
+     Primary Loop Type        Modifiers
+     ------- ---- ----        ---------
+     A - Pattern matched      a - atomic memory operation
+                              b - blocked
+     C - Collapsed            c - conditional and/or computed
+     D - Deleted               
+     E - Cloned                
+     F - Flat - No calls      f - fused
+     G - Accelerated          g - partitioned
+     I - Inlined              i - interchanged
+     M - Multithreaded        m - partitioned
+                              n - non-blocking remote transfer
+                              p - partial
+                              r - unrolled
+                              s - shortloop
+     V - Vectorized           w - unwound
+
+     + - More messages listed at end of listing
+     ------------------------------------------
+
+
+    1.                      SUBROUTINE LU(A,N,NDIM,IR,IC)
+    2.                C  IT IS THE FIRST SUBROUTINE TO COMPUTE THE MX. INV.
+    3.                      DIMENSION A(NDIM,1),IR(1),IC(1)
+    4.    Vr4-------<       DO 10I=1,N
+    5.    Vr4               IR(I)=I
+    6.    Vr4               IC(I)=I
+    7.    Vr4-------> 10      CONTINUE
+    8.                      K=1
+    9.                      L=K
+   10.                      M=K
+   11.                      XMAX=ABS(A(K,K))
+   12.  + i---------<       DO 100I=K,N
+   13.  + i i-------<       DO 100J=K,N
+   14.    i i               Y=ABS(A(I,J))
+   15.    i i               IF(XMAX.GE.Y) GOTO 100
+   16.    i i               XMAX=Y
+   17.    i i               L=I
+   18.    i i               M=J
+   19.    i i------>> 100     CONTINUE
+   20.  + 1---------<       DO 1000K=1,N
+   21.    1                 IRL=IR(L)
+   22.    1                 IR(L)=IR(K)
+   23.    1                 IR(K)=IRL
+   24.    1                 ICM=IC(M)
+   25.    1                 IC(M)=IC(K)
+   26.    1                 IC(K)=ICM
+   27.    1                 IF(L.EQ.K) GOTO 300
+   28.  + 1 r8------<       DO 200J=1,N
+   29.    1 r8              B=A(K,J)
+   30.    1 r8              A(K,J)=A(L,J)
+   31.    1 r8              A(L,J)=B
+   32.    1 r8------> 200     CONTINUE
+   33.    1           300     IF(M.EQ.K) GOTO 500
+   34.    1 Vr4-----<       DO 400I=1,N
+   35.    1 Vr4             B=A(I,K)
+   36.    1 Vr4             A(I,K)=A(I,M)
+   37.    1 Vr4              A(I,M)=B
+   38.    1 Vr4-----> 400    CONTINUE
+   39.  + 1           500     C=1./A(K,K)
+   40.    1                 A(K,K)=C
+   41.    1                 IF(K.EQ.N) GOTO 1000
+   42.    1                 K1=K+1
+   43.    1                 XMAX=ABS(A(K1,K1))
+   44.    1                 L=K1
+   45.    1                 M=K1
+   46.    1 Vr4-----<       DO 600I=K1,N
+   47.    1 Vr4              A(I,K)=C*A(I,K)
+   48.    1 Vr4-----> 600     CONTINUE
+   49.  + 1 2-------<       DO 800I=K1,N
+   50.    1 2               B=A(I,K)
+   51.  + 1 2 3-----<       DO 800J=K1,N
+   52.    1 2 3             A(I,J)=A(I,J)-B*A(K,J)
+   53.    1 2 3             Y=ABS(A(I,J))
+   54.    1 2 3             IF(XMAX.GE.Y) GOTO 800
+   55.    1 2 3             XMAX=Y
+   56.    1 2 3             L=I
+   57.    1 2 3             M=J
+   58.    1 2 3---->> 800    CONTINUE
+   59.    1---------> 1000  CONTINUE
+   60.                      RETURN
+   61.                      END
+
+ftn-6005 ftn: SCALAR File = gauss.f, Line = 4 
+  A loop starting at line 4 was unrolled 4 times.
+
+ftn-6204 ftn: VECTOR File = gauss.f, Line = 4 
+  A loop starting at line 4 was vectorized.
+
+ftn-6007 ftn: SCALAR File = gauss.f, Line = 12 
+  A loop starting at line 12 was interchanged with the loop starting at line 13.
+
+ftn-6337 ftn: VECTOR File = gauss.f, Line = 12 
+  A loop starting at line 12 was not vectorized because it contains unsupported conditional constructs near line 16.
+
+ftn-6294 ftn: VECTOR File = gauss.f, Line = 13 
+  A loop starting at line 13 was not vectorized because a better candidate was found at line 12.
+
+ftn-6254 ftn: VECTOR File = gauss.f, Line = 20 
+  A loop starting at line 20 was not vectorized because a recurrence was found on "ir" at line 22.
+
+ftn-6332 ftn: VECTOR File = gauss.f, Line = 28 
+  A loop starting at line 28 was not vectorized because it does not map well onto the target architecture.
+
+ftn-6005 ftn: SCALAR File = gauss.f, Line = 28 
+  A loop starting at line 28 was unrolled 8 times.
+
+ftn-6005 ftn: SCALAR File = gauss.f, Line = 34 
+  A loop starting at line 34 was unrolled 4 times.
+
+ftn-6204 ftn: VECTOR File = gauss.f, Line = 34 
+  A loop starting at line 34 was vectorized.
+
+ftn-6010 ftn: SCALAR File = gauss.f, Line = 39 
+  A divide was turned into a multiply by a reciprocal
+
+ftn-6005 ftn: SCALAR File = gauss.f, Line = 46 
+  A loop starting at line 46 was unrolled 4 times.
+
+ftn-6204 ftn: VECTOR File = gauss.f, Line = 46 
+  A loop starting at line 46 was vectorized.
+
+ftn-6294 ftn: VECTOR File = gauss.f, Line = 49 
+  A loop starting at line 49 was not vectorized because a better candidate was found at line 51.
+
+ftn-6337 ftn: VECTOR File = gauss.f, Line = 51 
+  A loop starting at line 51 was not vectorized because it contains unsupported conditional constructs near line 55.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   62.                      SUBROUTINE SOLVE(F,A,K,N,NDIM,IR,IC)
+   63.                C   IT IS THE SECOND PART OF THE MATRIX INVERSION
+   64.                      DIMENSION A(NDIM,1),F(NDIM,1),IR(1),IC(1)
+   65.                      COMMON /CTMPG/ G(2000)
+   66.                C
+   67.                C
+   68.                      IF (N.GT.2000) THEN
+   69.                         write(6,*) 'Abort IN Subrtouine SOLVE: N>2000, N=',N
+   70.  +                      call exitt
+   71.                      ENDIF
+   72.                C
+   73.                      N1=N+1
+   74.  + 1---------<       DO 1000KK=1,K
+   75.  + 1 r8------<       DO 100I=1,N
+   76.    1 r8              IRI=IR(I)
+   77.    1 r8                G(I)=F(IRI,KK)
+   78.    1 r8------> 100     CONTINUE
+   79.  + 1 2-------<       DO 400I=2,N
+   80.    1 2               I1=I-1
+   81.    1 2               B=G(I)
+   82.  + 1 2 Vpr6--<       DO 300J=1,I1
+   83.    1 2 Vpr6            B=B-A(I,J)*G(J)
+   84.    1 2 Vpr6--> 300     CONTINUE
+   85.    1 2                 G(I)=B
+   86.    1 2-------> 400     CONTINUE
+   87.  + 1 2-------<       DO 700IT=1,N
+   88.    1 2               I=N1-IT
+   89.    1 2               I1=I+1
+   90.    1 2               B=G(I)
+   91.    1 2               IF(I.EQ.N) GOTO 701
+   92.  + 1 2 Vpr6--<       DO 600J=I1,N
+   93.    1 2 Vpr6            B=B-A(I,J)*G(J)
+   94.    1 2 Vpr6--> 600     CONTINUE
+   95.    1 2         701     G(I)=B*A(I,I)
+   96.    1 2-------> 700     CONTINUE
+   97.    1 Vpr4----<       DO 900I=1,N
+   98.    1 Vpr4            ICI=IC(I)
+   99.    1 Vpr4              F(ICI,KK)=G(I)
+  100.    1 Vpr4----> 900     CONTINUE
+  101.    1---------> 1000    CONTINUE
+  102.                      RETURN
+  103.                      END
+
+ftn-3021 ftn: IPA File = gauss.f, Line = 70 
+  "exitt" (called from "solve") was not inlined because the compiler was unable to locate the routine.
+
+ftn-6289 ftn: VECTOR File = gauss.f, Line = 74 
+  A loop starting at line 74 was not vectorized because a recurrence was found on "g" between lines 90 and 95.
+
+ftn-6332 ftn: VECTOR File = gauss.f, Line = 75 
+  A loop starting at line 75 was not vectorized because it does not map well onto the target architecture.
+
+ftn-6005 ftn: SCALAR File = gauss.f, Line = 75 
+  A loop starting at line 75 was unrolled 8 times.
+
+ftn-6289 ftn: VECTOR File = gauss.f, Line = 79 
+  A loop starting at line 79 was not vectorized because a recurrence was found on "g" between lines 83 and 85.
+
+ftn-6005 ftn: SCALAR File = gauss.f, Line = 82 
+  A loop starting at line 82 was unrolled 6 times.
+
+ftn-6382 ftn: VECTOR File = gauss.f, Line = 82 
+  A loop starting at line 82 was partially vector pipelined.
+
+ftn-6209 ftn: VECTOR File = gauss.f, Line = 82 
+  A loop starting at line 82 was partially vectorized.
+
+ftn-6289 ftn: VECTOR File = gauss.f, Line = 87 
+  A loop starting at line 87 was not vectorized because a recurrence was found on "g" between lines 93 and 95.
+
+ftn-6005 ftn: SCALAR File = gauss.f, Line = 92 
+  A loop starting at line 92 was unrolled 6 times.
+
+ftn-6382 ftn: VECTOR File = gauss.f, Line = 92 
+  A loop starting at line 92 was partially vector pipelined.
+
+ftn-6209 ftn: VECTOR File = gauss.f, Line = 92 
+  A loop starting at line 92 was partially vectorized.
+
+ftn-6005 ftn: SCALAR File = gauss.f, Line = 97 
+  A loop starting at line 97 was unrolled 4 times.
+
+ftn-6209 ftn: VECTOR File = gauss.f, Line = 97 
+  A loop starting at line 97 was partially vectorized.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                    C r o s s   R e f e r e n c e   for   LU
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+10                                                                Statement label
+  Decl       7
+  Set 
+  Used       4
+
+100                                                               Statement label
+  Decl      19
+  Set 
+  Used      12      13      15
+
+1000                                                              Statement label
+  Decl      59
+  Set 
+  Used      20      41
+
+200                                                               Statement label
+  Decl      32
+  Set 
+  Used      28
+
+300                                                               Statement label
+  Decl      33
+  Set 
+  Used      27
+
+400                                                               Statement label
+  Decl      38
+  Set 
+  Used      34
+
+500                                                               Statement label
+  Decl      39
+  Set 
+  Used      33
+
+600                                                               Statement label
+  Decl      48
+  Set 
+  Used      46
+
+800                                                               Statement label
+  Decl      58
+  Set 
+  Used      49      51      54
+
+A                               Dummy Arg                         DOUBLE PRECISION, Implicit type, DIMENSION(<exp>, 1)
+  Decl       1       3
+  Set       30      31      36      37      40      47      52
+  Used      11      14      29      35      39      43      50      53
+
+ABS                                                               Function, REAL, INTRINSIC
+  Decl
+  Set 
+  Used       0      11      43      53
+
+B                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       29      35      50
+  Used      31      37      52
+
+C                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       39
+  Used      40      47
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used       5       6      14      17      35      36      37      47      50      52      53      56
+
+IC                              Dummy Arg                         INTEGER, Implicit type, DIMENSION(1)
+  Decl       1       3
+  Set        6      25      26
+  Used      24
+
+ICM                             Stack                             INTEGER, Implicit type
+  Decl
+  Set       24
+  Used      26
+
+IR                              Dummy Arg                         INTEGER, Implicit type, DIMENSION(1)
+  Decl       1       3
+  Set        5      22      23
+  Used      21
+
+IRL                             Stack                             INTEGER, Implicit type
+  Decl
+  Set       21
+  Used      23
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      14      18      29      30      31      52      53      57
+
+K                               Stack                             INTEGER, Implicit type
+  Decl
+  Set        8
+  Used       9      10      11      22      23      25      26      27      29      30      33      35      36      39      40
+            41      42      47      50      52
+
+K1                              Stack                             INTEGER, Implicit type
+  Decl
+  Set       42
+  Used      43      44      45
+
+L                               Stack                             INTEGER, Implicit type
+  Decl
+  Set        9      17      44      56
+  Used      21      22      27      30      31
+
+LU                                                                Subroutine, EXTERNAL
+  Decl       1
+  Set 
+  Used
+
+M                               Stack                             INTEGER, Implicit type
+  Decl
+  Set       10      18      45      57
+  Used      24      25      33      36      37
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl       1
+  Set 
+  Used       4      12      13      20      28      34      41      46      49      51
+
+NDIM                            Dummy Arg                         INTEGER, Implicit type
+  Decl       1
+  Set 
+  Used       3
+
+XMAX                            Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       11      16      43      55
+  Used      15      54
+
+Y                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       14      53
+  Used      15      16      54      55
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                  C r o s s   R e f e r e n c e   for   SOLVE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name                            Storage                           Attributes
+----                            -------                           ----------
+
+100                                                               Statement label
+  Decl      78
+  Set 
+  Used      75
+
+1000                                                              Statement label
+  Decl     101
+  Set 
+  Used      74
+
+300                                                               Statement label
+  Decl      84
+  Set 
+  Used      82
+
+400                                                               Statement label
+  Decl      86
+  Set 
+  Used      79
+
+600                                                               Statement label
+  Decl      94
+  Set 
+  Used      92
+
+700                                                               Statement label
+  Decl      96
+  Set 
+  Used      87
+
+701                                                               Statement label
+  Decl      95
+  Set 
+  Used      91
+
+900                                                               Statement label
+  Decl     100
+  Set 
+  Used      97
+
+A                               Dummy Arg                         DOUBLE PRECISION, Implicit type, DIMENSION(<exp>, 1)
+  Decl      62      64
+  Set 
+  Used      83      93      95
+
+B                               Stack                             DOUBLE PRECISION, Implicit type
+  Decl
+  Set       81      83      90      93
+  Used      85      95
+
+CTMPG                                                             Common block 
+  Decl      65
+  Set 
+  Used
+
+EXITT                                                             Subroutine, EXTERNAL
+  Decl
+  Set 
+  Used      70
+
+F                               Dummy Arg                         DOUBLE PRECISION, Implicit type, DIMENSION(<exp>, 1)
+  Decl      62      64
+  Set       99
+  Used      77
+
+G                               /CTMPG/ offset=0                  DOUBLE PRECISION, Implicit type, DIMENSION(2000)
+  Decl      65
+  Set       77      85      95
+  Used      81      83      90      93      99
+
+I                               Stack                             INTEGER, Implicit type
+  Decl
+  Set       88
+  Used      76      77      80      81      83      85      89      90      91      93      95      98      99
+
+I1                              Stack                             INTEGER, Implicit type
+  Decl
+  Set       80      89
+  Used      82
+
+IC                              Dummy Arg                         INTEGER, Implicit type, DIMENSION(1)
+  Decl      62      64
+  Set 
+  Used      98
+
+ICI                             Stack                             INTEGER, Implicit type
+  Decl
+  Set       98
+  Used      99
+
+IR                              Dummy Arg                         INTEGER, Implicit type, DIMENSION(1)
+  Decl      62      64
+  Set 
+  Used      76
+
+IRI                             Stack                             INTEGER, Implicit type
+  Decl
+  Set       76
+  Used      77
+
+IT                              Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      88
+
+J                               Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      83      93
+
+K                               Dummy Arg                         INTEGER, Implicit type
+  Decl      62
+  Set 
+  Used      74
+
+KK                              Stack                             INTEGER, Implicit type
+  Decl
+  Set 
+  Used      77      99
+
+N                               Dummy Arg                         INTEGER, Implicit type
+  Decl      62
+  Set 
+  Used      68      69      73      75      79      87      91      92      97
+
+N1                              Stack                             INTEGER, Implicit type
+  Decl
+  Set       73
+  Used      88
+
+NDIM                            Dummy Arg                         INTEGER, Implicit type
+  Decl      62
+  Set 
+  Used      64
+
+SOLVE                                                             Subroutine, EXTERNAL
+  Decl      62
+  Set 
+  Used
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                     C o m m o n   B l o c k   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Blk  Program Unit                     Messages
+---  ------------                     --------
+/CTMPG/                               Length: 16000 bytes
+
+     SOLVE                            
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                         E x t e r n a l   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Name  Messages
+----  --------
+ABS(Intrinsic)
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   EXITT (Line 11, file gauss.f)
+                   EXITT (Line 14, file gauss.f)
+                   EXITT (Line 43, file gauss.f)
+                   EXITT (Line 53, file gauss.f)
+
+Name  Messages
+----  --------
+EXITT
+      Defined as:  No definitions.
+
+      Interface:   None
+
+      Called By:   SOLVE (Line 70, file gauss.f)
+
+Name  Messages
+----  --------
+LU
+      Defined as:  Subroutine (line 1, file gauss.f)
+
+      Interface:   None
+
+      Calls:       ABS(Intrinsic) (Line 11, file gauss.f)
+                   ABS(Intrinsic) (Line 14, file gauss.f)
+                   ABS(Intrinsic) (Line 43, file gauss.f)
+                   ABS(Intrinsic) (Line 53, file gauss.f)
+
+Name  Messages
+----  --------
+SOLVE
+      Defined as:  Subroutine (line 62, file gauss.f)
+
+      Interface:   None
+
+      Calls:       EXITT (Line 70, file gauss.f)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
